@@ -292,19 +292,20 @@ static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size, int *sg_ents)
 	return sgt;
 }
 
-static void virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
-					       struct virtio_gpu_vbuffer *vbuf,
-					       struct scatterlist *vout)
+static bool virtio_gpu_queue_ctrl_buffer_locked(struct virtio_gpu_device *vgdev,
+						struct virtio_gpu_vbuffer *vbuf,
+						struct scatterlist *vout)
 		__releases(&vgdev->ctrlq.qlock)
 		__acquires(&vgdev->ctrlq.qlock)
 {
 	struct virtqueue *vq = vgdev->ctrlq.vq;
 	struct scatterlist *sgs[3], vcmd, vresp;
 	int outcnt = 0, incnt = 0;
+	bool notify = false;
 	int ret;
 
 	if (!vgdev->vqs_ready)
-		return;
+		return notify;
 
 	sg_init_one(&vcmd, vbuf->buf, vbuf->size);
 	sgs[outcnt + incnt] = &vcmd;
@@ -332,8 +333,9 @@ retry:
 		trace_virtio_gpu_cmd_queue(vq,
 			(struct virtio_gpu_ctrl_hdr *)vbuf->buf);
 
-		virtqueue_kick(vq);
+		notify = virtqueue_kick_prepare(vq);
 	}
+	return notify;
 }
 
 static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
@@ -344,7 +346,7 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
 	struct virtqueue *vq = vgdev->ctrlq.vq;
 	struct scatterlist *vout = NULL, sg;
 	struct sg_table *sgt = NULL;
-	int rc;
+        bool notify;
 	int outcnt = 0;
 
 	if (vbuf->data_size) {
@@ -352,7 +354,7 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
 			sgt = vmalloc_to_sgt(vbuf->data_buf, vbuf->data_size,
 					     &outcnt);
 			if (!sgt)
-				return -ENOMEM;
+				return /* -ENOMEM */;
 			vout = sgt->sgl;
 		} else {
 			sg_init_one(&sg, vbuf->data_buf, vbuf->data_size);
@@ -380,8 +382,10 @@ again:
 
 	if (hdr && fence)
 		virtio_gpu_fence_emit(vgdev, hdr, fence);
-	virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf, vout);
+	notify = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf, vout);
 	spin_unlock(&vgdev->ctrlq.qlock);
+	if (notify)
+		virtqueue_notify(vgdev->ctrlq.vq);
 
 	if (sgt) {
 		sg_free_table(sgt);
@@ -389,10 +393,10 @@ again:
 	}
 }
 
-static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
-					struct virtio_gpu_vbuffer *vbuf)
+static void virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
+					 struct virtio_gpu_vbuffer *vbuf)
 {
-	return virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, NULL, NULL);
+	virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, NULL, NULL);
 }
 
 static void virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
@@ -400,6 +404,7 @@ static void virtio_gpu_queue_cursor(struct virtio_gpu_device *vgdev,
 {
 	struct virtqueue *vq = vgdev->cursorq.vq;
 	struct scatterlist *sgs[1], ccmd;
+	bool notify;
 	int ret;
 	int outcnt;
 
@@ -422,10 +427,13 @@ retry:
 		trace_virtio_gpu_cmd_queue(vq,
 			(struct virtio_gpu_ctrl_hdr *)vbuf->buf);
 
-		virtqueue_kick(vq);
+		notify = virtqueue_kick_prepare(vq);
 	}
 
 	spin_unlock(&vgdev->cursorq.qlock);
+
+	if (notify)
+		virtqueue_notify(vq);
 }
 
 /* just create gem objects for userspace and long lived objects,
