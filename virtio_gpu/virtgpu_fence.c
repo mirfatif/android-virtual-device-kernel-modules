@@ -37,7 +37,7 @@ static const char *virtio_gpu_get_timeline_name(struct dma_fence *f)
 	return "controlq";
 }
 
-bool virtio_gpu_fence_signaled(struct dma_fence *f)
+static bool virtio_gpu_fence_signaled(struct dma_fence *f)
 {
 	/* leaked fence outside driver before completing
 	 * initialization with virtio_gpu_fence_emit.
