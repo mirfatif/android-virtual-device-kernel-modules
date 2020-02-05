@@ -307,7 +307,7 @@ static struct sg_table *vmalloc_to_sgt(char *data, uint32_t size, int *sg_ents)
 	return sgt;
 }
 
-static bool virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
+static void virtio_gpu_queue_ctrl_sgs(struct virtio_gpu_device *vgdev,
 				      struct virtio_gpu_vbuffer *vbuf,
 				      struct virtio_gpu_fence *fence,
 				      int elemcnt,
@@ -327,7 +327,7 @@ again:
 
 		if (fence && vbuf->objs)
 			virtio_gpu_array_unlock_resv(vbuf->objs);
-		return notify;
+		return;
 	}
 
 	if (vq->num_free < elemcnt) {
@@ -357,7 +357,12 @@ again:
 
 	spin_unlock(&vgdev->ctrlq.qlock);
 
-	return notify;
+	if (notify) {
+		if (vgdev->disable_notify)
+			vgdev->pending_notify = true;
+		else
+			virtqueue_notify(vq);
+	}
 }
 
 static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
@@ -367,7 +372,6 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
 	struct scatterlist *sgs[3], vcmd, vout, vresp;
 	struct sg_table *sgt = NULL;
 	int elemcnt = 0, outcnt = 0, incnt = 0;
-	bool notify;
 
 	/* set up vcmd */
 	sg_init_one(&vcmd, vbuf->buf, vbuf->size);
@@ -405,14 +409,8 @@ static void virtio_gpu_queue_fenced_ctrl_buffer(struct virtio_gpu_device *vgdev,
 		incnt++;
 	}
 
-	notify = virtio_gpu_queue_ctrl_sgs(vgdev, vbuf, fence, elemcnt, sgs,
-					   outcnt, incnt);
-	if (notify) {
-		if (vgdev->disable_notify)
-			vgdev->pending_notify = true;
-		else
-			virtqueue_notify(vgdev->ctrlq.vq);
-	}
+	virtio_gpu_queue_ctrl_sgs(vgdev, vbuf, fence, elemcnt, sgs, outcnt,
+				  incnt);
 
 	if (sgt) {
 		sg_free_table(sgt);
