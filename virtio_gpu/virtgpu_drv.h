@@ -217,8 +217,7 @@ struct virtio_gpu_device {
 	struct virtio_gpu_queue cursorq;
 	struct kmem_cache *vbufs;
 
-	bool disable_notify;
-	bool pending_notify;
+	atomic_t pending_commands;
 
 	struct ida	resource_ida;
 
@@ -415,8 +414,7 @@ int
 virtio_gpu_cmd_resource_assign_uuid(struct virtio_gpu_device *vgdev,
 				    struct virtio_gpu_object *bo);
 
-void virtio_gpu_disable_notify(struct virtio_gpu_device *vgdev);
-void virtio_gpu_enable_notify(struct virtio_gpu_device *vgdev);
+void virtio_gpu_notify(struct virtio_gpu_device *vgdev);
 
 /* virtio_gpu_display.c */
 int virtio_gpu_framebuffer_init(struct drm_device *dev,
