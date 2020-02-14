@@ -153,6 +153,7 @@ int virtio_gpu_gem_object_open(struct drm_gem_object *obj,
 
 	virtio_gpu_cmd_context_attach_resource(vgdev, vfpriv->ctx_id,
 					       objs);
+	virtio_gpu_notify(vgdev);
 	return 0;
 }
 
@@ -173,6 +174,7 @@ void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
 
 	virtio_gpu_cmd_context_detach_resource(vgdev, vfpriv->ctx_id,
 					       objs);
+	virtio_gpu_notify(vgdev);
 }
 
 struct virtio_gpu_object_array *virtio_gpu_array_alloc(u32 nents)
