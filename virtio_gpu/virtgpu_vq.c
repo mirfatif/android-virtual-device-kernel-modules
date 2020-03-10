@@ -239,15 +239,13 @@ void virtio_gpu_dequeue_ctrl_func(struct work_struct *work)
 					  __func__, fence_id, f);
 			} else {
 				fence_id = f;
+				virtio_gpu_fence_event_process(vgdev, fence_id);
 			}
 		}
 		if (entry->resp_cb)
 			entry->resp_cb(vgdev, entry);
 	}
 	wake_up(&vgdev->ctrlq.ack_queue);
-
-	if (fence_id)
-		virtio_gpu_fence_event_process(vgdev, fence_id);
 
 	list_for_each_entry_safe(entry, tmp, &reclaim_list, list) {
 		if (entry->objs)
