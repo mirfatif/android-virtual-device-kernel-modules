@@ -55,6 +55,7 @@
 #define UUID_INITIALIZATION_FAILED 2
 
 #define MAX_CAPSET_ID 31
+#define MAX_FENCE_CONTEXTS 32
 
 struct virtio_gpu_object_params {
 	uint32_t format;
@@ -252,6 +253,8 @@ struct virtio_gpu_fpriv {
 	uint32_t ctx_id;
 	uint32_t context_init;
 	bool context_created;
+	uint32_t num_fence_contexts;
+	uint64_t base_fence_ctx;
 	struct mutex context_lock;
 };
 
