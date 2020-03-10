@@ -151,12 +151,27 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 	int in_fence_fd = exbuf->fence_fd;
 	int out_fence_fd = -1;
 	void *buf;
+	uint64_t fence_ctx, fence_ctx_idx;
+
+	fence_ctx = vgdev->fence_drv.context;
+	fence_ctx_idx = 0;
 
 	if (vgdev->has_virgl_3d == false)
 		return -ENOSYS;
 
 	if ((exbuf->flags & ~VIRTGPU_EXECBUF_FLAGS))
 		return -EINVAL;
+
+	if ((exbuf->flags & VIRTGPU_EXECBUF_FENCE_CONTEXT)) {
+		if (exbuf->fence_ctx_idx >= vfpriv->num_fence_contexts)
+			return -EINVAL;
+
+		if (!vfpriv->base_fence_ctx)
+			return -EINVAL;
+
+		fence_ctx = vfpriv->base_fence_ctx;
+		fence_ctx_idx = exbuf->fence_ctx_idx;
+	}
 
 	exbuf->fence_fd = -1;
 
@@ -233,7 +248,7 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 		goto out_unresv;
 	}
 
-	out_fence = virtio_gpu_fence_alloc(vgdev, vgdev->fence_drv.context, 0);
+	out_fence = virtio_gpu_fence_alloc(vgdev, fence_ctx, fence_ctx_idx);
 	if(!out_fence) {
 		ret = -ENOMEM;
 		goto out_memdup;
@@ -774,7 +789,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 		return -EINVAL;
 
 	/* Number of unique parameters supported at this time. */
-	if (num_params > 1)
+	if (num_params > 2)
 		return -EINVAL;
 
 	ctx_set_params = memdup_user(u64_to_user_ptr(args->ctx_set_params),
@@ -807,6 +822,16 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 				return -EINVAL;
 
 			vfpriv->context_init |= value;
+			break;
+		case VIRTGPU_CONTEXT_PARAM_NUM_FENCE_CONTEXTS:
+			if (vfpriv->base_fence_ctx)
+				return -EINVAL;
+
+			if (value > MAX_FENCE_CONTEXTS)
+				return -EINVAL;
+
+			vfpriv->base_fence_ctx = dma_fence_context_alloc(value);
+			vfpriv->num_fence_contexts = value;
 			break;
 		default:
 			return -EINVAL;
