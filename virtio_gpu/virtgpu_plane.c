@@ -200,7 +200,8 @@ static int virtio_gpu_cursor_prepare_fb(struct drm_plane *plane,
 	vgfb = to_virtio_gpu_framebuffer(new_state->fb);
 	bo = gem_to_virtio_gpu_obj(vgfb->base.obj[0]);
 	if (bo && bo->dumb && (plane->state->fb != new_state->fb)) {
-		vgfb->fence = virtio_gpu_fence_alloc(vgdev);
+		vgfb->fence = virtio_gpu_fence_alloc(vgdev, vgdev->fence_drv.context,
+						     0);
 		if (!vgfb->fence)
 			return -ENOMEM;
 	}
