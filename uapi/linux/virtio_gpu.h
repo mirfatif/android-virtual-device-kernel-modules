@@ -59,14 +59,10 @@
  */
 #define VIRTIO_GPU_F_RESOURCE_BLOB       3
 /*
- * VIRTIO_GPU_CMD_RESOURCE_MAP
- * VIRTIO_GPU_CMD_RESOURCE_UMAP
+ * VIRTIO_GPU_CMD_CREATE_CONTEXT with
+ * context_init
  */
-#define VIRTIO_GPU_F_HOST_VISIBLE        4
-/*
- * VIRTIO_GPU_CMD_CTX_CREATE_V2
- */
-#define VIRTIO_GPU_F_VULKAN              5
+#define VIRTIO_GPU_F_CONTEXT_INIT        4
 
 enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_UNDEFINED = 0,
@@ -126,14 +122,19 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_RESP_ERR_INVALID_MEMORY_ID,
 };
 
-#define VIRTIO_GPU_FLAG_FENCE (1 << 0)
+#define VIRTIO_GPU_FLAG_FENCE                (1 << 0)
+/*
+ * If the following flag is set, info contains the index of the fence context
+ * that needs to used when creating the fence
+ */
+#define VIRTIO_GPU_FLAG_INFO_FENCE_CTX_IDX   (1 << 1)
 
 struct virtio_gpu_ctrl_hdr {
 	__le32 type;
 	__le32 flags;
 	__le64 fence_id;
 	__le32 ctx_id;
-	__le32 padding;
+	__le32 info;
 };
 
 /* data passed in the cursor vq */
@@ -275,10 +276,11 @@ struct virtio_gpu_resource_create_3d {
 };
 
 /* VIRTIO_GPU_CMD_CTX_CREATE */
+#define VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK 0x00ff
 struct virtio_gpu_ctx_create {
 	struct virtio_gpu_ctrl_hdr hdr;
 	__le32 nlen;
-	__le32 padding;
+	__le32 context_init;
 	char debug_name[64];
 };
 
