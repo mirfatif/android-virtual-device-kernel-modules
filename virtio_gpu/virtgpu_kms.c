@@ -205,6 +205,18 @@ int virtio_gpu_init(struct drm_device *dev)
 		DRM_INFO("resource_blob: %u, host visible %u\n",
 			  vgdev->has_resource_blob, vgdev->has_host_visible);
 	}
+	if (virtio_has_feature(vgdev->vdev, VIRTIO_GPU_F_CONTEXT_INIT)) {
+		vgdev->has_context_init = true;
+	}
+
+	DRM_INFO("features: %cvirgl %cedid %cresource_blob %chost_visible",
+		 vgdev->has_virgl_3d    ? '+' : '-',
+		 vgdev->has_edid        ? '+' : '-',
+		 vgdev->has_resource_blob ? '+' : '-',
+		 vgdev->has_host_visible ? '+' : '-');
+
+	DRM_INFO("features: %ccontext_init\n",
+		 vgdev->has_context_init ? '+' : '-');
 
 	ret = virtio_find_vqs(vgdev->vdev, 2, vqs, callbacks, names, NULL);
 	if (ret) {

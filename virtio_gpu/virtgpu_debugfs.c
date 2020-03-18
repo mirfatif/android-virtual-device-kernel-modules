@@ -47,6 +47,7 @@ static int virtio_gpu_features(struct seq_file *m, void *data)
 	virtio_gpu_add_bool(m, "virgl", vgdev->has_virgl_3d);
 	virtio_gpu_add_bool(m, "edid", vgdev->has_edid);
 	virtio_gpu_add_bool(m, "resource blob", vgdev->has_resource_blob);
+	virtio_gpu_add_bool(m, "context init", vgdev->has_context_init);
 	virtio_gpu_add_bool(m, "host visible", vgdev->has_host_visible);
 	virtio_gpu_add_int(m, "cap sets", vgdev->num_capsets);
 	virtio_gpu_add_int(m, "scanouts", vgdev->num_scanouts);

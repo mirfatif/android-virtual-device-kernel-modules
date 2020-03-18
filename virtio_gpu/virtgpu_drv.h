@@ -226,6 +226,7 @@ struct virtio_gpu_device {
 	bool has_resource_assign_uuid;
 	bool has_resource_blob;
 	bool has_host_visible;
+	bool has_context_init;
 
 	struct work_struct config_changed_work;
 
