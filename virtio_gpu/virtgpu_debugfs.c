@@ -53,6 +53,8 @@ static int virtio_gpu_features(struct seq_file *m, void *data)
 
 	virtio_gpu_add_bool(m, "blob resources", vgdev->has_resource_blob);
 	virtio_gpu_add_bool(m, "context init", vgdev->has_context_init);
+	virtio_gpu_add_bool(m, "create guest handle",
+			    vgdev->has_create_guest_handle);
 	virtio_gpu_add_int(m, "cap sets", vgdev->num_capsets);
 	virtio_gpu_add_int(m, "scanouts", vgdev->num_scanouts);
 	if (vgdev->host_visible_region.len) {
