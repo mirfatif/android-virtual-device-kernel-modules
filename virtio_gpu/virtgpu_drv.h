@@ -239,6 +239,7 @@ struct virtio_gpu_device {
 	bool has_resource_blob;
 	bool has_host_visible;
 	bool has_context_init;
+	bool has_create_guest_handle;
 	struct virtio_shm_region host_visible_region;
 	struct drm_mm host_visible_mm;
 
