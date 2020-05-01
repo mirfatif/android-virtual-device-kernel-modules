@@ -62,6 +62,9 @@ int virtio_gpu_gem_create(struct drm_file *file,
 	int ret;
 	u32 handle;
 
+	if (vgdev->has_virgl_3d)
+		virtio_gpu_create_context(dev, file);
+
 	obj = virtio_gpu_alloc_object(dev, params, NULL);
 	if (IS_ERR(obj))
 		return PTR_ERR(obj);
