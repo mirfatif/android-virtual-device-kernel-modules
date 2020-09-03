@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6eaa1f7_01b8b2b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2020-09-03T17:26:16Z",
+      "side": 1,
+      "message": "Still builds (BUILD_CONFIG\u003dcommon/build.config.gki.x86_64 build/build.sh \u0026\u0026 BUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.cuttlefish.x86_64 build/build.sh)",
+      "revId": "69e8872a714c97c84082b1e7b06bc64b16442b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
