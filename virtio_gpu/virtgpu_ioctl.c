@@ -29,6 +29,7 @@
 #include <linux/file.h>
 #include <linux/sync_file.h>
 
+#include <drm/drmP.h>
 #include <drm/drm_file.h>
 #include <drm/ttm/ttm_execbuf_util.h>
 #include <drm/virtgpu_drm.h>
@@ -66,7 +67,7 @@ int virtio_gpu_object_list_validate(struct ww_acquire_ctx *ticket,
 	struct virtio_gpu_object *qobj;
 	int ret;
 
-	ret = ttm_eu_reserve_buffers(ticket, head, true, NULL, true);
+	ret = ttm_eu_reserve_buffers(ticket, head, true, NULL);
 	if (ret != 0)
 		return ret;
 
@@ -425,7 +426,7 @@ static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
 		(vgdev, qobj->hw_res_handle,
 		 vfpriv->ctx_id, offset, args->level,
 		 &box, fence);
-	dma_resv_add_excl_fence(qobj->tbo.base.resv,
+	reservation_object_add_excl_fence(qobj->tbo.resv,
 					  &fence->f);
 
 	dma_fence_put(&fence->f);
@@ -479,7 +480,7 @@ static int virtio_gpu_transfer_to_host_ioctl(struct drm_device *dev, void *data,
 			(vgdev, qobj,
 			 vfpriv ? vfpriv->ctx_id : 0, offset,
 			 args->level, &box, fence);
-		dma_resv_add_excl_fence(qobj->tbo.base.resv,
+		reservation_object_add_excl_fence(qobj->tbo.resv,
 						  &fence->f);
 		dma_fence_put(&fence->f);
 	}
@@ -695,7 +696,7 @@ static int virtio_gpu_resource_create_blob_ioctl(struct drm_device *dev,
 	 * being used for ttm validation and no other processes can access
 	 * the reservation object at this point.
 	 */
-	dma_resv_add_excl_fence(obj->tbo.base.resv, &fence->f);
+	reservation_object_add_excl_fence(obj->tbo.resv, &fence->f);
 
 	dma_fence_put(&fence->f);
 	drm_gem_object_put_unlocked(&obj->gem_base);
@@ -715,36 +716,36 @@ err_free_obj:
 
 struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS] = {
 	DRM_IOCTL_DEF_DRV(VIRTGPU_MAP, virtio_gpu_map_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_EXECBUFFER, virtio_gpu_execbuffer_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_GETPARAM, virtio_gpu_getparam_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_CREATE,
 			  virtio_gpu_resource_create_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_INFO, virtio_gpu_resource_info_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	/* make transfer async to the main ring? - no sure, can we
 	 * thread these in the underlying GL
 	 */
 	DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_FROM_HOST,
 			  virtio_gpu_transfer_from_host_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 	DRM_IOCTL_DEF_DRV(VIRTGPU_TRANSFER_TO_HOST,
 			  virtio_gpu_transfer_to_host_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_WAIT, virtio_gpu_wait_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_GET_CAPS, virtio_gpu_get_caps_ioctl,
-			  DRM_RENDER_ALLOW),
+			  DRM_AUTH | DRM_RENDER_ALLOW),
 
 	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_CREATE_BLOB,
 			  virtio_gpu_resource_create_blob_ioctl,

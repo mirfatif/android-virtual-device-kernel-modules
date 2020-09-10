@@ -77,8 +77,6 @@ static void virtio_gpu_ttm_bo_destroy(struct ttm_buffer_object *tbo)
 		virtio_gpu_cmd_unref_resource(vgdev, bo->hw_res_handle);
 	if (bo->pages)
 		virtio_gpu_object_free_sg_table(bo);
-	if (bo->vmap)
-		virtio_gpu_object_kunmap(bo);
 	drm_gem_object_release(&bo->gem_base);
 	virtio_gpu_resource_id_put(vgdev, bo->hw_res_handle);
 	kfree(bo);
@@ -246,7 +244,6 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
 		.interruptible = false,
 		.no_wait_gpu = false
 	};
-	size_t max_segment;
 
 	/* wtf swapping */
 	if (bo->pages)
@@ -258,13 +255,8 @@ int virtio_gpu_object_get_sg_table(struct virtio_gpu_device *qdev,
 	if (!bo->pages)
 		goto out;
 
-	max_segment = virtio_max_dma_size(qdev->vdev);
-	max_segment &= PAGE_MASK;
-	if (max_segment > SCATTERLIST_MAX_SEGMENT)
-		max_segment = SCATTERLIST_MAX_SEGMENT;
-	ret = __sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
-					  nr_pages << PAGE_SHIFT,
-					  max_segment, GFP_KERNEL);
+	ret = sg_alloc_table_from_pages(bo->pages, pages, nr_pages, 0,
+					nr_pages << PAGE_SHIFT, GFP_KERNEL);
 	if (ret)
 		goto out;
 	return 0;

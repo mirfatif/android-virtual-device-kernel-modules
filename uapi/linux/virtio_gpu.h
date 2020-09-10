@@ -50,6 +50,7 @@
  * VIRTIO_GPU_CMD_GET_EDID
  */
 #define VIRTIO_GPU_F_EDID                1
+
 /*
  * VIRTIO_GPU_CMD_RESOURCE_ASSIGN_UUID
  */
