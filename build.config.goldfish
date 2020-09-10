@@ -1,5 +1,7 @@
-. ${ROOT_DIR}/common/build.config.common
-. ${ROOT_DIR}/common/build.config.gki
+KERNEL_DIR=common
+
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 
 EXT_MODULES="common-modules/virtual-device"
 FRAGMENT_DEFCONFIG_PATH="${ROOT_DIR}/common-modules/virtual-device/goldfish_defconfig.fragment"

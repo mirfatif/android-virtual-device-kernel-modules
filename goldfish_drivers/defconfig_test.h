@@ -48,10 +48,6 @@
 #error CONFIG_RTC_DRV_TEST is a module in goldfish_defconfig.fragment
 #endif
 
-#ifdef CONFIG_SDCARD_FS
-#error CONFIG_SDCARD_FS is a module in goldfish_defconfig.fragment
-#endif
-
 #ifdef CONFIG_SND_HDA_CODEC_REALTEK
 #error CONFIG_SND_HDA_CODEC_REALTEK is a module in goldfish_defconfig.fragment
 #endif
