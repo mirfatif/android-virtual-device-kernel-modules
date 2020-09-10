@@ -23,9 +23,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <drm/drm_file.h>
-#include <drm/drm_fourcc.h>
-
+#include <drm/drmP.h>
 #include "virtgpu_drv.h"
 
 void virtio_gpu_gem_free_object(struct drm_gem_object *gem_obj)
@@ -90,10 +88,7 @@ int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
 	int ret;
 	uint32_t pitch;
 
-	if (args->bpp != 32)
-		return -EINVAL;
-
-	pitch = args->width * 4;
+	pitch = args->width * ((args->bpp + 1) / 8);
 	args->size = pitch * args->height;
 	args->size = ALIGN(args->size, PAGE_SIZE);
 

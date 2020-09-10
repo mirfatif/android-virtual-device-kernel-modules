@@ -61,7 +61,7 @@
 #include <linux/mm.h>
 #include <linux/bug.h>
 
-#include "uapi/goldfish_dma.h"
+#include <goldfish/goldfish_dma.h>
 #include "goldfish_pipe_qemu.h"
 #include "goldfish_pipe.h"
 
@@ -455,7 +455,7 @@ static ssize_t goldfish_pipe_read_write(struct file *filp,
 	if (unlikely(bufflen == 0))
 		return 0;
 	/* Check the buffer range for access */
-	if (unlikely(!access_ok(buffer, bufflen)))
+	if (unlikely(!access_ok(is_write ? VERIFY_READ : VERIFY_WRITE, buffer, bufflen)))
 		return -EFAULT;
 
 	address = (unsigned long)buffer;

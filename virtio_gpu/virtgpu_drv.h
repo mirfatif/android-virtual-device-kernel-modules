@@ -31,16 +31,16 @@
 #include <linux/virtio_config.h>
 #include <linux/virtio_gpu.h>
 
+#include <drm/drmP.h>
+#include <drm/drm_gem.h>
 #include <drm/drm_atomic.h>
+#include <drm/drm_crtc_helper.h>
 #include <drm/drm_encoder.h>
 #include <drm/drm_fb_helper.h>
-#include <drm/drm_gem.h>
-#include <drm/drm_ioctl.h>
-#include <drm/drm_probe_helper.h>
 #include <drm/ttm/ttm_bo_api.h>
 #include <drm/ttm/ttm_bo_driver.h>
-#include <drm/ttm/ttm_module.h>
 #include <drm/ttm/ttm_placement.h>
+#include <drm/ttm/ttm_module.h>
 
 #define DRIVER_NAME "virtio_gpu"
 #define DRIVER_DESC "virtio GPU"
@@ -159,12 +159,18 @@ struct virtio_gpu_output {
 
 struct virtio_gpu_framebuffer {
 	struct drm_framebuffer base;
+	int x1, y1, x2, y2; /* dirty rect */
+	spinlock_t dirty_lock;
+	uint32_t hw_res_handle;
 	struct virtio_gpu_fence *fence;
 };
 #define to_virtio_gpu_framebuffer(x) \
 	container_of(x, struct virtio_gpu_framebuffer, base)
 
 struct virtio_gpu_mman {
+	struct ttm_bo_global_ref        bo_global_ref;
+	struct drm_global_reference	mem_global_ref;
+	bool				mem_global_referenced;
 	struct ttm_bo_device		bdev;
 };
 
@@ -281,6 +287,10 @@ int virtio_gpu_mode_dumb_mmap(struct drm_file *file_priv,
 			      struct drm_device *dev,
 			      uint32_t handle, uint64_t *offset_p);
 
+/* virtio_fb */
+int virtio_gpu_surface_dirty(struct virtio_gpu_framebuffer *qfb,
+			     struct drm_clip_rect *clips,
+			     unsigned int num_clips);
 /* virtio vg */
 int virtio_gpu_alloc_vbufs(struct virtio_gpu_device *vgdev);
 void virtio_gpu_free_vbufs(struct virtio_gpu_device *vgdev);
@@ -417,7 +427,10 @@ void virtio_gpu_object_free_sg_table(struct virtio_gpu_object *bo);
 int virtio_gpu_object_wait(struct virtio_gpu_object *bo, bool no_wait);
 
 /* virtgpu_prime.c */
-struct dma_buf *virtgpu_gem_prime_export(struct drm_gem_object *obj,
+struct dma_buf_ops;
+extern const struct dma_buf_ops virtgpu_dmabuf_ops;
+struct dma_buf *virtgpu_gem_prime_export(struct drm_device *dev,
+					 struct drm_gem_object *obj,
 					 int flags);
 struct sg_table *virtgpu_gem_prime_get_sg_table(struct drm_gem_object *obj);
 struct drm_gem_object *virtgpu_gem_prime_import_sg_table(
@@ -450,7 +463,7 @@ static inline void virtio_gpu_object_unref(struct virtio_gpu_object **bo)
 
 static inline u64 virtio_gpu_object_mmap_offset(struct virtio_gpu_object *bo)
 {
-	return drm_vma_node_offset_addr(&bo->tbo.base.vma_node);
+	return drm_vma_node_offset_addr(&bo->tbo.vma_node);
 }
 
 static inline int virtio_gpu_object_reserve(struct virtio_gpu_object *bo,

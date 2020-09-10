@@ -26,6 +26,21 @@
 #include <linux/dma-buf.h>
 #include "virtgpu_drv.h"
 
+/* Empty Implementations as there should not be any other driver for a virtual
+ * device that might share buffers with virtgpu
+ */
+
+const struct dma_buf_ops virtgpu_dmabuf_ops =  {
+	.attach = drm_gem_map_attach,
+	.detach = drm_gem_map_detach,
+	.map_dma_buf = drm_gem_map_dma_buf,
+	.unmap_dma_buf = drm_gem_unmap_dma_buf,
+	.release = drm_gem_dmabuf_release,
+	.mmap = drm_gem_dmabuf_mmap,
+	.vmap = drm_gem_dmabuf_vmap,
+	.vunmap = drm_gem_dmabuf_vunmap,
+};
+
 int virtgpu_gem_prime_get_uuid(struct drm_gem_object *obj,
 			       uuid_t *uuid)
 {
@@ -41,11 +56,12 @@ int virtgpu_gem_prime_get_uuid(struct drm_gem_object *obj,
 	return 0;
 }
 
-struct dma_buf *virtgpu_gem_prime_export(struct drm_gem_object *obj,
+struct dma_buf *virtgpu_gem_prime_export(struct drm_device *dev,
+					 struct drm_gem_object *obj,
 					 int flags)
 {
 	struct virtio_gpu_object *bo = gem_to_virtio_gpu_obj(obj);
-	struct virtio_gpu_device *vgdev = obj->dev->dev_private;
+	struct virtio_gpu_device *vgdev = dev->dev_private;
 	int ret = 0;
 
 	if (vgdev->has_resource_assign_uuid) {
@@ -56,7 +72,7 @@ struct dma_buf *virtgpu_gem_prime_export(struct drm_gem_object *obj,
 		bo->uuid_state = UUID_INITIALIZATION_FAILED;
 	}
 
-	return drm_gem_prime_export(obj, flags);
+	return drm_gem_prime_export(dev, obj, flags);
 }
 
 struct sg_table *virtgpu_gem_prime_get_sg_table(struct drm_gem_object *obj)
@@ -75,6 +91,7 @@ struct drm_gem_object *virtgpu_gem_prime_import_sg_table(
 	struct drm_device *dev, struct dma_buf_attachment *attach,
 	struct sg_table *table)
 {
+	WARN_ONCE(1, "not implemented");
 	return ERR_PTR(-ENODEV);
 }
 
@@ -97,5 +114,8 @@ void virtgpu_gem_prime_vunmap(struct drm_gem_object *obj, void *vaddr)
 int virtgpu_gem_prime_mmap(struct drm_gem_object *obj,
 			   struct vm_area_struct *vma)
 {
+	struct virtio_gpu_object *bo = gem_to_virtio_gpu_obj(obj);
+
+	bo->gem_base.vma_node.vm_node.start = bo->tbo.vma_node.vm_node.start;
 	return drm_gem_prime_mmap(obj, vma);
 }

@@ -1,5 +1,3 @@
 obj-m += virtio_gpu/
-
-obj-$(CONFIG_WLAN_SIMULATION) += wlan_simulation/
-
-obj-$(CONFIG_GOLDFISH) += goldfish_drivers/
+obj-$(CONFIG_VIRT_WIFI) += wlan_simulation/
+obj-${BUILD_GOLDFISH_DRIVERS} += goldfish_drivers/
