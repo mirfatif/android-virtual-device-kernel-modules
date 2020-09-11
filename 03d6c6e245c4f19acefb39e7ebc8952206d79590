@@ -1,0 +1,31 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004887260",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1424910?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "41e9bcb1_bef51243",
+        "filename": "virtio_gpu/virtgpu_fb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-09-11T06:20:27Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details.",
+      "range": {
+        "startLine": 143,
+        "startChar": 10,
+        "endLine": 143,
+        "endChar": 14
+      },
+      "revId": "03d6c6e245c4f19acefb39e7ebc8952206d79590",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
