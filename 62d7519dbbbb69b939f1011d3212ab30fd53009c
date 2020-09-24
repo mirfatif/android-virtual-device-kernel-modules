@@ -22,6 +22,30 @@
       "revId": "62d7519dbbbb69b939f1011d3212ab30fd53009c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b55685a5_f90b112f",
+        "filename": "build.config.cuttlefish",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-09-24T16:38:19Z",
+      "side": 1,
+      "message": "We don\u0027t build 4.19, it should be ok to break goldfish here.",
+      "parentUuid": "40ec0ef1_e845e70f",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "62d7519dbbbb69b939f1011d3212ab30fd53009c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
