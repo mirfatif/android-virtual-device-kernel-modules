@@ -46,6 +46,30 @@
       "revId": "62d7519dbbbb69b939f1011d3212ab30fd53009c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40ee96f5_c1973f5c",
+        "filename": "build.config.cuttlefish",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-09-24T16:44:14Z",
+      "side": 1,
+      "message": "build.config.cuttlefish is only used by the cuttlefish, the goldfish build will use build.config.goldfish, so the LZ4_RAMDISK in build.config.cuttlefish should not break any goldfish build I think.\nBut if you meant to enable goldfish build with LZ4_RAMDISK, then it would be another thing.",
+      "parentUuid": "b55685a5_f90b112f",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "62d7519dbbbb69b939f1011d3212ab30fd53009c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
