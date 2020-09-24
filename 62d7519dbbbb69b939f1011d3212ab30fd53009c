@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40ec0ef1_e845e70f",
+        "filename": "build.config.cuttlefish",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-24T16:32:49Z",
+      "side": 1,
+      "message": "Roman, can we move goldfish to LZ4_RAMDISK please?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 13
+      },
+      "revId": "62d7519dbbbb69b939f1011d3212ab30fd53009c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
