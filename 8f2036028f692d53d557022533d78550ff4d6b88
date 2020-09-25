@@ -16,6 +16,23 @@
       "revId": "8f2036028f692d53d557022533d78550ff4d6b88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7507f5dc_db9e02da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-09-25T17:34:49Z",
+      "side": 1,
+      "message": "Technically, by setting LLVM\u003d1 in aosp/1406509, this value is simply ignored.",
+      "revId": "8f2036028f692d53d557022533d78550ff4d6b88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
