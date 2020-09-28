@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66d201b1_0bf14c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101621
+      },
+      "writtenOn": "2020-09-28T23:46:08Z",
+      "side": 1,
+      "message": "Do we need to fix AOSP 4.14, 4.19, 5.4 too? ",
+      "revId": "b225162b1f34498af92e683c97e45fc80ed10346",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
