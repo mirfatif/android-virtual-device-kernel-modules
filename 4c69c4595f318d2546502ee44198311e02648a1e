@@ -1,0 +1,8 @@
+Code-Review+2: Alistair Delva <adelva@google.com>
+Lint+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Alistair Delva <adelva@google.com>
+Submitted-at: Tue, 06 Oct 2020 14:44:26 +0000
+Reviewed-on: https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1447059
+Project: kernel/common-modules/virtual-device
+Branch: refs/heads/android-mainline
