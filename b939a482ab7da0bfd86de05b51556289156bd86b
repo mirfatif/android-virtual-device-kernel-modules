@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "048bc596_36ffbb33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1113708
+      },
+      "writtenOn": "2020-10-07T17:55:20Z",
+      "side": 1,
+      "message": "Cherry-pick to common-modules/virtual-device",
+      "revId": "b939a482ab7da0bfd86de05b51556289156bd86b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
