@@ -47,6 +47,7 @@ extern "C" {
 #define DRM_VIRTGPU_WAIT     0x08
 #define DRM_VIRTGPU_GET_CAPS  0x09
 #define DRM_VIRTGPU_RESOURCE_CREATE_BLOB 0x0a
+#define DRM_VIRTGPU_EXECBUFFER_NO_NOTIFY 0x0b
 
 #define VIRTGPU_EXECBUF_FENCE_FD_IN	0x01
 #define VIRTGPU_EXECBUF_FENCE_FD_OUT	0x02
@@ -68,6 +69,12 @@ struct drm_virtgpu_execbuffer {
 	__u64 bo_handles;
 	__u32 num_bo_handles;
 	__s32 fence_fd; /* in/out fence fd (see VIRTGPU_EXECBUF_FENCE_FD_IN/OUT) */
+};
+
+struct drm_virtgpu_execbuffer_no_notify {
+	__u32 flags;
+	__u32 size;
+	__u64 command; /* void* */
 };
 
 #define VIRTGPU_PARAM_3D_FEATURES 1 /* do we have 3D features in the hw */
@@ -212,6 +219,10 @@ struct drm_virtgpu_resource_create_blob {
 #define DRM_IOCTL_VIRTGPU_RESOURCE_CREATE_BLOB				\
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_RESOURCE_CREATE_BLOB,	\
 		struct drm_virtgpu_resource_create_blob)
+
+#define DRM_IOCTL_VIRTGPU_EXECBUFFER_NO_NOTIFY \
+	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_EXECBUFFER_NO_NOTIFY,\
+		struct drm_virtgpu_execbuffer_no_notify)
 
 #if defined(__cplusplus)
 }
