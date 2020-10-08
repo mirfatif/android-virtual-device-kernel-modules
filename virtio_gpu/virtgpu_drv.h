@@ -332,6 +332,12 @@ void virtio_gpu_cmd_context_detach_resource(struct virtio_gpu_device *vgdev,
 void virtio_gpu_cmd_submit(struct virtio_gpu_device *vgdev,
 			   void *data, uint32_t data_size,
 			   uint32_t ctx_id, struct virtio_gpu_fence *fence);
+// void virtio_gpu_cmd_submit_no_notify(struct virtio_gpu_device *vgdev,
+// 			   void *data, uint32_t data_size,
+// 			   uint32_t ctx_id, struct virtio_gpu_fence *fence);
+void virtio_gpu_cmd_submit_no_notify(struct virtio_gpu_device *vgdev,
+			   void *data, uint32_t data_size,
+			   uint32_t ctx_id);
 void virtio_gpu_cmd_transfer_from_host_3d(struct virtio_gpu_device *vgdev,
 					  uint32_t resource_id, uint32_t ctx_id,
 					  uint64_t offset, uint32_t level,

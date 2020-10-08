@@ -90,7 +90,7 @@ virtio_gpu_get_vbuf(struct virtio_gpu_device *vgdev,
 
 	vbuf->resp_cb = resp_cb;
 	vbuf->resp_size = resp_size;
-	if (resp_size <= MAX_INLINE_RESP_SIZE)
+	if (resp_size && (resp_size <= MAX_INLINE_RESP_SIZE))
 		vbuf->resp_buf = (void *)vbuf->buf + size;
 	else
 		vbuf->resp_buf = resp_buf;
@@ -107,6 +107,21 @@ static void *virtio_gpu_alloc_cmd(struct virtio_gpu_device *vgdev,
 	vbuf = virtio_gpu_get_vbuf(vgdev, size,
 				   sizeof(struct virtio_gpu_ctrl_hdr),
 				   NULL, NULL);
+	if (IS_ERR(vbuf)) {
+		*vbuffer_p = NULL;
+		return ERR_CAST(vbuf);
+	}
+	*vbuffer_p = vbuf;
+	return vbuf->buf;
+}
+
+static void *virtio_gpu_alloc_cmd_no_notify(struct virtio_gpu_device *vgdev,
+				  struct virtio_gpu_vbuffer **vbuffer_p,
+				  int size)
+{
+	struct virtio_gpu_vbuffer *vbuf;
+
+	vbuf = virtio_gpu_get_vbuf(vgdev, size, 0, NULL, NULL);
 	if (IS_ERR(vbuf)) {
 		*vbuffer_p = NULL;
 		return ERR_CAST(vbuf);
@@ -300,6 +315,55 @@ retry:
 	return ret;
 }
 
+static int virtio_gpu_queue_ctrl_buffer_no_notify_locked(struct virtio_gpu_device *vgdev,
+					       struct virtio_gpu_vbuffer *vbuf)
+		__releases(&vgdev->ctrlq.qlock)
+		__acquires(&vgdev->ctrlq.qlock)
+{
+	struct virtqueue *vq = vgdev->ctrlq.vq;
+	struct scatterlist *sgs[3], vcmd, vout, vresp;
+	int outcnt = 0, incnt = 0;
+	int ret;
+
+	if (!vgdev->vqs_ready)
+		return -ENODEV;
+
+	sg_init_one(&vcmd, vbuf->buf, vbuf->size);
+	sgs[outcnt + incnt] = &vcmd;
+	outcnt++;
+
+	if (vbuf->data_size) {
+		sg_init_one(&vout, vbuf->data_buf, vbuf->data_size);
+		sgs[outcnt + incnt] = &vout;
+		outcnt++;
+	}
+
+	if (vbuf->resp_size) {
+		sg_init_one(&vresp, vbuf->resp_buf, vbuf->resp_size);
+		sgs[outcnt + incnt] = &vresp;
+		incnt++;
+	}
+
+	DRM_ERROR("incnt: %d\n", incnt);
+retry:
+	ret = virtqueue_add_sgs(vq, sgs, outcnt, incnt, vbuf, GFP_ATOMIC);
+	if (ret == -ENOSPC) {
+		spin_unlock(&vgdev->ctrlq.qlock);
+		wait_event(vgdev->ctrlq.ack_queue, vq->num_free >= outcnt + incnt);
+		spin_lock(&vgdev->ctrlq.qlock);
+		goto retry;
+	} else {
+		trace_virtio_gpu_cmd_queue(vq,
+			(struct virtio_gpu_ctrl_hdr *)vbuf->buf);
+
+		virtqueue_kick(vq);
+	}
+
+	if (!ret)
+		ret = vq->num_free;
+	return ret;
+}
+
 static int virtio_gpu_queue_ctrl_buffer(struct virtio_gpu_device *vgdev,
 					struct virtio_gpu_vbuffer *vbuf)
 {
@@ -339,6 +403,38 @@ again:
 	if (fence)
 		virtio_gpu_fence_emit(vgdev, hdr, fence);
 	rc = virtio_gpu_queue_ctrl_buffer_locked(vgdev, vbuf);
+	spin_unlock(&vgdev->ctrlq.qlock);
+	return rc;
+}
+
+static int virtio_gpu_queue_fenced_ctrl_buffer_no_notify(struct virtio_gpu_device *vgdev,
+					       struct virtio_gpu_vbuffer *vbuf,
+					       struct virtio_gpu_ctrl_hdr *hdr,
+					       struct virtio_gpu_fence *fence)
+{
+	struct virtqueue *vq = vgdev->ctrlq.vq;
+	int rc;
+
+again:
+	spin_lock(&vgdev->ctrlq.qlock);
+
+	/*
+	 * Make sure we have enouth space in the virtqueue.  If not
+	 * wait here until we have.
+	 *
+	 * Without that virtio_gpu_queue_ctrl_buffer_nolock might have
+	 * to wait for free space, which can result in fence ids being
+	 * submitted out-of-order.
+	 */
+	if (vq->num_free < 3) {
+		spin_unlock(&vgdev->ctrlq.qlock);
+		wait_event(vgdev->ctrlq.ack_queue, vq->num_free >= 3);
+		goto again;
+	}
+
+	if (fence)
+		virtio_gpu_fence_emit(vgdev, hdr, fence);
+	rc = virtio_gpu_queue_ctrl_buffer_no_notify_locked(vgdev, vbuf);
 	spin_unlock(&vgdev->ctrlq.qlock);
 	return rc;
 }
@@ -1008,6 +1104,29 @@ void virtio_gpu_cmd_submit(struct virtio_gpu_device *vgdev,
 	cmd_p->size = cpu_to_le32(data_size);
 
 	virtio_gpu_queue_fenced_ctrl_buffer(vgdev, vbuf, &cmd_p->hdr, fence);
+}
+
+void virtio_gpu_cmd_submit_no_notify(struct virtio_gpu_device *vgdev,
+			   void *data, uint32_t data_size,
+			   uint32_t ctx_id)
+			   // uint32_t ctx_id, struct virtio_gpu_fence *fence)
+{
+	struct virtio_gpu_cmd_submit *cmd_p;
+	struct virtio_gpu_vbuffer *vbuf;
+
+	cmd_p = virtio_gpu_alloc_cmd(vgdev, &vbuf, sizeof(*cmd_p));
+	memset(cmd_p, 0, sizeof(*cmd_p));
+
+	vbuf->data_buf = data;
+	vbuf->data_size = data_size;
+
+	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_SUBMIT_3D_NO_NOTIFY);
+	cmd_p->hdr.ctx_id = cpu_to_le32(ctx_id);
+	cmd_p->size = cpu_to_le32(data_size);
+
+    // TODO: Maybe we don't need a fence either?
+	// virtio_gpu_queue_fenced_ctrl_buffer_no_notify(vgdev, vbuf, &cmd_p->hdr, fence);
+	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
 }
 
 int virtio_gpu_object_attach(struct virtio_gpu_device *vgdev,
