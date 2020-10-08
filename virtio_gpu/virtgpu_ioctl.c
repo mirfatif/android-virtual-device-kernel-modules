@@ -248,6 +248,82 @@ out_unused_fd:
 	return ret;
 }
 
+/*
+ * Usage of execbuffer no notify:
+ * Relocations need to take into account the full VIRTIO_GPUDrawable size.
+ * However, the command as passed from user space must *not* contain the initial
+ * VIRTIO_GPUReleaseInfo struct (first XXX bytes)
+ */
+static int virtio_gpu_execbuffer_no_notify_ioctl(struct drm_device *dev, void *data,
+				 struct drm_file *drm_file)
+{
+	struct drm_virtgpu_execbuffer_no_notify *exbuf = data;
+	struct virtio_gpu_device *vgdev = dev->dev_private;
+	struct virtio_gpu_fpriv *vfpriv = drm_file->driver_priv;
+	struct drm_gem_object *gobj;
+	struct virtio_gpu_fence *out_fence;
+	struct virtio_gpu_object *qobj;
+	int ret;
+	uint32_t *bo_handles = NULL;
+	void __user *user_bo_handles = NULL;
+	struct list_head validate_list;
+	struct ttm_validate_buffer *buflist = NULL;
+	int i;
+	struct ww_acquire_ctx ticket;
+	struct sync_file *sync_file;
+	int in_fence_fd = -1;
+	int out_fence_fd = -1;
+	void *buf;
+
+	if ((exbuf->flags & ~VIRTGPU_EXECBUF_FLAGS))
+		return -EINVAL;
+
+	exbuf->fence_fd = -1;
+
+	INIT_LIST_HEAD(&validate_list);
+
+	ret = virtio_gpu_object_list_validate(&ticket, &validate_list);
+	if (ret)
+		goto out_free;
+
+	buf = memdup_user(u64_to_user_ptr(exbuf->command), exbuf->size);
+	if (IS_ERR(buf)) {
+		ret = PTR_ERR(buf);
+		goto out_unresv;
+	}
+
+	out_fence = virtio_gpu_fence_alloc(vgdev);
+	if(!out_fence) {
+		ret = -ENOMEM;
+		goto out_memdup;
+	}
+
+	virtio_gpu_cmd_submit_no_notify(vgdev, buf, exbuf->size,
+			      vfpriv->ctx_id, out_fence);
+
+	ttm_eu_fence_buffer_objects(&ticket, &validate_list, &out_fence->f);
+
+	/* fence the command bo */
+	virtio_gpu_unref_list(&validate_list);
+	kvfree(buflist);
+	return 0;
+
+out_memdup:
+	kfree(buf);
+out_unresv:
+	ttm_eu_backoff_reservation(&ticket, &validate_list);
+out_free:
+	virtio_gpu_unref_list(&validate_list);
+out_unused_fd:
+	kvfree(bo_handles);
+	kvfree(buflist);
+
+	if (out_fence_fd >= 0)
+		put_unused_fd(out_fence_fd);
+
+	return ret;
+}
+
 static int virtio_gpu_getparam_ioctl(struct drm_device *dev, void *data,
 				     struct drm_file *file_priv)
 {
@@ -749,4 +825,8 @@ struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS] = {
 	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_CREATE_BLOB,
 			  virtio_gpu_resource_create_blob_ioctl,
 			  DRM_RENDER_ALLOW)
+
+	DRM_IOCTL_DEF_DRV(VIRTGPU_EXECBUFFER_NO_NOTIFY, virtio_gpu_execbuffer_no_notify_ioctl,
+			  DRM_RENDER_ALLOW),
+
 };
