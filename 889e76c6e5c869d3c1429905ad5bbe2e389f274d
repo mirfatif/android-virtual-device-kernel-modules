@@ -22,6 +22,30 @@
       },
       "revId": "889e76c6e5c869d3c1429905ad5bbe2e389f274d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143a8669_12105b88",
+        "filename": "fvp.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2020-10-16T17:32:13Z",
+      "side": 1,
+      "message": "SGTM, I\u0027ve added it to gki_defconfig on the other change.",
+      "parentUuid": "d4049f13_1b2508ae",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 30
+      },
+      "revId": "889e76c6e5c869d3c1429905ad5bbe2e389f274d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
