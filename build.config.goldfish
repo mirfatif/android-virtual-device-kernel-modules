@@ -5,5 +5,6 @@ KERNEL_DIR=common
 
 EXT_MODULES="common-modules/virtual-device"
 FRAGMENT_DEFCONFIG_PATH="${ROOT_DIR}/common-modules/virtual-device/goldfish_defconfig.fragment"
+LZ4_RAMDISK=1
 
 BUILD_GOLDFISH_DRIVERS=m
