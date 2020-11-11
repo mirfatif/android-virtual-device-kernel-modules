@@ -1,0 +1,9 @@
+Autosubmit+1: Doug Horn <doughorn@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Alistair Delva <adelva@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 11 Nov 2020 21:50:56 +0000
+Reviewed-on: https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1447555
+Project: kernel/common-modules/virtual-device
+Branch: refs/heads/android12-5.4
