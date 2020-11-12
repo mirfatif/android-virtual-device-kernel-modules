@@ -22,6 +22,30 @@
       },
       "revId": "15b7024f96b273e6b63c202024210f6072cca6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2b66e6_4428700a",
+        "filename": "build.config.virtual_device.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-11-12T00:53:59Z",
+      "side": 1,
+      "message": "You\u0027ll have to generate a whitelist for this combined device (example  here https://android-review.googlesource.com/c/kernel/common/+/1233812).\n\nYou won\u0027t need to update the ABI since all the symbols used by this superset are already present in the allowlist.\n\nDon\u0027t think you\u0027ll need to do anything else. I added Matthias to this code review in case I\u0027m wrong.",
+      "parentUuid": "d5150068_94769c04",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "15b7024f96b273e6b63c202024210f6072cca6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
