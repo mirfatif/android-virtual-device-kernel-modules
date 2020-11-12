@@ -1,0 +1,13 @@
+. ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
+
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+
+DEFCONFIG=vd_aarch_64_gki_defconfig
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
+BUILD_GOLDFISH_DRIVERS=m
+
+# Not building/saving any kernel images. This build step is meant purely to generate the .kos.
+FILES=""
+MAKE_GOALS="modules"
+GKI_MODULES_LIST=android/gki_aarch64_modules
