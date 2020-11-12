@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5150068_94769c04",
+        "filename": "build.config.virtual_device.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-11-12T00:38:52Z",
+      "side": 1,
+      "message": "What do I do here?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "15b7024f96b273e6b63c202024210f6072cca6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
