@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4626c0f9_ca585ec1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-11-12T21:38:10Z",
+      "side": 1,
+      "message": "Bo, are we ok with changing our rvc kernel?",
+      "revId": "815ebebf49c4a64915c8312288ecfb0e04a42765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
