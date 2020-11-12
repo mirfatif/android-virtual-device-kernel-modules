@@ -46,6 +46,30 @@
       },
       "revId": "15b7024f96b273e6b63c202024210f6072cca6b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd503978_660774de",
+        "filename": "build.config.virtual_device.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-11-12T13:11:17Z",
+      "side": 1,
+      "message": "You probably can drop the symbol list parameter. From a symbol list perspective you should be covered by the the union of cf and gf symbol lists (unless you decide to retire those) and you will not do an update from here I assume.\n\nYou can keep the GKI_MODULES_LIST for reference as it might become significant for this in the future.",
+      "parentUuid": "4b2b66e6_4428700a",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "15b7024f96b273e6b63c202024210f6072cca6b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
