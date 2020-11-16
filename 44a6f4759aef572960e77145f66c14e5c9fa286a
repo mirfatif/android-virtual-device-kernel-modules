@@ -46,6 +46,30 @@
       },
       "revId": "44a6f4759aef572960e77145f66c14e5c9fa286a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ddd3b51_783925df",
+        "filename": "build.config.virtual_device.aarch64",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-11-16T22:31:17Z",
+      "side": 1,
+      "message": "For context - we will remove this build define once we migrate from separate builds to this one.",
+      "parentUuid": "e619a8ef_a0b73250",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 22
+      },
+      "revId": "44a6f4759aef572960e77145f66c14e5c9fa286a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
