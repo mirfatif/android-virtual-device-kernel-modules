@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "212cb387_5a5f6c63",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00682c33_f205ae70",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "450f3cef_50a52e52",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-11-16T21:28:18Z",
       "side": 1,
       "message": "Where is this needed?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14967ff5_04edcd63",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "450f3cef_50a52e52",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "214ccdcb_aaa3fa38",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a36f2c42_2df7d170",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 29
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8884f3e_3aa2762d",
@@ -100,6 +172,30 @@
       "writtenOn": "2020-11-16T21:28:18Z",
       "side": 1,
       "message": "Are these HCDs really required? Won\u0027t the virtual machine manager only emulate Intel USB controllers?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 24
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea967222_e3c74db0",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8884f3e_3aa2762d",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e94d69e_8b4b0b96",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8880e9b_3b3251a0",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 21
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3539b8d5_e01e72c3",
@@ -146,6 +266,30 @@
       "writtenOn": "2020-11-16T21:28:18Z",
       "side": 1,
       "message": "Can you add this to gki instead?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 21
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd7306a_82e9f5ed",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3539b8d5_e01e72c3",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -179,6 +323,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb2b07a_ff134374",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da77fdd1_2b132973",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 26
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "107aea9e_d484de16",
@@ -192,6 +360,30 @@
       "writtenOn": "2020-11-16T21:28:18Z",
       "side": 1,
       "message": "Why is this off?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 16
+      },
+      "revId": "042c97d905acd056a01ef7b1e6f62a8852faba56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02024e45_79441fac",
+        "filename": "goldfish_defconfig_car.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-18T21:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "107aea9e_d484de16",
       "range": {
         "startLine": 42,
         "startChar": 0,
