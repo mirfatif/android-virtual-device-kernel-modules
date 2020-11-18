@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54ebd25b_714b34a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-11-18T21:44:09Z",
+      "side": 1,
+      "message": "Bo, could you please confirm if we want to add kernel modules to RVC?",
+      "revId": "aef0ddbabda27d2e139b7127a0c1f0808a184315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
