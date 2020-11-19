@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba8be6e_80368866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-11-19T00:11:27Z",
+      "side": 1,
+      "message": "let\u0027s not add you module here. I am adding (to 12-5.4 and mainline) another build config to build all cf and gf modules at once.",
+      "revId": "4ef6d4d59c7faef0d9f68f51f0de02ad209a9be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
