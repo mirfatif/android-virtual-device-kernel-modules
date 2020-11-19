@@ -403,7 +403,7 @@ void virtio_gpu_fence_emit(struct virtio_gpu_device *vgdev,
 			  struct virtio_gpu_ctrl_hdr *cmd_hdr,
 			  struct virtio_gpu_fence *fence);
 void virtio_gpu_fence_event_process(struct virtio_gpu_device *vdev,
-				    u64 last_seq);
+				    u64 fence_id);
 
 /* virtio_gpu_object */
 int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
