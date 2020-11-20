@@ -16,6 +16,24 @@
       "message": "This CP is much smaller than the original commit, do we know how the common-modules/virtual-device version of virtio-gpu only got part of this change?",
       "revId": "067f10f1a659103d99891b4759852546b3b35b09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5754b9ea_8a94bc1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2020-11-20T19:23:02Z",
+      "side": 1,
+      "message": "I do a full CP from the original commit, and this is the only difference. It seems that we previously partially merged the original commit, but I am not sure why.",
+      "parentUuid": "b4e02138_99aeebce",
+      "revId": "067f10f1a659103d99891b4759852546b3b35b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
