@@ -68,10 +68,6 @@
 #error CONFIG_TEST_MEMINIT is a module in goldfish_defconfig.fragment
 #endif
 
-#ifdef CONFIG_USB_DUMMY_HCD
-#error CONFIG_USB_DUMMY_HCD is a module in goldfish_defconfig.fragment
-#endif
-
 #ifdef CONFIG_VIRTIO_BLK
 #error CONFIG_VIRTIO_BLK is a module in goldfish_defconfig.fragment
 #endif
