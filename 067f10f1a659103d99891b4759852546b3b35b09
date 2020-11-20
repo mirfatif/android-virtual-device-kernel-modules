@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e02138_99aeebce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2020-11-20T19:07:28Z",
+      "side": 1,
+      "message": "This CP is much smaller than the original commit, do we know how the common-modules/virtual-device version of virtio-gpu only got part of this change?",
+      "revId": "067f10f1a659103d99891b4759852546b3b35b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
