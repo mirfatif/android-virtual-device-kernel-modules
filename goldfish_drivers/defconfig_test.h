@@ -20,8 +20,8 @@
 #error CONFIG_PCI is required
 #endif
 
-#ifndef CONFIG_COMPAT
-#error CONFIG_COMPAT is required
+#if !defined(CONFIG_COMPAT) && !defined(CONFIG_COMPAT_32)
+#error CONFIG_COMPAT or CONFIG_COMPAT_32 is required
 #endif
 
 #ifdef CONFIG_BLK_DEV_MD
