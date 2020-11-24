@@ -96,10 +96,6 @@
 #error CONFIG_VIRTIO_PMEM is a module in goldfish_defconfig.fragment
 #endif
 
-#ifdef CONFIG_INCREMENTAL_FS
-#error CONFIG_INCREMENTAL_FS is a module in goldfish_defconfig.fragment
-#endif
-
 #ifdef CONFIG_ZRAM
 #error CONFIG_ZRAM is a module in goldfish_defconfig.fragment
 #endif
