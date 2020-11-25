@@ -34,6 +34,23 @@
       "parentUuid": "0ba8be6e_80368866",
       "revId": "4ef6d4d59c7faef0d9f68f51f0de02ad209a9be1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c776c6c1_29f78158",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2020-11-25T19:00:49Z",
+      "side": 1,
+      "message": "Reinstating this CL due to request from adelva@. It looks like I need to strictly add features from mainline first",
+      "revId": "4ef6d4d59c7faef0d9f68f51f0de02ad209a9be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
