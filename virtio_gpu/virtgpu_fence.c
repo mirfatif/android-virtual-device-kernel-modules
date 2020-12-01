@@ -39,10 +39,10 @@ static const char *virtio_gpu_get_timeline_name(struct dma_fence *f)
 
 bool virtio_gpu_fence_signaled(struct dma_fence *f)
 {
-	struct virtio_gpu_fence *fence = to_virtio_gpu_fence(f);
-
-	if (atomic64_read(&fence->drv->last_fence_id) >= fence->f.seqno)
-		return true;
+	/* leaked fence outside driver before completing
+	 * initialization with virtio_gpu_fence_emit.
+	 */
+	WARN_ON_ONCE(f->seqno == 0);
 	return false;
 }
 
