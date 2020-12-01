@@ -199,7 +199,7 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 		ret = virtio_gpu_object_list_validate(&ticket, &validate_list);
 		if (ret == 0) {
 			spin_lock_irqsave(&drv->lock, irq_flags);
-			signaled = virtio_fence_signaled(&fence->f);
+			signaled = virtio_gpu_fence_signaled(&fence->f);
 			if (!signaled)
 				/* virtio create command still in flight */
 				ttm_eu_fence_buffer_objects(&ticket, &validate_list,

@@ -121,7 +121,7 @@ struct virtio_gpu_fence {
 	struct virtio_gpu_fence_driver *drv;
 	struct list_head node;
 };
-#define to_virtio_fence(x) \
+#define to_virtio_gpu_fence(x) \
 	container_of(x, struct virtio_gpu_fence, f)
 
 struct virtio_gpu_vbuffer {
@@ -396,7 +396,7 @@ void virtio_gpu_ttm_fini(struct virtio_gpu_device *vgdev);
 int virtio_gpu_mmap(struct file *filp, struct vm_area_struct *vma);
 
 /* virtio_gpu_fence.c */
-bool virtio_fence_signaled(struct dma_fence *f);
+bool virtio_gpu_fence_signaled(struct dma_fence *f);
 struct virtio_gpu_fence *virtio_gpu_fence_alloc(
 	struct virtio_gpu_device *vgdev);
 void virtio_gpu_fence_emit(struct virtio_gpu_device *vgdev,
