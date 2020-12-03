@@ -24,6 +24,10 @@
 #error CONFIG_COMPAT or CONFIG_COMPAT_32 is required
 #endif
 
+#ifndef CONFIG_INCREMENTAL_FS
+#error CONFIG_INCREMENTAL_FS is required
+#endif
+
 #ifdef CONFIG_BLK_DEV_MD
 #error CONFIG_BLK_DEV_MD is a module in goldfish_defconfig.fragment
 #endif
