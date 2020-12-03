@@ -51,6 +51,24 @@
       "message": "Hi Alistair,\n\nIt\u0027s simple to cherry-pick this change to both android-4.19-stable, and android12-5.4, but it is not trivial to cherry-pick this change to android-4.14-stable. The virtio-gpu driver there is too old. If I have to keep 4.14 stable branch in sync, I need to be able to test it locally when I make the change. It would be better if I don\u0027t have to cherry-pick this change to 4.14.",
       "revId": "067f10f1a659103d99891b4759852546b3b35b09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c093a83_19ac7770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-12-03T00:21:53Z",
+      "side": 1,
+      "message": "The driver should be the same. I think you might be confused because cherry-picking isn\u0027t possible due to file renaming. Just rename the files in your history, commit it, cherry-pick this change, and then rename them back. Then you can squash the renames with git rebase -i and amend the final commit with git commit -C \u003cmiddle commit\u003e --amend",
+      "parentUuid": "7f338df7_7851fc25",
+      "revId": "067f10f1a659103d99891b4759852546b3b35b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
