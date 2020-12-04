@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e19d95a2_422e9565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-12-04T18:00:55Z",
+      "side": 1,
+      "message": "Will I be able to click \"Submit\" here\n\nhttps://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1517317\n\nwith this change?",
+      "revId": "6bbb37109ff39ebbfff75dc6d0623ed64c4c5334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
