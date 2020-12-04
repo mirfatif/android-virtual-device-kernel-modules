@@ -69,6 +69,24 @@
       "parentUuid": "7f338df7_7851fc25",
       "revId": "067f10f1a659103d99891b4759852546b3b35b09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c94aa1_f778fefd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2020-12-04T20:06:57Z",
+      "side": 1,
+      "message": "Thanks for the guidance. With renaming, I can submit a cherry-pick for 4.14.",
+      "parentUuid": "7c093a83_19ac7770",
+      "revId": "067f10f1a659103d99891b4759852546b3b35b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
