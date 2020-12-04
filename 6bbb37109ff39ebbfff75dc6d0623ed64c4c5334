@@ -34,6 +34,24 @@
       "parentUuid": "e19d95a2_422e9565",
       "revId": "6bbb37109ff39ebbfff75dc6d0623ed64c4c5334",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3248e6d_2c7d4368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1086523
+      },
+      "writtenOn": "2020-12-04T19:28:25Z",
+      "side": 1,
+      "message": "You would need to be in either kernel-approvers or kernel-committers groups to submit changes.  Alistair, is it Okay if we add the whole goldfish group to kernel-committers?",
+      "parentUuid": "c0e16ddc_837d4b4a",
+      "revId": "6bbb37109ff39ebbfff75dc6d0623ed64c4c5334",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
