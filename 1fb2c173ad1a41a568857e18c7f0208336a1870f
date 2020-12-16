@@ -1,0 +1,8 @@
+Code-Review+2: Todd Kjos <tkjos@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Todd Kjos <tkjos@google.com>
+Submitted-at: Wed, 16 Dec 2020 20:48:15 +0000
+Reviewed-on: https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1532198
+Project: kernel/common-modules/virtual-device
+Branch: refs/heads/android12-5.10
