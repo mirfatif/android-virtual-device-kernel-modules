@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "797eab9e_95dc6c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-16T10:38:04Z",
+      "side": 1,
+      "message": "Why is this needed on android-mainline?",
+      "revId": "cac1ece8530ab62465497ee18f8d9694dcbb7384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
