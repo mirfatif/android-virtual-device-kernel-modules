@@ -16,6 +16,24 @@
       "message": "Why is this needed on android-mainline?",
       "revId": "cac1ece8530ab62465497ee18f8d9694dcbb7384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f085d7_132b2dfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2020-12-16T15:32:40Z",
+      "side": 1,
+      "message": "I think branch is not yet created for android12-5.10.\n\nhttps://android.googlesource.com/kernel/manifest/+/refs/heads/common-android12-5.10/default.xml#13",
+      "parentUuid": "797eab9e_95dc6c2a",
+      "revId": "cac1ece8530ab62465497ee18f8d9694dcbb7384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
