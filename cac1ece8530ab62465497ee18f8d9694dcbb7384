@@ -52,6 +52,23 @@
       "parentUuid": "49f085d7_132b2dfd",
       "revId": "cac1ece8530ab62465497ee18f8d9694dcbb7384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "394bf0f6_5a81a1d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-16T17:01:36Z",
+      "side": 1,
+      "message": "Actually, you\u0027re right. android12-5.4 doesn\u0027t exist yet in kernel/common-modules/virtual-device. Still this shouldn\u0027t go to .../android-mainline",
+      "revId": "cac1ece8530ab62465497ee18f8d9694dcbb7384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
