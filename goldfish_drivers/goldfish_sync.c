@@ -35,6 +35,7 @@
 #include <linux/syscalls.h>
 #include <linux/types.h>
 #include <linux/uaccess.h>
+#include <linux/fdtable.h>
 
 #include <goldfish/goldfish_sync.h>
 
@@ -663,7 +664,7 @@ goldfish_sync_ioctl_locked(struct goldfish_sync_timeline *tl,
 		if (copy_to_user((void __user *)arg,
 				 &ioctl_data,
 				 sizeof(ioctl_data))) {
-			ksys_close(fd_out);
+			close_fd(fd_out);
 			return -EFAULT;
 		}
 
