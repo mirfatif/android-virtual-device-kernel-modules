@@ -9,5 +9,5 @@ POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
 FILES=""
 MAKE_GOALS="modules"
-KMI_SYMBOL_LIST=android/abi_gki_aarch64_cuttlefish
+KMI_SYMBOL_LIST=android/abi_gki_aarch64_virtual_device
 GKI_MODULES_LIST=android/gki_aarch64_modules
