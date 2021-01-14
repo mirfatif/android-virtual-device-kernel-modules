@@ -1,0 +1,9 @@
+Autosubmit+1: Hridya Valsaraju <hridya@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Suren Baghdasaryan <surenb@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 14 Jan 2021 17:40:03 +0000
+Reviewed-on: https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1550220
+Project: kernel/common-modules/virtual-device
+Branch: refs/heads/android12-5.4
