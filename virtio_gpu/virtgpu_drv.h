@@ -245,6 +245,8 @@ struct virtio_gpu_device {
 	uint32_t num_capsets;
 	struct list_head cap_cache;
 
+	atomic64_t total_mem;
+
 	/* protects uuid state when exporting */
 	spinlock_t resource_export_lock;
 	/* protects map state and host_visible_mm */
@@ -277,6 +279,9 @@ void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
 int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
 				struct drm_device *dev,
 				struct drm_mode_create_dumb *args);
+int virtio_gpu_mode_dumb_destroy(struct drm_file *file_priv,
+				 struct drm_device *dev,
+				 uint32_t handle);
 int virtio_gpu_mode_dumb_mmap(struct drm_file *file_priv,
 			      struct drm_device *dev,
 			      uint32_t handle, uint64_t *offset_p);
