@@ -25,8 +25,23 @@
 
 #include <drm/drm_file.h>
 #include <drm/drm_fourcc.h>
+#ifdef CONFIG_TRACE_GPU_MEM
+#include <trace/events/gpu_mem.h>
+#endif
 
 #include "virtgpu_drv.h"
+
+#ifdef CONFIG_TRACE_GPU_MEM
+static inline void virtio_gpu_trace_total_mem(struct drm_device *dev, s64 delta)
+{
+	struct virtio_gpu_device *vgdev = dev->dev_private;
+
+	trace_gpu_mem_total(0, 0,
+			    atomic64_add_return(delta, &vgdev->total_mem));
+}
+#else
+static inline void virtio_gpu_trace_total_mem(struct drm_device *, s64) {}
+#endif
 
 static int virtio_gpu_gem_create(struct drm_file *file,
 				 struct drm_device *dev,
@@ -88,10 +103,25 @@ int virtio_gpu_mode_dumb_create(struct drm_file *file_priv,
 		goto fail;
 
 	args->pitch = pitch;
+	virtio_gpu_trace_total_mem(dev, gobj->size);
 	return ret;
 
 fail:
 	return ret;
+}
+
+int virtio_gpu_mode_dumb_destroy(struct drm_file *file_priv,
+				 struct drm_device *dev,
+				 uint32_t handle)
+{
+	struct drm_gem_object *gobj;
+
+	gobj = drm_gem_object_lookup(file_priv, handle);
+	if (gobj == NULL)
+		return -ENOENT;
+
+	virtio_gpu_trace_total_mem(dev, -(gobj->size));
+	return drm_gem_handle_delete(file_priv, handle);
 }
 
 int virtio_gpu_mode_dumb_mmap(struct drm_file *file_priv,
