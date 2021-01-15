@@ -196,6 +196,7 @@ static struct drm_driver driver = {
 	.postclose = virtio_gpu_driver_postclose,
 
 	.dumb_create = virtio_gpu_mode_dumb_create,
+	.dumb_destroy = virtio_gpu_mode_dumb_destroy,
 	.dumb_map_offset = virtio_gpu_mode_dumb_mmap,
 
 #if defined(CONFIG_DEBUG_FS)
