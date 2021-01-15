@@ -16,6 +16,29 @@
       "message": "Besides the tests, I\u0027ve also verified with local printk logs.",
       "revId": "63978d4742044ae102f131661fc33f2be7161134",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e1a9fe_69e1989e",
+        "filename": "virtio_gpu/virtgpu_object.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-01-15T21:50:58Z",
+      "side": 1,
+      "message": "Might be slightly nicer as shmem_obj-\u003ebase.size, but this is okay with me",
+      "range": {
+        "startLine": 286,
+        "startChar": 35,
+        "endLine": 286,
+        "endChar": 53
+      },
+      "revId": "63978d4742044ae102f131661fc33f2be7161134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
