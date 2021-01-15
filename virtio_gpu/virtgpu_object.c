@@ -30,9 +30,37 @@
 #include <linux/uuid.h>
 #include "virtgpu_drv.h"
 #include <drm/virtgpu_drm.h>
+#ifdef CONFIG_TRACE_GPU_MEM
+#include <trace/events/gpu_mem.h>
+#endif
 
 static int virtio_gpu_virglrenderer_workaround = 1;
 module_param_named(virglhack, virtio_gpu_virglrenderer_workaround, int, 0400);
+
+#ifdef CONFIG_TRACE_GPU_MEM
+static inline void virtio_gpu_trace_total_mem(struct virtio_gpu_device *vgdev,
+					      s64 delta)
+{
+	u64 total_mem = atomic64_add_return(delta, &vgdev->total_mem);
+
+	trace_gpu_mem_total(0, 0, total_mem);
+}
+#else
+static inline void virtio_gpu_trace_total_mem(struct virtio_gpu_device *, s64)
+{
+}
+#endif
+
+void virtio_gpu_free_object(struct drm_gem_object *gem_obj)
+{
+	struct virtio_gpu_object *obj = gem_to_virtio_gpu_obj(gem_obj);
+	struct virtio_gpu_device *vgdev = gem_obj->dev->dev_private;
+
+	if (obj->created)
+		virtio_gpu_trace_total_mem(vgdev, -(gem_obj->size));
+	if (obj)
+		virtio_gpu_object_unref(&obj);
+}
 
 static int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev,
 				       uint32_t *resid)
@@ -168,6 +196,8 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 	} else if (params->dumb) {
 		virtio_gpu_cmd_create_resource(vgdev, bo, params, fence);
 	}
+
+	virtio_gpu_trace_total_mem(vgdev, bo->gem_base.size);
 
 	virtio_gpu_init_ttm_placement(bo);
 	ret = ttm_bo_init(&vgdev->mman.bdev, &bo->tbo, params->size,
