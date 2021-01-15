@@ -25,11 +25,26 @@
 
 #include <linux/dma-mapping.h>
 #include <linux/moduleparam.h>
+#ifdef CONFIG_TRACE_GPU_MEM
+#include <trace/events/gpu_mem.h>
+#endif
 
 #include "virtgpu_drv.h"
 
 static int virtio_gpu_virglrenderer_workaround = 1;
 module_param_named(virglhack, virtio_gpu_virglrenderer_workaround, int, 0400);
+
+#ifdef CONFIG_TRACE_GPU_MEM
+static inline void virtio_gpu_trace_total_mem(struct drm_device *dev, s64 delta)
+{
+	struct virtio_gpu_device *vgdev = dev->dev_private;
+
+	trace_gpu_mem_total(0, 0,
+			    atomic64_add_return(delta, &vgdev->total_mem));
+}
+#else
+static inline void virtio_gpu_trace_total_mem(struct drm_device *, s64) {}
+#endif
 
 int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev, uint32_t *resid)
 {
@@ -104,6 +119,8 @@ static void virtio_gpu_free_object(struct drm_gem_object *obj)
 	struct virtio_gpu_device *vgdev = bo->base.base.dev->dev_private;
 
 	if (bo->created) {
+		virtio_gpu_trace_total_mem(dev, -(obj->size));
+		printk(KERN_INFO "YIWEI-FREE %zu\n", gobj->size);
 		virtio_gpu_cmd_unref_resource(vgdev, bo);
 		virtio_gpu_notify(vgdev);
 		/* completion handler calls virtio_gpu_cleanup_object() */
@@ -265,6 +282,8 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 		virtio_gpu_object_attach(vgdev, bo, ents, nents);
 	}
 
+	virtio_gpu_trace_total_mem(dev, bo->base.base.size);
+	printk(KERN_INFO "YIWEI-CREATE %zu\n", bo->base.base.size);
 	*bo_ptr = bo;
 	return 0;
 
