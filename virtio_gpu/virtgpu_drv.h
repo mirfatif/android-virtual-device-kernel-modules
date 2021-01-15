@@ -239,6 +239,10 @@ struct virtio_gpu_device {
 	spinlock_t request_idr_lock;
 
 	spinlock_t resource_export_lock;
+
+#ifdef CONFIG_TRACE_GPU_MEM
+	atomic64_t total_mem;
+#endif
 };
 
 struct virtio_gpu_fpriv {
@@ -259,7 +263,6 @@ int virtio_gpu_driver_open(struct drm_device *dev, struct drm_file *file);
 void virtio_gpu_driver_postclose(struct drm_device *dev, struct drm_file *file);
 
 /* virtio_gem.c */
-void virtio_gpu_gem_free_object(struct drm_gem_object *gem_obj);
 int virtio_gpu_gem_init(struct virtio_gpu_device *vgdev);
 void virtio_gpu_gem_fini(struct virtio_gpu_device *vgdev);
 int virtio_gpu_gem_create(struct drm_file *file,
@@ -406,6 +409,7 @@ void virtio_gpu_fence_event_process(struct virtio_gpu_device *vdev,
 				    u64 last_seq);
 
 /* virtio_gpu_object */
+void virtio_gpu_free_object(struct drm_gem_object *gem_obj);
 int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 			     struct virtio_gpu_object_params *params,
 			     struct virtio_gpu_object **bo_ptr,
