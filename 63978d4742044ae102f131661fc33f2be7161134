@@ -39,6 +39,30 @@
       },
       "revId": "63978d4742044ae102f131661fc33f2be7161134",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abbd87d6_d274b325",
+        "filename": "virtio_gpu/virtgpu_object.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1339259
+      },
+      "writtenOn": "2021-01-15T21:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e1a9fe_69e1989e",
+      "range": {
+        "startLine": 286,
+        "startChar": 35,
+        "endLine": 286,
+        "endChar": 53
+      },
+      "revId": "63978d4742044ae102f131661fc33f2be7161134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
