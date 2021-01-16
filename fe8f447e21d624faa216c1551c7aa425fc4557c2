@@ -1,0 +1,11 @@
+Verified+1: Yiwei Zhang <zzyiwei@google.com>
+Autosubmit+1: Yiwei Zhang <zzyiwei@google.com>
+Code-Review+2: Alistair Delva <adelva@google.com>
+Presubmit-Verified-1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Bypass-Presubmit+1: Alistair Delva <adelva@google.com>
+Submitted-by: Alistair Delva <adelva@google.com>
+Submitted-at: Sat, 16 Jan 2021 00:41:45 +0000
+Reviewed-on: https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1551757
+Project: kernel/common-modules/virtual-device
+Branch: refs/heads/android12-5.10
