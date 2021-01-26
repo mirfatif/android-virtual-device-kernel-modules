@@ -22,6 +22,18 @@ struct goldfish_address_space_ping {
 	__u32 direction;
 };
 
+struct goldfish_address_space_ping_with_data {
+	__u64 offset;
+	__u64 size;
+	__u64 metadata;
+	__u32 version;
+	__u32 wait_fd;
+	__u32 wait_flags;
+	__u32 direction;
+	__u64 data_size;
+	__u64 data_ptr;
+};
+
 struct goldfish_address_space_claim_shared {
 	__u64 offset;
 	__u64 size;
@@ -49,5 +61,8 @@ struct goldfish_address_space_claim_shared {
 
 #define GOLDFISH_ADDRESS_SPACE_IOCTL_UNCLAIM_SHARED \
 	GOLDFISH_ADDRESS_SPACE_IOCTL_OP(14,  __u64)
+
+#define GOLDFISH_ADDRESS_SPACE_IOCTL_PING_WITH_DATA \
+	GOLDFISH_ADDRESS_SPACE_IOCTL_OP(15,  struct goldfish_address_space_ping_with_data)
 
 #endif /* UAPI_GOLDFISH_ADDRESS_SPACE_H */
