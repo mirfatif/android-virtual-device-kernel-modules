@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (c847a8 ANDROID: Track total GPU memory for virtio driver)
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
@@ -7,3 +8,5 @@ CLANG_TRIPLE=i686-linux-gnu-
 DEFCONFIG=cf_x86_gki_defconfig
 PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/cuttlefish.fragment ${ROOT_DIR}/common-modules/virtual-device/i686.fragment"
 POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG}"
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)

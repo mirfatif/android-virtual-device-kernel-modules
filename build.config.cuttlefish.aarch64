@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (c847a8 ANDROID: Track total GPU memory for virtio driver)
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
@@ -11,3 +12,5 @@ FILES=""
 MAKE_GOALS="modules"
 KMI_SYMBOL_LIST=android/abi_gki_aarch64_virtual_device
 GKI_MODULES_LIST=android/gki_aarch64_modules
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)

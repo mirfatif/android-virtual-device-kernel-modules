@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (c847a8 ANDROID: Track total GPU memory for virtio driver)
 CONFIG_CPUFREQ_DUMMY=m
 CONFIG_VIRTIO_VSOCKETS=m
 CONFIG_GNSS_CMDLINE_SERIAL=m
@@ -23,3 +24,5 @@ CONFIG_VIRTIO_FS=m
 CONFIG_USB_PULSE8_CEC=m
 CONFIG_DM_USER=m
 CONFIG_DMABUF_HEAPS_SYSTEM=m
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)
