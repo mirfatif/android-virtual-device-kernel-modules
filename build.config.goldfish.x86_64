@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (c847a8 ANDROID: Track total GPU memory for virtio driver)
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.goldfish
 . ${ROOT_DIR}/common/build.config.x86_64
 
@@ -9,3 +10,5 @@ POST_DEFCONFIG_CMDS="rm ${DEFCONFIG_PATH}/${DEFCONFIG}"
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
 FILES=""
 MAKE_GOALS="modules"
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)

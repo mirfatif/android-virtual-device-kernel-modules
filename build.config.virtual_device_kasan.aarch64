@@ -1,4 +1,4 @@
-. ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
+. ${ROOT_DIR}/common-modules/virtual-device/build.config.virtual_device
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki_kasan

@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (c847a8 ANDROID: Track total GPU memory for virtio driver)
 KERNEL_DIR=common
 
 . ${ROOT_DIR}/common/build.config.common
@@ -8,3 +9,5 @@ FRAGMENT_DEFCONFIG_PATH="${ROOT_DIR}/common-modules/virtual-device/goldfish_defc
 LZ4_RAMDISK=1
 
 BUILD_GOLDFISH_DRIVERS=m
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)
