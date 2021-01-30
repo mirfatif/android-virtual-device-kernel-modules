@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (55bdec ANDROID: goldfish_sync switch ksys_close() to close_fd())
 CONFIG_CPUFREQ_DUMMY=m
 CONFIG_VIRTIO_VSOCKETS=m
 CONFIG_GNSS_CMDLINE_SERIAL=m
@@ -24,3 +25,5 @@ CONFIG_ZSMALLOC=m
 CONFIG_VIRTIO_FS=m
 CONFIG_USB_PULSE8_CEC=m
 CONFIG_DM_USER=m
+=======
+>>>>>>> CHANGE (991c39 Remove dead cuttlefish/goldfish targets)
