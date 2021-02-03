@@ -16,6 +16,23 @@
       "message": "Ping.",
       "revId": "266975bc10b1bacfeeb81a171d05593a818477d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a3115f_459398b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-02-03T19:05:38Z",
+      "side": 1,
+      "message": "tkjos: Ping.",
+      "revId": "266975bc10b1bacfeeb81a171d05593a818477d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
