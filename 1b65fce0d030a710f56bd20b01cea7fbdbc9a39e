@@ -46,6 +46,30 @@
       },
       "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94155538_05025a93",
+        "filename": "rtl8821cu/os_dep/osdep_service.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-02-10T13:09:06Z",
+      "side": 1,
+      "message": "Actually, never mind. I do think we need these:\n\nWARNING: module 8821cu uses symbol kernel_write from namespace VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\nWARNING: module 8821cu uses symbol kernel_read from namespace VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\nWARNING: module 8821cu uses symbol kern_path from namespace VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.",
+      "parentUuid": "2a380fa7_57561944",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 76
+      },
+      "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
