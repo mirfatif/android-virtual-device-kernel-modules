@@ -142,6 +142,30 @@
       },
       "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbc3919_f84a336a",
+        "filename": "rtl8821cu/os_dep/osdep_service.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-02-18T23:21:58Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ecdbe7ab_a0e48aca",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 76
+      },
+      "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
