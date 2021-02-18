@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae90dbb_b97010e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-02-18T23:34:12Z",
+      "side": 1,
+      "message": "Should we remove the whole rtw_store_to_file thing instead?",
+      "revId": "2652251d112758191de1a3b4bdd9a0d32965f567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
