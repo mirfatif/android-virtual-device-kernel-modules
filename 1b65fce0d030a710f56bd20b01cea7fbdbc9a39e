@@ -118,6 +118,30 @@
       },
       "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecdbe7ab_a0e48aca",
+        "filename": "rtl8821cu/os_dep/osdep_service.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-02-18T17:14:55Z",
+      "side": 1,
+      "message": "thanks for additional context, i will take another look at it tomorrow to replace these symbols.",
+      "parentUuid": "af83f9ad_ada13a6d",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 76
+      },
+      "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
