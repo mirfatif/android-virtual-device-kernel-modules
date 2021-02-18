@@ -16,6 +16,24 @@
       "message": "Should we remove the whole rtw_store_to_file thing instead?",
       "revId": "2652251d112758191de1a3b4bdd9a0d32965f567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc98ae9_7579ed73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-02-18T23:49:08Z",
+      "side": 1,
+      "message": "looks like those things are actually used in some efuse functionality",
+      "parentUuid": "dae90dbb_b97010e9",
+      "revId": "2652251d112758191de1a3b4bdd9a0d32965f567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
