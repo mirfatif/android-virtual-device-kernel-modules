@@ -94,6 +94,30 @@
       },
       "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af83f9ad_ada13a6d",
+        "filename": "rtl8821cu/os_dep/osdep_service.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-18T16:50:14Z",
+      "side": 1,
+      "message": "These functions are always going to be there in upstream kernels, because they might be needed by some specific in-tree drivers or filesystems. But for GKI, we decided to ban their use because they are often abused (a driver writing to a filesystem, what??) and so we introduced this module namespace to detect abuse by drivers. In android11-5.4 we had to export with the namespace because we decided to keep incfs as a module, and it needs them, but in android12+ we will ban use of these symbols and there will be no workaround.\n\nSo, I\u0027m afraid we cannot just take these changes as is, and you need to modify the realtek driver to not use these symbols. It absolutely should not depend on being able to read or write files from the kernel driver.",
+      "parentUuid": "7214bef2_94a26ac6",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 76
+      },
+      "revId": "1b65fce0d030a710f56bd20b01cea7fbdbc9a39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
