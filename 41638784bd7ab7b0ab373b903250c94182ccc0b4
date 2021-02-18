@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8297739f_46f8a19b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1581772
+      },
+      "writtenOn": "2021-02-18T12:13:35Z",
+      "side": 1,
+      "message": "This is also needed on android12-5.10 as https://r.android.com/1565163 got cherry-picked there.",
+      "revId": "41638784bd7ab7b0ab373b903250c94182ccc0b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
