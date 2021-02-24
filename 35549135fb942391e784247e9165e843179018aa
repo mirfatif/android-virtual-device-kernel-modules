@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff67959_697f74c0",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "LTO_CLANG_THIN, currently",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe08d443_34de943a",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "already set",
+      "range": {
+        "startLine": 16,
+        "startChar": 5,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda014e0_9aed1b6b",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "already set",
+      "range": {
+        "startLine": 22,
+        "startChar": 5,
+        "endLine": 22,
+        "endChar": 23
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "816de34c_a004c239",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "The name of this option is wrong. It\u0027s KPROBE_EVENTS in newer kernels, and it\u0027s already set.",
+      "range": {
+        "startLine": 23,
+        "startChar": 5,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dca6d93_b9a8d94e",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "already set",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c8046a_d607c268",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "already set (for S kernels)",
+      "range": {
+        "startLine": 25,
+        "startChar": 5,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee14b271_43c5a87b",
+        "filename": "build.config.cuttlefish_kprobes.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-02-24T17:07:19Z",
+      "side": 1,
+      "message": "already set",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 26
+      },
+      "revId": "35549135fb942391e784247e9165e843179018aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
