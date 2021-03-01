@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "384994ae_9080f09b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-03-01T23:33:44Z",
+      "side": 1,
+      "message": "You may also need to cherry-pick it to the android-4.14-stable branch, android-4.19-stable branch, and android12-5.4 branch.",
+      "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
