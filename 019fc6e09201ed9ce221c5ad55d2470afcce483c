@@ -34,6 +34,24 @@
       "parentUuid": "384994ae_9080f09b",
       "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55123e48_b54b2111",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1113708
+      },
+      "writtenOn": "2021-03-02T17:01:41Z",
+      "side": 1,
+      "message": "Thanks for the cherry-picks! \n\nWhen you say, should have gone through -stable, what does that mean?",
+      "parentUuid": "b7773092_61bb2b0e",
+      "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
