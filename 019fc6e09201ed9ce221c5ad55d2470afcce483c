@@ -52,6 +52,24 @@
       "parentUuid": "b7773092_61bb2b0e",
       "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e10eca8_63685335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1113708
+      },
+      "writtenOn": "2021-03-02T17:04:19Z",
+      "side": 1,
+      "message": "ah I see, to -stable on the common-kernel repo. Got it",
+      "parentUuid": "55123e48_b54b2111",
+      "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
