@@ -16,6 +16,24 @@
       "message": "You may also need to cherry-pick it to the android-4.14-stable branch, android-4.19-stable branch, and android12-5.4 branch.",
       "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7773092_61bb2b0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-02T16:57:49Z",
+      "side": 1,
+      "message": "And android12-5.10 😊\n(FYI this patch probably should have gone through -stable.)",
+      "parentUuid": "384994ae_9080f09b",
+      "revId": "019fc6e09201ed9ce221c5ad55d2470afcce483c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
