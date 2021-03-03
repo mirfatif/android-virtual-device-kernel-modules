@@ -16,6 +16,23 @@
       "message": "Are these boot tests flaky? I don\u0027t think this patch should cause a failure to boot (and it does not in my testing)",
       "revId": "a9da37e6ad7137e1b88a6e5317e1ac5404cc8754",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0add26c5_8e43d4a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1113708
+      },
+      "writtenOn": "2021-03-03T17:19:22Z",
+      "side": 1,
+      "message": "Failed to send command to instance (exec /usr/bin/ssh -i /google/data/ro/teams/tradefed/configs/gce-ssh/id_rsa -q -o UserKnownHostsFile\u003d/dev/null -o StrictHostKeyChecking\u003dno -l vsoc-01 10.2.0.23 ./fetch_cvd -credential_source\u003dgce -default_build\u003d7181225/aosp_cf_x86_64_phone-userdebug -kernel_build\u003dP20251118/kernel_cf_x86_64)",
+      "revId": "a9da37e6ad7137e1b88a6e5317e1ac5404cc8754",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
