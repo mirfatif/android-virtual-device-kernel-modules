@@ -20,5 +20,9 @@ CONFIG_VIRTIO_NET=m
 CONFIG_VIRTIO_PCI=m
 CONFIG_VIRTIO_PMEM=m
 CONFIG_INCREMENTAL_FS=m
+<<<<<<< HEAD   (1fba7e UPSTREAM: drm/virtio: use kvmalloc for large allocations)
 CONFIG_ZRAM=m
 CONFIG_ZSMALLOC=m
+=======
+CONFIG_BT_HCIVHCI=m
+>>>>>>> CHANGE (bd8e3f CONFIG_BT_HCIVHCI=m for goldfish)
