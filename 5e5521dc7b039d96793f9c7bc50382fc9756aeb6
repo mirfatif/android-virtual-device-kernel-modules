@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ddf2ebb_fb52f297",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-18T20:04:45Z",
+      "side": 1,
+      "message": "Please cherry-pick to android-4.19-stable, android12-5.4, android12-5.10, android-mainline and upload a separate CL to *cuttlefish_defconfig for android-4.14-stable. Thanks!",
+      "revId": "5e5521dc7b039d96793f9c7bc50382fc9756aeb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
