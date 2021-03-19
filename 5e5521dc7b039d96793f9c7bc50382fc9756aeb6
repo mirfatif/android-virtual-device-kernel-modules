@@ -33,6 +33,24 @@
       "message": "@Alistair, any insight on the failures here? Locally I am able to build kernel just fine, it seems it\u0027s having some issues launching. Some error messages regarding failing to mount partition, retrying over and over\n\nhttp://go/paste/5130443973197824\n\nI can look into it further but any thoughts? I don\u0027t immediately see how my change would be causing this, but it doesn\u0027t seem to be a flake.",
       "revId": "5e5521dc7b039d96793f9c7bc50382fc9756aeb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfcbe69c_bd425396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-03-19T14:47:34Z",
+      "side": 1,
+      "message": "I think this is indicating that you broke the kernel ABI by enabling this option. It works for you locally because you\u0027re using the kernel bzImage from your virtual_device / cuttlefish build, but you\u0027re supposed to build again with the GKI defconfig and use that one 😊\n\nI had a quick look and I think it\u0027s due to this:\n\nconfig VIRTIO_BALLOON\n        tristate \"Virtio balloon driver\"\n        depends on VIRTIO\n        select MEMORY_BALLOON\n\nThe \"select\" there isn\u0027t selected by anything else, and that feature isn\u0027t tristate, so it needs to be built into GKI. Then there\u0027s this option:\n\nconfig BALLOON_COMPACTION\n        bool \"Allow for balloon memory compaction/migration\"\n        def_bool y\n        depends on COMPACTION \u0026\u0026 MEMORY_BALLOON\n\nWhich is now being turned on automatically..\n\nThe bad news is that these options dos touch \"enum vm_event_item\", and the worse news is the way it\u0027s designed upstream, the enum blocks that are conditional don\u0027t have block-start values, so if we enable this option, we will break the ABI. We are no longer allowed to change the ABI for android11-5.4, because it could break partners.\n\nSo, if you want to land this feature and continue to use GKI, you\u0027ll need to find an ABI-stable way to do it.\n\nPlease cherry-pick to android12-5.4, android12-5.10 and android-mainline now, so we can get it in now before their ABIs are frozen as well! We don\u0027t have much time to do this.",
+      "parentUuid": "89d2ae91_ae6210c8",
+      "revId": "5e5521dc7b039d96793f9c7bc50382fc9756aeb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
