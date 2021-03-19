@@ -16,6 +16,23 @@
       "message": "Please cherry-pick to android-4.19-stable, android12-5.4, android12-5.10, android-mainline and upload a separate CL to *cuttlefish_defconfig for android-4.14-stable. Thanks!",
       "revId": "5e5521dc7b039d96793f9c7bc50382fc9756aeb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d2ae91_ae6210c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684878
+      },
+      "writtenOn": "2021-03-19T09:56:55Z",
+      "side": 1,
+      "message": "@Alistair, any insight on the failures here? Locally I am able to build kernel just fine, it seems it\u0027s having some issues launching. Some error messages regarding failing to mount partition, retrying over and over\n\nhttp://go/paste/5130443973197824\n\nI can look into it further but any thoughts? I don\u0027t immediately see how my change would be causing this, but it doesn\u0027t seem to be a flake.",
+      "revId": "5e5521dc7b039d96793f9c7bc50382fc9756aeb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
