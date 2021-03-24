@@ -63,6 +63,11 @@
  * context_init
  */
 #define VIRTIO_GPU_F_CONTEXT_INIT        4
+/*
+ * VIRTIO_GPU_CMD_RESOURCE_CREATE_BLOB with
+ * VIRTIO_GPU_BLOB_FLAG_CREATE_GUEST_HANDLE
+ */
+#define VIRTIO_GPU_F_CREATE_GUEST_HANDLE 5
 
 enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_UNDEFINED = 0,
@@ -405,9 +410,10 @@ struct virtio_gpu_resource_create_blob {
 #define VIRTIO_GPU_BLOB_MEM_HOSTSYS           0x0004
 #define VIRTIO_GPU_BLOB_MEM_HOSTSYS_GUEST     0x0005
 
-#define VIRTIO_GPU_BLOB_FLAG_USE_MAPPABLE     0x0001
-#define VIRTIO_GPU_BLOB_FLAG_USE_SHAREABLE    0x0002
-#define VIRTIO_GPU_BLOB_FLAG_USE_CROSS_DEVICE 0x0004
+#define VIRTIO_GPU_BLOB_FLAG_USE_MAPPABLE        0x0001
+#define VIRTIO_GPU_BLOB_FLAG_USE_SHAREABLE       0x0002
+#define VIRTIO_GPU_BLOB_FLAG_USE_CROSS_DEVICE    0x0004
+#define VIRTIO_GPU_BLOB_FLAG_CREATE_GUEST_HANDLE 0x0008
 	/* zero is invalid blob mem */
 	__le32 blob_mem;
 	__le32 blob_flags;
