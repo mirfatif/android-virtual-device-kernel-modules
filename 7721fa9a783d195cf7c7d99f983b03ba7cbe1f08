@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54bd00a4_30baea86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786238
+      },
+      "writtenOn": "2021-03-25T17:24:11Z",
+      "side": 1,
+      "message": "Friendly ping, this fixes a frequent crash for us.",
+      "revId": "7721fa9a783d195cf7c7d99f983b03ba7cbe1f08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
