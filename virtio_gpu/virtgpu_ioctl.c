@@ -34,9 +34,10 @@
 
 #include "virtgpu_drv.h"
 
-#define VIRTGPU_BLOB_FLAG_USE_MASK (VIRTGPU_BLOB_FLAG_USE_MAPPABLE | \
-				    VIRTGPU_BLOB_FLAG_USE_SHAREABLE | \
-				    VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE)
+#define VIRTGPU_BLOB_FLAG_MASK (VIRTGPU_BLOB_FLAG_USE_MAPPABLE | \
+				VIRTGPU_BLOB_FLAG_USE_SHAREABLE | \
+				VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE | \
+				VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE)
 
 /* Must be called with &virtio_gpu_fpriv.struct_mutex held. */
 static void virtio_gpu_create_context_locked(struct virtio_gpu_device *vgdev,
@@ -572,16 +573,24 @@ static int verify_blob(struct virtio_gpu_device *vgdev,
 		       struct drm_virtgpu_resource_create_blob *rc_blob,
 		       bool *guest_blob, bool *host3d_blob)
 {
+	bool create_guest_handle = false;
 	if (!vgdev->has_resource_blob)
 		return -EINVAL;
 
-	if ((rc_blob->blob_flags & ~VIRTGPU_BLOB_FLAG_USE_MASK) ||
+	if ((rc_blob->blob_flags & ~VIRTGPU_BLOB_FLAG_MASK) ||
 	    !rc_blob->blob_flags)
 		return -EINVAL;
 
 	if (rc_blob->blob_flags & VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE) {
 		if (!vgdev->has_resource_assign_uuid)
 			return -EINVAL;
+	}
+
+	if (rc_blob->blob_flags & VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE) {
+		if (!vgdev->has_create_guest_handle)
+			return -EINVAL;
+
+		create_guest_handle = true;
 	}
 
 	switch (rc_blob->blob_mem) {
@@ -598,7 +607,7 @@ static int verify_blob(struct virtio_gpu_device *vgdev,
 		return -EINVAL;
 	}
 
-	if (*host3d_blob) {
+	if (*host3d_blob || (vgdev->has_virgl_3d && create_guest_handle)) {
 		if (!vgdev->has_virgl_3d)
 			return -EINVAL;
 
