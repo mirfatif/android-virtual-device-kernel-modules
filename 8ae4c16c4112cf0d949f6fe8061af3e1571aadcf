@@ -16,6 +16,23 @@
       "message": "Hung-ying, Szu-Wei, can you help us with this presubmit error? It seems that sc-gsi-dev contains the kernel source for this branch (android12-5.4) and treehugger is testing the merge-ability of this change with that branch which should pass but doesn\u0027t seem to.",
       "revId": "8ae4c16c4112cf0d949f6fe8061af3e1571aadcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ff60b7_eb9087c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2021-04-01T08:32:49Z",
+      "side": 1,
+      "message": "Ram, Kaiyi, please ignore the merge conflict on sc-gsi-dev. It is a KI. We will fix it or revert the configuration soon. Sorry for the inconvenience.",
+      "revId": "8ae4c16c4112cf0d949f6fe8061af3e1571aadcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
