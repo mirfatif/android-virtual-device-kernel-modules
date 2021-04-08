@@ -11,3 +11,5 @@ BUILD_GOLDFISH_DRIVERS=m
 FILES=""
 MAKE_GOALS="modules"
 GKI_MODULES_LIST=android/gki_aarch64_modules
+
+KMI_SYMBOL_LIST=android/abi_gki_aarch64_virtual_device
