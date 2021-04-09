@@ -16,6 +16,23 @@
       "message": "This is for 5.10. It also needs symbol and abi update which are currently blocked by tool issues.",
       "revId": "0649b7280d02209fc29179bf5ff9892e6eb781b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a26cd9_9960c527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-04-09T09:35:51Z",
+      "side": 1,
+      "message": "The auto submit is blocked by a flaky warning.\n\nhttps://android-build.googleplex.com/builds/treetop/android-review/1669612?ref\u003dCOMMENT\u0026revision\u003d1\n\nAnyone has the permission to submit manually? Need your hand. ",
+      "revId": "0649b7280d02209fc29179bf5ff9892e6eb781b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
