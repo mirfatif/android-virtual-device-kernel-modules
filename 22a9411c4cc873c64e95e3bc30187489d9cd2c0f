@@ -16,6 +16,23 @@
       "message": "Meanwhile, I\u0027m trying to update the symbollist but running into what looks like an unrelated issue with build_abi.sh where depmod fails to find System.map",
       "revId": "22a9411c4cc873c64e95e3bc30187489d9cd2c0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0622a9d0_69e95bd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-04-12T12:31:07Z",
+      "side": 1,
+      "message": "aosp/1671961 has the updated symbol list",
+      "revId": "22a9411c4cc873c64e95e3bc30187489d9cd2c0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
