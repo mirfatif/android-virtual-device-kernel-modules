@@ -1223,7 +1223,7 @@ int virtio_gpu_cmd_map(struct virtio_gpu_device *vgdev,
 		 sizeof(struct virtio_gpu_resp_map_info), resp_buf);
 	memset(cmd_p, 0, sizeof(*cmd_p));
 
-	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_RESOURCE_MAP);
+	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_RESOURCE_MAP_BLOB);
 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
 	cmd_p->offset = cpu_to_le64(offset);
 	vbuf->objs = objs;
@@ -1241,7 +1241,7 @@ void virtio_gpu_cmd_unmap(struct virtio_gpu_device *vgdev,
 	cmd_p = virtio_gpu_alloc_cmd(vgdev, &vbuf, sizeof(*cmd_p));
 	memset(cmd_p, 0, sizeof(*cmd_p));
 
-	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_RESOURCE_UNMAP);
+	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_RESOURCE_UNMAP_BLOB);
 	cmd_p->resource_id = cpu_to_le32(bo->hw_res_handle);
 
 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
