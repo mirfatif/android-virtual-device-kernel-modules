@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8813d7e0_b4394a2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2021-05-26T22:52:39Z",
+      "side": 1,
+      "message": "The vmlinux resulting from this build will confuse users into thinking it\u0027s a GKI build so it is thrown away.",
+      "revId": "ebbe427bf393009f2c26724e72fe1b23a3a5f3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bae2966_99ba90d6",
         "filename": "build.config.virtual_device.aarch64",
         "patchSetId": 1
