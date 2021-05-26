@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bae2966_99ba90d6",
+        "filename": "build.config.virtual_device.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-26T15:04:50Z",
+      "side": 1,
+      "message": "I believe this is not what is intended.",
+      "range": {
+        "startLine": 10,
+        "startChar": 41,
+        "endLine": 10,
+        "endChar": 93
+      },
+      "revId": "ebbe427bf393009f2c26724e72fe1b23a3a5f3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
