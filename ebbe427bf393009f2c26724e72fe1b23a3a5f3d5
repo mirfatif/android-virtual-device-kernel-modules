@@ -20,6 +20,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35f95aab_e766231d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-05-27T03:28:53Z",
+      "side": 1,
+      "message": "The command below is what we used to update the symbol list. \nBUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.aarch64\n    build/build_abi.sh --update-symbol-list\n\nDo we have a new command to do it?",
+      "parentUuid": "8813d7e0_b4394a2e",
+      "revId": "ebbe427bf393009f2c26724e72fe1b23a3a5f3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e51d4e_ec9b0740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2021-05-27T03:28:53Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e (1 comment)\n\u003e \n\u003e By voting Code-Review-1 the following files are no longer code-owner approved by \u003cGERRIT_ACCOUNT_1466604\u003e:\n\u003e * build.config.virtual_device.aarch64\n\u003e \n\n",
+      "revId": "ebbe427bf393009f2c26724e72fe1b23a3a5f3d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6bae2966_99ba90d6",
         "filename": "build.config.virtual_device.aarch64",
         "patchSetId": 1
