@@ -16,6 +16,24 @@
       "message": "I believe it should look like something this way:\n\n# CONFIG_CRYPTO_DEV_VIRTIO is not set",
       "revId": "167a34d8f9a8029bc5a917edd43b899674b468a9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd791fc6_a2fc2793",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-05-31T18:44:32Z",
+      "side": 1,
+      "message": "hmm would that work? I thought I had to explicitly set it to \u003dn to override the default \u003dy. I will try that tomorrow.",
+      "parentUuid": "c980da5c_de7dc17a",
+      "revId": "167a34d8f9a8029bc5a917edd43b899674b468a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
