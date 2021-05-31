@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c980da5c_de7dc17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-05-31T16:20:11Z",
+      "side": 1,
+      "message": "I believe it should look like something this way:\n\n# CONFIG_CRYPTO_DEV_VIRTIO is not set",
+      "revId": "167a34d8f9a8029bc5a917edd43b899674b468a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
