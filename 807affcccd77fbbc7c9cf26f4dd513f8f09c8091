@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 1:\n\u003e \n\u003e Let me add you on the email thread\n\nI believe it is worth elaborating here because one might want to know why we did this few years from now.",
       "revId": "807affcccd77fbbc7c9cf26f4dd513f8f09c8091",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b28ff7d_11b739fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-06-07T18:32:08Z",
+      "side": 1,
+      "message": "CONFIG_CAN requires an extra field in `struct net`, you can\u0027t add CAN support by adding files here.",
+      "revId": "807affcccd77fbbc7c9cf26f4dd513f8f09c8091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
