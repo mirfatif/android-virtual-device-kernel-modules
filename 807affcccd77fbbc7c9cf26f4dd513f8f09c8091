@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ec5bb0_f7c01508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-06-07T16:17:06Z",
+      "side": 1,
+      "message": "\u003e Because GKI can\u0027t properly enable can_dev\n\nCould you please elaborate what prevents GKI to build this module properly?",
+      "revId": "807affcccd77fbbc7c9cf26f4dd513f8f09c8091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
