@@ -112,12 +112,15 @@ int virtio_gpu_mode_dumb_mmap(struct drm_file *file_priv,
 int virtio_gpu_gem_object_open(struct drm_gem_object *obj,
 			       struct drm_file *file)
 {
-	struct virtio_gpu_device *vgdev = obj->dev->dev_private;
+	struct drm_device *dev = obj->dev;
+	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct virtio_gpu_object_array *objs;
 
 	if (!vgdev->has_virgl_3d)
 		goto out_notify;
+
+	virtio_gpu_create_context(dev, file);
 
 	objs = virtio_gpu_array_alloc(1);
 	if (!objs)
