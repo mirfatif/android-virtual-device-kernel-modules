@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf599b9_d69bc446",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-06-14T16:44:50Z",
+      "side": 1,
+      "message": "Does this bug affect the old version of virtio_gpu in 5.4 and earlier?",
+      "revId": "5f2c65e6d65d77b3fafbec4887a142e2279014be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
