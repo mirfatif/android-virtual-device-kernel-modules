@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fb5db9_6a53d5e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2021-06-18T23:46:06Z",
+      "side": 1,
+      "message": "Please try booting with only modules updated, keep the kernel binary unchanged.",
+      "revId": "80e33a99c41347b58cd57b1b292acc58ff1b240a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
