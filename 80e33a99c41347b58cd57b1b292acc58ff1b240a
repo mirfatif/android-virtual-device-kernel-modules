@@ -16,6 +16,24 @@
       "message": "Please try booting with only modules updated, keep the kernel binary unchanged.",
       "revId": "80e33a99c41347b58cd57b1b292acc58ff1b240a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7f960f_f3382cfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2021-06-21T08:42:43Z",
+      "side": 1,
+      "message": "yes i did do that! :\u0027)",
+      "parentUuid": "48fb5db9_6a53d5e6",
+      "revId": "80e33a99c41347b58cd57b1b292acc58ff1b240a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
