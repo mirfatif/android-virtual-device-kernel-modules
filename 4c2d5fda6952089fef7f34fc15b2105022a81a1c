@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fef6a93_65b6759f",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T21:11:40Z",
+      "side": 1,
+      "message": "I\u0027m confused too since the cf build did generate .ko files for these.",
+      "parentUuid": "e994b834_7423a06c",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "4c2d5fda6952089fef7f34fc15b2105022a81a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "292a4fac_a312fc06",
