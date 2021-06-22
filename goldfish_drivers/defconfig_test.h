@@ -8,8 +8,8 @@
 #error CONFIG_VETH is required
 #endif
 
-#ifndef CONFIG_CFG80211
-#error CONFIG_CFG80211 is required
+#ifdef CONFIG_CFG80211
+#error CONFIG_BLK_DEV_MD is a module in virtual_device.fragment
 #endif
 
 #ifndef CONFIG_NAMESPACES
