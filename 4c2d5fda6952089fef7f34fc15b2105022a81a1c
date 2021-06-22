@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f5326f_667d3247",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2021-06-22T21:20:05Z",
+      "side": 1,
+      "message": "FWIW, I checked in the build artifacts for one of the presubmit builds and I didn\u0027t see .kos for these on the first presubmit attempt. I\u0027ll confirm on the second presubmit run that takes your edits into account.",
+      "parentUuid": "7fef6a93_65b6759f",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "4c2d5fda6952089fef7f34fc15b2105022a81a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "292a4fac_a312fc06",
