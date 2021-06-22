@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e994b834_7423a06c",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T21:10:33Z",
+      "side": 1,
+      "message": "Duh, yes. I lost my original copy and re-applied it incorrectly. Sigh.",
+      "parentUuid": "f21f0818_ce93e836",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "4c2d5fda6952089fef7f34fc15b2105022a81a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "292a4fac_a312fc06",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-22T21:07:30Z",
       "side": 1,
       "message": "This should be an \u003dm right?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "4c2d5fda6952089fef7f34fc15b2105022a81a1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c209356_ea311c2f",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-22T21:10:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "292a4fac_a312fc06",
       "range": {
         "startLine": 33,
         "startChar": 0,
