@@ -36,4 +36,11 @@ CONFIG_SERIO_AMBAKMI=m
 CONFIG_VEXPRESS_CONFIG=m
 
 CONFIG_BT_HCIVHCI=m
+<<<<<<< HEAD   (e6d14f UPSTREAM: drm/virtio: make sure context is created in gem op)
 CONFIG_BATTERY_GOLDFISH=m
+=======
+
+CONFIG_CAN_VCAN=m
+CONFIG_CAN_SLCAN=m
+CONFIG_CAN_GS_USB=m
+>>>>>>> CHANGE (6a14bd Add CAN drivers)
