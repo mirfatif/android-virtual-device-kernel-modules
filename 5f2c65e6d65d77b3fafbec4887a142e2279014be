@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4416ac04_420ac4ec",
+        "filename": "virtio_snd/VERSION",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-07-02T23:43:00Z",
+      "side": 0,
+      "message": "Maybe we can drop this file? I\u0027m not sure what VERSION it is referring to.",
+      "revId": "5f2c65e6d65d77b3fafbec4887a142e2279014be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
