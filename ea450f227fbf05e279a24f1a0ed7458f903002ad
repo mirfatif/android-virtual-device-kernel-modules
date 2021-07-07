@@ -16,6 +16,24 @@
       "message": "Delete this file",
       "revId": "ea450f227fbf05e279a24f1a0ed7458f903002ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5121b02a_e844a917",
+        "filename": "virtio_snd/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2021-07-07T23:10:29Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "666baf8f_7df435de",
+      "revId": "ea450f227fbf05e279a24f1a0ed7458f903002ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
