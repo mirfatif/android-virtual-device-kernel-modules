@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "666baf8f_7df435de",
+        "filename": "virtio_snd/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-07-07T22:57:51Z",
+      "side": 0,
+      "message": "Delete this file",
+      "revId": "ea450f227fbf05e279a24f1a0ed7458f903002ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
