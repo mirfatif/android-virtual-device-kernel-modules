@@ -16,6 +16,24 @@
       "message": "Maybe we can drop this file? I\u0027m not sure what VERSION it is referring to.",
       "revId": "5f2c65e6d65d77b3fafbec4887a142e2279014be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f4032d6_967c67e9",
+        "filename": "virtio_snd/VERSION",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2021-07-07T17:42:07Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4416ac04_420ac4ec",
+      "revId": "5f2c65e6d65d77b3fafbec4887a142e2279014be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
