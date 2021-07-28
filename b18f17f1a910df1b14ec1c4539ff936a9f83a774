@@ -46,6 +46,30 @@
       },
       "revId": "b18f17f1a910df1b14ec1c4539ff936a9f83a774",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f19829_5bd1df38",
+        "filename": "virtio_gpu/virtgpu_vq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2021-07-28T01:28:15Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1780489",
+      "parentUuid": "4036d4d8_15a910ce",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 17
+      },
+      "revId": "b18f17f1a910df1b14ec1c4539ff936a9f83a774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
