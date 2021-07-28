@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622ffd52_405775c0",
+        "filename": "virtio_gpu/virtgpu_vq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1101621
+      },
+      "writtenOn": "2021-07-28T00:01:02Z",
+      "side": 1,
+      "message": "This commit is more correct:\n\nhttps://gitlab.freedesktop.org/virgl/drm-misc-next/-/commit/1febaca3f3c23c08002d86c811adbc1a015d388c#0d3d4d503879c3b4ede22e85bbf3a8e086c38055_240_235\n\nI think we should update 12-5.10 too.\nCC: kaiyi@",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 17
+      },
+      "revId": "b18f17f1a910df1b14ec1c4539ff936a9f83a774",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
