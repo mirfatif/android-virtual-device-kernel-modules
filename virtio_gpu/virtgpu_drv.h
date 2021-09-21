@@ -273,7 +273,7 @@ struct virtio_gpu_fpriv {
 	struct mutex context_lock;
 };
 
-/* virtio_ioctl.c */
+/* virtgpu_ioctl.c */
 #define DRM_VIRTIO_NUM_IOCTLS 12
 extern struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS];
 void virtio_gpu_create_context(struct drm_device *dev, struct drm_file *file);
