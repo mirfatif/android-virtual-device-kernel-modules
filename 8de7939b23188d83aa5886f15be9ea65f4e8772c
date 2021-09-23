@@ -33,6 +33,115 @@
       "message": "no signed-off-by?",
       "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33bf2e0_6d1a72e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:38:50Z",
+      "side": 1,
+      "message": "first quick coding review pass.  Don\u0027t know if it matters if this is coming from some other group/company or not.",
+      "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf95c080_c1f2bad1",
+        "filename": "virtio_snd/virtio_card.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:38:50Z",
+      "side": 1,
+      "message": "can be dropped given there is a spdx line above.",
+      "range": {
+        "startLine": 6,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 71
+      },
+      "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b7dc55d_9f5fe022",
+        "filename": "virtio_snd/virtio_card.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:38:50Z",
+      "side": 1,
+      "message": "should not be needed, we have in-kernel functions for this.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 15
+      },
+      "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc44815_a024a89c",
+        "filename": "virtio_snd/virtio_ctl_msg.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:38:50Z",
+      "side": 1,
+      "message": "use a kref please.",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 51,
+        "endChar": 11
+      },
+      "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7935baf_6e8c0129",
+        "filename": "virtio_snd/virtio_pcm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-23T07:38:50Z",
+      "side": 1,
+      "message": "should be per-device attributes, not module parameters, this isn\u0027t the 1990\u0027s.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 79
+      },
+      "revId": "8de7939b23188d83aa5886f15be9ea65f4e8772c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
