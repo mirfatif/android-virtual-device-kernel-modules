@@ -26,6 +26,12 @@ CONFIG_TEST_MEMINIT=m
 # Ranchu-specific drivers
 CONFIG_SND_HDA_GENERIC=m
 CONFIG_SND_HDA_INTEL=m
+<<<<<<< HEAD   (4b3be1 Merge changes I8108a490,I66ac1ad7 into android-mainline)
+=======
+CONFIG_BT_HCIBTUSB=m
+CONFIG_MAC80211_HWSIM=m
+CONFIG_DMABUF_HEAPS_SYSTEM=m
+>>>>>>> CHANGE (18b1de Add USB Bluetooth dongle support to the kernel)
 
 # Cuttlefish-specific drivers
 CONFIG_SND_VIRTIO=m
