@@ -26,6 +26,7 @@ CONFIG_TEST_MEMINIT=m
 # Ranchu-specific drivers
 CONFIG_SND_HDA_GENERIC=m
 CONFIG_SND_HDA_INTEL=m
+CONFIG_BT_HCIBTUSB=m
 
 # Cuttlefish-specific drivers
 CONFIG_SND_VIRTIO=m
