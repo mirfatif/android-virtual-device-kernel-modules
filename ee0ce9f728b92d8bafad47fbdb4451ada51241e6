@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f6ed9b_f8e872d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-10-14T21:25:49Z",
+      "side": 1,
+      "message": "Putting an internal link in the commit text is a bit odd. I\u0027d just put it in a Gerrit comment instead.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "ee0ce9f728b92d8bafad47fbdb4451ada51241e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19769739_103f2cda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-10-14T21:25:49Z",
+      "side": 1,
+      "message": "Please add your Signed-off-by here, it\u0027s not strictly enforced but followed by most.\n\nSigned-off-by: Marcell Kovacs \u003cmarcellk@google.com\u003e",
+      "revId": "ee0ce9f728b92d8bafad47fbdb4451ada51241e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
