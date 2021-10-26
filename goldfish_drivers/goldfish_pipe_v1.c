@@ -299,7 +299,7 @@ static ssize_t goldfish_pipe_read_write(struct file *filp, char __user *buffer,
 			    (long)MAX_PAGES_TO_GRAB);
 
 		ret = get_user_pages_fast(first_page, requested_pages,
-					  !is_write, pages);
+					  (!is_write ? FOLL_WRITE : 0), pages);
 		if (ret < 0) {
 			dev_err(dev->pdev_dev,
 				"%s: get_user_pages_fast failed: %d\n",
