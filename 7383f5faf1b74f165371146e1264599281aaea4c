@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a571ccf_db241675",
+        "filename": "goldfish_drivers/goldfish_pipe_v2.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-10-27T16:32:25Z",
+      "side": 1,
+      "message": "I think this can remain DEVICE_NAME ?",
+      "range": {
+        "startLine": 1145,
+        "startChar": 18,
+        "endLine": 1145,
+        "endChar": 33
+      },
+      "revId": "7383f5faf1b74f165371146e1264599281aaea4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
