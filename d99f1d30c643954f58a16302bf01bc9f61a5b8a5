@@ -16,6 +16,23 @@
       "message": "is there a bug report for this?",
       "revId": "d99f1d30c643954f58a16302bf01bc9f61a5b8a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38dd93ba_af9d17d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2021-11-03T23:19:15Z",
+      "side": 1,
+      "message": "Plan per Alistair is to re-enable the unwinder once continuuous integration on that target is running.",
+      "revId": "d99f1d30c643954f58a16302bf01bc9f61a5b8a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
