@@ -34,6 +34,24 @@
       "parentUuid": "e8043c12_8c6305f6",
       "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08297b52_7262a3f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-04T17:37:00Z",
+      "side": 1,
+      "message": "Not done :) we need android13-5.15 now, and mainline is outstanding. I think these might need some manual work because there were some cleanups went into the virtual_device.fragment file.",
+      "parentUuid": "6c90a7e6_77cda271",
+      "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
