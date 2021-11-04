@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8b31b2a_627d040e",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-04T21:23:55Z",
+      "side": 1,
+      "message": "alpha sort above CAN please",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 20
+      },
+      "revId": "7fa9d7b6f1f021b24fc6485716fddf91440d15fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
