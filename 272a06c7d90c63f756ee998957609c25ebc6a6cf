@@ -52,6 +52,24 @@
       "parentUuid": "6c90a7e6_77cda271",
       "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b37e98_a86f53d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229163
+      },
+      "writtenOn": "2021-11-05T18:43:44Z",
+      "side": 1,
+      "message": "CP CLs exist for 13-5.10, 13-5.15, mailine and this one for 12-5.10.\nMarking this resolved, please let me know if this is needed on other branches. Thank you",
+      "parentUuid": "08297b52_7262a3f5",
+      "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
