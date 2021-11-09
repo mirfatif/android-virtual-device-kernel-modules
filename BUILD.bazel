@@ -1,0 +1,66 @@
+# Copyright (C) 2021 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load(
+    "//build/kleaf:kernel.bzl",
+    "kernel_build",
+    "kernel_images",
+    "kernel_modules_install",
+)
+load("//build/kleaf:common_kernels.bzl", "x86_64_outs")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+
+kernel_build(
+    name = "virtual_device_x86_64",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "android/*",
+            "BUILD.bazel",
+            "**/*.bzl",
+            ".git/**",
+        ],
+    ) + [
+        "//common:kernel_x86_64_sources",
+    ],
+    outs = [],
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.virtual_device.x86_64",
+    module_outs = [
+        "goldfish_address_space.ko",
+        "goldfish_pipe.ko",
+        "goldfish_sync.ko",
+    ],
+)
+
+kernel_modules_install(
+    name = "virtual_device_x86_64_modules_install",
+    kernel_build = ":virtual_device_x86_64",
+)
+
+kernel_images(
+    name = "virtual_device_x86_64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules_install = ":virtual_device_x86_64_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_x86_64_dist",
+    data = [
+        ":virtual_device_x86_64_for_dist",
+        ":virtual_device_x86_64_images",
+        ":virtual_device_x86_64_modules_install",
+    ],
+)
