@@ -70,6 +70,23 @@
       "parentUuid": "08297b52_7262a3f5",
       "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d18cac_19f75011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-11-10T20:29:28Z",
+      "side": 1,
+      "message": "Bypassing presubmit because:\n- release kernel branches use a pinned revision of common-modules/virtual-device\n- the binderlib failure is an unrelated known issue",
+      "revId": "272a06c7d90c63f756ee998957609c25ebc6a6cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
