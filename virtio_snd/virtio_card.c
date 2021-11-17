@@ -21,12 +21,9 @@
 #include <linux/version.h>
 #include <linux/virtio_config.h>
 #include <sound/initval.h>
+#include <uapi/linux/virtio_ids.h>
 
 #include "virtio_card.h"
-
-#ifndef VIRTIO_ID_SOUND
-#define VIRTIO_ID_SOUND 25
-#endif
 
 static int virtsnd_find_vqs(struct virtio_snd *snd)
 {
