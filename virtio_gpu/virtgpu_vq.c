@@ -1304,3 +1304,64 @@ void virtio_gpu_cmd_set_scanout_blob(struct virtio_gpu_device *vgdev,
 
 	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
 }
+
+void virtio_gpu_cmd_page_flip_mode(struct virtio_gpu_device *vgdev,
+				     uint32_t scanout_id, uint32_t flags)
+{
+	struct virtio_gpu_set_page_flip_mode *cmd_p;
+	struct virtio_gpu_vbuffer *vbuf;
+
+	cmd_p = virtio_gpu_alloc_cmd(vgdev, &vbuf, sizeof(*cmd_p));
+	memset(cmd_p, 0, sizeof(*cmd_p));
+
+	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_SET_PAGE_FLIP_MODE);
+	cmd_p->scanout_id = cpu_to_le32(scanout_id);
+	cmd_p->flags = cpu_to_le32(flags);
+
+	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
+}
+
+static void virtio_gpu_cmd_page_flip_cb(struct virtio_gpu_device *vgdev,
+				    struct virtio_gpu_vbuffer *vbuf)
+{
+	struct virtio_gpu_output *output = NULL;
+	struct drm_crtc *crtc;
+	struct drm_pending_vblank_event *event;
+	unsigned long flags;
+
+	output = vbuf->resp_cb_data;
+	if (!output)
+		return;
+
+	vbuf->resp_cb_data = NULL;
+	crtc = &output->crtc;
+
+	spin_lock_irqsave(&crtc->dev->event_lock, flags);
+	event = output->event;
+
+	if (!event) {
+		spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
+		return;
+	}
+	output->event = NULL;
+	drm_crtc_send_vblank_event(crtc, event);
+	spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
+}
+
+void virtio_gpu_cmd_page_flip(struct virtio_gpu_device *vgdev,
+			      struct virtio_gpu_output *output, uint32_t flags)
+{
+	struct virtio_gpu_page_flip *cmd_p;
+	struct virtio_gpu_vbuffer *vbuf;
+
+	cmd_p = virtio_gpu_alloc_cmd_cb(vgdev, &vbuf, sizeof(*cmd_p),
+					virtio_gpu_cmd_page_flip_cb);
+	memset(cmd_p, 0, sizeof(*cmd_p));
+
+	cmd_p->hdr.type = cpu_to_le32(VIRTIO_GPU_CMD_PAGE_FLIP);
+	cmd_p->scanout_id = cpu_to_le32(output->index);
+	cmd_p->flags = cpu_to_le32(flags);
+
+	vbuf->resp_cb_data = output;
+	virtio_gpu_queue_ctrl_buffer(vgdev, vbuf);
+}

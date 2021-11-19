@@ -119,6 +119,9 @@ static int virtio_gpu_crtc_atomic_check(struct drm_crtc *crtc,
 static void virtio_gpu_crtc_atomic_flush(struct drm_crtc *crtc,
 					 struct drm_crtc_state *old_state)
 {
+	unsigned long flags;
+	struct drm_device *dev = crtc->dev;
+	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_output *output = drm_crtc_to_virtio_gpu_output(crtc);
 
 	/*
@@ -130,6 +133,23 @@ static void virtio_gpu_crtc_atomic_flush(struct drm_crtc *crtc,
 	if (drm_atomic_crtc_needs_modeset(crtc->state)) {
 		output->needs_modeset = true;
 	}
+
+	if (!output->pending_flush)
+		return;
+
+	spin_lock_irqsave(&crtc->dev->event_lock, flags);
+	if (crtc->state->event) {
+		if (output->event)
+			DRM_ERROR("event left from previous vsync");
+		output->event = crtc->state->event;
+		crtc->state->event = NULL;
+	}
+	spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
+
+	output->pending_flush = false;
+
+	virtio_gpu_cmd_page_flip(vgdev, output, async_flag);
+	virtio_gpu_notify(vgdev);
 }
 
 static const struct drm_crtc_helper_funcs virtio_gpu_crtc_helper_funcs = {

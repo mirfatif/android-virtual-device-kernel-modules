@@ -239,6 +239,17 @@ static void virtio_gpu_primary_plane_update(struct drm_plane *plane,
 		}
 	}
 
+	if (vgdev->has_vsync) {
+		if (!output->explicit_page_flip_enabled) {
+			output->explicit_page_flip_enabled = true;
+
+			virtio_gpu_cmd_page_flip_mode(
+				vgdev, output->index,
+				VIRTIO_GPU_PAGE_FLIP_MODE_FLAG_EXPLICIT);
+		}
+		output->pending_flush = true;
+	}
+
 	virtio_gpu_cmd_resource_flush(vgdev, bo->hw_res_handle,
 				      rect.x1,
 				      rect.y1,
