@@ -315,10 +315,33 @@ virtio_gpu_user_framebuffer_create(struct drm_device *dev,
 	return &virtio_gpu_fb->base;
 }
 
+static void virtio_gpu_atomic_commit_tail(struct drm_atomic_state *old_state)
+{
+	struct drm_device *dev = old_state->dev;
+
+	drm_atomic_helper_commit_modeset_disables(dev, old_state);
+
+	drm_atomic_helper_commit_planes(dev, old_state, 0);
+
+	drm_atomic_helper_commit_modeset_enables(dev, old_state);
+
+	drm_atomic_helper_fake_vblank(old_state);
+
+	drm_atomic_helper_commit_hw_done(old_state);
+
+	drm_atomic_helper_wait_for_flip_done(dev, old_state);
+
+	drm_atomic_helper_cleanup_planes(dev, old_state);
+}
+
 static const struct drm_mode_config_funcs virtio_gpu_mode_funcs = {
 	.fb_create = virtio_gpu_user_framebuffer_create,
 	.atomic_check = drm_atomic_helper_check,
 	.atomic_commit = drm_atomic_helper_commit,
+};
+
+static struct drm_mode_config_helper_funcs virtio_gpu_config_helper_funcs = {
+	.atomic_commit_tail = virtio_gpu_atomic_commit_tail
 };
 
 int virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev)
@@ -330,6 +353,8 @@ int virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev)
 		return ret;
 
 	vgdev->ddev->mode_config.funcs = &virtio_gpu_mode_funcs;
+	vgdev->ddev->mode_config.helper_private =
+		&virtio_gpu_config_helper_funcs;
 
 	/* modes will be validated against the framebuffer size */
 	vgdev->ddev->mode_config.min_width = XRES_MIN;
