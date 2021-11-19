@@ -70,6 +70,13 @@
  */
 #define VIRTIO_GPU_F_CREATE_GUEST_HANDLE 5
 
+/*
+ * VIRTIO_GPU_CMD_SET_PAGE_FLIP_MODE +
+ * VIRTIO_GPU_CMD_PAGE_FLIP
+ */
+#define VIRTIO_GPU_F_EXPLICIT_PAGE_FLIP  22
+
+
 enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_UNDEFINED = 0,
 
@@ -113,6 +120,10 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_RESP_OK_EDID,
 	VIRTIO_GPU_RESP_OK_RESOURCE_UUID,
 	VIRTIO_GPU_RESP_OK_MAP_INFO,
+
+	/* experimental commands */
+	VIRTIO_GPU_CMD_SET_PAGE_FLIP_MODE = 0x0400,
+	VIRTIO_GPU_CMD_PAGE_FLIP,
 
 	/* error responses */
 	VIRTIO_GPU_RESP_ERR_UNSPEC = 0x1200,
@@ -457,5 +468,22 @@ struct virtio_gpu_resource_unmap_blob {
 	__le32 resource_id;
 	__le32 padding;
 };
+
+/* VIRTIO_GPU_CMD_SET_PAGE_FLIP_MODE */
+#define VIRTIO_GPU_PAGE_FLIP_MODE_FLAG_EXPLICIT (1 << 0)
+struct virtio_gpu_set_page_flip_mode {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 scanout_id;
+	__le32 flags;
+};
+
+/* VIRTIO_GPU_CMD_PAGE_FLIP */
+#define VIRTIO_GPU_PAGE_FLIP_FLAG_ASYNC (1 << 0)
+struct virtio_gpu_page_flip {
+	struct virtio_gpu_ctrl_hdr hdr;
+	__le32 scanout_id;
+	__le32 flags;
+};
+
 
 #endif
