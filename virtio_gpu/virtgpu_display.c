@@ -119,7 +119,7 @@ static int virtio_gpu_crtc_atomic_check(struct drm_crtc *crtc,
 static void virtio_gpu_crtc_atomic_flush(struct drm_crtc *crtc,
 					 struct drm_crtc_state *old_state)
 {
-	unsigned long flags;
+	unsigned long flags, async_flag = 0;
 	struct drm_device *dev = crtc->dev;
 	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_output *output = drm_crtc_to_virtio_gpu_output(crtc);
@@ -147,6 +147,11 @@ static void virtio_gpu_crtc_atomic_flush(struct drm_crtc *crtc,
 	spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
 
 	output->pending_flush = false;
+
+	if (crtc->state->async_flip)
+		async_flag = VIRTIO_GPU_PAGE_FLIP_FLAG_ASYNC;
+
+	vgdev->ddev->mode_config.async_page_flip = true;
 
 	virtio_gpu_cmd_page_flip(vgdev, output, async_flag);
 	virtio_gpu_notify(vgdev);
