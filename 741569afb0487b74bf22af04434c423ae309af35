@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26243ac2_0df79b53",
+        "filename": "virtio_gpu/virtgpu_display.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1927296
+      },
+      "writtenOn": "2021-11-23T11:46:04Z",
+      "side": 1,
+      "message": "This should be set in virtio_gpu_modeset_init() before for loop.",
+      "revId": "741569afb0487b74bf22af04434c423ae309af35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
