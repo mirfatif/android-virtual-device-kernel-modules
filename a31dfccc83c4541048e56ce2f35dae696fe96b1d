@@ -33,6 +33,23 @@
       "message": "Hmm, worked locally, but looks like missing symbols.  Is there anyway to fix this?\n\n\nmake -C common-modules/virtual-device M\u003d../common-modules/virtual-device KERNEL_SRC\u003d/usr/local/google/buildbot/src/android/common-android12-5.10-2021-08/common O\u003d/usr/local/google/buildbot/src/android/common-android12-5.10-2021-08/out/android12-5.10/common LLVM\u003d1 LLVM_IAS\u003d1 DEPMOD\u003ddepmod DTC\u003ddtc -j40\nERROR: modpost: \"drm_crtc_send_vblank_event\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_cleanup_planes\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_wait_for_flip_done\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_commit_hw_done\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_fake_vblank\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_commit_modeset_enables\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_commit_planes\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\nERROR: modpost: \"drm_atomic_helper_commit_modeset_disables\" [../common-modules/virtual-device/virtio_gpu/virtio-gpu.ko] undefined!\n",
       "revId": "a31dfccc83c4541048e56ce2f35dae696fe96b1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c74c636_aa8f2cf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-11-30T18:22:46Z",
+      "side": 1,
+      "message": "tl;dr the symbol list for virtual_device needs to be updated with the new symbol requirements, or the GKI build will strip them (since no other partner has asked for these symbols)\n\nTry:\nBUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build.sh\nBUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.aarch64 \\\n    build/build.sh\nBUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.aarch64 \\\n    build/build_abi.sh --update-symbol-list\n",
+      "revId": "a31dfccc83c4541048e56ce2f35dae696fe96b1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
