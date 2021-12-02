@@ -16,6 +16,24 @@
       "message": "why was this bypassing the presubmit? this is now broken in postsubmit :-/",
       "revId": "253ee6f2bc4e44cb2419f3278267c13344de7143",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3849af92_bab0873c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2021-12-02T20:36:07Z",
+      "side": 1,
+      "message": "TH is not smart enough to properly test the monthly release GKI branches which have pinned versions of certain projects. The android12-5.10-lts failure will get resolved when Greg does the next merge from android12-5.10.",
+      "parentUuid": "dc795166_202356ab",
+      "revId": "253ee6f2bc4e44cb2419f3278267c13344de7143",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
