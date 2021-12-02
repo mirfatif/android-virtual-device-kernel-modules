@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc795166_202356ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-12-02T19:47:31Z",
+      "side": 1,
+      "message": "why was this bypassing the presubmit? this is now broken in postsubmit :-/",
+      "revId": "253ee6f2bc4e44cb2419f3278267c13344de7143",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
