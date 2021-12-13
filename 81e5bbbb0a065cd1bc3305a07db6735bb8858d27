@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e135d13a_bbd79661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-12-13T22:03:45Z",
+      "side": 1,
+      "message": "Why not just make a dtbo that disables the BT node? You could do this:\n\n1) Create the file rk3399-rock-pi-4b-no-bt.dtsi that looks like this:\n\n  \u0026uart0 {\n    status \u003d \"disabled\";\n  };\n\n2) Then in the Makefile do this:\n\n  rk3399-rock-pi-4b-no-bt-dtbs :\u003d rk3399-rock-pi-4b.dtb rk3399-rock-pi-4b-no-bt.dtbo\n  dtb-y +\u003d rk3399-rock-pi-4b-no-bt.dtb\n\nThe build will create \"rk3399-rock-pi-no-bt.dtb\" which should have the overlay applied. You should be able to use that directly instead of rk3399-rock-pi-4b.dtb.",
+      "revId": "81e5bbbb0a065cd1bc3305a07db6735bb8858d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
