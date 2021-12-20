@@ -78,3 +78,63 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
     ],
 )
+
+filegroup(
+    name = "virtual_device_aarch64_common_sources",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "BUILD.bazel",
+            "**/*.bzl",
+            ".git/**",
+        ],
+    ) + [
+        "//common:kernel_aarch64_sources",
+    ],
+)
+
+kernel_build(
+    name = "virtual_device_aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
+    ],
+    base_kernel = "//common:kernel_aarch64",
+    build_config = "build.config.virtual_device.aarch64",
+)
+
+kernel_module(
+    name = "virtual_device_aarch64_external_modules",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "goldfish_drivers/goldfish_address_space.ko",
+        "goldfish_drivers/goldfish_pipe.ko",
+        "goldfish_drivers/goldfish_sync.ko",
+    ],
+    kernel_build = ":virtual_device_aarch64",
+)
+
+kernel_modules_install(
+    name = "virtual_device_aarch64_modules_install",
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [
+        ":virtual_device_aarch64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_aarch64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules_install = ":virtual_device_aarch64_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_aarch64_dist",
+    data = [
+        ":virtual_device_aarch64_for_dist",
+        ":virtual_device_aarch64_images",
+        ":virtual_device_aarch64_modules_install",
+        "//common:kernel_aarch64",
+    ],
+)
