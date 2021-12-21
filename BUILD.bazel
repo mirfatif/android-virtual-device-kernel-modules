@@ -72,9 +72,13 @@ kernel_images(
 copy_to_dist_dir(
     name = "virtual_device_x86_64_dist",
     data = [
-        ":virtual_device_x86_64_for_dist",
+        ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
+        # Use headers from ACK build. At the time of writing, this diverges from
+        # the behavior of build.sh.
+        "//common:kernel_x86_64_headers",
+        "//common:kernel_x86_64_uapi_headers",
     ],
 )
