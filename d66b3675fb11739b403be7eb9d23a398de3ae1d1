@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746aa9b9_afa47d78",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-12-21T23:42:27Z",
+      "side": 1,
+      "message": "Waiting for decision in b/207041103",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 43
+      },
+      "revId": "d66b3675fb11739b403be7eb9d23a398de3ae1d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
