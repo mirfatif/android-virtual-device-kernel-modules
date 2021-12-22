@@ -22,6 +22,30 @@
       },
       "revId": "d66b3675fb11739b403be7eb9d23a398de3ae1d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6199ad33_d4b241db",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-12-22T23:42:28Z",
+      "side": 1,
+      "message": "Will fix in https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/1931376",
+      "parentUuid": "746aa9b9_afa47d78",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 43
+      },
+      "revId": "d66b3675fb11739b403be7eb9d23a398de3ae1d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
