@@ -39,6 +39,30 @@
       },
       "revId": "ab0c72be0a8835facb124a25de38318ca15e4019",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "676b9960_cbbf1889",
+        "filename": "virtio_snd/virtio_card.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2021-12-22T23:20:51Z",
+      "side": 1,
+      "message": "No, this definition was no longer required after aosp/1895718. I\u0027m not sure where you see breakage, but it wasn\u0027t on this branch due to this change. It sounds like you are building these ACK modules against another kernel without merging that other change first, which isn\u0027t supported.",
+      "parentUuid": "0acf39fc_88084601",
+      "range": {
+        "startLine": 418,
+        "startChar": 3,
+        "endLine": 418,
+        "endChar": 18
+      },
+      "revId": "ab0c72be0a8835facb124a25de38318ca15e4019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
