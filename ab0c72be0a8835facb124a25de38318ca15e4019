@@ -87,6 +87,30 @@
       },
       "revId": "ab0c72be0a8835facb124a25de38318ca15e4019",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8f64108_33cca119",
+        "filename": "virtio_snd/virtio_card.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1279563
+      },
+      "writtenOn": "2021-12-23T01:37:47Z",
+      "side": 1,
+      "message": "b/211712579 have exactly the same build errors as Tree-hugger RED build errors of this CLs.",
+      "parentUuid": "fe07f878_6615e69d",
+      "range": {
+        "startLine": 418,
+        "startChar": 3,
+        "endLine": 418,
+        "endChar": 18
+      },
+      "revId": "ab0c72be0a8835facb124a25de38318ca15e4019",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
