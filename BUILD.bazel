@@ -81,7 +81,9 @@ copy_to_dist_dir(
         "//common:kernel_x86_64_headers",
         "//common:kernel_x86_64_uapi_headers",
     ],
+    flat = True,
 )
+
 
 filegroup(
     name = "virtual_device_aarch64_common_sources",
@@ -145,4 +147,5 @@ copy_to_dist_dir(
         "//common:kernel_aarch64_headers",
         "//common:kernel_aarch64_uapi_headers",
     ],
+    flat = True,
 )
