@@ -71,6 +71,7 @@ kernel_images(
 
 copy_to_dist_dir(
     name = "virtual_device_x86_64_dist",
+    flat = True,
     data = [
         ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
@@ -135,6 +136,7 @@ kernel_images(
 
 copy_to_dist_dir(
     name = "virtual_device_aarch64_dist",
+    flat = True,
     data = [
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
