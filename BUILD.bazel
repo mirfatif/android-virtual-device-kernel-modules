@@ -35,12 +35,61 @@ filegroup(
     ],
 )
 
+_virt_common_modules = [
+    # keep sorted
+    "btintel.ko",
+    "btrtl.ko",
+    "btusb.ko",
+    "dummy-cpufreq.ko",
+    "dummy_hcd.ko",
+    "failover.ko",
+    "goldfish_battery.ko",
+    "gs_usb.ko",
+    "hci_vhci.ko",
+    "mac80211_hwsim.ko",
+    "nd_virtio.ko",
+    "net_failover.ko",
+    "pulse8-cec.ko",
+    "rtc-test.ko",
+    "slcan.ko",
+    "snd-hda-codec.ko",
+    "snd-hda-codec-generic.ko",
+    "snd-hda-core.ko",
+    "snd-hda-intel.ko",
+    "system_heap.ko",
+    "usbip-core.ko",
+    "vcan.ko",
+    "vhci-hcd.ko",
+    "virt_wifi.ko",
+    "virtio-gpu.ko",
+    "virtio-rng.ko",
+    "virtio_balloon.ko",
+    "virtio_blk.ko",
+    "virtio_console.ko",
+    "virtio_dma_buf.ko",
+    "virtio_input.ko",
+    "virtio_net.ko",
+    "virtio_pci.ko",
+    "virtio_pci_legacy_dev.ko",
+    "virtio_pci_modern_dev.ko",
+    "virtio_pmem.ko",
+    "virtio_snd.ko",
+    "vmw_vsock_virtio_transport.ko",
+    "zram.ko",
+    "zsmalloc.ko",
+]
+
 kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
+    module_outs = _virt_common_modules + [
+        # keep sorted
+        "test_meminit.ko",
+        "test_stackinit.ko",
+    ],
 )
 
 kernel_module(
@@ -84,7 +133,6 @@ copy_to_dist_dir(
     flat = True,
 )
 
-
 filegroup(
     name = "virtual_device_aarch64_common_sources",
     srcs = glob(
@@ -107,6 +155,17 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
+    module_outs = _virt_common_modules + [
+        # keep sorted
+        "ambakmi.ko",
+        "armmmci.ko",
+        "clk-vexpress-osc.ko",
+        "psmouse.ko",
+        "snd-intel-dspcfg.ko",
+        "vexpress-config.ko",
+        "vexpress-sysreg.ko",
+        "virtio_mmio.ko",
+    ],
 )
 
 kernel_module(
