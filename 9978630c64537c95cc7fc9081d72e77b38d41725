@@ -69,6 +69,24 @@
       "parentUuid": "06b0ec47_70c5f6ea",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82dc3a05_4ee9a56c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T18:41:59Z",
+      "side": 1,
+      "message": "I do not see that specific id, what chip is this?  Many USB wifi drivers support multiple devices, so maybe just add it to an existing driver?  What other devices does this driver say it supports?  Have a pointer to the source so I can look at it?",
+      "parentUuid": "57ec443a_f35cd2fd",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
