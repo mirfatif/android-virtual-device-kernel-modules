@@ -33,6 +33,24 @@
       "message": "why not use the in-kernel driver for this instead of relying on an out-of-tree one?\n\nWhat USB device ids are you needing/wanting to support here?",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc50c05_934c0842",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T18:13:35Z",
+      "side": 1,
+      "message": "Some are, some are not, but the big question is, why not use the in-tree driver instead?  That will not need some of these symbols (i.e. the pid mess), which is just wrong for any driver to use.",
+      "parentUuid": "f7db7626_690f1042",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
