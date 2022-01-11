@@ -87,6 +87,24 @@
       "parentUuid": "57ec443a_f35cd2fd",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25314da6_b350e336",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2022-01-11T18:48:11Z",
+      "side": 1,
+      "message": "It would be pretty amazing if this can be done with in-kernel driver :\u0027) It would save us a lot of headaches.\n\nThe device is called RTL8821cu. It is a Bluetooth and WiFi in one dongle. We support bluetooth with BTUSB in-kernel module and WiFi with this external module (https://github.com/morrownr/8821cu) at the moment.\n\nThank you for the consultation :)",
+      "parentUuid": "82dc3a05_4ee9a56c",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
