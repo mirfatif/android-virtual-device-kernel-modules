@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75f34ed_a17b8358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2022-01-11T01:05:34Z",
+      "side": 1,
+      "message": "Per the TH failure, looks like you need to update the arm64 GKI allowlist to include the missing symbols.",
+      "revId": "f7c63dcfe400cfc76cb7b2a01c3baf694affdb73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
