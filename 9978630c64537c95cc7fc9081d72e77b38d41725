@@ -16,6 +16,23 @@
       "message": "Hi Greg,\nPlease take a look if the new symbols are ok to use.\nThe last build error contains the missing symbols: https://android-build.googleplex.com/builds/pending/P28783971/kernel_virt_aarch64/latest/view/logs/build_error.log\nThank you,\nm.",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b0ec47_70c5f6ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-11T18:12:29Z",
+      "side": 1,
+      "message": "why not use the in-kernel driver for this instead of relying on an out-of-tree one?\n\nWhat USB device ids are you needing/wanting to support here?",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
