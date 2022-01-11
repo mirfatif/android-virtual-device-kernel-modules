@@ -105,6 +105,24 @@
       "parentUuid": "82dc3a05_4ee9a56c",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08db41e_1542b683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2022-01-11T18:53:46Z",
+      "side": 1,
+      "message": "By \"add it to an existing driver\", do you mean we modify the main kernel source and add this productID to the corresponding USB probe list?",
+      "parentUuid": "25314da6_b350e336",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
