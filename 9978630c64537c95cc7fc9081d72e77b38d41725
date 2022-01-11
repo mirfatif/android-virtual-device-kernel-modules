@@ -51,6 +51,24 @@
       "parentUuid": "f7db7626_690f1042",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ec443a_f35cd2fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2022-01-11T18:15:39Z",
+      "side": 1,
+      "message": "hi we are trying to support {VendorID, ProductID} \u003d {0x0bda,0xc820}. I wasn\u0027t aware of any in-kernel driver for this. Is there one?",
+      "parentUuid": "06b0ec47_70c5f6ea",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
