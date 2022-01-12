@@ -141,6 +141,24 @@
       "parentUuid": "a08db41e_1542b683",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc6d01d8_41f13ab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2022-01-12T18:01:13Z",
+      "side": 1,
+      "message": "Thanks. I will explore all the suggested routes:\n\n1. See if I can use already existing wifi driver (rtl8xxxu ones?) and see if that one works with this. If this method works, we will be modifying GKI kernel code. Does GKI kernel take patches? I am guessing Android S and Android T is frozen?\n\n2. See if we can get the support from the vendor.\n\n3. Try to get rid of pid related symbols and see if it is straightforward. (unless you have another symbol in mind that is alerting)",
+      "parentUuid": "37e73cfd_740504a0",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
