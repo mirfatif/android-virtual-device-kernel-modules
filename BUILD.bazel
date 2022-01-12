@@ -19,7 +19,10 @@ load(
     "kernel_module",
     "kernel_modules_install",
 )
+load("//build/kleaf:common_kernels.bzl", "define_download_prebuilts")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+
+define_download_prebuilts()
 
 filegroup(
     name = "virtual_device_x86_64_common_sources",
@@ -153,7 +156,7 @@ kernel_build(
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
-    base_kernel = "//common:kernel_aarch64",
+    base_kernel = ":kernel_aarch64_download_or_build",
     build_config = "build.config.virtual_device.aarch64",
     module_outs = _virt_common_modules + [
         # keep sorted
@@ -200,11 +203,12 @@ copy_to_dist_dir(
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
         ":virtual_device_aarch64_modules_install",
-        "//common:kernel_aarch64",
+        ":kernel_aarch64_download_or_build",
         # Use headers from ACK build. At the time of writing, this diverges from
         # the behavior of build.sh.
-        "//common:kernel_aarch64_headers",
-        "//common:kernel_aarch64_uapi_headers",
+        ":kernel_aarch64_headers_download_or_build",
+        ":kernel_aarch64_uapi_headers_download_or_build",
+        ":kernel_aarch64_images_download_or_build",
     ],
     flat = True,
 )
