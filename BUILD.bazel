@@ -127,8 +127,7 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
         # Use headers from ACK build. At the time of writing, this diverges from
         # the behavior of build.sh.
-        "//common:kernel_x86_64_headers",
-        "//common:kernel_x86_64_uapi_headers",
+        "//common:kernel_x86_64_additional_artifacts",
     ],
     flat = True,
 )
@@ -203,8 +202,7 @@ copy_to_dist_dir(
         "//common:kernel_aarch64",
         # Use headers from ACK build. At the time of writing, this diverges from
         # the behavior of build.sh.
-        "//common:kernel_aarch64_headers",
-        "//common:kernel_aarch64_uapi_headers",
+        "//common:kernel_aarch64_additional_artifacts",
     ],
     flat = True,
 )
