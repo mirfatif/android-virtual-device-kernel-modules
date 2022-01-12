@@ -125,10 +125,10 @@ copy_to_dist_dir(
         ":virtual_device_x86_64_images",
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
-        # Use headers from ACK build. At the time of writing, this diverges from
-        # the behavior of build.sh.
-        "//common:kernel_x86_64_headers",
-        "//common:kernel_x86_64_uapi_headers",
+        "//common:kernel_aarch64_additional_artifacts",
+        # TODO(b/211695803): Install UAPI headers of external modules
+        #   (though we don't have any yet)
+        "//common:kernel_aarch64_uapi_headers",
     ],
     flat = True,
 )
@@ -201,9 +201,9 @@ copy_to_dist_dir(
         ":virtual_device_aarch64_images",
         ":virtual_device_aarch64_modules_install",
         "//common:kernel_aarch64",
-        # Use headers from ACK build. At the time of writing, this diverges from
-        # the behavior of build.sh.
-        "//common:kernel_aarch64_headers",
+        "//common:kernel_aarch64_additional_artifacts",
+        # TODO(b/211695803): Install UAPI headers of external modules
+        #   (though we don't have any yet)
         "//common:kernel_aarch64_uapi_headers",
     ],
     flat = True,
