@@ -123,6 +123,24 @@
       "parentUuid": "25314da6_b350e336",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e73cfd_740504a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-12T11:01:02Z",
+      "side": 1,
+      "message": "ah, the dual bluetooth/wifi driver, ick, that\u0027s a mess.\n\nPlease get support from the vendor for this driver, trusting a random github code drop in the tens of thousands of lines of kernel code is very dangerous.\n\nBased on this, it\u0027s hard to see if an in-kernel driver will work, again, please\ncontact the vendor.  If you are stuck with an out-of-tree driver, many of those\nsymbols need to be fixed up, as a driver should not be messing around with\npids for obvious reasons (namespaces, security, etc.)",
+      "parentUuid": "a08db41e_1542b683",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
