@@ -41,3 +41,6 @@ CONFIG_CAN_GS_USB=m
 
 # TV-specific drivers
 CONFIG_USB_PULSE8_CEC=m
+
+# Disable module signing during build
+# CONFIG_MODULE_SIG_ALL is not set
