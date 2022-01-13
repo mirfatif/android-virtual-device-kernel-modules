@@ -159,6 +159,24 @@
       "parentUuid": "37e73cfd_740504a0",
       "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3562d1d8_fad27e4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-01-13T08:03:01Z",
+      "side": 1,
+      "message": "Yes, the gki kernel always takes patches 😊\n\nThe released trees are \"frozen\" from an abi point of view, but we accept new features and fixes for things that do not break the abi.  For a driver it should not be an issue.\n\nI do not remember the full list of new symbols, sorry, but the pid ones stood out.  Fix those first and then submit the list of others that you need and I will be glad to review them.",
+      "parentUuid": "cc6d01d8_41f13ab5",
+      "revId": "9978630c64537c95cc7fc9081d72e77b38d41725",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
