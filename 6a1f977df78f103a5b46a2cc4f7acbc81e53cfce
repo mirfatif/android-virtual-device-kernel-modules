@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd882ba5_723d5cfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-01-14T10:48:47Z",
+      "side": 1,
+      "message": "Waiting for aosp/1943619",
+      "revId": "6a1f977df78f103a5b46a2cc4f7acbc81e53cfce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
