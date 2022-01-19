@@ -16,6 +16,23 @@
       "message": "Waiting for aosp/1943619",
       "revId": "6a1f977df78f103a5b46a2cc4f7acbc81e53cfce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ad8420_ac51430c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-19T09:27:22Z",
+      "side": 1,
+      "message": "I can\u0027t +2 here, but this definitely is needed for Microdroid.",
+      "revId": "6a1f977df78f103a5b46a2cc4f7acbc81e53cfce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
