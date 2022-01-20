@@ -158,6 +158,8 @@ kernel_build(
         "ambakmi.ko",
         "armmmci.ko",
         "clk-vexpress-osc.ko",
+        "drm_cma_helper.ko",
+        "pl111_drm.ko",
         "psmouse.ko",
         "snd-intel-dspcfg.ko",
         "vexpress-config.ko",
