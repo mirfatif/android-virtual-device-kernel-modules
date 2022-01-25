@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18302f65_7385e5db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-25T00:24:24Z",
+      "side": 1,
+      "message": "This is unfortunate. Do we have a resolution for this?",
+      "range": {
+        "startLine": 9,
+        "startChar": 19,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "d4fcbb11252c514773b42b4aad7e048ee63dbc0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10385af3_37faf4b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-01-25T00:24:24Z",
+      "side": 1,
+      "message": "(I can\u0027t +2 here)",
+      "revId": "d4fcbb11252c514773b42b4aad7e048ee63dbc0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
