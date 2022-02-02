@@ -202,11 +202,11 @@ copy_to_dist_dir(
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
         ":virtual_device_aarch64_modules_install",
-        "//common:kernel_aarch64",
-        "//common:kernel_aarch64_additional_artifacts",
+        "//common:kernel_aarch64_download_or_build",
+        "//common:kernel_aarch64_additional_artifacts_download_or_build",
         # TODO(b/211695803): Install UAPI headers of external modules
         #   (though we don't have any yet)
-        "//common:kernel_aarch64_uapi_headers",
+        "//common:kernel_aarch64_uapi_headers_download_or_build",
     ],
     flat = True,
 )
