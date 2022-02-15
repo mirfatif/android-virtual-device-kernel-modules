@@ -5,6 +5,15 @@ CONFIG_SMP=y
 CONFIG_TASKSTATS=y
 CONFIG_VFP=y
 CONFIG_VFPv3=y
+<<<<<<< HEAD   (aaae95 Revert "ANDROID: Hack virtio_gpu uapi to match crosvm")
+=======
+# CONFIG_WERROR is not set
+
+# MTE and SW_TAGS aren't available on ARMv7-A, so this is generic KASAN
+# which just wastes memory and can't provide KFENCE anyway
+# CONFIG_KASAN is not set
+
+>>>>>>> CHANGE (5213b7 ANDROID: Disable Werror for 32-bit ARM)
 # b/154934534
 # CONFIG_TEST_STACKINIT is not set
 # CONFIG_BPF_JIT_ALWAYS_ON is not set
