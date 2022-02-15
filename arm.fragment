@@ -7,6 +7,7 @@ CONFIG_TASKSTATS=y
 CONFIG_UNWINDER_FRAME_POINTER=y
 CONFIG_VFP=y
 CONFIG_VFPv3=y
+# CONFIG_WERROR is not set
 
 # MTE and SW_TAGS aren't available on ARMv7-A, so this is generic KASAN
 # which just wastes memory and can't provide KFENCE anyway
