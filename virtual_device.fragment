@@ -33,6 +33,9 @@ CONFIG_SND_HDA_INTEL=m
 CONFIG_SND_VIRTIO=m
 CONFIG_VIRT_WIFI=m
 
+# Gem5-specific drivers
+CONFIG_E1000=m
+
 # Auto-specific drivers
 CONFIG_BT_HCIBTUSB=m
 CONFIG_CAN_VCAN=m
