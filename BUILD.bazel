@@ -88,7 +88,6 @@ kernel_build(
     module_outs = _virt_common_modules + [
         # keep sorted
         "test_meminit.ko",
-        "test_stackinit.ko",
     ],
 )
 
