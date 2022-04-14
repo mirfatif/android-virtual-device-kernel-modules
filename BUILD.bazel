@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
@@ -129,6 +130,7 @@ copy_to_dist_dir(
         #   (though we don't have any yet)
         "//common:kernel_x86_64_uapi_headers",
     ],
+    dist_dir = "out/{branch}/dist".format(branch = BRANCH),
     flat = True,
 )
 
@@ -207,5 +209,6 @@ copy_to_dist_dir(
         #   (though we don't have any yet)
         "//common:kernel_aarch64_uapi_headers",
     ],
+    dist_dir = "out/{branch}/dist".format(branch = BRANCH),
     flat = True,
 )
