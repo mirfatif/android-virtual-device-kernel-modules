@@ -36,6 +36,7 @@
 #include <drm/drm_encoder.h>
 #include <drm/drm_fb_helper.h>
 #include <drm/drm_fourcc.h>
+#include <drm/drm_vblank.h>
 #include <drm/drm_gem.h>
 #include <drm/drm_gem_shmem_helper.h>
 #include <drm/drm_ioctl.h>
@@ -165,6 +166,7 @@ struct virtio_gpu_vbuffer {
 struct virtio_gpu_output {
 	int index;
 	struct drm_crtc crtc;
+	struct drm_pending_vblank_event *event;
 	struct drm_connector conn;
 	struct drm_encoder enc;
 	struct virtio_gpu_display_one info;
@@ -173,6 +175,8 @@ struct virtio_gpu_output {
 	int cur_x;
 	int cur_y;
 	bool needs_modeset;
+	bool explicit_page_flip_enabled;
+	bool pending_flush;
 };
 #define drm_crtc_to_virtio_gpu_output(x) \
 	container_of(x, struct virtio_gpu_output, crtc)
@@ -240,6 +244,7 @@ struct virtio_gpu_device {
 	bool has_host_visible;
 	bool has_context_init;
 	bool has_create_guest_handle;
+	bool has_vsync;
 	struct virtio_shm_region host_visible_region;
 	struct drm_mm host_visible_mm;
 
@@ -419,6 +424,11 @@ virtio_gpu_cmd_set_scanout_blob(struct virtio_gpu_device *vgdev,
 				struct drm_framebuffer *fb,
 				uint32_t width, uint32_t height,
 				uint32_t x, uint32_t y);
+
+void virtio_gpu_cmd_page_flip_mode(struct virtio_gpu_device *vgdev,
+				     uint32_t scanout_id, uint32_t flags);
+void virtio_gpu_cmd_page_flip(struct virtio_gpu_device *vgdev,
+			      struct virtio_gpu_output *output, uint32_t flags);
 
 /* virtgpu_display.c */
 int virtio_gpu_modeset_init(struct virtio_gpu_device *vgdev);
