@@ -21,6 +21,13 @@ load(
     "kernel_modules_install",
 )
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/test_mapping:test_mapping.bzl", "test_mapping")
+load("//build/bazel_common_rules/multi_exec:multi_exec.bzl", "multi_exec")
+
+test_mapping(
+    name = "virtual_device_test_mapping",
+    out_dir = "out/{branch}".format(branch = BRANCH),
+)
 
 filegroup(
     name = "virtual_device_x86_64_common_sources",
@@ -119,7 +126,7 @@ kernel_images(
 )
 
 copy_to_dist_dir(
-    name = "virtual_device_x86_64_dist",
+    name = "virtual_device_x86_64_internal_dist",
     data = [
         ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
@@ -132,6 +139,15 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/{branch}/dist".format(branch = BRANCH),
     flat = True,
+)
+
+multi_exec(
+    name = "virtual_device_x86_64_dist",
+    data = [
+        # do not sort
+        ":virtual_device_test_mapping",
+        ":virtual_device_x86_64_internal_dist",
+    ],
 )
 
 filegroup(
@@ -198,7 +214,7 @@ kernel_images(
 )
 
 copy_to_dist_dir(
-    name = "virtual_device_aarch64_dist",
+    name = "virtual_device_aarch64_internal_dist",
     data = [
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
@@ -211,4 +227,13 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/{branch}/dist".format(branch = BRANCH),
     flat = True,
+)
+
+multi_exec(
+    name = "virtual_device_aarch64_dist",
+    data = [
+        # do not sort
+        ":virtual_device_test_mapping",
+        ":virtual_device_aarch64_internal_dist",
+    ],
 )
