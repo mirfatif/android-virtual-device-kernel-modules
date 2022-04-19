@@ -21,6 +21,15 @@ load(
     "kernel_modules_install",
 )
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/test_mapping:test_mapping.bzl", "test_mapping_dist")
+load("//build/bazel_common_rules/exec:execrule.bzl", "execrule")
+
+_dist_dir = "out/{branch}/dist".format(branch = BRANCH)
+
+test_mapping_dist(
+    name = "virtual_device_test_mapping_dist",
+    dist_dir = _dist_dir,
+)
 
 filegroup(
     name = "virtual_device_x86_64_common_sources",
@@ -119,7 +128,7 @@ kernel_images(
 )
 
 copy_to_dist_dir(
-    name = "virtual_device_x86_64_dist",
+    name = "virtual_device_x86_64_copy_to_dist_dir",
     data = [
         ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
@@ -130,8 +139,20 @@ copy_to_dist_dir(
         #   (though we don't have any yet)
         "//common:kernel_x86_64_uapi_headers",
     ],
-    dist_dir = "out/{branch}/dist".format(branch = BRANCH),
+    dist_dir = _dist_dir,
     flat = True,
+)
+
+execrule(
+    name = "virtual_device_x86_64_dist",
+    data = [
+        ":virtual_device_test_mapping_dist",
+        ":virtual_device_x86_64_copy_to_dist_dir",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mapping_dist) $@
+        $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
+    """,
 )
 
 filegroup(
@@ -198,7 +219,7 @@ kernel_images(
 )
 
 copy_to_dist_dir(
-    name = "virtual_device_aarch64_dist",
+    name = "virtual_device_aarch64_copy_to_dist_dir",
     data = [
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
@@ -209,6 +230,18 @@ copy_to_dist_dir(
         #   (though we don't have any yet)
         "//common:kernel_aarch64_uapi_headers",
     ],
-    dist_dir = "out/{branch}/dist".format(branch = BRANCH),
+    dist_dir = _dist_dir,
     flat = True,
+)
+
+execrule(
+    name = "virtual_device_aarch64_dist",
+    data = [
+        ":virtual_device_aarch64_copy_to_dist_dir",
+        ":virtual_device_test_mapping_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mapping_dist) $@
+        $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+    """,
 )
