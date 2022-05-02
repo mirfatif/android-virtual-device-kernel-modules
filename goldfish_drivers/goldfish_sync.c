@@ -395,25 +395,28 @@ static void goldfish_sync_fence_destroy(const struct fence_data *fence)
 	goldfish_sync_pt_destroy(fence->pt);
 }
 
-static inline void
+static inline bool
 goldfish_sync_cmd_queue(struct goldfish_sync_state *sync_state,
 			u32 cmd,
 			u64 handle,
 			u32 time_arg,
 			u64 hostcmd_handle)
 {
+	const unsigned to_do_end = sync_state->to_do_end;
 	struct goldfish_sync_hostcmd *to_add;
 
-	WARN_ON(sync_state->to_do_end == GOLDFISH_SYNC_MAX_CMDS);
+	if (to_do_end >= GOLDFISH_SYNC_MAX_CMDS)
+		return false;
 
-	to_add = &sync_state->to_do[sync_state->to_do_end];
+	to_add = &sync_state->to_do[to_do_end];
 
 	to_add->cmd = cmd;
 	to_add->handle = handle;
 	to_add->time_arg = time_arg;
 	to_add->hostcmd_handle = hostcmd_handle;
 
-	++sync_state->to_do_end;
+	sync_state->to_do_end = to_do_end + 1;
+	return true;
 }
 
 static inline void
@@ -496,11 +499,11 @@ goldfish_sync_interrupt_impl(struct goldfish_sync_state *sync_state)
 		time_r = batch_hostcmd->time_arg;
 		hostcmd_handle_rw = batch_hostcmd->hostcmd_handle;
 
-		goldfish_sync_cmd_queue(sync_state,
-					command_r,
-					handle_rw,
-					time_r,
-					hostcmd_handle_rw);
+		BUG_ON(!goldfish_sync_cmd_queue(sync_state,
+						command_r,
+						handle_rw,
+						time_r,
+						hostcmd_handle_rw));
 	}
 	spin_unlock(&sync_state->to_do_lock);
 
