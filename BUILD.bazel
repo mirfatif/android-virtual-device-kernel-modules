@@ -23,6 +23,9 @@ load(
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+load(":test.bzl", "define_virt_tests")
+
+define_virt_tests()
 
 _dist_dir = "out/{branch}/dist".format(branch = BRANCH)
 
