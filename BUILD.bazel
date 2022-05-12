@@ -1,0 +1,262 @@
+# Copyright (C) 2021 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "kernel_build",
+    "kernel_images",
+    "kernel_module",
+    "kernel_modules_install",
+    "merged_kernel_uapi_headers",
+)
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
+load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+
+_dist_dir = "out/{branch}/dist".format(branch = BRANCH)
+
+# Workaround for b/201687176.
+# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
+test_mappings_dist(
+    name = "virtual_device_test_mappings_dist",
+    dist_dir = _dist_dir,
+)
+
+filegroup(
+    name = "virtual_device_x86_64_common_sources",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "BUILD.bazel",
+            "**/*.bzl",
+            ".git/**",
+        ],
+    ) + [
+        "//common:kernel_x86_64_sources",
+    ],
+)
+
+_virt_common_modules = [
+    # keep sorted
+    "btintel.ko",
+    "btrtl.ko",
+    "btusb.ko",
+    "dummy-cpufreq.ko",
+    "dummy_hcd.ko",
+    "e1000.ko",
+    "failover.ko",
+    "goldfish_battery.ko",
+    "gs_usb.ko",
+    "hci_vhci.ko",
+    "mac80211_hwsim.ko",
+    "nd_virtio.ko",
+    "net_failover.ko",
+    "pulse8-cec.ko",
+    "rtc-test.ko",
+    "slcan.ko",
+    "snd-hda-codec.ko",
+    "snd-hda-codec-generic.ko",
+    "snd-hda-core.ko",
+    "snd-hda-intel.ko",
+    "system_heap.ko",
+    "usbip-core.ko",
+    "vcan.ko",
+    "vhci-hcd.ko",
+    "virt_wifi.ko",
+    "virtio-rng.ko",
+    "virtio_balloon.ko",
+    "virtio_blk.ko",
+    "virtio_console.ko",
+    "virtio_dma_buf.ko",
+    "virtio_input.ko",
+    "virtio_net.ko",
+    "virtio_pci.ko",
+    "virtio_pci_modern_dev.ko",
+    "virtio_pmem.ko",
+    "virtio_snd.ko",
+    "vkms.ko",
+    "vmw_vsock_virtio_transport.ko",
+    "zram.ko",
+    "zsmalloc.ko",
+]
+
+_virt_common_ext_modules = [
+    "goldfish_drivers/goldfish_address_space.ko",
+    "goldfish_drivers/goldfish_pipe.ko",
+    "goldfish_drivers/goldfish_sync.ko",
+    "virtio_gpu/virtio-gpu.ko",
+]
+
+kernel_build(
+    name = "virtual_device_x86_64",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.virtual_device.x86_64",
+    module_outs = _virt_common_modules + [
+        # keep sorted
+        "test_meminit.ko",
+        "test_stackinit.ko",
+    ],
+)
+
+kernel_module(
+    name = "virtual_device_x86_64_external_modules",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = _virt_common_ext_modules,
+    kernel_build = ":virtual_device_x86_64",
+)
+
+kernel_modules_install(
+    name = "virtual_device_x86_64_modules_install",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":virtual_device_x86_64_external_modules",
+    ],
+)
+
+merged_kernel_uapi_headers(
+    name = "virtual_device_x86_64_merged_kernel_uapi_headers",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":virtual_device_x86_64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_x86_64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules_install = ":virtual_device_x86_64_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_x86_64_copy_to_dist_dir",
+    data = [
+        ":virtual_device_x86_64",
+        ":virtual_device_x86_64_images",
+        ":virtual_device_x86_64_merged_kernel_uapi_headers",
+        ":virtual_device_x86_64_modules_install",
+        "//common:kernel_x86_64",
+        "//common:kernel_x86_64_additional_artifacts",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+exec(
+    name = "virtual_device_x86_64_dist",
+    data = [
+        ":virtual_device_test_mappings_dist",
+        ":virtual_device_x86_64_copy_to_dist_dir",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
+    """,
+)
+
+filegroup(
+    name = "virtual_device_aarch64_common_sources",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "BUILD.bazel",
+            "**/*.bzl",
+            ".git/**",
+        ],
+    ) + [
+        "//common:kernel_aarch64_sources",
+    ],
+)
+
+kernel_build(
+    name = "virtual_device_aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
+    ],
+    base_kernel = "//common:kernel_aarch64",
+    build_config = "build.config.virtual_device.aarch64",
+    module_outs = _virt_common_modules + [
+        # keep sorted
+        "ambakmi.ko",
+        "armmmci.ko",
+        "clk-vexpress-osc.ko",
+        "open-dice.ko",
+        "pl111_drm.ko",
+        "psmouse.ko",
+        "snd-intel-dspcfg.ko",
+        "vexpress-config.ko",
+        "vexpress-sysreg.ko",
+        "virtio_mmio.ko",
+    ],
+)
+
+kernel_module(
+    name = "virtual_device_aarch64_external_modules",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = _virt_common_ext_modules,
+    kernel_build = ":virtual_device_aarch64",
+)
+
+kernel_modules_install(
+    name = "virtual_device_aarch64_modules_install",
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [
+        ":virtual_device_aarch64_external_modules",
+    ],
+)
+
+merged_kernel_uapi_headers(
+    name = "virtual_device_aarch64_merged_kernel_uapi_headers",
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [
+        ":virtual_device_aarch64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_aarch64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules_install = ":virtual_device_aarch64_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_aarch64_copy_to_dist_dir",
+    data = [
+        ":virtual_device_aarch64",
+        ":virtual_device_aarch64_images",
+        ":virtual_device_aarch64_merged_kernel_uapi_headers",
+        ":virtual_device_aarch64_modules_install",
+        "//common:kernel_aarch64",
+        "//common:kernel_aarch64_additional_artifacts",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+exec(
+    name = "virtual_device_aarch64_dist",
+    data = [
+        ":virtual_device_aarch64_copy_to_dist_dir",
+        ":virtual_device_test_mappings_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+    """,
+)
