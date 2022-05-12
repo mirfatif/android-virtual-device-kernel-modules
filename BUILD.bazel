@@ -60,13 +60,13 @@ _virt_common_modules = [
     "hci_vhci.ko",
     "mac80211_hwsim.ko",
     "mt76.ko",
+    "mt76-usb.ko",
+    "mt76x0-common.ko",
     "mt76x02-lib.ko",
     "mt76x02-usb.ko",
     "mt76x0u.ko",
-    "mt76x0-common.ko",
-    "mt76x2u.ko",
     "mt76x2-common.ko",
-    "mt76-usb.ko",
+    "mt76x2u.ko",
     "nd_virtio.ko",
     "net_failover.ko",
     "pulse8-cec.ko",
@@ -99,6 +99,12 @@ _virt_common_modules = [
     "zsmalloc.ko",
 ]
 
+_virt_common_ext_modules = [
+    "goldfish_drivers/goldfish_address_space.ko",
+    "goldfish_drivers/goldfish_pipe.ko",
+    "goldfish_drivers/goldfish_sync.ko",
+]
+
 kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
@@ -114,11 +120,7 @@ kernel_build(
 kernel_module(
     name = "virtual_device_x86_64_external_modules",
     srcs = [":virtual_device_x86_64_common_sources"],
-    outs = [
-        "goldfish_drivers/goldfish_address_space.ko",
-        "goldfish_drivers/goldfish_pipe.ko",
-        "goldfish_drivers/goldfish_sync.ko",
-    ],
+    outs = _virt_common_ext_modules,
     kernel_build = ":virtual_device_x86_64",
 )
 
@@ -205,11 +207,7 @@ kernel_build(
 kernel_module(
     name = "virtual_device_aarch64_external_modules",
     srcs = [":virtual_device_aarch64_common_sources"],
-    outs = [
-        "goldfish_drivers/goldfish_address_space.ko",
-        "goldfish_drivers/goldfish_pipe.ko",
-        "goldfish_drivers/goldfish_sync.ko",
-    ],
+    outs = _virt_common_ext_modules,
     kernel_build = ":virtual_device_aarch64",
 )
 
