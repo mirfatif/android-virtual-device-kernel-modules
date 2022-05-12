@@ -16,6 +16,24 @@
       "message": "On further thought, can you move this fragment into kernel/common - arch/x86/configs? Like the rockpi fragment Alistair added.\n\nThis repo is for module related configs for the virtual device.",
       "revId": "95bad5c4498752bafa83c3cd7847f1af7ebb7eaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c533e161_38902398",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928727
+      },
+      "writtenOn": "2022-05-12T22:50:22Z",
+      "side": 1,
+      "message": "I created a new CL aosp/2097218 which move this fragment into kernel/common and also include another CL which is also in kernel/common. Then we could ignore this CL.",
+      "parentUuid": "d894114f_3c719717",
+      "revId": "95bad5c4498752bafa83c3cd7847f1af7ebb7eaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
