@@ -46,6 +46,30 @@
       },
       "revId": "7b3f3b85afa37e17b95a3f30a1938deeef3fff30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9d826e8_9c822ed8",
+        "filename": "goldfish_drivers/defconfig_test.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-06-01T18:06:31Z",
+      "side": 1,
+      "message": "Okay, I guess Roman had some method to this madness :)",
+      "parentUuid": "10605a1b_cdc4aaa1",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "7b3f3b85afa37e17b95a3f30a1938deeef3fff30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
