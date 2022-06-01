@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb66357_2e4e6a58",
+        "filename": "goldfish_drivers/defconfig_test.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-06-01T17:50:39Z",
+      "side": 1,
+      "message": "What does CONFIG_BLK_DEV_MD have to do with CONFIG_CFG80211?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 6
+      },
+      "revId": "7b3f3b85afa37e17b95a3f30a1938deeef3fff30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
