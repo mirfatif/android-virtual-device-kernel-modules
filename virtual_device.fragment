@@ -21,10 +21,6 @@ CONFIG_ZSMALLOC=m
 CONFIG_TEST_MEMINIT=m
 CONFIG_TEST_STACKINIT=m
 
-# Ranchu-specific drivers
-CONFIG_SND_HDA_GENERIC=m
-CONFIG_SND_HDA_INTEL=m
-
 # Cuttlefish-specific drivers
 CONFIG_VIRT_WIFI=m
 
