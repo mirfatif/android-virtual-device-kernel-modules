@@ -1,0 +1,12 @@
+SRCARCH=${ARCH}
+if [ "${ARCH}" = x86_64 ]; then
+    SRCARCH=x86
+fi
+
+DEFCONFIG=crashdump_defconfig
+
+SRC_CONFIG=${ROOT_DIR}/common-modules/virtual-device/crashdump_${ARCH}.defconfig
+COPIED_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/${SRCARCH}/configs/${DEFCONFIG}
+
+PRE_DEFCONFIG_CMDS="cp ${SRC_CONFIG} ${COPIED_CONFIG}"
+POST_DEFCONFIG_CMDS="rm ${COPIED_CONFIG}"
