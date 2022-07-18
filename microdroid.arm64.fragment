@@ -7,6 +7,7 @@ CONFIG_VIRTIO_VSOCKETS=y
 
 # To use kdump
 CONFIG_KEXEC_FILE=y
+# CONFIG_DEBUG_KINFO is not set
 
 # Remove unnecessary serial devices
 # CONFIG_SERIAL_8250_16550A_VARIANT is not set
