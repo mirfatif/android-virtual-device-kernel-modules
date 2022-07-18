@@ -108,3 +108,7 @@ CONFIG_PARTITION_ADVANCED=y
 # CONFIG_UTS_NS is not set
 # CONFIG_TIME_NS is not set
 # CONFIG_NET_NS is not set
+
+# Disable modules
+# CONFIG_MODULES is not set
+CONFIG_CRYPTO_SHA1=y
