@@ -109,6 +109,12 @@ CONFIG_PARTITION_ADVANCED=y
 # CONFIG_WIRELESS is not set
 # CONFIG_WLAN is not set
 # CONFIG_USB_SUPPORT is not set
+# CONFIG_MAILBOX is not set
+# CONFIG_CPU_FREQ is not set
+# CONFIG_CMA is not set
+# CONFIG_ENERGY_MODEL is not set
+# CONFIG_GENERIC_PHY is not set
+# CONFIG_POWERCAP is not set
 
 # Microdroid is 64-bit only
 # CONFIG_COMPAT is not set
