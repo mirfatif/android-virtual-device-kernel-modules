@@ -99,3 +99,9 @@ CONFIG_KEXEC_FILE=y
 
 # Microdroid is 64-bit only
 # CONFIG_COMPAT is not set
+
+# Remove namespaces support
+# CONFIG_NAMESPACES is not set
+# CONFIG_UTS_NS is not set
+# CONFIG_TIME_NS is not set
+# CONFIG_NET_NS is not set
