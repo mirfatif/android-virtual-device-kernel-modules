@@ -28,7 +28,7 @@ CONFIG_KEXEC_FILE=y
 # Remove config options that are for unknown vendor modules
 # CONFIG_GKI_HACKS_TO_FIX is not set
 
-# Remove unnecessary filesystems
+# Remove unnecessary filesystems and partitions
 # CONFIG_F2FS_FS is not set
 # CONFIG_VIRTIO_FS is not set
 # CONFIG_OVERLAY_FS is not set
@@ -36,6 +36,8 @@ CONFIG_KEXEC_FILE=y
 # CONFIG_MSDOS_FS is not set
 # CONFIG_VFAT_FS is not set
 # CONFIG_EXFAT_FS is not set
+CONFIG_PARTITION_ADVANCED=y
+# CONFIG_MSDOS_PARTITION is not set
 
 # CONFIG_EMBEDDED is not set
 # CONFIG_ARCH_HISI is not set
