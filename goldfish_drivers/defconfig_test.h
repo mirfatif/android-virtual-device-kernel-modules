@@ -9,7 +9,7 @@
 #endif
 
 #ifdef CONFIG_CFG80211
-#error CONFIG_BLK_DEV_MD is a module in virtual_device.fragment
+#error CONFIG_CFG80211 is a module in virtual_device.fragment
 #endif
 
 #ifndef CONFIG_NAMESPACES
