@@ -97,3 +97,6 @@ CONFIG_KEXEC_FILE=y
 # CONFIG_VHOST_VSOCK is not set
 # CONFIG_WIRELESS is not set
 # CONFIG_WLAN is not set
+
+# Microdroid is 64-bit only
+# CONFIG_COMPAT is not set
