@@ -39,6 +39,30 @@
       },
       "revId": "7881910d5a323678cf1da1cf9d922e051b61f576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa56c842_3631baa9",
+        "filename": "uapi/linux/virtio_gpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-08-01T23:31:47Z",
+      "side": 1,
+      "message": "Removed. Thanks!",
+      "parentUuid": "eaa65c8e_98737e38",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 46
+      },
+      "revId": "7881910d5a323678cf1da1cf9d922e051b61f576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
