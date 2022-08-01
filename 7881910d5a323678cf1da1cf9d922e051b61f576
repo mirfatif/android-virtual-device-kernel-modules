@@ -16,6 +16,29 @@
       "message": "This change appears to define diverge chrome\u0027s struct from the common one and uses it conditionally. It\u0027s not clear to me if we need to preserve the code for the common one and why a union, variable size struct, or conditional struct is not used. Please let me know if you\u0027d like to see something changed here.",
       "revId": "7881910d5a323678cf1da1cf9d922e051b61f576",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa65c8e_98737e38",
+        "filename": "uapi/linux/virtio_gpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-08-01T22:17:00Z",
+      "side": 1,
+      "message": "Can you explain this? Do we still need it? It conflicts with VIRTIO_GPU_RESP_OK_EDID",
+      "range": {
+        "startLine": 113,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 46
+      },
+      "revId": "7881910d5a323678cf1da1cf9d922e051b61f576",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
