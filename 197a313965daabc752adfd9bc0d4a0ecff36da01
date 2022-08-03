@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57846052_d2359ae9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2022-08-03T16:06:27Z",
+      "side": 1,
+      "message": "There\u0027s a commit on android13-5.15 that didn\u0027t make it into the last merge to android13-5.15-lts, adelva@ is doing another merge now so this change can be abandoned.",
+      "revId": "197a313965daabc752adfd9bc0d4a0ecff36da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
