@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81843d5d_881dae5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-08-03T12:02:03Z",
+      "side": 1,
+      "message": "This replaces https://r.android.com/2163925",
+      "revId": "d7f12ee308a7a366d5cdb084c0e043d43297ad88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
