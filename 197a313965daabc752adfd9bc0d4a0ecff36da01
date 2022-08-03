@@ -16,6 +16,24 @@
       "message": "There\u0027s a commit on android13-5.15 that didn\u0027t make it into the last merge to android13-5.15-lts, adelva@ is doing another merge now so this change can be abandoned.",
       "revId": "197a313965daabc752adfd9bc0d4a0ecff36da01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581603b6_eac7100b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2022-08-03T18:03:29Z",
+      "side": 1,
+      "message": "Let met fix symbols in android13-5.15-lts. This will take me about 5 hours (it takes a while to run those kernel tools).",
+      "parentUuid": "57846052_d2359ae9",
+      "revId": "197a313965daabc752adfd9bc0d4a0ecff36da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
