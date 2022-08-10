@@ -22,6 +22,30 @@
       },
       "revId": "c193bf537ce36a43f99bf8d5a3fd46cbcdcf3700",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd9a52e0_972bb87d",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-08-10T20:41:18Z",
+      "side": 1,
+      "message": "This should have been virtsnd_pcm_sg_from(), sorry.",
+      "parentUuid": "284feaf4_ab203004",
+      "range": {
+        "startLine": 1051,
+        "startChar": 9,
+        "endLine": 1051,
+        "endChar": 21
+      },
+      "revId": "c193bf537ce36a43f99bf8d5a3fd46cbcdcf3700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
