@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c25ef39_bb1e2bce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "Needs some basic cleanups to start with, after this is done I will be glad to do a more complete review.",
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad18a996_1af82583",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "no SPDX line?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11e1974a_2b8cbaea",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "copyright needs to be updated.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 35
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92ed9f6c_5c6ded21",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "are you _SURE_ you mean \"any later version\"?  Please get legal approval for this.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 39
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ac020e_5249e2ca",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "remove all license boilerplate code, it\u0027s not needed if you have the SPDX line.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b040fc2_358fdb94",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "please just use the misc_device api instead of this.  It is much simpler and removes a lot of your code.  This is total overkill for just one character device node.",
+      "range": {
+        "startLine": 1606,
+        "startChar": 0,
+        "endLine": 1606,
+        "endChar": 53
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed33235_e26fc3a4",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T08:49:59Z",
+      "side": 1,
+      "message": "this is a driver, always use dev_warn() and friends.  Never use pr_* as you always have a device pointer.",
+      "range": {
+        "startLine": 1609,
+        "startChar": 2,
+        "endLine": 1609,
+        "endChar": 9
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
