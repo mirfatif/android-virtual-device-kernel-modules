@@ -20,6 +20,190 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9aa55d72_df9280f2",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "SPDX line please.\n\nCopyright line please.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edbe347d_2aba91a5",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "__u8",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46adf3e2_eddde161",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "why 32?",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85baff3_cd3cbefe",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "spdx line and copyright line.\n\nAnd why 2 different .h files?  Why not just 1?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227aff4e_ff78aa85",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "vs \"old\"???",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f79151_eaacb733",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "this matches the other file, use the same structure.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 16
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c66ff6_acd189f8",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "careful with this, are you sure this is correct?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6e5af6_48e74cdc",
+        "filename": "virtio_wl/Kbuild",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "odd, shouldn\u0027t the build handle this for you?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 82
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad18a996_1af82583",
         "filename": "virtio_wl/virtio_wl.c",
         "patchSetId": 4
@@ -105,6 +289,75 @@
         "startChar": 0,
         "endLine": 13,
         "endChar": 48
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4106408_04f6a109",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "why is this needed?  (hint, it isn\u0027t...)",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1511,
+        "endChar": 29
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d16cd5a_8a387a6b",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "you should not need this if you create your ioctls properly.  Please do that instead of relying on this.",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1560,
+        "endChar": 20
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3906ffc_65ea3221",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-13T09:01:16Z",
+      "side": 1,
+      "message": "no need for an empty callback if you do nothing.",
+      "range": {
+        "startLine": 1572,
+        "startChar": 0,
+        "endLine": 1573,
+        "endChar": 1
       },
       "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
