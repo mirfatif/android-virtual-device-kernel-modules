@@ -16,6 +16,52 @@
       "message": "Richard, can you take care of responding to the copyright related comments?",
       "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d311edd3_4d028a54",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:48:01Z",
+      "side": 1,
+      "message": "why an empty structure?  If you don\u0027t use it, don\u0027t declare it.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ecf6333_c3d81d44",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:48:01Z",
+      "side": 1,
+      "message": "don\u0027t you have to specify the values of the enum in a UAPI file to be sure the compiler always gets it right?  I thought the documentation said to do that somewhere...",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

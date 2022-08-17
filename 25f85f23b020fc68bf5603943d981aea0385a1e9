@@ -371,6 +371,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba5d122_d53c2e4f",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:48:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f676f67_cb90b855",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa6e5af6_48e74cdc",
