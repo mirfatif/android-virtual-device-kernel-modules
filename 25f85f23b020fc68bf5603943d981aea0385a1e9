@@ -89,6 +89,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e3ee51d_bc46cb9a",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "The virtwl device in the VMM has a list of name -\u003e socket pairs that it uses to resolve the underlying socket for the virtwl context. We didn\u0027t have any reason to support arbitrary length names, so we went with a fixed maximum length. That made the code simpler and is enough for reasonably descriptive names.\n\nIt should be a #define instead of a hardcoded constant, though.",
+      "parentUuid": "46adf3e2_eddde161",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41378a7_0a066b20",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edbe347d_2aba91a5",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d85baff3_cd3cbefe",
         "filename": "uapi/linux/virtwl.h",
         "patchSetId": 4
@@ -100,6 +148,30 @@
       "writtenOn": "2022-08-13T09:01:16Z",
       "side": 1,
       "message": "spdx line and copyright line.\n\nAnd why 2 different .h files?  Why not just 1?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 23
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e86ee29_e8607168",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "One header has the ioctls, and the other header has the virtio protocol definition. It\u0027s probably modeled after virtio_gpu, which has the ioctls in `include/uapi/drm/virtgpu_drm.h` and the protocol definition in `include/uapi/linux/virtio_gpu.h`. That\u0027s the only other virtio device which defines its own ioctls.",
+      "parentUuid": "d85baff3_cd3cbefe",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -135,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94e222d2_257023b9",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "\"new\" in the sense of VIRTWL_IOCTL_NEW_CTX|VIRTWL_IOCTL_NEW_ALLOC|etc. I assume the word \"new\" (rather than \"create\" for example) was originally chosen to align with DRM_IOCTL_NEW_CTX.",
+      "parentUuid": "227aff4e_ff78aa85",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88f79151_eaacb733",
         "filename": "uapi/linux/virtwl.h",
         "patchSetId": 4
@@ -146,6 +242,30 @@
       "writtenOn": "2022-08-13T09:01:16Z",
       "side": 1,
       "message": "this matches the other file, use the same structure.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 16
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b59080_bc5285b2",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88f79151_eaacb733",
       "range": {
         "startLine": 47,
         "startChar": 0,
@@ -169,6 +289,30 @@
       "writtenOn": "2022-08-13T09:01:16Z",
       "side": 1,
       "message": "careful with this, are you sure this is correct?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519104c2_554e5490",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Are you referring to zero length arrays vs flexible array members? I\u0027ve updated this to a flexible array to be inline with current kernel policy.\n\nIs there some other subtle issue with flexible arrays here?",
+      "parentUuid": "86c66ff6_acd189f8",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -317,6 +461,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b5e4887_4bc14929",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4106408_04f6a109",
+      "range": {
+        "startLine": 1511,
+        "startChar": 0,
+        "endLine": 1511,
+        "endChar": 29
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d16cd5a_8a387a6b",
@@ -330,6 +498,30 @@
       "writtenOn": "2022-08-13T09:01:16Z",
       "side": 1,
       "message": "you should not need this if you create your ioctls properly.  Please do that instead of relying on this.",
+      "range": {
+        "startLine": 1560,
+        "startChar": 0,
+        "endLine": 1560,
+        "endChar": 20
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6235303f_ba5bd847",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d16cd5a_8a387a6b",
       "range": {
         "startLine": 1560,
         "startChar": 0,
@@ -363,6 +555,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9622c62e_eec3c650",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1573,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3906ffc_65ea3221",
+      "range": {
+        "startLine": 1572,
+        "startChar": 0,
+        "endLine": 1573,
+        "endChar": 1
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b040fc2_358fdb94",
@@ -386,6 +602,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c13069_07cfb12a",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1606,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b040fc2_358fdb94",
+      "range": {
+        "startLine": 1606,
+        "startChar": 0,
+        "endLine": 1606,
+        "endChar": 53
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ed33235_e26fc3a4",
@@ -399,6 +639,30 @@
       "writtenOn": "2022-08-13T08:49:59Z",
       "side": 1,
       "message": "this is a driver, always use dev_warn() and friends.  Never use pr_* as you always have a device pointer.",
+      "range": {
+        "startLine": 1609,
+        "startChar": 2,
+        "endLine": 1609,
+        "endChar": 9
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "881f2f53_685db808",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ed33235_e26fc3a4",
       "range": {
         "startLine": 1609,
         "startChar": 2,

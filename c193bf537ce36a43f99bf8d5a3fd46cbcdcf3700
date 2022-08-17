@@ -46,6 +46,30 @@
       },
       "revId": "c193bf537ce36a43f99bf8d5a3fd46cbcdcf3700",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67dfd84e_84a9bbee",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-17T12:39:39Z",
+      "side": 1,
+      "message": "Updated to a simplified version of vmalloc_to_sgt() from the virtio_gpu driver.",
+      "parentUuid": "cd9a52e0_972bb87d",
+      "range": {
+        "startLine": 1051,
+        "startChar": 9,
+        "endLine": 1051,
+        "endChar": 21
+      },
+      "revId": "c193bf537ce36a43f99bf8d5a3fd46cbcdcf3700",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
