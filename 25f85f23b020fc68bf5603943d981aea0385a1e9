@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddef309_f5c20033",
+        "filename": "uapi/linux/virtio_wl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-17T16:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aa55d72_df9280f2",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edbe347d_2aba91a5",
@@ -441,6 +465,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07faf778_30b18719",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-17T16:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad18a996_1af82583",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11e1974a_2b8cbaea",
@@ -454,6 +502,30 @@
       "writtenOn": "2022-08-13T08:49:59Z",
       "side": 1,
       "message": "copyright needs to be updated.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 35
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf14f79_baf0084e",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-17T16:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e1974a_2b8cbaea",
       "range": {
         "startLine": 3,
         "startChar": 0,
@@ -487,6 +559,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba712f7_ff41b825",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-17T16:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ed9f6c_5c6ded21",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 39
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40ac020e_5249e2ca",
@@ -500,6 +596,30 @@
       "writtenOn": "2022-08-13T08:49:59Z",
       "side": 1,
       "message": "remove all license boilerplate code, it\u0027s not needed if you have the SPDX line.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e87d0d_2bec93a5",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-08-17T16:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40ac020e_5249e2ca",
       "range": {
         "startLine": 10,
         "startChar": 0,
