@@ -231,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b10e741_7c1759f8",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:46:33Z",
+      "side": 1,
+      "message": "Ah, ok, that was not obvious at all.  Any pointer to the documentation for any of this would be appreciated.\n\nYou all have documented this api somewhere, right?",
+      "parentUuid": "94e222d2_257023b9",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88f79151_eaacb733",
         "filename": "uapi/linux/virtwl.h",
         "patchSetId": 4
@@ -313,6 +337,30 @@
       "side": 1,
       "message": "Are you referring to zero length arrays vs flexible array members? I\u0027ve updated this to a flexible array to be inline with current kernel policy.\n\nIs there some other subtle issue with flexible arrays here?",
       "parentUuid": "86c66ff6_acd189f8",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f676f67_cb90b855",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:46:33Z",
+      "side": 1,
+      "message": "Yes, you can not use [0] in the kernel anymore.\n\nSee commit 94dfc73e7cf4 (\"treewide: uapi: Replace zero-length arrays with flexible-array members\") in the upstream kernel tree as one example of how to do this properly.",
+      "parentUuid": "519104c2_554e5490",
       "range": {
         "startLine": 54,
         "startChar": 0,
