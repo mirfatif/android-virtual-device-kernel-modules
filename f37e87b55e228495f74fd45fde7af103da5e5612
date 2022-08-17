@@ -62,6 +62,138 @@
       },
       "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a6c0d1_46de995b",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "sorry, but you are not a fliesystem.  Do not do this.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 76
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef87c228_baaa9cf3",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "you never do anything with this structure, why is it here?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 21
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864c404a_da654748",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "why not use the misc device name instead?",
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e8d0f5_dce4445a",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "hard-coded name?",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 20
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db81c7bb_1c86e387",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "you only return true, so why return anything at all?",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 42
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c014f7ca_8ceb93a4",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-17T12:52:58Z",
+      "side": 1,
+      "message": "again, only true?",
+      "range": {
+        "startLine": 399,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 13
+      },
+      "revId": "f37e87b55e228495f74fd45fde7af103da5e5612",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
