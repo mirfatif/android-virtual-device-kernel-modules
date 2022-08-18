@@ -444,6 +444,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ca88d0c_705f26f4",
+        "filename": "virtio_wl/Kbuild",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2022-08-18T05:44:59Z",
+      "side": 1,
+      "message": "The build system doesn\u0027t appear to handle it. The other virtio-drivers (virtio_gpu, goldfish_drivers) include the same line as well.",
+      "parentUuid": "aa6e5af6_48e74cdc",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 82
+      },
+      "revId": "25f85f23b020fc68bf5603943d981aea0385a1e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad18a996_1af82583",
         "filename": "virtio_wl/virtio_wl.c",
         "patchSetId": 4
