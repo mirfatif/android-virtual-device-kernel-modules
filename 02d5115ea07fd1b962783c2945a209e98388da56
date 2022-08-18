@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "010b19eb_316fe290",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1963481
+      },
+      "writtenOn": "2022-08-18T20:17:09Z",
+      "side": 1,
+      "message": "Please replace with \"Google LLC\"",
+      "range": {
+        "startLine": 4,
+        "startChar": 29,
+        "endLine": 4,
+        "endChar": 35
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59aa1e76_5aa3dcdd",
         "filename": "virtio_wl/virtio_wl.c",
         "patchSetId": 7
