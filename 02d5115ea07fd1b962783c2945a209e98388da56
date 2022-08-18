@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04be5848_d420d727",
+        "filename": "uapi/linux/virtwl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "not needed.  checkpatch should have complained about this.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59aa1e76_5aa3dcdd",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "the kernel uses `u32`, please do not use userspace variable types within the kernel, it\u0027s confusing and often times wrong.",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 77,
+        "endChar": 9
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7375827_192cfab9",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "why not error result passed back?",
+      "range": {
+        "startLine": 274,
+        "startChar": 7,
+        "endLine": 274,
+        "endChar": 11
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4463c74b_04f6c3d4",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "no error results returned anywhere?  Why?  That means userspace never knew anything went wrong.",
+      "range": {
+        "startLine": 286,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 8
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b1caad_4228f828",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "kernel return values are `int`.  0 is success, -ERROR_NUMBER is an error.  Please never use bool as a return value for any non-trivial kernel function (i.e. other than something like `is_char()`).\n\nBy doing this, you lost the error value returned to you from the kernel and can not pass it back to userspace properly.",
+      "range": {
+        "startLine": 311,
+        "startChar": 7,
+        "endLine": 311,
+        "endChar": 11
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ea0dee_964931ab",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "so ignore all errors?",
+      "range": {
+        "startLine": 442,
+        "startChar": 2,
+        "endLine": 442,
+        "endChar": 9
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78831f0_1d152d46",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "why `12`?",
+      "range": {
+        "startLine": 793,
+        "startChar": 40,
+        "endLine": 793,
+        "endChar": 42
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b8fe4ea_afcad750",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "where did this magic string value come from or is #defined?",
+      "range": {
+        "startLine": 806,
+        "startChar": 19,
+        "endLine": 806,
+        "endChar": 29
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c0b233_783f4459",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "#ifdef shouldn\u0027t be in .c files, especially in the middle of functions, for options that are not even config options.\n\nMove these to a separate function if you really need this, and make sure to test both with, and without it enabled.\n\nIf this is not needed anymore, just delete it.",
+      "range": {
+        "startLine": 997,
+        "startChar": 0,
+        "endLine": 997,
+        "endChar": 29
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb7e1f7_86123c08",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "nothing validated that len was sane as it came directly from userspace, you just crashed your system or caused a security hole or allowed userspace to allocate Gb of kernel memory.",
+      "range": {
+        "startLine": 1004,
+        "startChar": 54,
+        "endLine": 1004,
+        "endChar": 57
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e3ccc7_06b5dd6a",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1149,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "why doesn\u0027t send return the number of bytes sent?",
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1786a82_1946f85c",
+        "filename": "virtio_wl/virtio_wl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1216,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-08-18T12:49:12Z",
+      "side": 1,
+      "message": "why throw away the `ret` value?",
+      "range": {
+        "startLine": 1216,
+        "startChar": 8,
+        "endLine": 1216,
+        "endChar": 9
+      },
+      "revId": "02d5115ea07fd1b962783c2945a209e98388da56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
