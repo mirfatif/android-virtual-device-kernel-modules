@@ -16,6 +16,24 @@
       "message": "I can\u0027t +2 here, but Will can.\n\nSome questions:\n\n1. is this only for ARM? If not, why don\u0027t we enable it for x86_64 as well?\n2. will there be a test for this? ex: we run a payload that intentionaly stalls and check if it is detected as expected",
       "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac513d2_7951de95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-09-08T16:06:03Z",
+      "side": 1,
+      "message": "Thanks for looking on this. I will try and answer your questions:\n1. Currently this is only for aarch64 as this is implemented in crosvm only for this arch but I don\u0027t see any reason why it wouldn\u0027t work in the future for x86. As long as the guest provides /proc/stat/::guest_info.\n\n2. I added some tests recently as part of the crosvm backend implementation(for reference : https://chromium-review.googlesource.com/c/crosvm/crosvm/+/3872276) . To test a stalling guest it will be a bit more complicated because you will need a custom guest kernel image that can trigger this condition.\nLet me know what do you think of this.\n\nCheers",
+      "parentUuid": "80e9cfbc_65127852",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
