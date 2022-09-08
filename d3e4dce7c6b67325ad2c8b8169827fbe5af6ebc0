@@ -87,6 +87,24 @@
       "parentUuid": "3a602398_8f642a07",
       "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61659001_6cd6b8df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-08T16:35:37Z",
+      "side": 1,
+      "message": "Yes. A shutdown caused by a watchdog bite shouldn\u0027t be confused with a successful and intentional shutdown of the VM, I think.",
+      "parentUuid": "1a245410_9bc398b8",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
