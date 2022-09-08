@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e9cfbc_65127852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-08T15:51:25Z",
+      "side": 1,
+      "message": "I can\u0027t +2 here, but Will can.\n\nSome questions:\n\n1. is this only for ARM? If not, why don\u0027t we enable it for x86_64 as well?\n2. will there be a test for this? ex: we run a payload that intentionaly stalls and check if it is detected as expected",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
