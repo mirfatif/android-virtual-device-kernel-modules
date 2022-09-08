@@ -69,6 +69,24 @@
       "parentUuid": "2ac513d2_7951de95",
       "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a245410_9bc398b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2022-09-08T16:33:09Z",
+      "side": 1,
+      "message": "I think I need to elaborate this a bit more because the only difference that we have right now is only a log in crosvm (to be more precise a warn) but this isn\u0027t what I want. I was thinking if it makes sense to have a mechanism to notify the VirtualisationService without adding too much \u0027custom\u0027 logic in crosvm.",
+      "parentUuid": "3a602398_8f642a07",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
