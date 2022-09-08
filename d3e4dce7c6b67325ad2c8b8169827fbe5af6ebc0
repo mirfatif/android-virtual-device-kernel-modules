@@ -34,6 +34,41 @@
       "parentUuid": "80e9cfbc_65127852",
       "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a602398_8f642a07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-08T16:22:16Z",
+      "side": 1,
+      "message": "Non-blocking question.\n\nWhen the watchdog expires, the VM is reset, right? How one can distinguish such an event from other resets?",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea4b00c_e268ecfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-08T16:22:16Z",
+      "side": 1,
+      "message": "Thanks. If supporting x86 requires some work in crosvm, let\u0027s keep this in this way. I can\u0027t justify the effort.\n\nIf there\u0027s some test running as part of crosvm unittests, I feel fine.",
+      "parentUuid": "2ac513d2_7951de95",
+      "revId": "d3e4dce7c6b67325ad2c8b8169827fbe5af6ebc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
