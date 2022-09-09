@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4028fdfa_663d7db0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-09T10:57:31Z",
+      "side": 1,
+      "message": "Thanks David for pointing the CMDLINE set by GKI.\nr.android.com/2211756 will include those",
+      "revId": "79cf778276ea3cef2be16f320db6f52026948181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd99c501_35e9553c",
@@ -73,6 +90,48 @@
       "side": 1,
       "message": "Thanks for pointing that out David. I think we need them too.",
       "parentUuid": "bd99c501_35e9553c",
+      "revId": "79cf778276ea3cef2be16f320db6f52026948181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51393e61_3189a143",
+        "filename": "microdroid.arm64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-09T10:57:31Z",
+      "side": 1,
+      "message": "There was a todo (b/237381762) to remove it \u0026 make it part of bootconfig, so I was thinking of doing that alongwith, but I should isolate the 2 changes \u0026 include it here.",
+      "parentUuid": "8aba2289_17a991e4",
+      "range": {
+        "startLine": 13,
+        "startChar": 49,
+        "endLine": 13,
+        "endChar": 50
+      },
+      "revId": "79cf778276ea3cef2be16f320db6f52026948181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0089fb_6a99798e",
+        "filename": "microdroid.arm64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2022-09-09T10:57:31Z",
+      "side": 1,
+      "message": "Thanks you. I added those in r.android.com/2211756",
+      "parentUuid": "5dd10d62_d353cb18",
       "revId": "79cf778276ea3cef2be16f320db6f52026948181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
