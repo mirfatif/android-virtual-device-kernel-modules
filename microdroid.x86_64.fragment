@@ -9,8 +9,9 @@ CONFIG_VIRTIO_VSOCKETS=y
 CONFIG_KEXEC_FILE=y
 # CONFIG_DEBUG_KINFO is not set
 
-# Built-in kernel command arguments
-CONFIG_CMDLINE="ioremap_guard panic=-1 bootconfig acpi=noirq"
+# Kernel command line arguments
+# This includes the default CMDLINE from GKI defconfig, please keep in sync
+CONFIG_CMDLINE="stack_depot_disable=on cgroup_disable=pressure ioremap_guard panic=-1 bootconfig crashkernel=17M acpi=noirq"
 
 # Remove unnecessary serial devices
 # CONFIG_SERIAL_8250_16550A_VARIANT is not set
