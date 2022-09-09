@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c88011_bcfe6124",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:07:59Z",
+      "side": 1,
+      "message": "nit: don\u0027t refer to patches with URLs in your commits. That URL may not work in a few years.\n\nIn kernel code people reference with SHA-1 commitish. See https://www.kernel.org/doc/html/v4.17/process/submitting-patches.html#describe-your-changes\n\nIn Android code people tend to reference with Change-Ids. I\u0027d use the kernel variant here, but either is fine.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 35
+      },
+      "revId": "ef29e9cc729c099c6487cf6c79fb2e2abadfba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60abdbd_1a3e284f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:07:59Z",
+      "side": 1,
+      "message": "The formatting is messed up but more importantly, it doesn\u0027t actually test that your changes are correct. It tests that the kernel compiles, which it will because it just embeds the cmdline string into the kernel. So even if the cmdline is completely wrong, your test command will succeed. Can you change this to something else, please? Eg. you can compare the generated .config file before and after.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 20
+      },
+      "revId": "ef29e9cc729c099c6487cf6c79fb2e2abadfba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b7cbcbe_cdd66ab9",
+        "filename": "microdroid.arm64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:07:59Z",
+      "side": 1,
+      "message": "Please put a comment that this needs to be kept in sync with the GKI cmdline.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 35
+      },
+      "revId": "ef29e9cc729c099c6487cf6c79fb2e2abadfba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c14dfe_6f3727ad",
+        "filename": "microdroid.x86_64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:07:59Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 35
+      },
+      "revId": "ef29e9cc729c099c6487cf6c79fb2e2abadfba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c30b976_3d0af9a3",
+        "filename": "microdroid.x86_64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T11:07:59Z",
+      "side": 1,
+      "message": "This is not there in the x86_64 GKI cmdline",
+      "range": {
+        "startLine": 13,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 60
+      },
+      "revId": "ef29e9cc729c099c6487cf6c79fb2e2abadfba61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
