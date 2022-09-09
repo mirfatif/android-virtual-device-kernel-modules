@@ -57,6 +57,24 @@
       },
       "revId": "79cf778276ea3cef2be16f320db6f52026948181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd10d62_d353cb18",
+        "filename": "microdroid.arm64.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-09-09T09:32:09Z",
+      "side": 1,
+      "message": "Thanks for pointing that out David. I think we need them too.",
+      "parentUuid": "bd99c501_35e9553c",
+      "revId": "79cf778276ea3cef2be16f320db6f52026948181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
