@@ -10,7 +10,7 @@ CONFIG_KEXEC_FILE=y
 # CONFIG_DEBUG_KINFO is not set
 
 # Built-in kernel command arguments
-CONFIG_CMDLINE="ioremap_guard panic=-1 bootconfig acpi=noirq"
+CONFIG_CMDLINE="stack_depot_disable=on kasan.stacktrace=off cgroup_disable=pressure ioremap_guard panic=-1 crashkernel=17M bootconfig acpi=noirq"
 
 # Remove unnecessary serial devices
 # CONFIG_SERIAL_8250_16550A_VARIANT is not set
