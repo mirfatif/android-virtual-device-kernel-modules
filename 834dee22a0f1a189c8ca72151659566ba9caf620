@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4efa2184_be3a0af7",
+        "filename": "microdroid.arm64.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T14:57:15Z",
+      "side": 1,
+      "message": "nit: command line",
+      "range": {
+        "startLine": 12,
+        "startChar": 9,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "834dee22a0f1a189c8ca72151659566ba9caf620",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6257a5_3b83053c",
+        "filename": "microdroid.x86_64.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-09-09T14:57:15Z",
+      "side": 1,
+      "message": "nit: put after \u0027bootconfig\u0027 to keep the order the same between architectures",
+      "range": {
+        "startLine": 14,
+        "startChar": 86,
+        "endLine": 14,
+        "endChar": 101
+      },
+      "revId": "834dee22a0f1a189c8ca72151659566ba9caf620",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
