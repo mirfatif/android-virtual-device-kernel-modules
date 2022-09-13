@@ -246,7 +246,6 @@ copy_to_dist_dir(
         ":virtual_device_aarch64_modules_install",
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
-        "//common:kernel_aarch64_uapi_headers",
     ],
     dist_dir = _dist_dir,
     flat = True,
