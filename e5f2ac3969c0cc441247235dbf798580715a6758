@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03b42e8_a0966d40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2022-09-23T02:27:00Z",
+      "side": 1,
+      "message": "To resolve build error, I just synced it up with https://android-review.googlesource.com/c/kernel/common/+/2183200",
+      "revId": "e5f2ac3969c0cc441247235dbf798580715a6758",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
