@@ -98,6 +98,19 @@ _virt_common_modules = [
     "zsmalloc.ko",
 ]
 
+_virt_aarch64_modules = [
+    # keep sorted
+    "ambakmi.ko",
+    "armmmci.ko",
+    "clk-vexpress-osc.ko",
+    "open-dice.ko",
+    "pl111_drm.ko",
+    "psmouse.ko",
+    "vexpress-config.ko",
+    "vexpress-sysreg.ko",
+    "virtio_mmio.ko",
+]
+
 _virt_common_ext_modules = [
     "goldfish_drivers/goldfish_address_space.ko",
     "goldfish_drivers/goldfish_pipe.ko",
@@ -196,18 +209,7 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
-    module_outs = _virt_common_modules + [
-        # keep sorted
-        "ambakmi.ko",
-        "armmmci.ko",
-        "clk-vexpress-osc.ko",
-        "open-dice.ko",
-        "pl111_drm.ko",
-        "psmouse.ko",
-        "vexpress-config.ko",
-        "vexpress-sysreg.ko",
-        "virtio_mmio.ko",
-    ],
+    module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
 kernel_module(
@@ -263,5 +265,63 @@ exec(
     script = """
         $(rootpath :virtual_device_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+    """,
+)
+
+kernel_build(
+    name = "virtual_device_aarch64_16k",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
+    ],
+    base_kernel = "//common:kernel_aarch64_16k",
+    build_config = "build.config.virtual_device.aarch64.16k",
+    module_outs = _virt_common_modules + _virt_aarch64_modules,
+)
+
+kernel_module(
+    name = "virtual_device_aarch64_16k_external_modules",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = _virt_common_ext_modules,
+    kernel_build = ":virtual_device_aarch64_16k",
+)
+
+kernel_modules_install(
+    name = "virtual_device_aarch64_16k_modules_install",
+    kernel_build = ":virtual_device_aarch64_16k",
+    kernel_modules = [
+        ":virtual_device_aarch64_16k_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_aarch64_16k_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_aarch64_16k",
+    kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_aarch64_16k_copy_to_dist_dir",
+    data = [
+        ":virtual_device_aarch64_16k",
+        ":virtual_device_aarch64_16k_images",
+        ":virtual_device_aarch64_16k_modules_install",
+        "//common:kernel_aarch64_16k",
+        "//common:kernel_aarch64_16k_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+exec(
+    name = "virtual_device_aarch64_16k_dist",
+    data = [
+        ":virtual_device_aarch64_16k_copy_to_dist_dir",
+        ":virtual_device_test_mappings_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
 )
