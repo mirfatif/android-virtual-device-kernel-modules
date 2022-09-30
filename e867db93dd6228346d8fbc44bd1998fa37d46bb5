@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7981d0af_d9aecafa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-09-30T11:37:08Z",
+      "side": 1,
+      "message": "deprecation is correct at this point, but unless we remove build.sh, this cannot be removed from the build.config files. So, the config removal has to likely wait until we drop build.sh from master. Am I missing something?",
+      "revId": "e867db93dd6228346d8fbc44bd1998fa37d46bb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
