@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb9e078_9094a575",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-09-30T23:04:11Z",
+      "side": 1,
+      "message": "BTW if you don\u0027t need test_mapping.zip for this target, you can drop this virtual_device_aarch64_16k_dist and rename virtual_device_aarch64_16k_copy_to_dist_dir to virtual_device_aarch64_16k_dist",
+      "range": {
+        "startLine": 321,
+        "startChar": 10,
+        "endLine": 321,
+        "endChar": 43
+      },
+      "revId": "f74a3e4ab54e02c6590bd384bea55dbb11dd016f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
