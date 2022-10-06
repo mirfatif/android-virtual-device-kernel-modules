@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03e8c5b8_c176b37e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-10-06T09:13:49Z",
+      "side": 1,
+      "message": "LGTM, but I don\u0027t have +2 here.",
+      "revId": "8cc684a64db6cf80eaa27f425d582ca3a998a492",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
