@@ -102,7 +102,7 @@ _virt_aarch64_modules = [
     "ambakmi.ko",
     "armmmci.ko",
     "clk-vexpress-osc.ko",
-    "drm_cma_helper.ko",
+    "drm_dma_helper.ko",
     "pl111_drm.ko",
     "psmouse.ko",
     "vexpress-config.ko",
