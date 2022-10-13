@@ -141,6 +141,15 @@ CONFIG_PARTITION_ADVANCED=y
 # CONFIG_BPF_SYSCALL is not set
 # CONFIG_BPF_JIT is not set
 # CONFIG_BPF_JIT_ALWAYS_ON is not set
+# CONFIG_DAMON is not set
+# CONFIG_LIBNVDIMM is not set
+# CONFIG_NVMEM is not set
+# CONFIG_NVMEM_SYSFS is not set
+# CONFIG_RTC_NVMEM is not set
+
+# Disable CPUIDLE
+# CONFIG_CPU_IDLE is not set
+# CONFIG_ARM_CPUIDLE is not set
 
 # Microdroid is 64-bit only
 # CONFIG_COMPAT is not set
