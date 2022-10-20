@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf79fc0_a7abb23e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-20T23:56:19Z",
+      "side": 1,
+      "message": "FIXME: virtio_gpu is not building\n\nFIXME: This needs CL:2257886",
+      "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
