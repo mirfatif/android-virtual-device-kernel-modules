@@ -27,6 +27,7 @@ load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
+load(":virtual_device.bzl", "virtual_device_external_modules")
 
 _dist_dir = "out/{branch}/dist".format(branch = BRANCH)
 
@@ -38,17 +39,13 @@ test_mappings_dist(
 )
 
 filegroup(
-    name = "virtual_device_x86_64_common_sources",
+    name = "common_sources",
     srcs = glob(
-        ["**"],
+        ["*.*"],
         exclude = [
             "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
         ],
-    ) + [
-        "//common:kernel_x86_64_sources",
-    ],
+    ),
 )
 
 _virt_common_modules = [
@@ -114,16 +111,12 @@ _virt_aarch64_modules = [
     "virtio_pmem.ko",
 ]
 
-_virt_common_ext_modules = [
-    "goldfish_drivers/goldfish_address_space.ko",
-    "goldfish_drivers/goldfish_pipe.ko",
-    "goldfish_drivers/goldfish_sync.ko",
-    "virtio_gpu/virtio-gpu.ko",
-]
-
 kernel_build(
     name = "virtual_device_x86_64",
-    srcs = [":virtual_device_x86_64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_x86_64_sources",
+    ],
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
@@ -136,10 +129,9 @@ kernel_build(
     ],
 )
 
-kernel_module(
+virtual_device_external_modules(
     name = "virtual_device_x86_64_external_modules",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = _virt_common_ext_modules,
+    gki_headers = "//common:all_headers_x86_64",
     kernel_build = ":virtual_device_x86_64",
 )
 
@@ -192,23 +184,12 @@ exec(
     """,
 )
 
-filegroup(
-    name = "virtual_device_aarch64_common_sources",
-    srcs = glob(
-        ["**"],
-        exclude = [
-            "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
-        ],
-    ) + [
-        "//common:kernel_aarch64_sources",
-    ],
-)
-
 kernel_build(
     name = "virtual_device_aarch64",
-    srcs = [":virtual_device_aarch64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
+    ],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
@@ -217,10 +198,9 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
+virtual_device_external_modules(
     name = "virtual_device_aarch64_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+    gki_headers = "//common:all_headers_aarch64",
     kernel_build = ":virtual_device_aarch64",
 )
 
@@ -275,7 +255,10 @@ exec(
 
 kernel_build(
     name = "virtual_device_aarch64_16k",
-    srcs = [":virtual_device_aarch64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
+    ],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
@@ -284,10 +267,9 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
+virtual_device_external_modules(
     name = "virtual_device_aarch64_16k_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+    gki_headers = "//common:all_headers_aarch64",
     kernel_build = ":virtual_device_aarch64_16k",
 )
 
@@ -364,10 +346,10 @@ kernel_build(
     ])),
 )
 
-kernel_module(
+virtual_device_external_modules(
     name = "virtual_device_arm_external_modules",
-    outs = _virt_common_ext_modules,
-    kernel_build = "//common-modules/virtual-device:virtual_device_arm",
+    gki_headers = "//common:all_headers_arm",
+    kernel_build = ":virtual_device_arm",
 )
 
 kernel_modules_install(
@@ -427,10 +409,10 @@ kernel_build(
     strip_modules = False,
 )
 
-kernel_module(
+virtual_device_external_modules(
     name = "virtual_device_i686_external_modules",
-    outs = _virt_common_ext_modules,
-    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    gki_headers = "//common:all_headers_x86_64",
+    kernel_build = ":virtual_device_i686",
 )
 
 kernel_modules_install(
