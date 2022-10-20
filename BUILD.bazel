@@ -15,6 +15,8 @@
 load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "ddk_headers",
+    "ddk_module",
     "kernel_build",
     "kernel_images",
     "kernel_module",
@@ -35,7 +37,7 @@ test_mappings_dist(
 )
 
 filegroup(
-    name = "virtual_device_x86_64_common_sources",
+    name = "common_sources",
     srcs = glob(
         ["**"],
         exclude = [
@@ -43,9 +45,7 @@ filegroup(
             "**/*.bzl",
             ".git/**",
         ],
-    ) + [
-        "//common:kernel_x86_64_sources",
-    ],
+    ),
 )
 
 _virt_common_modules = [
@@ -111,16 +111,12 @@ _virt_aarch64_modules = [
     "virtio_mmio.ko",
 ]
 
-_virt_common_ext_modules = [
-    "goldfish_drivers/goldfish_address_space.ko",
-    "goldfish_drivers/goldfish_pipe.ko",
-    "goldfish_drivers/goldfish_sync.ko",
-    "virtio_gpu/virtio-gpu.ko",
-]
-
 kernel_build(
     name = "virtual_device_x86_64",
-    srcs = [":virtual_device_x86_64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_x86_64_sources",
+    ],
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
@@ -131,27 +127,91 @@ kernel_build(
     ],
 )
 
-kernel_module(
-    name = "virtual_device_x86_64_external_modules",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = _virt_common_ext_modules,
-    kernel_build = ":virtual_device_x86_64",
+ddk_headers(
+    name = "common_headers",
+    hdrs = glob([
+        "uapi/**/*.h",
+        "drivers/**/*.h",
+    ]),
+    includes = ["include"],
+    linux_includes = ["uapi"],
 )
+
+ddk_headers(
+    name = "common_headers_x86_64",
+    hdrs = [
+        # Keep ordering so that uapi/ has a higher priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_x86_64",
+    ],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_address_space",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_address_space.c",
+    ],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_pipe",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
+        "goldfish_drivers/goldfish_pipe_base.c",
+        "goldfish_drivers/goldfish_pipe_qemu.h",
+        "goldfish_drivers/goldfish_pipe_v1.c",
+        "goldfish_drivers/goldfish_pipe_v2.c",
+    ],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_sync",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_sync.c",
+    ],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/virtio_gpu/virtio-gpu",
+    srcs = glob([
+        "virtio_gpu/*.c",
+        "virtio_gpu/*.h",
+    ]),
+    out = "virtio_gpu/virtio-gpu.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+_virtual_device_x86_64_external_modules = [
+    ":x86_64/goldfish_drivers/goldfish_address_space",
+    ":x86_64/goldfish_drivers/goldfish_pipe",
+    ":x86_64/goldfish_drivers/goldfish_sync",
+    ":x86_64/virtio_gpu/virtio-gpu",
+]
 
 kernel_modules_install(
     name = "virtual_device_x86_64_modules_install",
     kernel_build = ":virtual_device_x86_64",
-    kernel_modules = [
-        ":virtual_device_x86_64_external_modules",
-    ],
+    kernel_modules = _virtual_device_x86_64_external_modules,
 )
 
 merged_kernel_uapi_headers(
     name = "virtual_device_x86_64_merged_kernel_uapi_headers",
     kernel_build = ":virtual_device_x86_64",
-    kernel_modules = [
-        ":virtual_device_x86_64_external_modules",
-    ],
+    kernel_modules = _virtual_device_x86_64_external_modules,
 )
 
 kernel_images(
@@ -187,23 +247,24 @@ exec(
     """,
 )
 
-filegroup(
-    name = "virtual_device_aarch64_common_sources",
-    srcs = glob(
-        ["**"],
-        exclude = [
-            "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
-        ],
-    ) + [
-        "//common:kernel_aarch64_sources",
+ddk_headers(
+    name = "common_headers_aarch64",
+    hdrs = [
+        # Keep ordering so that uapi/ has a higher priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_aarch64",
     ],
+    includes = ["include"],
+    linux_includes = ["uapi"],
 )
 
 kernel_build(
     name = "virtual_device_aarch64",
-    srcs = [":virtual_device_aarch64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
+    ],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
@@ -212,27 +273,71 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
-    name = "virtual_device_aarch64_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_address_space",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_address_space.c",
+    ],
+    out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
 )
+
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_pipe",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
+        "goldfish_drivers/goldfish_pipe_base.c",
+        "goldfish_drivers/goldfish_pipe_qemu.h",
+        "goldfish_drivers/goldfish_pipe_v1.c",
+        "goldfish_drivers/goldfish_pipe_v2.c",
+    ],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_sync",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_sync.c",
+    ],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64/virtio_gpu/virtio-gpu",
+    srcs = glob([
+        "virtio_gpu/*.c",
+        "virtio_gpu/*.h",
+    ]),
+    out = "virtio_gpu/virtio-gpu.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+_virtual_device_aarch64_external_modules = [
+    ":aarch64/goldfish_drivers/goldfish_address_space",
+    ":aarch64/goldfish_drivers/goldfish_pipe",
+    ":aarch64/goldfish_drivers/goldfish_sync",
+    ":aarch64/virtio_gpu/virtio-gpu",
+]
 
 kernel_modules_install(
     name = "virtual_device_aarch64_modules_install",
     kernel_build = ":virtual_device_aarch64",
-    kernel_modules = [
-        ":virtual_device_aarch64_external_modules",
-    ],
+    kernel_modules = _virtual_device_aarch64_external_modules,
 )
 
 merged_kernel_uapi_headers(
     name = "virtual_device_aarch64_merged_kernel_uapi_headers",
     kernel_build = ":virtual_device_aarch64",
-    kernel_modules = [
-        ":virtual_device_aarch64_external_modules",
-    ],
+    kernel_modules = _virtual_device_aarch64_external_modules,
 )
 
 kernel_images(
@@ -270,7 +375,10 @@ exec(
 
 kernel_build(
     name = "virtual_device_aarch64_16k",
-    srcs = [":virtual_device_aarch64_common_sources"],
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
+    ],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
@@ -279,19 +387,65 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
-    name = "virtual_device_aarch64_16k_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_address_space",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_address_space.c",
+    ],
+    out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
 )
+
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_pipe",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
+        "goldfish_drivers/goldfish_pipe_base.c",
+        "goldfish_drivers/goldfish_pipe_qemu.h",
+        "goldfish_drivers/goldfish_pipe_v1.c",
+        "goldfish_drivers/goldfish_pipe_v2.c",
+    ],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_sync",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_sync.c",
+    ],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64_16k/virtio_gpu/virtio-gpu",
+    srcs = glob([
+        "virtio_gpu/*.c",
+        "virtio_gpu/*.h",
+    ]),
+    out = "virtio_gpu/virtio-gpu.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+_virtual_device_aarch64_16k_external_modules = [
+    ":aarch64_16k/goldfish_drivers/goldfish_address_space",
+    ":aarch64_16k/goldfish_drivers/goldfish_pipe",
+    ":aarch64_16k/goldfish_drivers/goldfish_sync",
+    ":aarch64_16k/virtio_gpu/virtio-gpu",
+]
 
 kernel_modules_install(
     name = "virtual_device_aarch64_16k_modules_install",
     kernel_build = ":virtual_device_aarch64_16k",
-    kernel_modules = [
-        ":virtual_device_aarch64_16k_external_modules",
-    ],
+    kernel_modules = _virtual_device_aarch64_16k_external_modules,
 )
 
 kernel_images(
