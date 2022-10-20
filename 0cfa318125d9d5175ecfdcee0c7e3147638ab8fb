@@ -16,6 +16,24 @@
       "message": "I can\u0027t +2 here.\n\nWe could instead land aosp/2254138 which I got reviewed a few days ago. (I couldn\u0027t land it because I didn\u0027t have the userspace-side change)",
       "revId": "0cfa318125d9d5175ecfdcee0c7e3147638ab8fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f86ced_b97fee1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-20T23:56:58Z",
+      "side": 1,
+      "message": "I see. Let me check if my userspace change works with aosp/2254138, and if it does then we can land it.",
+      "parentUuid": "7628b804_e8524781",
+      "revId": "0cfa318125d9d5175ecfdcee0c7e3147638ab8fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
