@@ -15,6 +15,7 @@
 load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "ddk_module",
     "kernel_build",
     "kernel_images",
     "kernel_module",
@@ -42,6 +43,7 @@ filegroup(
             "BUILD.bazel",
             "**/*.bzl",
             ".git/**",
+            "Makefile",
         ],
     ) + [
         "//common:kernel_x86_64_sources",
@@ -131,27 +133,68 @@ kernel_build(
     ],
 )
 
-kernel_module(
-    name = "virtual_device_x86_64_external_modules",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "goldfish_drivers/goldfish_address_space",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_address_space.c",
+        "//common:all_headers",
+    ],
     kernel_build = ":virtual_device_x86_64",
 )
+
+ddk_module(
+    name = "goldfish_drivers/goldfish_pipe",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
+        "goldfish_drivers/goldfish_pipe_base.c",
+        "goldfish_drivers/goldfish_pipe_qemu.h",
+        "goldfish_drivers/goldfish_pipe_v1.c",
+        "goldfish_drivers/goldfish_pipe_v2.c",
+        "//common:all_headers",
+    ],
+    kernel_build = ":virtual_device_x86_64",
+)
+
+ddk_module(
+    name = "goldfish_drivers/goldfish_sync",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_sync.c",
+        "//common:all_headers",
+    ],
+    kernel_build = ":virtual_device_x86_64",
+)
+
+ddk_module(
+    name = "virtio_gpu/virtio-gpu",
+    srcs = glob([
+        "virtio_gpu/*.c",
+        "virtio_gpu/*.h",
+    ]) + [
+        "//common:all_headers",
+    ],
+    kernel_build = ":virtual_device_x86_64",
+)
+
+_virtual_device_x86_64_external_modules = [
+    ":goldfish_drivers/goldfish_address_space",
+    ":goldfish_drivers/goldfish_pipe",
+    ":goldfish_drivers/goldfish_sync",
+    ":virtio_gpu/virtio-gpu",
+]
 
 kernel_modules_install(
     name = "virtual_device_x86_64_modules_install",
     kernel_build = ":virtual_device_x86_64",
-    kernel_modules = [
-        ":virtual_device_x86_64_external_modules",
-    ],
+    kernel_modules = _virtual_device_x86_64_external_modules,
 )
 
 merged_kernel_uapi_headers(
     name = "virtual_device_x86_64_merged_kernel_uapi_headers",
     kernel_build = ":virtual_device_x86_64",
-    kernel_modules = [
-        ":virtual_device_x86_64_external_modules",
-    ],
+    kernel_modules = _virtual_device_x86_64_external_modules,
 )
 
 kernel_images(
