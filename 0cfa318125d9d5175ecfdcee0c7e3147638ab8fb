@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7628b804_e8524781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-20T23:55:01Z",
+      "side": 1,
+      "message": "I can\u0027t +2 here.\n\nWe could instead land aosp/2254138 which I got reviewed a few days ago. (I couldn\u0027t land it because I didn\u0027t have the userspace-side change)",
+      "revId": "0cfa318125d9d5175ecfdcee0c7e3147638ab8fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
