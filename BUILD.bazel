@@ -17,10 +17,13 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "ddk_headers",
+    "ddk_module",
     "kernel_build",
     "kernel_dtstree",
     "kernel_images",
     "kernel_module",
+    "kernel_module_group",
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
@@ -64,6 +67,71 @@ filegroup(
     srcs = [
         ":common_sources",
         "//common:kernel_aarch64_sources",
+    ],
+)
+
+filegroup(
+    name = "goldfish_address_space_sources",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_address_space.c",
+    ],
+)
+
+filegroup(
+    name = "goldfish_pipe_sources",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
+        "goldfish_drivers/goldfish_pipe_base.c",
+        "goldfish_drivers/goldfish_pipe_qemu.h",
+        "goldfish_drivers/goldfish_pipe_v1.c",
+        "goldfish_drivers/goldfish_pipe_v2.c",
+    ],
+)
+
+filegroup(
+    name = "goldfish_sync_sources",
+    srcs = [
+        "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_sync.c",
+    ],
+)
+
+ddk_headers(
+    name = "common_headers",
+    hdrs = glob(["uapi/**/*.h"]),
+    includes = ["."],
+    linux_includes = ["uapi"],
+)
+
+ddk_headers(
+    name = "common_headers_aarch64",
+    hdrs = [
+        # uapi/ has highest priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_aarch64",
+    ],
+)
+
+ddk_headers(
+    name = "common_headers_arm",
+    hdrs = [
+        # uapi/ has highest priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_arm",
+    ],
+)
+
+ddk_headers(
+    name = "common_headers_x86_64",
+    hdrs = [
+        # uapi/ has highest priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_x86_64",
     ],
 )
 
@@ -129,12 +197,6 @@ _virt_aarch64_modules = [
     "virtio_pmem.ko",
 ]
 
-_virt_common_ext_modules = [
-    "goldfish_drivers/goldfish_address_space.ko",
-    "goldfish_drivers/goldfish_pipe.ko",
-    "goldfish_drivers/goldfish_sync.ko",
-]
-
 kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
@@ -149,11 +211,37 @@ kernel_build(
     ],
 )
 
-kernel_module(
-    name = "virtual_device_x86_64_external_modules",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
+kernel_module_group(
+    name = "virtual_device_x86_64_external_modules",
+    srcs = [
+        ":x86_64/goldfish_drivers/goldfish_address_space",
+        ":x86_64/goldfish_drivers/goldfish_pipe",
+        ":x86_64/goldfish_drivers/goldfish_sync",
+    ],
 )
 
 kernel_modules_install(
@@ -216,11 +304,37 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
-    name = "virtual_device_aarch64_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
+kernel_module_group(
+    name = "virtual_device_aarch64_external_modules",
+    srcs = [
+        ":aarch64/goldfish_drivers/goldfish_address_space",
+        ":aarch64/goldfish_drivers/goldfish_pipe",
+        ":aarch64/goldfish_drivers/goldfish_sync",
+    ],
 )
 
 kernel_modules_install(
@@ -283,11 +397,37 @@ kernel_build(
     module_outs = _virt_common_modules + _virt_aarch64_modules,
 )
 
-kernel_module(
-    name = "virtual_device_aarch64_16k_external_modules",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = _virt_common_ext_modules,
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+ddk_module(
+    name = "aarch64_16k/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    deps = [":common_headers_aarch64"],
+)
+
+kernel_module_group(
+    name = "virtual_device_aarch64_16k_external_modules",
+    srcs = [
+        ":aarch64_16k/goldfish_drivers/goldfish_address_space",
+        ":aarch64_16k/goldfish_drivers/goldfish_pipe",
+        ":aarch64_16k/goldfish_drivers/goldfish_sync",
+    ],
 )
 
 kernel_modules_install(
@@ -363,10 +503,37 @@ kernel_build(
     ])),
 )
 
-kernel_module(
+ddk_module(
+    name = "arm/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":virtual_device_arm",
+    deps = [":common_headers_arm"],
+)
+
+ddk_module(
+    name = "arm/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_arm",
+    deps = [":common_headers_arm"],
+)
+
+ddk_module(
+    name = "arm/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_arm",
+    deps = [":common_headers_arm"],
+)
+
+kernel_module_group(
     name = "virtual_device_arm_external_modules",
-    outs = _virt_common_ext_modules,
-    kernel_build = "//common-modules/virtual-device:virtual_device_arm",
+    srcs = [
+        ":arm/goldfish_drivers/goldfish_address_space",
+        ":arm/goldfish_drivers/goldfish_pipe",
+        ":arm/goldfish_drivers/goldfish_sync",
+    ],
 )
 
 kernel_modules_install(
@@ -418,10 +585,37 @@ kernel_build(
     strip_modules = False,
 )
 
-kernel_module(
+ddk_module(
+    name = "i686/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":virtual_device_i686",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "i686/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_i686",
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "i686/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_i686",
+    deps = [":common_headers_x86_64"],
+)
+
+kernel_module_group(
     name = "virtual_device_i686_external_modules",
-    outs = _virt_common_ext_modules,
-    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    srcs = [
+        ":i686/goldfish_drivers/goldfish_address_space",
+        ":i686/goldfish_drivers/goldfish_pipe",
+        ":i686/goldfish_drivers/goldfish_sync",
+    ],
 )
 
 kernel_modules_install(
