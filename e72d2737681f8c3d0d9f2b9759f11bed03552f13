@@ -16,6 +16,23 @@
       "message": "FIXME: virtio_gpu is not building\n\nFIXME: This needs CL:2257886",
       "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bc6913_ffa2507b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-22T01:32:14Z",
+      "side": 1,
+      "message": "need work",
+      "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
