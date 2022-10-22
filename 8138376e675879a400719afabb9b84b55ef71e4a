@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa96ea0_34b9c517",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-22T06:11:46Z",
+      "side": 1,
+      "message": "This needs \"drivers/gpu/drm/virtio/virtgpu_trace.h\" from the all_headers_unsafe list",
+      "revId": "8138376e675879a400719afabb9b84b55ef71e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
