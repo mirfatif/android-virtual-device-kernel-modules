@@ -33,6 +33,24 @@
       "message": "need work",
       "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83260ede_500bdca6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-22T01:32:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d7bc6913_ffa2507b",
+      "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
