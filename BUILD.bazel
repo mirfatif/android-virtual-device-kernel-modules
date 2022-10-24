@@ -314,6 +314,37 @@ copy_to_dist_dir(
     flat = True,
 )
 
+# FIXME: Unknown in build config: FRAGMENT_CONFIG=/usr/local/google/home/umendez/android/android-14/common-modules/virtual-device/microdroid.arm64.fragment
+# FIXME: Unknown in build config: GKI_DEFCONFIG=/usr/local/google/home/umendez/android/android-14/common/arch/arm64/configs/gki_defconfig
+# FIXME: Unknown in build config: MERGED_CONFIG=/usr/local/google/home/umendez/android/android-14/common/arch/arm64/configs/microdroid_defconfig
+# FIXME: Unknown in build config: MERGE_SCRIPT=/usr/local/google/home/umendez/android/android-14/common/scripts/kconfig/merge_config.sh
+# FIXME: PRE_DEFCONFIG_CMDS: Don't forget to modify PRE_DEFCONFIG_CMDS so it writes to $OUT_DIR, not the source tree: https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/errors.md#defconfig-readonly
+# FIXME: Unknown in build config: SRCARCH=arm64
+# FIXME: STOP_SHIP_TRACEPRINTK=1 not supported
+kernel_build(
+    name = "microdroid.aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "System.map",
+        "arch/arm64/boot/Image",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    base_kernel = None,  # FIXME: base_kernel should be migrated to //common:kernel_aarch64.
+    build_config = "build.config.microdroid.aarch64",
+    module_outs = None,  # FIXME: set to the list of in-tree modules. You may run `tools/bazel build //common-modules/virtual-device:microdroid.aarch64` and follow the instructions in the error message.
+    strip_modules = False,
+)
+
+copy_to_dist_dir(
+    name = "microdroid.aarch64_dist",
+    data = [":microdroid.aarch64"],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
 exec(
     name = "virtual_device_aarch64_16k_dist",
     data = [
