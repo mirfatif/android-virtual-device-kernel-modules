@@ -26,6 +26,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91850512_5405341a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-24T19:51:07Z",
+      "side": 1,
+      "message": "Actually I might need to wait until CL:2264682 is in and then modify it according. \n\nWill check it tomorrow.",
+      "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ca4a274_be34738b",
         "filename": "build.config.microdroid",
         "patchSetId": 2
