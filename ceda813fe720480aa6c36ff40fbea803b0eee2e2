@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "583efcc9_3cf8be1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-24T19:45:37Z",
+      "side": 1,
+      "message": "full link",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ca4a274_be34738b",
         "filename": "build.config.microdroid",
         "patchSetId": 2
