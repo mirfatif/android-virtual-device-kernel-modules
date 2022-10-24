@@ -34,6 +34,24 @@
       "parentUuid": "7628b804_e8524781",
       "revId": "0cfa318125d9d5175ecfdcee0c7e3147638ab8fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d9ce5b_1a4753a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2022-10-24T07:15:52Z",
+      "side": 1,
+      "message": "For some reason my microdroid didn\u0027t boot with aosp/2254138. It\u0027s most likely due to my own setup. Will merge this change as is, and investigate why removing accounting related CONFIG_ variables as a follow up.",
+      "parentUuid": "d6f86ced_b97fee1e",
+      "revId": "0cfa318125d9d5175ecfdcee0c7e3147638ab8fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
