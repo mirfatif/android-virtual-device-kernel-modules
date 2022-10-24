@@ -151,6 +151,14 @@ CONFIG_PARTITION_ADVANCED=y
 # CONFIG_CPU_IDLE is not set
 # CONFIG_ARM_CPUIDLE is not set
 
+# Disable cgroup
+# CONFIG_CGROUPS is not set
+
+# Disable task accounting
+# CONFIG_TASKSTATS is not set
+# CONFIG_TASK_XACCT is not set
+# CONFIG_TASK_IO_ACCOUNTING is not set
+
 # Microdroid is 64-bit only
 # CONFIG_COMPAT is not set
 
