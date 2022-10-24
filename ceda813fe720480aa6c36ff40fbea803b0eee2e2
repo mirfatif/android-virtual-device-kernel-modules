@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ca4a274_be34738b",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-24T19:45:01Z",
+      "side": 1,
+      "message": "You need \n\n```\nPOST_DEFCONFIG_CMDS\u003d\"\"\n```\n\nOtherwise it will fallback to `check_defconfig`",
+      "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
