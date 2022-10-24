@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64822e3d_99c0526d",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-24T20:43:40Z",
+      "side": 1,
+      "message": "Maybe copy into `\\${OUT_DIR}/arch/${SRCARCH}/configs/` instead? See example in CL:2267508. Reasoning behind this is \n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/errors.md#defconfig-readonly",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "0e2c4a1cc6500cde83d4e12c7cc0f5ea65f03310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
