@@ -325,3 +325,20 @@ exec(
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
 )
+
+kernel_build(
+    name = "microdroid_aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_aarch64",
+    build_config = "build.config.microdroid.aarch64",
+    module_outs = [],
+    strip_modules = False,
+)
+
+copy_to_dist_dir(
+    name = "microdroid_aarch64_dist",
+    data = [":microdroid_aarch64"],
+    dist_dir = _dist_dir,
+    flat = True,
+)
