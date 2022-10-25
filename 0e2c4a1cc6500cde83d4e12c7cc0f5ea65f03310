@@ -22,6 +22,30 @@
       },
       "revId": "0e2c4a1cc6500cde83d4e12c7cc0f5ea65f03310",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb7ff5fc_99d01839",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-25T00:30:18Z",
+      "side": 1,
+      "message": "BUILD_CONFIG files are parsed before OUT_DIR is set in _setup_env.sh.\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/master/_setup_env.sh#55\n\nEven when I moved OUT_DIR\u003d... before the parsing of the build config, \n\nOUT_DIR was actually `out/common-modules/virtual-device`",
+      "parentUuid": "64822e3d_99c0526d",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "0e2c4a1cc6500cde83d4e12c7cc0f5ea65f03310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
