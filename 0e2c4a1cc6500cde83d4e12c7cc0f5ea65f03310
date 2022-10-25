@@ -70,6 +70,30 @@
       },
       "revId": "0e2c4a1cc6500cde83d4e12c7cc0f5ea65f03310",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048a07f7_df57c9af",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-25T21:29:51Z",
+      "side": 1,
+      "message": "The equivalent Kleaf command for config.sh is in CL:2266247. But if config.sh doesn\u0027t work in the first place then we need to think about how this should be fixed.\n\nI think both config.sh and the Kleaf version CL:2266247 won\u0027t work if the defconfig are \"generated\" with PRE_DEFCONFIG_CMDS. We just need to think of a better mechanism.",
+      "parentUuid": "d8b2d57e_b5b78d0f",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 39
+      },
+      "revId": "0e2c4a1cc6500cde83d4e12c7cc0f5ea65f03310",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
