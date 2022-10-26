@@ -110,6 +110,24 @@
       "parentUuid": "309d30ad_1dbe1a56",
       "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52b7079_4396e3c4",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-10-26T01:40:22Z",
+      "side": 1,
+      "message": "Yeah, that copying is annoying. Perhaps I may be able to do that automatically using PRE_DEFCONFIG_CMDS. I will submit a follow-up CL. I think this CL can be abandoned.",
+      "parentUuid": "15267912_76e99f3b",
+      "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
