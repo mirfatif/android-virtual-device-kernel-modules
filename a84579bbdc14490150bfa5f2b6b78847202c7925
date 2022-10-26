@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b85f005_e57c6d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-26T18:56:59Z",
+      "side": 1,
+      "message": "I think this is a very clean and smart solution. Thanks Jiyong!",
+      "parentUuid": "dbd1eb86_8fd54e24",
+      "revId": "a84579bbdc14490150bfa5f2b6b78847202c7925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d98e6f7_4455e3a4",
         "filename": "build.config.crashdump",
         "patchSetId": 1
