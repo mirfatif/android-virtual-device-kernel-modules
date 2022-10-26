@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "335ab133_e8e54c36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-26T18:57:30Z",
+      "side": 1,
+      "message": "This comment is non-blocking because I don\u0027t know how ready is aosp/2267507",
+      "parentUuid": "4b85f005_e57c6d74",
+      "revId": "a84579bbdc14490150bfa5f2b6b78847202c7925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d98e6f7_4455e3a4",
         "filename": "build.config.crashdump",
         "patchSetId": 1
