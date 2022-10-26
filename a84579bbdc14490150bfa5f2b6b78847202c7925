@@ -16,6 +16,29 @@
       "message": "Can this be a solution?",
       "revId": "a84579bbdc14490150bfa5f2b6b78847202c7925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d98e6f7_4455e3a4",
+        "filename": "build.config.crashdump",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-26T11:09:41Z",
+      "side": 1,
+      "message": "This was `crashdump` before is this intended?",
+      "range": {
+        "startLine": 8,
+        "startChar": 53,
+        "endLine": 8,
+        "endChar": 63
+      },
+      "revId": "a84579bbdc14490150bfa5f2b6b78847202c7925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
