@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbd1eb86_8fd54e24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-26T18:56:21Z",
+      "side": 1,
+      "message": "Yes!\n\nCan you check that the Kleaf version of config.sh works too?\n\n1. cp https://android-review.googlesource.com/q/topic:kleaf_config_sh\n2. cp https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/2267507 (though, it probably isn\u0027t ready enough...)\n2. `bazel run //common-modules/virtual-device:microdroid.aarch64_config -- menuconfig`",
+      "parentUuid": "34e48ecc_e0b11ef0",
+      "revId": "a84579bbdc14490150bfa5f2b6b78847202c7925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d98e6f7_4455e3a4",
         "filename": "build.config.crashdump",
         "patchSetId": 1
