@@ -128,6 +128,24 @@
       "parentUuid": "15267912_76e99f3b",
       "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8803f1_7cdfae0a",
+        "filename": "build.config.microdroid",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-26T17:43:59Z",
+      "side": 1,
+      "message": "Thanks Jiyong. As long as we aren\u0027t writing to the source tree I am happy 😊",
+      "parentUuid": "a52b7079_4396e3c4",
+      "revId": "ceda813fe720480aa6c36ff40fbea803b0eee2e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
