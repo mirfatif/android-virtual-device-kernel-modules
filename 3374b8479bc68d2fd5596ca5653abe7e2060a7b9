@@ -16,6 +16,24 @@
       "message": "Looks promising; though, can you move this to the end of the file to not interrupt 16k definition?",
       "revId": "3374b8479bc68d2fd5596ca5653abe7e2060a7b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8896c82_d7b1dc91",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-27T21:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7801948a_0da50e7a",
+      "revId": "3374b8479bc68d2fd5596ca5653abe7e2060a7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
