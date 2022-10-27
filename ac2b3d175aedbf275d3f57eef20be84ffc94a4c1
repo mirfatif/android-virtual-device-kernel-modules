@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6062b507_f348b9cb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-27T22:08:08Z",
+      "side": 1,
+      "message": "nit: please follow up with x86 too",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 30
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bc0ccc_703d93b1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-27T22:08:08Z",
+      "side": 1,
+      "message": "nit: you can drop this",
+      "range": {
+        "startLine": 335,
+        "startChar": 4,
+        "endLine": 335,
+        "endChar": 21
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bd0939_fc660bf2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-27T22:08:08Z",
+      "side": 1,
+      "message": "You can drop this; this is the default, right?\n\nAsking because build.config.microdroid.aarch64 doesn\u0027t specify an explicit value",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 336,
+        "endChar": 26
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeca7ec9_ef3201f3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-10-27T22:08:08Z",
+      "side": 1,
+      "message": "I think we need to add //common:kernel_aarch64 and //common:kernel_aarch64_images here as well",
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
