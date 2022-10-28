@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91e4208_9b133e42",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-28T09:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6062b507_f348b9cb",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 30
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8bc0ccc_703d93b1",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-27T22:08:08Z",
       "side": 1,
       "message": "nit: you can drop this",
+      "range": {
+        "startLine": 335,
+        "startChar": 4,
+        "endLine": 335,
+        "endChar": 21
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9dae38_ee8ac450",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-28T09:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8bc0ccc_703d93b1",
       "range": {
         "startLine": 335,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc987e3f_121d6b67",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-28T09:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18bd0939_fc660bf2",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 336,
+        "endChar": 26
+      },
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeca7ec9_ef3201f3",
@@ -83,6 +155,24 @@
       "writtenOn": "2022-10-27T22:08:08Z",
       "side": 1,
       "message": "I think we need to add //common:kernel_aarch64 and //common:kernel_aarch64_images here as well",
+      "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292df8e0_5c84c618",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-10-28T09:57:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeca7ec9_ef3201f3",
       "revId": "ac2b3d175aedbf275d3f57eef20be84ffc94a4c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
