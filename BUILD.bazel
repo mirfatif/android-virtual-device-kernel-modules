@@ -44,6 +44,8 @@ filegroup(
             "BUILD.bazel",
             "**/*.bzl",
             ".git/**",
+            "**/*.c",
+            "**/*.h",
         ],
     ),
 )
@@ -165,11 +167,15 @@ ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_sync",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
+        "goldfish_drivers/goldfish_pipe.h",
         "goldfish_drivers/goldfish_sync.c",
     ],
     out = "goldfish_drivers/goldfish_sync.ko",
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [
+        #        "x86_64/goldfish_drivers/goldfish_pipe",
+        ":common_headers_x86_64",
+    ],
 )
 
 ddk_module(
