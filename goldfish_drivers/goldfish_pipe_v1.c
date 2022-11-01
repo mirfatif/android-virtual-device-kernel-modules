@@ -622,3 +622,5 @@ static int goldfish_pipe_device_deinit(void *raw_dev,
 	misc_deregister(&dev->miscdev);
 	return 0;
 }
+
+EXPORT_SYMBOL(goldfish_pipe_device_v1_init);
