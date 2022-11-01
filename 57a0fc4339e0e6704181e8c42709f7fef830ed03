@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd368d2a_c76d4d31",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-01T20:12:17Z",
+      "side": 1,
+      "message": "If we don\u0027t care about test_mapping for the crashdump / microdroid targets then you can skip L410~420 \u0026 rename it to crashdump_aarch64_dist.\n\nJiyong? Do we care about test_mapping.zip there?",
+      "range": {
+        "startLine": 400,
+        "startChar": 12,
+        "endLine": 400,
+        "endChar": 46
+      },
+      "revId": "57a0fc4339e0e6704181e8c42709f7fef830ed03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
