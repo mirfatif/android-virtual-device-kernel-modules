@@ -39,6 +39,8 @@
 
 #include <goldfish/goldfish_sync.h>
 
+#include "goldfish_pipe.h"
+
 struct sync_pt {
 	struct dma_fence base;	/* must be the first field in this struct */
 	struct list_head active_list;	/* see active_list_head below */
@@ -361,6 +363,8 @@ goldfish_sync_fence_create(struct goldfish_sync_timeline *tl, u32 val,
 	struct sync_pt *pt;
 	struct sync_file *sync_file_obj = NULL;
 	int fd;
+
+    goldfish_pipe_device_v1_init(NULL, NULL, 0);
 
 	pt = goldfish_sync_pt_create(tl, val);
 	if (!pt)
