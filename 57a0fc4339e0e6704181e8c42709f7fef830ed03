@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "76dc85f9_4b2277da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-02T10:50:10Z",
+      "side": 1,
+      "message": "tl;dr use `--config\u003dfast` and `--lto\u003dthin` after `tools/bazel build`\n\nSee more at https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/#configurations",
+      "parentUuid": "ec52549c_6b405c3b",
+      "revId": "57a0fc4339e0e6704181e8c42709f7fef830ed03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "fd368d2a_c76d4d31",
         "filename": "BUILD.bazel",
         "patchSetId": 1
