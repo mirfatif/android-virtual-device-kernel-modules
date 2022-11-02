@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec52549c_6b405c3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-02T03:40:27Z",
+      "side": 1,
+      "message": "How can we specify things like LTO\u003dthin or FAST_BUILD\u003d1 ?",
+      "revId": "57a0fc4339e0e6704181e8c42709f7fef830ed03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fd368d2a_c76d4d31",
