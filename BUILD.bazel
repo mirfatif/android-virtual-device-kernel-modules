@@ -335,7 +335,7 @@ kernel_build(
 )
 
 copy_to_dist_dir(
-    name = "microdroid_aarch64_copy_to_dist_dir",
+    name = "microdroid_aarch64_dist",
     data = [
         ":microdroid_aarch64",
         "//common:kernel_aarch64",
@@ -343,18 +343,6 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
-)
-
-exec(
-    name = "microdroid_aarch64_dist",
-    data = [
-        ":microdroid_aarch64_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
-        $(rootpath :microdroid_aarch64_copy_to_dist_dir) $@
-    """,
 )
 
 kernel_build(
@@ -366,7 +354,7 @@ kernel_build(
 )
 
 copy_to_dist_dir(
-    name = "microdroid_x86_64_copy_to_dist_dir",
+    name = "microdroid_x86_64_dist",
     data = [
         ":microdroid_x86_64",
         "//common:kernel_x86_64",
@@ -374,18 +362,6 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
-)
-
-exec(
-    name = "microdroid_x86_64_dist",
-    data = [
-        ":microdroid_x86_64_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
-        $(rootpath :microdroid_x86_64_copy_to_dist_dir) $@
-    """,
 )
 
 kernel_build(
@@ -397,7 +373,7 @@ kernel_build(
 )
 
 copy_to_dist_dir(
-    name = "crashdump_aarch64_copy_to_dist_dir",
+    name = "crashdump_aarch64_dist",
     data = [
         ":crashdump_aarch64",
         "//common:kernel_aarch64",
@@ -405,18 +381,6 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
-)
-
-exec(
-    name = "crashdump_aarch64_dist",
-    data = [
-        ":crashdump_aarch64_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
-        $(rootpath :crashdump_aarch64_copy_to_dist_dir) $@
-    """,
 )
 
 kernel_build(
@@ -428,7 +392,7 @@ kernel_build(
 )
 
 copy_to_dist_dir(
-    name = "crashdump_x86_64_copy_to_dist_dir",
+    name = "crashdump_x86_64_dist",
     data = [
         ":crashdump_x86_64",
         "//common:kernel_x86_64",
@@ -436,16 +400,4 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
-)
-
-exec(
-    name = "crashdump_x86_64_dist",
-    data = [
-        ":crashdump_x86_64_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
-        $(rootpath :crashdump_x86_64_copy_to_dist_dir) $@
-    """,
 )
