@@ -5,7 +5,7 @@ fi
 
 DEFCONFIG=microdroid_defconfig
 
-SRC_CONFIG=${ROOT_DIR}/common-modules/virtual-device/microdroid_${ARCH}.defconfig
+SRC_CONFIG=${ROOT_DIR}/common-modules/virtual-device/configs/microdroid_${ARCH}.defconfig
 COPIED_CONFIG=\${OUT_DIR}/arch/${SRCARCH}/configs/${DEFCONFIG}
 UPDATED_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/${SRCARCH}/configs/${DEFCONFIG}
 
