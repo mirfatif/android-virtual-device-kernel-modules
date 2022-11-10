@@ -286,6 +286,12 @@ kernel_module(
     kernel_build = ":virtual_device_aarch64_16k",
 )
 
+kernel_module(
+    name = "virtual-device",
+    outs = None,  # FIXME: set to the list of external modules in this package. You may run `tools/bazel build //common-modules/virtual-device:virtual-device` and follow the instructions in the error message.
+    kernel_build = "//common-modules/virtual-device:virtual_device.i686",
+)
+
 kernel_modules_install(
     name = "virtual_device_aarch64_16k_modules_install",
     kernel_build = ":virtual_device_aarch64_16k",
@@ -294,11 +300,25 @@ kernel_modules_install(
     ],
 )
 
+kernel_modules_install(
+    name = "virtual_device.i686_modules_install",
+    kernel_build = "//common-modules/virtual-device:virtual_device.i686",
+    kernel_modules = [":virtual-device"],
+)
+
 kernel_images(
     name = "virtual_device_aarch64_16k_images",
     build_initramfs = True,
     kernel_build = ":virtual_device_aarch64_16k",
     kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
+)
+
+kernel_images(
+    name = "virtual_device.i686_images",
+    build_initramfs = True,
+    kernel_build = "//common-modules/virtual-device:virtual_device.i686",
+    kernel_modules_install = "//common-modules/virtual-device:virtual_device.i686_modules_install",
+    modules_blocklist = "modules.blocklist",
 )
 
 copy_to_dist_dir(
@@ -395,6 +415,30 @@ copy_to_dist_dir(
     name = "crashdump_x86_64_dist",
     data = [
         ":crashdump_x86_64",
+        "//common:kernel_x86_64",
+        "//common:kernel_x86_64_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+# FIXME: Unknown in build config: BUILD_GOLDFISH_DRIVERS=m
+# FIXME: Unknown in build config: CLANG_TRIPLE=i686-linux-gnu-
+# FIXME: PRE_DEFCONFIG_CMDS: Don't forget to modify PRE_DEFCONFIG_CMDS so it writes to $OUT_DIR, not the source tree: https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/errors.md#defconfig-readonly
+kernel_build(
+    name = "virtual_device_i686",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.virtual_device.i686",
+    module_outs = None,  # FIXME: set to the list of in-tree modules. You may run `tools/bazel build //common-modules/virtual-device:virtual_device.i686` and follow the instructions in the error message.
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_i686_dist",
+    data = [
+        ":virtual_device_i686",
+        ":virtual_device_i686_images",
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_images",
     ],
