@@ -401,3 +401,49 @@ copy_to_dist_dir(
     dist_dir = _dist_dir,
     flat = True,
 )
+
+# FIXME: Unknown in build config: CLANG_TRIPLE=i686-linux-gnu-
+# FIXME: PRE_DEFCONFIG_CMDS: Don't forget to modify PRE_DEFCONFIG_CMDS so it writes to $OUT_DIR, not the source tree: https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/errors.md#defconfig-readonly
+kernel_build(
+    name = "virtual_device_i686",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.virtual_device.i686",
+    module_outs = _virt_common_modules,  # FIXME: set to the list of in-tree modules. You may run `tools/bazel build //common-modules/virtual-device:virtual_device.i686` and follow the instructions in the error message.
+)
+
+kernel_module(
+    name = "virtual_device_i686_external_modules",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = _virt_common_ext_modules,
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+)
+
+kernel_modules_install(
+    name = "virtual_device_i686_modules_install",
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    kernel_modules = [":virtual_device_i686_external_modules"],
+)
+
+kernel_images(
+    name = "virtual_device_i686_images",
+    build_initramfs = True,
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    kernel_modules_install = "//common-modules/virtual-device:virtual_device_i686_modules_install",
+    modules_blocklist = "modules.blocklist",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_i686_dist",
+    data = [
+        ":virtual_device_i686",
+        ":virtual_device_i686_images",
+        "//common:kernel_x86_64",
+        "//common:kernel_x86_64_images",
+        "//common:kernel_x86_64_additional_artifacts",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
