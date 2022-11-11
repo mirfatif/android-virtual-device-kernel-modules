@@ -56,31 +56,6 @@ filegroup(
 )
 
 filegroup(
-    name = "virtual_device_x86_64_common_sources",
-    srcs = [
-        ":common_sources",
-        "//common:kernel_x86_64_sources",
-    ],
-)
-
-filegroup(
-    name = "virtual_device_aarch64_common_sources",
-    srcs = [
-        ":common_sources",
-        "//common:kernel_aarch64_sources",
-    ],
-)
-
-filegroup(
-    name = "virtual_device_arm_common_sources",
-    srcs = [
-        ":common_sources",
-        # We don't have an arm-specific source list, so use the common one.
-        "//common:common_kernel_sources",
-    ],
-)
-
-filegroup(
     name = "goldfish_address_space_sources",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
@@ -105,6 +80,39 @@ filegroup(
     srcs = [
         "goldfish_drivers/defconfig_test.h",
         "goldfish_drivers/goldfish_sync.c",
+    ],
+)
+
+filegroup(
+    name = "virtual_device_aarch64_common_sources",
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
+    ],
+)
+
+filegroup(
+    name = "virtual_device_arm_common_sources",
+    srcs = [
+        ":common_sources",
+        # We don't have an arm-specific source list, so use the common one.
+        "//common:common_kernel_sources",
+    ],
+)
+
+filegroup(
+    name = "virtual_device_riscv64_common_sources",
+    srcs = [
+        ":common_sources",
+        "//common:kernel_riscv64_sources",
+    ],
+)
+
+filegroup(
+    name = "virtual_device_x86_64_common_sources",
+    srcs = [
+        ":common_sources",
+        "//common:kernel_x86_64_sources",
     ],
 )
 
@@ -136,6 +144,16 @@ ddk_headers(
 )
 
 ddk_headers(
+    name = "common_headers_riscv64",
+    hdrs = [
+        # uapi/ has highest priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_riscv64",
+    ],
+)
+
+ddk_headers(
     name = "common_headers_x86_64",
     hdrs = [
         # uapi/ has highest priority
@@ -150,7 +168,6 @@ _VIRT_COMMON_MODULES = [
     "btintel.ko",
     "btrtl.ko",
     "btusb.ko",
-    "dummy-cpufreq.ko",
     "dummy_hcd.ko",
     "failover.ko",
     "goldfish_battery.ko",
@@ -198,12 +215,19 @@ _VIRT_AARCH64_MODULES = [
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
+    "dummy-cpufreq.ko",
     "nd_virtio.ko",
     "pl111_drm.ko",
     "psmouse.ko",
     "vexpress-config.ko",
     "vexpress-sysreg.ko",
     "virtio_mmio.ko",
+    "virtio_pmem.ko",
+]
+
+_VIRT_RISCV64_MODULES = [
+    # keep sorted
+    "nd_virtio.ko",
     "virtio_pmem.ko",
 ]
 
@@ -220,6 +244,7 @@ kernel_build(
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
+        "dummy-cpufreq.ko",
         "nd_virtio.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
@@ -489,6 +514,77 @@ exec(
 )
 
 kernel_build(
+    name = "virtual_device_riscv64",
+    srcs = [":virtual_device_riscv64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_riscv64",
+    build_config = "build.config.virtual_device.riscv64",
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+kernel_module_group(
+    name = "virtual_device_riscv64_external_modules",
+    srcs = [
+        ":riscv64/goldfish_drivers/goldfish_address_space",
+        ":riscv64/goldfish_drivers/goldfish_pipe",
+        ":riscv64/goldfish_drivers/goldfish_sync",
+    ],
+)
+
+kernel_modules_install(
+    name = "virtual_device_riscv64_modules_install",
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules = [
+        ":virtual_device_riscv64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_riscv64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules_install = ":virtual_device_riscv64_modules_install",
+    modules_blocklist = "modules.blocklist",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_riscv64_dist",
+    data = [
+        ":virtual_device_riscv64",
+        ":virtual_device_riscv64_images",
+        ":virtual_device_riscv64_modules_install",
+        "//common:kernel_riscv64",
+        "//common:kernel_riscv64_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+kernel_build(
     name = "virtual_device_arm",
     srcs = [":virtual_device_arm_common_sources"],
     outs = [
@@ -500,6 +596,7 @@ kernel_build(
     build_config = "build.config.virtual_device.arm",
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
+            "dummy-cpufreq.ko",
             "test_meminit.ko",
         ],
     )),
@@ -578,6 +675,7 @@ kernel_build(
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
             # keep sorted
+            "dummy-cpufreq.ko",
             "nd_virtio.ko",
             "test_meminit.ko",
             "virtio_pmem.ko",
