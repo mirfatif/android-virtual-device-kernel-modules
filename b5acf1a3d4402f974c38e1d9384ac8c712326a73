@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b26fca02_6cf645a6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-11T12:40:53Z",
+      "side": 1,
+      "message": "Nit: Here and L254: Does it work if it\u0027s not above the field or in the first line? http://go/buildifier#do-not-sort",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 21
+      },
+      "revId": "b5acf1a3d4402f974c38e1d9384ac8c712326a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
