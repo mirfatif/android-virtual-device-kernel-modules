@@ -22,6 +22,30 @@
       },
       "revId": "b5acf1a3d4402f974c38e1d9384ac8c712326a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57edd2e3_5ea6f5c4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-11T23:42:46Z",
+      "side": 1,
+      "message": "Yes.\n\nActually, any comment in there will prevent sorting for some reason 😊",
+      "parentUuid": "b26fca02_6cf645a6",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 21
+      },
+      "revId": "b5acf1a3d4402f974c38e1d9384ac8c712326a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
