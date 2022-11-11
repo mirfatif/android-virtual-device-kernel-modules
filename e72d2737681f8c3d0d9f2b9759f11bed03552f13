@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a0b427_949affa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-11T00:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf79fc0_a7abb23e",
+      "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66dea305_fbd433ce",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-22T03:43:22Z",
       "side": 1,
       "message": "Should use --allow_ddk_unsafe_headers option now.",
+      "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ed4527_efdfda24",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-11T00:48:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66dea305_fbd433ce",
       "revId": "e72d2737681f8c3d0d9f2b9759f11bed03552f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
