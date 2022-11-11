@@ -114,6 +114,12 @@ _virt_aarch64_modules = [
     "virtio_pmem.ko",
 ]
 
+_virt_riscv64_modules = [
+    # keep sorted
+    "nd_virtio.ko",
+    "virtio_pmem.ko",
+]
+
 _virt_common_ext_modules = [
     "goldfish_drivers/goldfish_address_space.ko",
     "goldfish_drivers/goldfish_pipe.ko",
@@ -326,6 +332,62 @@ exec(
     script = """
         $(rootpath :virtual_device_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
+    """,
+)
+
+kernel_build(
+    name = "virtual_device_riscv64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_riscv64",
+    build_config = "build.config.virtual_device.riscv64",
+    module_outs = _virt_common_modules + _virt_riscv64_modules,
+)
+
+kernel_module(
+    name = "virtual_device_riscv64_external_modules",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = _virt_common_ext_modules,
+    kernel_build = ":virtual_device_riscv64",
+)
+
+kernel_modules_install(
+    name = "virtual_device_riscv64_modules_install",
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules = [
+        ":virtual_device_riscv64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_riscv64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules_install = ":virtual_device_riscv64_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_riscv64_copy_to_dist_dir",
+    data = [
+        ":virtual_device_riscv64",
+        ":virtual_device_riscv64_images",
+        ":virtual_device_riscv64_modules_install",
+        "//common:kernel_riscv64",
+        "//common:kernel_riscv64_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+exec(
+    name = "virtual_device_riscv64_dist",
+    data = [
+        ":virtual_device_riscv64_copy_to_dist_dir",
+        ":virtual_device_test_mappings_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_riscv64_copy_to_dist_dir) $@
     """,
 )
 
