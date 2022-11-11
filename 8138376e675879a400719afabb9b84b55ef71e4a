@@ -16,6 +16,24 @@
       "message": "This needs \"drivers/gpu/drm/virtio/virtgpu_trace.h\" from the all_headers_unsafe list",
       "revId": "8138376e675879a400719afabb9b84b55ef71e4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d565dd7_3605d86a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-11T00:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa96ea0_34b9c517",
+      "revId": "8138376e675879a400719afabb9b84b55ef71e4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
