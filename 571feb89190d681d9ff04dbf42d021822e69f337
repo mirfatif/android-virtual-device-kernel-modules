@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57dae9c_e2389bb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2022-11-15T09:07:43Z",
+      "side": 1,
+      "message": "nit: intact",
+      "range": {
+        "startLine": 15,
+        "startChar": 48,
+        "endLine": 15,
+        "endChar": 55
+      },
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef37b321_11588af2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2022-11-15T09:07:43Z",
+      "side": 1,
+      "message": "You can remove these.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c854193_71158168",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2022-11-15T09:07:43Z",
+      "side": 1,
+      "message": "If you want to keep this line, it should probably be above your signed-off-by.",
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85580fa9_490ad355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2022-11-15T09:07:43Z",
+      "side": 1,
+      "message": "CL author should be the original author. You can use \"git commit --amend --author\u003d\" to change the author.",
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
