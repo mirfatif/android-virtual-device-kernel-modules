@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aaec0d0_65f3eeb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-15T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57dae9c_e2389bb1",
+      "range": {
+        "startLine": 15,
+        "startChar": 48,
+        "endLine": 15,
+        "endChar": 55
+      },
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef37b321_11588af2",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-15T09:07:43Z",
       "side": 1,
       "message": "You can remove these.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8137c3e_af7039c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-15T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef37b321_11588af2",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -66,6 +114,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3b1c37b5_d979f905",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-15T18:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c854193_71158168",
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "85580fa9_490ad355",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -77,6 +143,24 @@
       "writtenOn": "2022-11-15T09:07:43Z",
       "side": 1,
       "message": "CL author should be the original author. You can use \"git commit --amend --author\u003d\" to change the author.",
+      "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44671d91_5a520212",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-11-15T18:15:57Z",
+      "side": 1,
+      "message": "Thanks for the pointer!",
+      "parentUuid": "85580fa9_490ad355",
       "revId": "571feb89190d681d9ff04dbf42d021822e69f337",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
