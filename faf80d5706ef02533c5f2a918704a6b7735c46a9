@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1616b50e_3f14b250",
+        "filename": "BUILD.bazel",
+        "patchSetId": 15
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-15T18:23:50Z",
+      "side": 0,
+      "message": "I think there are a couple of other targets using this, could you please replace all the previous usage?",
+      "range": {
+        "startLine": 191,
+        "startChar": 12,
+        "endLine": 191,
+        "endChar": 49
+      },
+      "revId": "faf80d5706ef02533c5f2a918704a6b7735c46a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

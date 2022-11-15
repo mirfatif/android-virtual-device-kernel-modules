@@ -70,6 +70,30 @@
       },
       "revId": "b5acf1a3d4402f974c38e1d9384ac8c712326a73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f11e437_9ef6f504",
+        "filename": "BUILD.bazel",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-15T18:23:50Z",
+      "side": 1,
+      "message": "` (note that buildifier doesn\u0027t know how to sort when there are comments between lines):` From http://go/buildifier#keep-sorted",
+      "parentUuid": "5ca77bf1_3b14f0a9",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 21
+      },
+      "revId": "b5acf1a3d4402f974c38e1d9384ac8c712326a73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
