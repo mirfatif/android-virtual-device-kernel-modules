@@ -103,6 +103,7 @@ _virt_common_ext_modules = [
     "goldfish_drivers/goldfish_pipe.ko",
     "goldfish_drivers/goldfish_sync.ko",
     "virtio_gpu/virtio-gpu.ko",
+    "arcvm_drivers/dev-sw-sync/sw_sync.ko",
 ]
 
 kernel_build(
