@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b317bd_b480a081",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-16T11:18:20Z",
+      "side": 1,
+      "message": "See http://aosp/2304173",
+      "range": {
+        "startLine": 404,
+        "startChar": 10,
+        "endLine": 404,
+        "endChar": 41
+      },
+      "revId": "0258bf73dec88a20c022edbb3fda60001eb737eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
