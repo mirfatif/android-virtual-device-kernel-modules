@@ -33,6 +33,23 @@
       "message": "This is effectively the same implementation as in https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel/+/3301104, which I reviewed a year ago. LGTM FWIW.",
       "revId": "a709ab723f7901b06dd82f489200d11a43d0c7e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad77465_51f635c4",
+        "filename": "arcvm_drivers/dev-sw-sync/sw_sync.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-16T17:19:41Z",
+      "side": 1,
+      "message": "Does this line replace\n\n```\nstatic int __init sw_sync_device_init(void)\n{\n        return misc_register(\u0026sw_sync_dev);\n}\n```\n?",
+      "revId": "a709ab723f7901b06dd82f489200d11a43d0c7e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
