@@ -22,6 +22,30 @@
       },
       "revId": "452d6513d44a37f5c62ad1fba3afe8d15a910e98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42055e1e_9d484eaf",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-16T11:11:24Z",
+      "side": 1,
+      "message": "Let\u0027s follow up in CL:2304173",
+      "parentUuid": "308f0798_de2dd4cd",
+      "range": {
+        "startLine": 407,
+        "startChar": 10,
+        "endLine": 407,
+        "endChar": 41
+      },
+      "revId": "452d6513d44a37f5c62ad1fba3afe8d15a910e98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
