@@ -16,6 +16,7 @@ load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
+    "kernel_dtstree",
     "kernel_images",
     "kernel_module",
     "kernel_modules_install",
@@ -321,4 +322,9 @@ exec(
         $(rootpath :virtual_device_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
+)
+
+kernel_dtstree(
+    name = "rockpi4_dts",
+    visibility = ["//common:__pkg__"],
 )
