@@ -19,6 +19,7 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "ddk_submodule",
     "kernel_build",
     "kernel_images",
     "kernel_module",
@@ -186,12 +187,17 @@ ddk_headers(
     ],
 )
 
-ddk_module(
-    name = "x86_64/goldfish_drivers/goldfish_address_space",
+ddk_submodule(
+    name = "submodules/x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
-    kernel_build = ":virtual_device_x86_64",
     deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/goldfish_drivers/goldfish_address_space",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":submodules/x86_64/goldfish_drivers/goldfish_address_space"],
 )
 
 ddk_module(
@@ -515,17 +521,19 @@ kernel_build(
     ],
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
-    module_outs = sets.to_list(sets.make(_virt_common_modules + [
-        "test_meminit.ko",
-    ] + [
-        paths.basename(module)
-        for module in COMMON_GKI_MODULES_LIST
-    ])),
+    # FIXME
+    #    module_outs = sets.to_list(sets.make(_virt_common_modules + [
+    #        "test_meminit.ko",
+    #    ] + [
+    #        paths.basename(module)
+    #        for module in COMMON_GKI_MODULES_LIST
+    #    ])),
 )
 
 kernel_module(
     name = "virtual_device_arm_external_modules",
-    outs = _virt_common_ext_modules,
+    # FIXME
+    outs = [],
     kernel_build = "//common-modules/virtual-device:virtual_device_arm",
 )
 
@@ -574,21 +582,23 @@ kernel_build(
     ],
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
-    module_outs = sets.to_list(sets.make(_virt_common_modules + [
-        # keep sorted
-        "nd_virtio.ko",
-        "test_meminit.ko",
-        "virtio_pmem.ko",
-    ] + [
-        paths.basename(module)
-        for module in COMMON_GKI_MODULES_LIST
-    ])),
+    # FIXME
+    #    module_outs = sets.to_list(sets.make(_virt_common_modules + [
+    #        # keep sorted
+    #        "nd_virtio.ko",
+    #        "test_meminit.ko",
+    #        "virtio_pmem.ko",
+    #    ] + [
+    #        paths.basename(module)
+    #        for module in COMMON_GKI_MODULES_LIST
+    #    ])),
     strip_modules = False,
 )
 
 kernel_module(
     name = "virtual_device_i686_external_modules",
-    outs = _virt_common_ext_modules,
+    # FIXME
+    outs = [],
     kernel_build = "//common-modules/virtual-device:virtual_device_i686",
 )
 
