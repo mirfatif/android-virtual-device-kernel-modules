@@ -26,6 +26,7 @@ load(
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 _dist_dir = "out/{branch}/dist".format(branch = BRANCH)
@@ -457,11 +458,19 @@ copy_to_dist_dir(
     flat = True,
 )
 
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
 kernel_build(
     name = "microdroid_aarch64",
     srcs = [":virtual_device_aarch64_common_sources"],
-    outs = [],
-    base_kernel = "//common:kernel_aarch64",
+    outs = [
+        "Image",
+        "System.map",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
     build_config = "build.config.microdroid.aarch64",
 )
 
@@ -469,18 +478,17 @@ copy_to_dist_dir(
     name = "microdroid_aarch64_dist",
     data = [
         ":microdroid_aarch64",
-        "//common:kernel_aarch64",
-        "//common:kernel_aarch64_images",
     ],
     dist_dir = _dist_dir,
     flat = True,
 )
 
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
 kernel_build(
     name = "microdroid_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
-    outs = [],
-    base_kernel = "//common:kernel_x86_64",
+    outs = X86_64_OUTS,
     build_config = "build.config.microdroid.x86_64",
 )
 
@@ -488,8 +496,6 @@ copy_to_dist_dir(
     name = "microdroid_x86_64_dist",
     data = [
         ":microdroid_x86_64",
-        "//common:kernel_x86_64",
-        "//common:kernel_x86_64_images",
     ],
     dist_dir = _dist_dir,
     flat = True,
