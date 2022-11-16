@@ -396,15 +396,7 @@ copy_to_dist_dir(
 
 kernel_build(
     name = "virtual_device_i686",
-    srcs = glob(
-        ["**"],
-        exclude = [
-            "**/.*",
-            "**/.*/**",
-            "**/BUILD.bazel",
-            "**/*.bzl",
-        ],
-    ) + ["//common:kernel_aarch64_sources"],
+    srcs = [":virtual_device_x86_64_common_sources"],
     outs = [
         "System.map",
         "arch/x86/boot/bzImage",
