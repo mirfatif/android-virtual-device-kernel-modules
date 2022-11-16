@@ -18,6 +18,7 @@ load("@bazel_skylib//lib:sets.bzl", "sets")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
+    "kernel_dtstree",
     "kernel_images",
     "kernel_module",
     "kernel_modules_install",
@@ -444,4 +445,9 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/virtual_device_i686/dist",
     flat = True,
+)
+
+kernel_dtstree(
+    name = "rockpi4_dts",
+    visibility = ["//common:__pkg__"],
 )
