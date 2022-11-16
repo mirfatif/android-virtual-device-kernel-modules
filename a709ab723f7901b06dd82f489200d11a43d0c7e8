@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e51c14e_acf6799a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-11-16T22:27:16Z",
+      "side": 1,
+      "message": "Can you add this module to modules.blocklist?",
+      "revId": "a709ab723f7901b06dd82f489200d11a43d0c7e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ad77465_51f635c4",
         "filename": "arcvm_drivers/dev-sw-sync/sw_sync.c",
         "patchSetId": 4
