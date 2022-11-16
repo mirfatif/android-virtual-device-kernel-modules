@@ -16,6 +16,23 @@
       "message": "Thanks for the comments. PTAL",
       "revId": "a709ab723f7901b06dd82f489200d11a43d0c7e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd205200_5b43cc9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1086703
+      },
+      "writtenOn": "2022-11-16T01:35:55Z",
+      "side": 1,
+      "message": "This is effectively the same implementation as in https://chromium-review.googlesource.com/c/chromiumos/third_party/kernel/+/3301104, which I reviewed a year ago. LGTM FWIW.",
+      "revId": "a709ab723f7901b06dd82f489200d11a43d0c7e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
