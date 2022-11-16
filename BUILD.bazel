@@ -16,6 +16,7 @@ load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
+    "kernel_dtstree",
     "kernel_images",
     "kernel_module",
     "kernel_modules_install",
@@ -400,4 +401,9 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+)
+
+kernel_dtstree(
+    name = "rockpi4_dts",
+    visibility = ["//common:__pkg__"],
 )
