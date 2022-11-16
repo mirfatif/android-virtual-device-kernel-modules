@@ -16,6 +16,7 @@ load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
+    "kernel_dtstree",
     "kernel_images",
     "kernel_module",
     "kernel_modules_install",
@@ -322,3 +323,134 @@ exec(
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
 )
+<<<<<<< Updated upstream
+=======
+
+filegroup(
+    name = "virtual_device_arm_common_sources",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "BUILD.bazel",
+            "**/*.bzl",
+            ".git/**",
+        ],
+    ) + [
+        # We don't have an arm-specific source list, so use the common one.
+        "//common:common_kernel_sources",
+    ],
+)
+
+kernel_build(
+    name = "virtual_device_arm",
+    srcs = [":virtual_device_arm_common_sources"],
+    outs = [
+        "System.map",
+        "vmlinux",
+        "zImage",
+    ],
+    base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
+    build_config = "build.config.virtual_device.arm",
+    module_outs = sets.to_list(sets.make(_virt_common_modules + [
+        "test_meminit.ko",
+    ] + [
+        paths.basename(module)
+        for module in COMMON_GKI_MODULES_LIST
+    ])),
+)
+
+kernel_module(
+    name = "virtual_device_arm_external_modules",
+    outs = _virt_common_ext_modules,
+    kernel_build = "//common-modules/virtual-device:virtual_device_arm",
+)
+
+kernel_modules_install(
+    name = "virtual_device_arm_modules_install",
+    kernel_build = "//common-modules/virtual-device:virtual_device_arm",
+    kernel_modules = [":virtual_device_arm_external_modules"],
+)
+
+kernel_images(
+    name = "virtual_device_arm_images",
+    build_initramfs = True,
+    kernel_build = "//common-modules/virtual-device:virtual_device_arm",
+    kernel_modules_install = "//common-modules/virtual-device:virtual_device_arm_modules_install",
+    modules_blocklist = "modules.blocklist",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_arm_dist",
+    data = [
+        ":virtual_device_arm",
+        ":virtual_device_arm_images",
+    ],
+    dist_dir = "out/virtual_device_arm/dist",
+    flat = True,
+)
+
+kernel_build(
+    name = "virtual_device_i686",
+    srcs = glob(
+        ["**"],
+        exclude = [
+            "**/.*",
+            "**/.*/**",
+            "**/BUILD.bazel",
+            "**/*.bzl",
+        ],
+    ) + ["//common:kernel_aarch64_sources"],
+    outs = [
+        "System.map",
+        "arch/x86/boot/bzImage",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
+    build_config = "build.config.virtual_device.i686",
+    module_outs = sets.to_list(sets.make(_virt_common_modules + [
+        # keep sorted
+        "nd_virtio.ko",
+        "test_meminit.ko",
+        "virtio_pmem.ko",
+    ] + [
+        paths.basename(module)
+        for module in COMMON_GKI_MODULES_LIST
+    ])),
+    strip_modules = False,
+)
+
+kernel_module(
+    name = "virtual_device_i686_external_modules",
+    outs = _virt_common_ext_modules,
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+)
+
+kernel_modules_install(
+    name = "virtual_device_i686_modules_install",
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    kernel_modules = ["virtual_device_i686_external_modules"],
+)
+
+kernel_images(
+    name = "virtual_device_i686_images",
+    build_initramfs = True,
+    kernel_build = "//common-modules/virtual-device:virtual_device_i686",
+    kernel_modules_install = "//common-modules/virtual-device:virtual_device_i686_modules_install",
+    modules_blocklist = "modules.blocklist",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_i686_dist",
+    data = [
+        ":virtual_device_i686",
+        ":virtual_device_i686_images",
+    ],
+    dist_dir = "out/virtual_device_i686/dist",
+    flat = True,
+)
+
+kernel_dtstree(name = "rockpi4_dts")
+>>>>>>> Stashed changes
