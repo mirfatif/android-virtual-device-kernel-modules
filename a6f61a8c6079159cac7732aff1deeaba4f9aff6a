@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04068c09_0403e7f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-18T01:36:46Z",
+      "side": 1,
+      "message": "And please check the presubmit build for the actual binary size",
+      "revId": "a6f61a8c6079159cac7732aff1deeaba4f9aff6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "89a9150f_3d787e65",
         "filename": "BUILD.bazel",
         "patchSetId": 2
