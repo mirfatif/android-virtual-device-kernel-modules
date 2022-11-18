@@ -52,7 +52,7 @@ CONFIG_NR_CPUS=32
 CONFIG_EFI=y
 CONFIG_KEXEC_FILE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="stack_depot_disable=on cgroup_disable=pressure ioremap_guard panic=-1 bootconfig crashkernel=17M acpi=noirq"
+CONFIG_CMDLINE="stack_depot_disable=on cgroup_disable=pressure ioremap_guard panic=-1 bootconfig acpi=noirq"
 CONFIG_PM_WAKELOCKS=y
 CONFIG_PM_WAKELOCKS_LIMIT=0
 # CONFIG_PM_WAKELOCKS_GC is not set
