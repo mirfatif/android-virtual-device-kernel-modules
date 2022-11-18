@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89a9150f_3d787e65",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-18T01:36:25Z",
+      "side": 1,
+      "message": "```\n# Microdroid is not a real device. The kernel image is built with special\n# configs to reduce the size. Hence, not using mixed build.\n```",
+      "range": {
+        "startLine": 465,
+        "startChar": 4,
+        "endLine": 465,
+        "endChar": 55
+      },
+      "revId": "a6f61a8c6079159cac7732aff1deeaba4f9aff6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
