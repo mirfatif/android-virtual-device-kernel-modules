@@ -63,6 +63,30 @@
       },
       "revId": "a6f61a8c6079159cac7732aff1deeaba4f9aff6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60764a53_9f2292af",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2022-11-18T02:27:59Z",
+      "side": 1,
+      "message": "I wish we have an explanation about what mixed build is. :)",
+      "parentUuid": "ad30c84c_2ede1f94",
+      "range": {
+        "startLine": 465,
+        "startChar": 4,
+        "endLine": 465,
+        "endChar": 55
+      },
+      "revId": "a6f61a8c6079159cac7732aff1deeaba4f9aff6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
