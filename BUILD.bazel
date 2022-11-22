@@ -38,16 +38,31 @@ test_mappings_dist(
 )
 
 filegroup(
-    name = "virtual_device_x86_64_common_sources",
+    name = "common_sources",
     srcs = glob(
-        ["**"],
+        [
+            "*",
+            "configs/*",
+        ],
         exclude = [
             "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
         ],
-    ) + [
+    ),
+)
+
+filegroup(
+    name = "virtual_device_x86_64_common_sources",
+    srcs = [
+        ":common_sources",
         "//common:kernel_x86_64_sources",
+    ],
+)
+
+filegroup(
+    name = "virtual_device_aarch64_common_sources",
+    srcs = [
+        ":common_sources",
+        "//common:kernel_aarch64_sources",
     ],
 )
 
@@ -187,20 +202,6 @@ exec(
         $(rootpath :virtual_device_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
     """,
-)
-
-filegroup(
-    name = "virtual_device_aarch64_common_sources",
-    srcs = glob(
-        ["**"],
-        exclude = [
-            "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
-        ],
-    ) + [
-        "//common:kernel_aarch64_sources",
-    ],
 )
 
 kernel_build(
