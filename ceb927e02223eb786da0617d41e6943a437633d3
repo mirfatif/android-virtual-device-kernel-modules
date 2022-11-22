@@ -16,6 +16,24 @@
       "message": "dummy-cpufreq.ko issue is solved by aosp/2308504\n\nI removed virtio_mmio because QEMU should be reconfigured to use PCI",
       "revId": "ceb927e02223eb786da0617d41e6943a437633d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ccd741_940ca6d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1969641
+      },
+      "writtenOn": "2022-11-22T01:15:13Z",
+      "side": 1,
+      "message": "Got.\n\nI used to test with an old emulator which still requires virtio_mmio.\n\nSo, what should I do next for this change? I see the procedure is in \"My Turn\" now. I am a newer to use this Gerrit system, thanks in adv.",
+      "parentUuid": "cd73bdeb_636d2386",
+      "revId": "ceb927e02223eb786da0617d41e6943a437633d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
