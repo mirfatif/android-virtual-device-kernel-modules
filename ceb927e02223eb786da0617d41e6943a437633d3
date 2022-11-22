@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd73bdeb_636d2386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-11-22T00:54:51Z",
+      "side": 1,
+      "message": "dummy-cpufreq.ko issue is solved by aosp/2308504\n\nI removed virtio_mmio because QEMU should be reconfigured to use PCI",
+      "revId": "ceb927e02223eb786da0617d41e6943a437633d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
