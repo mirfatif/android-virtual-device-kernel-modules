@@ -145,7 +145,7 @@ ddk_headers(
     ],
 )
 
-_virt_common_modules = [
+_VIRT_COMMON_MODULES = [
     # keep sorted
     "btintel.ko",
     "btrtl.ko",
@@ -192,7 +192,7 @@ _virt_common_modules = [
     "zsmalloc.ko",
 ]
 
-_virt_aarch64_modules = [
+_VIRT_AARCH64_MODULES = [
     # keep sorted
     "ambakmi.ko",
     "armmmci.ko",
@@ -207,13 +207,18 @@ _virt_aarch64_modules = [
     "virtio_pmem.ko",
 ]
 
+_GKI_MODULES_BASENAMES = [
+    paths.basename(module)
+    for module in COMMON_GKI_MODULES_LIST
+]
+
 kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
-    module_outs = _virt_common_modules + [
+    module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "nd_virtio.ko",
         "test_meminit.ko",
@@ -311,7 +316,7 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
-    module_outs = _virt_common_modules + _virt_aarch64_modules,
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
 )
 
 ddk_module(
@@ -404,7 +409,7 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64_16k",
     build_config = "build.config.virtual_device.aarch64.16k",
-    module_outs = _virt_common_modules + _virt_aarch64_modules,
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
 )
 
 ddk_module(
@@ -490,12 +495,11 @@ kernel_build(
     ],
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
-    module_outs = sets.to_list(sets.make(_virt_common_modules + [
-        "test_meminit.ko",
-    ] + [
-        paths.basename(module)
-        for module in COMMON_GKI_MODULES_LIST
-    ])),
+    module_outs = sets.to_list(sets.make(
+        _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
+            "test_meminit.ko",
+        ],
+    )),
 )
 
 ddk_module(
@@ -568,15 +572,14 @@ kernel_build(
     ],
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
-    module_outs = sets.to_list(sets.make(_virt_common_modules + [
-        # keep sorted
-        "nd_virtio.ko",
-        "test_meminit.ko",
-        "virtio_pmem.ko",
-    ] + [
-        paths.basename(module)
-        for module in COMMON_GKI_MODULES_LIST
-    ])),
+    module_outs = sets.to_list(sets.make(
+        _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
+            # keep sorted
+            "nd_virtio.ko",
+            "test_meminit.ko",
+            "virtio_pmem.ko",
+        ],
+    )),
     strip_modules = False,
 )
 
