@@ -30,6 +30,7 @@ load(
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+load("//build/kernel/kleaf:constants.bzl", "AARCH64_GKI_OUTS", "X86_64_OUTS")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 _dist_dir = "out/{branch}/dist".format(branch = BRANCH)
@@ -203,18 +204,39 @@ _GKI_MODULES_BASENAMES = [
     for module in COMMON_GKI_MODULES_LIST
 ]
 
+_VIRT_X86_64_MODULES = [
+    # keep sorted
+    "nd_virtio.ko",
+    "test_meminit.ko",
+    "virtio_pmem.ko",
+]
+
 kernel_build(
-    name = "virtual_device_x86_64",
+    name = "virtual_device_x86_64_internal",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
-    module_outs = _VIRT_COMMON_MODULES + [
-        # keep sorted
-        "nd_virtio.ko",
-        "test_meminit.ko",
-        "virtio_pmem.ko",
-    ],
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_X86_64_MODULES,
+)
+
+kernel_build(
+    name = "virtual_device_x86_64_kgdb",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = X86_64_OUTS,
+    base_kernel = None,
+    build_config = "build.config.virtual_device_kgdb.x86_64",
+    module_outs = sets.to_list(sets.make(
+        _VIRT_COMMON_MODULES + _VIRT_X86_64_MODULES + _GKI_MODULES_BASENAMES,
+    )),
+)
+
+alias(
+    name = "virtual_device_x86_64",
+    actual = select({
+        "//build/kernel/kleaf:kgdb_set": ":virtual_device_x86_64_kgdb",
+        "//conditions:default": ":virtual_device_x86_64_internal",
+    }),
 )
 
 ddk_module(
@@ -300,7 +322,7 @@ exec(
 )
 
 kernel_build(
-    name = "virtual_device_aarch64",
+    name = "virtual_device_aarch64_internal",
     srcs = [":virtual_device_aarch64_common_sources"],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
@@ -308,6 +330,27 @@ kernel_build(
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+)
+
+kernel_build(
+    name = "virtual_device_aarch64_kgdb",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = AARCH64_GKI_OUTS + [
+        "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
+    ],
+    base_kernel = None,
+    build_config = "build.config.virtual_device_kgdb.aarch64",
+    module_outs = sets.to_list(sets.make(
+        _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES + _GKI_MODULES_BASENAMES,
+    )),
+)
+
+alias(
+    name = "virtual_device_aarch64",
+    actual = select({
+        "//build/kernel/kleaf:kgdb_set": ":virtual_device_aarch64_kgdb",
+        "//conditions:default": ":virtual_device_aarch64_internal",
+    }),
 )
 
 ddk_module(
