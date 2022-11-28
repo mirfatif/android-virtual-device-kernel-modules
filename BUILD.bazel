@@ -71,6 +71,15 @@ filegroup(
 )
 
 filegroup(
+    name = "virtual_device_arm_common_sources",
+    srcs = [
+        ":common_sources",
+        # We don't have an arm-specific source list, so use the common one.
+        "//common:common_kernel_sources",
+    ],
+)
+
+filegroup(
     name = "goldfish_address_space_sources",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
@@ -505,21 +514,6 @@ exec(
         $(rootpath :virtual_device_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
-)
-
-filegroup(
-    name = "virtual_device_arm_common_sources",
-    srcs = glob(
-        ["**"],
-        exclude = [
-            "BUILD.bazel",
-            "**/*.bzl",
-            ".git/**",
-        ],
-    ) + [
-        # We don't have an arm-specific source list, so use the common one.
-        "//common:common_kernel_sources",
-    ],
 )
 
 kernel_build(
