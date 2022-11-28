@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a306da4_6af5bc32",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2022-11-28T16:16:29Z",
+      "side": 1,
+      "message": "For some reason this change is breaking this target, the only difference I see might be the ordering? Please double check.",
+      "range": {
+        "startLine": 505,
+        "startChar": 29,
+        "endLine": 507,
+        "endChar": 10
+      },
+      "revId": "45404c7cedd0c46333269f0328de62f8f4e4f1ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
