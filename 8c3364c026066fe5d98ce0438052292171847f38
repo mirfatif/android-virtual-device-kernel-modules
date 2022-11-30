@@ -16,6 +16,24 @@
       "message": "The presubmit error seems legit, please verify this change is not breaking other targets.",
       "revId": "8c3364c026066fe5d98ce0438052292171847f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0daf7c22_8ea3add3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-11-30T01:57:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bbe9c17_979a1ffc",
+      "revId": "8c3364c026066fe5d98ce0438052292171847f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
