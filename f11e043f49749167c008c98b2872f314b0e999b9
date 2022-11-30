@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8d0eb5_c93c1df5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-11-30T16:32:26Z",
+      "side": 1,
+      "message": "Thinking about this a little longer, it feels like this is actually a fragment config applied on top of a base build.\n\nCan we 1) use the base build config 2) apply the configuration to kconfig 3) run just the target to build the scripts distribution 4) grab that and provide it as a separate artifact? Perhaps this is //common:kernel_aarch64_gdb_scripts, maybe?",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
