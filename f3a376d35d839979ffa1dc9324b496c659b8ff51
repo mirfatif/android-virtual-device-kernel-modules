@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c961e611_a9abdd28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-12-01T23:53:12Z",
+      "side": 1,
+      "message": "Need to wait until CF\u0027s vendor module\u0027s can cross reference dependencies on the system_dlkm modules.",
+      "revId": "f3a376d35d839979ffa1dc9324b496c659b8ff51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
