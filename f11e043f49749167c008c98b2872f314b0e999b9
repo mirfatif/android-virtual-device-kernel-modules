@@ -22,6 +22,30 @@
       },
       "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "decbedb6_671ca93f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-01T06:57:17Z",
+      "side": 1,
+      "message": "The fragment config is an implementation detail to CF\u0027s kgdb build. By that I mean, perhaps for a different device, to enable --kgdb, adding a fragment config might not be enough.\n\nMaybe you are suggesting that, instead of using PRE_DEFCONFIG_CMDS / POST_DEFCONFIG_CMDS in build configs, we should express fragment configs in `BUILD` files directly? I think that\u0027s a problem orthogonal to the implementation of --kgdb (tracked in b/236012223).",
+      "parentUuid": "2e8d0eb5_c93c1df5",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
