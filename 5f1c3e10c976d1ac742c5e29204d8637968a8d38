@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d20b9b5_db550edc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-01T13:51:30Z",
+      "side": 1,
+      "message": "Let\u0027s await the outcome in aosp/2315867",
+      "revId": "5f1c3e10c976d1ac742c5e29204d8637968a8d38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
