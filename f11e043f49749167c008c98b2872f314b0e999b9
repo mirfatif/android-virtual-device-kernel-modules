@@ -46,6 +46,30 @@
       },
       "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11353cdb_f66bb6ae",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-12-01T13:50:49Z",
+      "side": 1,
+      "message": "I think what I am actually challenging is whether there is a difference between the gdb scripts produced by virtual_device_x86_64_kgdb vs kernel_x86_64_kgdb.\n\nAnd further, even though the configuration changes, why is this having to define a different kernel build? Why can we not use the approach of --lto\u003d... to adjust the config and let the presence of the flag determine whether additional artifacts are part of the kernel_build outs? I seem to miss something, but I would expect that we do not need to add anything in the kernel trees to enable --kgdb. Similarly, we do not need additional definitions for --lto\u003dthin ..",
+      "parentUuid": "decbedb6_671ca93f",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
