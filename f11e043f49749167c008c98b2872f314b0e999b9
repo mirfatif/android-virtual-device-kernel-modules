@@ -70,6 +70,30 @@
       },
       "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d21629_0c8224d6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-01T20:19:16Z",
+      "side": 1,
+      "message": "The reason is that (and I might be wrong here) the \"magic\" to enable kgdb is device specific. For virtual device, it is specified in build.config.virtual_device_kgdb.x86_64. But it can be different on other devices. Hence, I can\u0027t encode those magic in `build/kernel`, but only in `common-modules/virtual-device`.\n\nIs my understanding correct that this \"magic\" is device-specific? This is described in https://android-review.git.corp.google.com/c/kernel/build/+/2315767/5/kleaf/docs/kgdb.md",
+      "parentUuid": "11353cdb_f66bb6ae",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
