@@ -19,9 +19,9 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "kernel_abi",
     "kernel_build",
     "kernel_images",
-    "kernel_module",
     "kernel_module_group",
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
@@ -335,7 +335,22 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
+    kmi_symbol_list = "//common:android/abi_gki_aarch64_virtual_device",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+    collect_unstripped_modules = True,
+)
+
+kernel_abi(
+    name = "virtual_device_aarch64_abi",
+    define_abi_targets = True,
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [
+        ":aarch64/goldfish_drivers/goldfish_address_space",
+        ":aarch64/goldfish_drivers/goldfish_pipe",
+        ":aarch64/goldfish_drivers/goldfish_sync",
+        ":aarch64/virtio_gpu/virtio-gpu",
+    ],
+    kmi_symbol_list_add_only = True,
 )
 
 ddk_module(
