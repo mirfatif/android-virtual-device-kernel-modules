@@ -22,6 +22,29 @@
       },
       "revId": "14c6e8cd7ff15b7e49413cf5d2cb6578fb3976ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a929415f_55b107f9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-02T23:47:46Z",
+      "side": 1,
+      "message": "\"virtual_device_aarch64_external_modules\"",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 41
+      },
+      "revId": "14c6e8cd7ff15b7e49413cf5d2cb6578fb3976ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
