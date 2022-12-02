@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e5ae0b_ff3b8b42",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-02T23:43:50Z",
+      "side": 1,
+      "message": "unnecessary",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 30
+      },
+      "revId": "14c6e8cd7ff15b7e49413cf5d2cb6578fb3976ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
