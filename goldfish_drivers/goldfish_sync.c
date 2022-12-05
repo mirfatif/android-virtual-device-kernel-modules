@@ -325,7 +325,7 @@ goldfish_sync_timeline_fence_enable_signaling(struct dma_fence *fence)
 static void goldfish_sync_timeline_fence_value_str(struct dma_fence *fence,
 						   char *str, int size)
 {
-	snprintf(str, size, "%d", fence->seqno);
+	snprintf(str, size, "%llu", fence->seqno);
 }
 
 static void goldfish_sync_timeline_fence_timeline_value_str(
