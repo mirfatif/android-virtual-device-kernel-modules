@@ -1,1 +1,2 @@
 blocklist vkms.ko
+blocklist sw_sync.ko
