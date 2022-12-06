@@ -118,6 +118,30 @@
       },
       "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd769fed_35fa0991",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-12-06T19:24:27Z",
+      "side": 1,
+      "message": "So, with all that said, CF specifically does not do anything \"special\" for the kgdb targets, and anybody else who wanted to use kgdb or kdb would need the same changes.",
+      "parentUuid": "60cc4259_5d542845",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 1
+      },
+      "revId": "f11e043f49749167c008c98b2872f314b0e999b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
