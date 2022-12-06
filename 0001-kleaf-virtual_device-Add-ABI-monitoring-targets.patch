@@ -1,0 +1,83 @@
+From eb0b9e572592bd03f75dc136497715af9892e25e Mon Sep 17 00:00:00 2001
+From: Ulises Mendez Martinez <umendez@google.com>
+Date: Tue, 6 Dec 2022 02:26:44 +0000
+Subject: [PATCH] kleaf: virtual_device: Add ABI monitoring targets
+
+* This is needed to generate the artifacts needed
+for ABI monitoring to work.
+
+Bug: 260913198
+Change-Id: Iec8477cd00c023d9fccce8f992182bd63f879e81
+Signed-off-by: Ulises Mendez Martinez <umendez@google.com>
+---
+ BUILD.bazel | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/BUILD.bazel b/BUILD.bazel
+index 8503b45..f40bf41 100644
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -19,12 +19,15 @@ load(
+     "//build/kernel/kleaf:kernel.bzl",
+     "ddk_headers",
+     "ddk_module",
++    "kernel_abi",
++    "kernel_abi_dist",
+     "kernel_build",
+     "kernel_dtstree",
+     "kernel_images",
+     "kernel_module",
+     "kernel_module_group",
+     "kernel_modules_install",
++    "kernel_unstripped_modules_archive",
+     "merged_kernel_uapi_headers",
+ )
+ load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+@@ -387,6 +390,14 @@ kernel_modules_install(
+     ],
+ )
+ 
++kernel_unstripped_modules_archive(
++    name = "virtual_device_aarch64_unstripped_modules_archive",
++    kernel_build = ":virtual_device_aarch64",
++    kernel_modules = [
++        ":virtual_device_aarch64_external_modules",
++    ],
++)
++
+ merged_kernel_uapi_headers(
+     name = "virtual_device_aarch64_merged_kernel_uapi_headers",
+     kernel_build = ":virtual_device_aarch64",
+@@ -410,11 +421,29 @@ copy_to_dist_dir(
+         ":virtual_device_aarch64_images",
+         ":virtual_device_aarch64_merged_kernel_uapi_headers",
+         ":virtual_device_aarch64_modules_install",
++        ":virtual_device_aarch64_unstripped_modules_archive",
++        "//common:kernel_aarch64",
++        "//common:kernel_aarch64_additional_artifacts",
++    ],
++    dist_dir = _dist_dir,
++    flat = True,
++)
++
++kernel_abi_dist(
++    name = "virtual_device_aarch64_abi_dist",
++    data = [
++        ":virtual_device_aarch64",
++        ":virtual_device_aarch64_images",
++        ":virtual_device_aarch64_merged_kernel_uapi_headers",
++        ":virtual_device_aarch64_modules_install",
++        ":virtual_device_aarch64_unstripped_modules_archive",
+         "//common:kernel_aarch64",
+         "//common:kernel_aarch64_additional_artifacts",
+     ],
+     dist_dir = _dist_dir,
+     flat = True,
++    kernel_abi = "virtual_device_aarch64_abi",
++    log = "info",
+ )
+ 
+ exec(
+-- 
+2.39.0.246.g2a6d74b583-goog
+
