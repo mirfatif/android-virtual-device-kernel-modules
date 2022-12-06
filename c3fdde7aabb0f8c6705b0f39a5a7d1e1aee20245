@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19bff43f_41480980",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2022-12-06T21:23:40Z",
+      "side": 1,
+      "message": "alphasort",
+      "revId": "c3fdde7aabb0f8c6705b0f39a5a7d1e1aee20245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
