@@ -16,6 +16,24 @@
       "message": "alphasort",
       "revId": "c3fdde7aabb0f8c6705b0f39a5a7d1e1aee20245",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e6a581_4ac0f414",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1952665
+      },
+      "writtenOn": "2022-12-06T22:10:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "19bff43f_41480980",
+      "revId": "c3fdde7aabb0f8c6705b0f39a5a7d1e1aee20245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
