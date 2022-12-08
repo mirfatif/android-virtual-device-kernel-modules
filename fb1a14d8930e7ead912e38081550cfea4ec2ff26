@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e691669_02e79ca7",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-08T22:54:45Z",
+      "side": 1,
+      "message": "If you don\u0027t care about test_mapping.zip for riscv, you can directly name this \"virtual_device_riscv64_dist\" and delete L587~597",
+      "range": {
+        "startLine": 573,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 53
+      },
+      "revId": "fb1a14d8930e7ead912e38081550cfea4ec2ff26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
