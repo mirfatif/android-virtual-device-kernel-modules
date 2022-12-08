@@ -639,6 +639,7 @@ copy_to_dist_dir(
     data = [
         ":virtual_device_arm",
         ":virtual_device_arm_images",
+        ":virtual_device_arm_modules_install",
     ],
     dist_dir = "out/virtual_device_arm/dist",
     flat = True,
@@ -729,6 +730,7 @@ copy_to_dist_dir(
     data = [
         ":virtual_device_i686",
         ":virtual_device_i686_images",
+        ":virtual_device_i686_modules_install",
     ],
     dist_dir = "out/virtual_device_i686/dist",
     flat = True,
