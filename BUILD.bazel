@@ -184,6 +184,7 @@ _VIRT_COMMON_MODULES = [
     "vcan.ko",
     "vhci-hcd.ko",
     "virt_wifi.ko",
+    "virtio-gpu.ko",
     "virtio-rng.ko",
     "virtio_balloon.ko",
     "virtio_blk.ko",
