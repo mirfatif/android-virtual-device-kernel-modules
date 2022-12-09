@@ -16,6 +16,23 @@
       "message": "(as long as treehugger is happy)",
       "revId": "ca6e2341cd3b12e121ae01b6618e3a4402926646",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8848676_2887661f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-12-09T22:52:43Z",
+      "side": 1,
+      "message": "It is actually already built here:",
+      "revId": "ca6e2341cd3b12e121ae01b6618e3a4402926646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
