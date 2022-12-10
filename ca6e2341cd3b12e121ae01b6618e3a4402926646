@@ -51,6 +51,24 @@
       "parentUuid": "b8848676_2887661f",
       "revId": "ca6e2341cd3b12e121ae01b6618e3a4402926646",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27f1a22_da3c50b9",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-12-10T20:07:03Z",
+      "side": 1,
+      "message": "Verified with local build as well that adding the modules to dist is adding back the `virtio-gpu.ko` in the dist.\n\n\n```\ntools/bazel run --lto\u003dthin //common-modules/virtual-device:virtual_device_i686_dist\n...\n[dist] DEBUG: Copying file: /usr/local/google/home/ramjiyani/repos/android14-5.15/out/virtual_device_i686/dist/virtio-gpu.ko\nramjiyani@ramjiyani:~/repos/android14-5.15$ history | tail -4\n33170  [2022-12-10 04:42:08 +0000] tools/bazel run --lto\u003dthin //common-modules/virtual-device:virtual_device_i686_dist\nramjiyani@ramjiyani:~/repos/android14-5.15$\n```",
+      "parentUuid": "1d145b79_a09c72e0",
+      "revId": "ca6e2341cd3b12e121ae01b6618e3a4402926646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
