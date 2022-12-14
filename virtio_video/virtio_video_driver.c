@@ -238,6 +238,7 @@ static void virtio_video_remove(struct virtio_device *vdev)
 	virtio_video_device_deinit(vv);
 	virtio_video_free_vbufs(vv);
 	vdev->config->del_vqs(vdev);
+	vdev->config->reset(vdev);
 	v4l2_device_unregister(&vv->v4l2_dev);
 	devm_kfree(&vdev->dev, vv);
 }
