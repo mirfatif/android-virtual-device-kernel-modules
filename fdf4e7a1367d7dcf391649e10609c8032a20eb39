@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f9bae8_abbf0532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2022-12-19T14:01:35Z",
+      "side": 1,
+      "message": "Hi all,\n\nI have just pushed initial work related to ARCVM video. It\u0027s not yet tested on DUT, just prepared to be ready for integration with android13-5.15-arkvm.\n\nThanks,\nSławek",
+      "revId": "fdf4e7a1367d7dcf391649e10609c8032a20eb39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
