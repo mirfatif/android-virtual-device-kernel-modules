@@ -125,5 +125,5 @@ DEFINE_EVENT(virtio_video_cmd_class, virtio_video_cmd_done,
 /* This part must be outside protection */
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_FILE trace
-#define TRACE_INCLUDE_PATH ../../drivers/media/virtio/
+#define TRACE_INCLUDE_PATH ABS_SRCTREE/../common-modules/virtual-device/virtio_video
 #include <trace/define_trace.h>
