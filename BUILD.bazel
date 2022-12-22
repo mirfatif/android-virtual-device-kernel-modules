@@ -745,3 +745,84 @@ kernel_dtstree(
     name = "rockpi4_dts",
     visibility = ["//common:__pkg__"],
 )
+
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
+kernel_build(
+    name = "microdroid_aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [
+        "Image",
+        "System.map",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    build_config = "build.config.microdroid.aarch64",
+)
+
+copy_to_dist_dir(
+    name = "microdroid_aarch64_dist",
+    data = [
+        ":microdroid_aarch64",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+# Microdroid is not a real device. The kernel image is built with special
+#  configs to reduce the size. Hence, not using mixed build.
+kernel_build(
+    name = "microdroid_x86_64",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = X86_64_OUTS,
+    build_config = "build.config.microdroid.x86_64",
+)
+
+copy_to_dist_dir(
+    name = "microdroid_x86_64_dist",
+    data = [
+        ":microdroid_x86_64",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+kernel_build(
+    name = "crashdump_aarch64",
+    srcs = [":virtual_device_aarch64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_aarch64",
+    build_config = "build.config.crashdump.aarch64",
+)
+
+copy_to_dist_dir(
+    name = "crashdump_aarch64_dist",
+    data = [
+        ":crashdump_aarch64",
+        "//common:kernel_aarch64",
+        "//common:kernel_aarch64_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
+
+kernel_build(
+    name = "crashdump_x86_64",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = [],
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.crashdump.x86_64",
+)
+
+copy_to_dist_dir(
+    name = "crashdump_x86_64_dist",
+    data = [
+        ":crashdump_x86_64",
+        "//common:kernel_x86_64",
+        "//common:kernel_x86_64_images",
+    ],
+    dist_dir = _dist_dir,
+    flat = True,
+)
