@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6129ab_eb7340eb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1950816
+      },
+      "writtenOn": "2022-12-29T02:14:43Z",
+      "side": 1,
+      "message": "Is it okay to update microdroid only? Accidentally I found we use crashdump as well, and it looks it uses android14-5.15.",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 793,
+        "endChar": 13
+      },
+      "revId": "afae01a3ae0571a1712eee0c1fa4f08b26fc8279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
