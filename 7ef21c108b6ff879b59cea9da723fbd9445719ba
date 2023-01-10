@@ -51,6 +51,23 @@
       "message": "Alistair, do you have +2 permission here? I should probably reach out to the build team and make sure the trout team can +2 our own branch, but I\u0027d like to merge this in the meanwhile. wdyt?",
       "revId": "7ef21c108b6ff879b59cea9da723fbd9445719ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "469e85e2_834a278c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133963
+      },
+      "writtenOn": "2023-01-10T20:56:01Z",
+      "side": 1,
+      "message": "Friendly ping",
+      "revId": "7ef21c108b6ff879b59cea9da723fbd9445719ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
