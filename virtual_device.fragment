@@ -1,23 +1,27 @@
-# Drivers used by all virtual devices
+# Drivers used by all Android virtual devices
 CONFIG_BATTERY_GOLDFISH=m
 CONFIG_BT_HCIVHCI=m
 CONFIG_CPUFREQ_DUMMY=m
 CONFIG_DMABUF_HEAPS_SYSTEM=m
 CONFIG_DRM_VKMS=m
+<<<<<<< HEAD   (86a804 ANDROID: Add build configs for GCE)
 CONFIG_DRM_VIRTIO_GPU=m
 CONFIG_HW_RANDOM_VIRTIO=m
+=======
+>>>>>>> CHANGE (aba10c Fix up gce, rename to server)
 CONFIG_MAC80211_HWSIM=m
 CONFIG_RTC_DRV_TEST=m
-CONFIG_SND_VIRTIO=m
 CONFIG_USB_DUMMY_HCD=m
 CONFIG_VIRTIO_BALLOON=m
+<<<<<<< HEAD   (86a804 ANDROID: Add build configs for GCE)
 CONFIG_VIRTIO_BLK=m
 CONFIG_VIRTIO_CONSOLE=m
 CONFIG_VIRTIO_INPUT=m
 CONFIG_VIRTIO_NET=m
 CONFIG_VIRTIO_PCI=m
+=======
+>>>>>>> CHANGE (aba10c Fix up gce, rename to server)
 CONFIG_VIRTIO_PMEM=m
-CONFIG_VIRTIO_VSOCKETS=m
 CONFIG_USBIP_CORE=m
 CONFIG_USBIP_VHCI_HCD=m
 CONFIG_ZRAM=m
@@ -41,6 +45,7 @@ CONFIG_MT76x2U=m
 
 # TV-specific drivers
 CONFIG_USB_PULSE8_CEC=m
+<<<<<<< HEAD   (86a804 ANDROID: Add build configs for GCE)
 
 # Disable module signing during build
 # CONFIG_MODULE_SIG_ALL is not set
@@ -51,3 +56,5 @@ CONFIG_NL80211_TESTMODE=y
 # CONFIG_CFG80211_DEFAULT_PS is not set
 # CONFIG_CFG80211_CRDA_SUPPORT is not set
 CONFIG_MAC80211=m
+=======
+>>>>>>> CHANGE (aba10c Fix up gce, rename to server)
