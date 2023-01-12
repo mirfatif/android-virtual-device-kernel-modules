@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0279be48_b71e4d71",
+        "filename": "build.config.virtual_device_kasan.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2023-01-12T11:09:37Z",
+      "side": 0,
+      "message": "What triggers building goldfish drivers now? I\u0027m guessing EXT_MODULES right below this or you\u0027ve defined all out of tree modules in the virtual_device fragment directly. I just couldn\u0027t find it when I searched.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "622652465e5bcb6f100690cea9591413efa65911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
