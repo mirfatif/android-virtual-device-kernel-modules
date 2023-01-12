@@ -22,6 +22,30 @@
       },
       "revId": "622652465e5bcb6f100690cea9591413efa65911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feaa5af6_324b30b4",
+        "filename": "build.config.virtual_device_kasan.x86_64",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-01-12T16:38:26Z",
+      "side": 0,
+      "message": "I think EXT_MODULES is dead code too, but I\u0027ll clean it up in another CL. The BUILD_GOLDFISH_DRIVERS was using used by the top level Kconfig/Makefile but those files have been deleted.",
+      "parentUuid": "0279be48_b71e4d71",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 24
+      },
+      "revId": "622652465e5bcb6f100690cea9591413efa65911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
