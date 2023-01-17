@@ -22,7 +22,6 @@ load(
     "kernel_build",
     "kernel_dtstree",
     "kernel_images",
-    "kernel_module",
     "kernel_module_group",
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
@@ -249,6 +248,7 @@ kernel_build(
         "test_meminit.ko",
         "virtio_pmem.ko",
     ],
+    strip_modules = True,
 )
 
 ddk_module(
@@ -343,6 +343,7 @@ kernel_build(
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+    strip_modules = True,
 )
 
 ddk_module(
@@ -437,6 +438,7 @@ kernel_build(
     base_kernel = "//common:kernel_aarch64_16k",
     build_config = "build.config.virtual_device.aarch64.16k",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+    strip_modules = True,
 )
 
 ddk_module(
@@ -520,6 +522,7 @@ kernel_build(
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
+    strip_modules = True,
 )
 
 ddk_module(
