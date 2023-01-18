@@ -68,6 +68,23 @@
       "message": "Friendly ping",
       "revId": "7ef21c108b6ff879b59cea9da723fbd9445719ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f722b37_c4d89b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1133963
+      },
+      "writtenOn": "2023-01-18T17:20:03Z",
+      "side": 1,
+      "message": "Friendly ping again; adelva@ can we merge this?",
+      "revId": "7ef21c108b6ff879b59cea9da723fbd9445719ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
