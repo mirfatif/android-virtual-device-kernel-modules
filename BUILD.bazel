@@ -452,6 +452,7 @@ kernel_abi_dist(
     dist_dir = _dist_dir,
     flat = True,
     kernel_abi = "virtual_device_aarch64_abi",
+    kernel_build_add_vmlinux = True,
     log = "info",
 )
 
