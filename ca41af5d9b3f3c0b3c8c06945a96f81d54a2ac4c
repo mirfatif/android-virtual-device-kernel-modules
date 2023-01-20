@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e18bae_158421fe",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-01-20T23:48:18Z",
+      "side": 1,
+      "message": "You need to delete this",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 449,
+        "endChar": 34
+      },
+      "revId": "ca41af5d9b3f3c0b3c8c06945a96f81d54a2ac4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
