@@ -446,12 +446,12 @@ kernel_abi_dist(
         ":virtual_device_aarch64_merged_kernel_uapi_headers",
         ":virtual_device_aarch64_modules_install",
         ":virtual_device_aarch64_unstripped_modules_archive",
-        "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
     ],
     dist_dir = _dist_dir,
     flat = True,
     kernel_abi = "virtual_device_aarch64_abi",
+    kernel_build_add_vmlinux = True,
     log = "info",
 )
 
