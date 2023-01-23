@@ -34,6 +34,24 @@
       "parentUuid": "b07dda38_7f2486c8",
       "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b9c8809_6f82d3ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-01-23T19:45:11Z",
+      "side": 1,
+      "message": "Ack. This is not a problem in 6.1 yet as http://aosp/2394395 has not been merged, but I\u0027ll include these changes there too. Thank you.",
+      "parentUuid": "d570e535_c65074f3",
+      "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
