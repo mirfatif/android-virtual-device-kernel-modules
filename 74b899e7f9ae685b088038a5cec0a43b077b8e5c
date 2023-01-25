@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a06361_d785c4fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-01-25T13:39:33Z",
+      "side": 1,
+      "message": "adelva@, this CL needs to be merged as well 😊",
+      "revId": "74b899e7f9ae685b088038a5cec0a43b077b8e5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
