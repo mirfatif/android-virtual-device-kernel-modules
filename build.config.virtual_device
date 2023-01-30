@@ -3,6 +3,7 @@ KERNEL_DIR=common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 
+BUILD_VIRTUAL_DEVICE=m
 MODULES_BLOCKLIST=common-modules/virtual-device/modules.blocklist
 BUILD_INITRAMFS=1
 LZ4_RAMDISK=1
