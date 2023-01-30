@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config  BUILTIN_VD
+	bool "Build virtual-device drivers into GKI kernel"
+	default n
+	help
+	  Build virtual-device drivers from common Makefile if enabled.
