@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5034ffa5_597228ed",
+        "filename": "Kconfig.ext",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-31T06:57:00Z",
+      "side": 1,
+      "message": "default is always n, no need to do this.",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 4,
+        "endChar": 10
+      },
+      "revId": "0c0e1a84fb3b0b1671165189b911f2f77755d4f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
