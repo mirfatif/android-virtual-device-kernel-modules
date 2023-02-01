@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb877b6f_8e56f243",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-02-01T03:01:28Z",
+      "side": 1,
+      "message": "Needs to remove these modules from BUILD.bazel file as well. I\u0027ll submit the CL.",
+      "revId": "cfde6da963eda366ea780b494cefcc9bf9d815f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
