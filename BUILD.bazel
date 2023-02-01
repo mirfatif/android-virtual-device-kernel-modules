@@ -177,10 +177,8 @@ _VIRT_COMMON_MODULES = [
     "net_failover.ko",
     "pulse8-cec.ko",
     "rtc-test.ko",
-    "slcan.ko",
     "system_heap.ko",
     "usbip-core.ko",
-    "vcan.ko",
     "vhci-hcd.ko",
     "virt_wifi.ko",
     "virtio-gpu.ko",
@@ -197,8 +195,6 @@ _VIRT_COMMON_MODULES = [
     "virtio_snd.ko",
     "vkms.ko",
     "vmw_vsock_virtio_transport.ko",
-    "zram.ko",
-    "zsmalloc.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
