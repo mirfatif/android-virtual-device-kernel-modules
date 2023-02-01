@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b944d7bf_d116fb73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2023-02-01T12:33:03Z",
+      "side": 1,
+      "message": "As explained in git log messaga this is just single squash commit of latest virtio_video version taken from kernel 5.10. Pure code without any changes. I was wondering If wouldn\u0027t it be better to push complete git history instead (64 patches)?",
+      "revId": "21b2b1db911dd748e8d6002deebec8b1844db23b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
