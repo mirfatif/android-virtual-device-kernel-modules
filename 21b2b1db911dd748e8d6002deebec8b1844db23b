@@ -16,6 +16,24 @@
       "message": "As explained in git log messaga this is just single squash commit of latest virtio_video version taken from kernel 5.10. Pure code without any changes. I was wondering If wouldn\u0027t it be better to push complete git history instead (64 patches)?",
       "revId": "21b2b1db911dd748e8d6002deebec8b1844db23b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc355f6_a99f9dbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1768393
+      },
+      "writtenOn": "2023-02-02T05:50:21Z",
+      "side": 1,
+      "message": "The intermediate state of this driver is of little interest, so I believe pushing the ToT as-is is both simpler and more efficient.",
+      "parentUuid": "b944d7bf_d116fb73",
+      "revId": "21b2b1db911dd748e8d6002deebec8b1844db23b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
