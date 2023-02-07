@@ -19,6 +19,7 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "kbuild_options",
     "kernel_abi",
     "kernel_abi_dist",
     "kernel_build",
@@ -235,12 +236,31 @@ kernel_build(
     ],
 )
 
+kbuild_options(
+    name = "kopt",
+    values = [
+        "CONFIG_FOO=y",
+        "CONFIG_BAR=y",
+    ],
+)
+
 ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
+    conditional_srcs = {
+        "CONFIG_FOO": {
+            True: ["goldfish_drivers/foo.c"],
+        },
+        "CONFIG_BAR": {
+            True: ["goldfish_drivers/bar.c"],
+        },
+    },
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [
+        ":common_headers_x86_64",
+        ":kopt",
+    ],
 )
 
 ddk_module(
