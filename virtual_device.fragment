@@ -16,9 +16,6 @@ CONFIG_USBIP_VHCI_HCD=m
 CONFIG_TEST_STACKINIT=m
 CONFIG_TEST_MEMINIT=m
 
-# Cuttlefish-specific drivers
-CONFIG_VIRT_WIFI=m
-
 # Auto-specific drivers
 CONFIG_BT_HCIBTUSB=m
 CONFIG_CAN_GS_USB=m

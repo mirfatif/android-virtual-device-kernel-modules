@@ -16,3 +16,7 @@ CONFIG_VFPv3=y
 # b/154934534
 # CONFIG_BPF_JIT_ALWAYS_ON is not set
 # CONFIG_TEST_STACKINIT is not set
+
+# Cuttlefish-specific drivers
+# WIP to deprecate for arm64
+CONFIG_VIRT_WIFI=m
