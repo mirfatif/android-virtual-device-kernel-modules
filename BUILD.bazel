@@ -20,7 +20,6 @@ load(
     "ddk_headers",
     "ddk_module",
     "kernel_abi",
-    "kernel_abi_dist",
     "kernel_build",
     "kernel_images",
     "kernel_module_group",
@@ -432,23 +431,6 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
-)
-
-kernel_abi_dist(
-    name = "virtual_device_aarch64_abi_dist",
-    data = [
-        ":virtual_device_aarch64",
-        ":virtual_device_aarch64_images",
-        ":virtual_device_aarch64_merged_kernel_uapi_headers",
-        ":virtual_device_aarch64_modules_install",
-        ":virtual_device_aarch64_unstripped_modules_archive",
-        "//common:kernel_aarch64_additional_artifacts",
-    ],
-    dist_dir = _dist_dir,
-    flat = True,
-    kernel_abi = "virtual_device_aarch64_abi",
-    kernel_build_add_vmlinux = True,
-    log = "info",
 )
 
 exec(
