@@ -982,6 +982,7 @@ static void virtio_gpu_cmd_resource_create_cb(struct virtio_gpu_device *vgdev,
 
 	switch (resp_type) {
 	case VIRTIO_GPU_RESP_OK_RESOURCE_PLANE_INFO:
+	case VIRTIO_GPU_RESP_OK_RESOURCE_PLANE_INFO_LEGACY:
 		break;
 	default:
 		goto finish_pending;
