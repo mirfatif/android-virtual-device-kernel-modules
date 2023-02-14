@@ -308,6 +308,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 exec(
@@ -431,6 +432,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 exec(
@@ -525,6 +527,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 exec(
@@ -621,6 +624,7 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/virtual_device_arm/dist",
     flat = True,
+    log = "info",
 )
 
 kernel_build(
@@ -712,6 +716,7 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/virtual_device_i686/dist",
     flat = True,
+    log = "info",
 )
 
 kernel_build(
@@ -784,6 +789,7 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/server_aarch64/dist",
     flat = True,
+    log = "info",
 )
 
 kernel_build(
@@ -856,6 +862,7 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/server_x86_64/dist",
     flat = True,
+    log = "info",
 )
 
 # Microdroid is not a real device. The kernel image is built with special
@@ -881,6 +888,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 # Microdroid is not a real device. The kernel image is built with special
@@ -899,6 +907,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 kernel_build(
@@ -918,6 +927,7 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
 
 kernel_build(
@@ -937,4 +947,5 @@ copy_to_dist_dir(
     ],
     dist_dir = _dist_dir,
     flat = True,
+    log = "info",
 )
