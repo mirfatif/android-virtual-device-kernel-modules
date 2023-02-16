@@ -16,6 +16,24 @@
       "message": "Which backend driver is being used? Is this hci_serdev.c ? How will this be configured for acpi on x86, dt on arm64?",
       "revId": "9bb81bdb2f49ff874b486829e7bd329828921db8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3c6df5_ed6a0fd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884477
+      },
+      "writtenOn": "2023-02-16T01:19:11Z",
+      "side": 1,
+      "message": "The change in bt_vhci_forwarder will use hci_ldisc.\n\n\u003e How will this be configured for acpi on x86, dt on arm64?\n\nCan you explain what are the potential blockers here ?",
+      "parentUuid": "e6ada71f_c6867ebf",
+      "revId": "9bb81bdb2f49ff874b486829e7bd329828921db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
