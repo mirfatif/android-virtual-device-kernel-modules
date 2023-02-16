@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ada71f_c6867ebf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-02-16T01:00:48Z",
+      "side": 1,
+      "message": "Which backend driver is being used? Is this hci_serdev.c ? How will this be configured for acpi on x86, dt on arm64?",
+      "revId": "9bb81bdb2f49ff874b486829e7bd329828921db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
