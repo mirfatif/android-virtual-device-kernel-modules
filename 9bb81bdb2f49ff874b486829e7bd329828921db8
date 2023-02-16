@@ -34,6 +34,24 @@
       "parentUuid": "e6ada71f_c6867ebf",
       "revId": "9bb81bdb2f49ff874b486829e7bd329828921db8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97007840_96b559b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2023-02-16T18:22:17Z",
+      "side": 1,
+      "message": "How is the serial port crosvm creates configured to be bound by hci_ldisc?",
+      "parentUuid": "1c3c6df5_ed6a0fd4",
+      "revId": "9bb81bdb2f49ff874b486829e7bd329828921db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
