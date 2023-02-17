@@ -167,6 +167,7 @@ _VIRT_COMMON_MODULES = [
     "btintel.ko",
     "btrtl.ko",
     "btusb.ko",
+    "dummy-cpufreq.ko",
     "dummy_hcd.ko",
     "failover.ko",
     "goldfish_battery.ko",
@@ -214,7 +215,6 @@ _VIRT_AARCH64_MODULES = [
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
-    "dummy-cpufreq.ko",
     "nd_virtio.ko",
     "pl111_drm.ko",
     "psmouse.ko",
@@ -243,7 +243,6 @@ kernel_build(
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
-        "dummy-cpufreq.ko",
         "nd_virtio.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
@@ -599,7 +598,6 @@ kernel_build(
     build_config = "build.config.virtual_device.arm",
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
-            "dummy-cpufreq.ko",
             "test_meminit.ko",
         ],
     )),
@@ -678,7 +676,6 @@ kernel_build(
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
             # keep sorted
-            "dummy-cpufreq.ko",
             "nd_virtio.ko",
             "test_meminit.ko",
             "virtio_pmem.ko",
