@@ -52,6 +52,7 @@ filegroup(
             "BUILD.bazel",
         ],
     ),
+    visibility = ["//visibility:public"],
 )
 
 filegroup(
