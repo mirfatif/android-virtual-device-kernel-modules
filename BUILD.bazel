@@ -45,6 +45,16 @@ filegroup(
 )
 
 filegroup(
+    name = "arm_fragment",
+    srcs = glob(
+        [
+            "arm.fragment",
+        ],
+    ),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
     name = "goldfish_address_space_sources",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
