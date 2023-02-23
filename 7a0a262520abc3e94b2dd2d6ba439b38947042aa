@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51065150_6830c4c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-02-23T21:24:10Z",
+      "side": 1,
+      "message": "From email:\n\nIf you need just `arm.fragment` and nothing else, it is encouraged that you define a separate filegroup and expose just that (visibility public) instead. This reduces the number of inputs to your rule so it\u0027ll trigger less rebuilds for incremental builds.",
+      "revId": "7a0a262520abc3e94b2dd2d6ba439b38947042aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
