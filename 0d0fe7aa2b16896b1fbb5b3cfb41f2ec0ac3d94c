@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c97a695b_56bb3f7a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 917,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-02-24T15:05:32Z",
+      "side": 1,
+      "message": "Will we still get a vmlinux artifact in this case? That\u0027s needed for the crash utility.",
+      "range": {
+        "startLine": 917,
+        "startChar": 9,
+        "endLine": 917,
+        "endChar": 14
+      },
+      "revId": "0d0fe7aa2b16896b1fbb5b3cfb41f2ec0ac3d94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
