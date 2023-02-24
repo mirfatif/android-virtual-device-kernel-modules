@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3dd4454_972ce400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1882526
+      },
+      "writtenOn": "2023-02-24T11:12:34Z",
+      "side": 1,
+      "message": "So was `DMA_RESTRICTED_POOL` previously implicitly enabled by another option?\n\n(giving +1 as I\u0027m not allowed to +2)",
+      "revId": "11c5900ad3249b3d0cf0eaa9a5fcb40eb38776a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
