@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load(
@@ -30,15 +29,6 @@ load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
-
-_dist_dir = "out/{branch}/dist".format(branch = BRANCH)
-
-# Workaround for b/201687176.
-# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
-test_mappings_dist(
-    name = "virtual_device_test_mappings_dist",
-    dist_dir = _dist_dir,
-)
 
 filegroup(
     name = "common_sources",
@@ -308,6 +298,13 @@ kernel_images(
     modules_blocklist = "modules.blocklist",
 )
 
+# Workaround for b/201687176.
+# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
+test_mappings_dist(
+    name = "virtual_device_x86_64_test_mappings_dist",
+    dist_dir = "out/virtual_device_x86_64/dist",
+)
+
 copy_to_dist_dir(
     name = "virtual_device_x86_64_copy_to_dist_dir",
     data = [
@@ -318,18 +315,18 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
     ],
-    dist_dir = _dist_dir,
+    dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
 )
 
 exec(
     name = "virtual_device_x86_64_dist",
     data = [
-        ":virtual_device_test_mappings_dist",
+        ":virtual_device_x86_64_test_mappings_dist",
         ":virtual_device_x86_64_copy_to_dist_dir",
     ],
     script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
     """,
 )
@@ -403,6 +400,13 @@ kernel_images(
     modules_blocklist = "modules.blocklist",
 )
 
+# Workaround for b/201687176.
+# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
+test_mappings_dist(
+    name = "virtual_device_aarch64_test_mappings_dist",
+    dist_dir = "out/virtual_device_aarch64/dist",
+)
+
 copy_to_dist_dir(
     name = "virtual_device_aarch64_copy_to_dist_dir",
     data = [
@@ -413,7 +417,7 @@ copy_to_dist_dir(
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
     ],
-    dist_dir = _dist_dir,
+    dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
 )
 
@@ -421,10 +425,10 @@ exec(
     name = "virtual_device_aarch64_dist",
     data = [
         ":virtual_device_aarch64_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
+        ":virtual_device_aarch64_test_mappings_dist",
     ],
     script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
     """,
 )
@@ -490,6 +494,13 @@ kernel_images(
     modules_blocklist = "modules.blocklist",
 )
 
+# Workaround for b/201687176.
+# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
+test_mappings_dist(
+    name = "virtual_device_aarch64_16k_test_mappings_dist",
+    dist_dir = "out/virtual_device_aarch64_16k/dist",
+)
+
 copy_to_dist_dir(
     name = "virtual_device_aarch64_16k_copy_to_dist_dir",
     data = [
@@ -499,7 +510,7 @@ copy_to_dist_dir(
         "//common:kernel_aarch64_16k",
         "//common:kernel_aarch64_16k_images",
     ],
-    dist_dir = _dist_dir,
+    dist_dir = "out/virtual_device_aarch64_16k/dist",
     flat = True,
 )
 
@@ -507,10 +518,10 @@ exec(
     name = "virtual_device_aarch64_16k_dist",
     data = [
         ":virtual_device_aarch64_16k_copy_to_dist_dir",
-        ":virtual_device_test_mappings_dist",
+        ":virtual_device_aarch64_16k_test_mappings_dist",
     ],
     script = """
-        $(rootpath :virtual_device_test_mappings_dist) $@
+        $(rootpath :virtual_device_aarch64_16k_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
     """,
 )
@@ -573,7 +584,6 @@ kernel_images(
     kernel_modules_install = ":virtual_device_riscv64_modules_install",
     modules_blocklist = "modules.blocklist",
 )
-
 copy_to_dist_dir(
     name = "virtual_device_riscv64_dist",
     data = [
@@ -583,7 +593,7 @@ copy_to_dist_dir(
         "//common:kernel_riscv64",
         "//common:kernel_riscv64_images",
     ],
-    dist_dir = _dist_dir,
+    dist_dir = "out/virtual_device_riscv64/dist",
     flat = True,
 )
 
