@@ -16,6 +16,24 @@
       "message": "From email:\n\nIf you need just `arm.fragment` and nothing else, it is encouraged that you define a separate filegroup and expose just that (visibility public) instead. This reduces the number of inputs to your rule so it\u0027ll trigger less rebuilds for incremental builds.",
       "revId": "7a0a262520abc3e94b2dd2d6ba439b38947042aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25139dd1_7c888dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-02-28T05:09:08Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, changed to add the arm_fragment filegroup which only includes the arm.fragment file. Please help check it again.",
+      "parentUuid": "51065150_6830c4c6",
+      "revId": "7a0a262520abc3e94b2dd2d6ba439b38947042aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
