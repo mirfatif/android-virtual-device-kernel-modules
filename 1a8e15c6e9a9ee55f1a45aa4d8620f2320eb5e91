@@ -52,6 +52,23 @@
       "parentUuid": "d570e535_c65074f3",
       "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00b4af7_9e6f8c7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-02T22:25:06Z",
+      "side": 1,
+      "message": "Is this applicable for the `android14-6.1` ?",
+      "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
