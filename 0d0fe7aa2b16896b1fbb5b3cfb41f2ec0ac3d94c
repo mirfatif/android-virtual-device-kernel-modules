@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe806a9_9ddbce50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-03-03T06:21:22Z",
+      "side": 1,
+      "message": "Sure. Thanks for the reminder. Uploaded aosp/2469161.",
+      "parentUuid": "dbf3e3db_3534f855",
+      "revId": "0d0fe7aa2b16896b1fbb5b3cfb41f2ec0ac3d94c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c97a695b_56bb3f7a",
