@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f47e2b_9c197e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-03T07:54:57Z",
+      "side": 1,
+      "message": "Saw on this cherry-pick: http://aosp/2467323",
+      "revId": "f46f7a60510f5636c2b6406ca0969c7ae3db9719",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
