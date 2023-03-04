@@ -16,6 +16,24 @@
       "message": "Is this applicable for the `android14-6.1`?",
       "revId": "f77ebdf960de3812c247d52c3059d7fdeb648d51",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29717352_76edf7eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-03-04T00:26:17Z",
+      "side": 1,
+      "message": "It\u0027s a nice to have, so let\u0027s have it http://aosp/2469487. ty.",
+      "parentUuid": "6b210489_c953253d",
+      "revId": "f77ebdf960de3812c247d52c3059d7fdeb648d51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
