@@ -69,6 +69,24 @@
       "message": "Is this applicable for the `android14-6.1` ?",
       "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e31dc2f_f9c9f528",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-03-04T00:07:33Z",
+      "side": 1,
+      "message": "No, `kernel_abi_dist` was removed in http://aosp/2431054",
+      "parentUuid": "d00b4af7_9e6f8c7c",
+      "revId": "1a8e15c6e9a9ee55f1a45aa4d8620f2320eb5e91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
