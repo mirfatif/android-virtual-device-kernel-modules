@@ -19,6 +19,7 @@ load(
     "ddk_headers",
     "ddk_module",
     "kernel_build",
+    "kernel_compile_commands",
     "kernel_dtstree",
     "kernel_images",
     "kernel_module_group",
@@ -244,6 +245,11 @@ kernel_build(
         "virtio_pmem.ko",
     ],
     strip_modules = True,
+)
+
+kernel_compile_commands(
+    name = "virtual_device_x86_64_compile_commands",
+    kernel_build = ":virtual_device_x86_64",
 )
 
 ddk_module(
