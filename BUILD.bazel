@@ -218,6 +218,15 @@ kernel_build(
         "test_stackinit.ko",
         "virtio_pmem.ko",
     ],
+    kmi_symbol_list = "//common:android/abi_gki_x86_64_virtual_device",
+)
+
+kernel_abi(
+    name = "virtual_device_x86_64_abi",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":virtual_device_x86_64_external_modules",
+    ],
 )
 
 ddk_module(
