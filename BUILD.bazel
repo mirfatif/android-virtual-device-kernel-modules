@@ -230,12 +230,21 @@ kernel_build(
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
+    kmi_symbol_list = "//common:android/abi_gki_x86_64_virtual_device",
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "dummy-cpufreq.ko",
         "nd_virtio.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
+    ],
+)
+
+kernel_abi(
+    name = "virtual_device_x86_64_abi",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":virtual_device_x86_64_external_modules",
     ],
 )
 
