@@ -246,6 +246,11 @@ kernel_build(
     strip_modules = True,
 )
 
+kernel_compile_commands(
+    name = "virtual_device_x86_64_compile_commands",
+    kernel_build = ":virtual_device_x86_64",
+)
+
 ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
@@ -346,6 +351,11 @@ kernel_build(
     build_config = "build.config.virtual_device.aarch64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     strip_modules = True,
+)
+
+kernel_compile_commands(
+    name = "virtual_device_aarch64_compile_commands",
+    kernel_build = ":virtual_device_aarch64",
 )
 
 ddk_module(
@@ -539,6 +549,11 @@ kernel_build(
     build_config = "build.config.virtual_device.riscv64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
     strip_modules = True,
+)
+
+kernel_compile_commands(
+    name = "virtual_device_riscv64_compile_commands",
+    kernel_build = ":virtual_device_riscv64",
 )
 
 ddk_module(
