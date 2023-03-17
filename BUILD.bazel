@@ -25,6 +25,7 @@ load(
     "initramfs_modules_lists_test",
     "kernel_abi",
     "kernel_build",
+    "kernel_compile_commands",
     "kernel_dtstree",
     "kernel_images",
     "kernel_module_group",
@@ -274,6 +275,11 @@ kernel_build(
     ],
 )
 
+kernel_compile_commands(
+    name = "virtual_device_x86_64_compile_commands",
+    kernel_build = ":virtual_device_x86_64",
+)
+
 ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
@@ -485,6 +491,11 @@ kernel_abi(
         ":virtual_device_aarch64_external_modules",
     ],
     kmi_symbol_list_add_only = True,
+)
+
+kernel_compile_commands(
+    name = "virtual_device_aarch64_compile_commands",
+    kernel_build = ":virtual_device_aarch64",
 )
 
 ddk_module(
@@ -796,6 +807,11 @@ kernel_build(
         "modules",
     ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
+)
+
+kernel_compile_commands(
+    name = "virtual_device_riscv64_compile_commands",
+    kernel_build = ":virtual_device_riscv64",
 )
 
 ddk_module(
