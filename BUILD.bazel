@@ -254,8 +254,11 @@ ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
+    config = ":x86_64/goldfish_drivers/goldfish_address_space_config",
     kernel_build = ":virtual_device_x86_64",
     deps = [":common_headers_x86_64"],
+    defconfig = "defconfig.goldfish_address_space",
+    kconfig = "Kconfig.goldfish_address_space",
 )
 
 ddk_module(
