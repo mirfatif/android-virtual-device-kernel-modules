@@ -1,6 +1,7 @@
 """Tests on Kleaf using virtual device as a baseline."""
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_module",
@@ -41,10 +42,17 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_module_config_test(
+        name = name + "_ddk_module_config_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
             name + "_ddk_module_conditional_srcs_test",
+            name + "_ddk_module_config_test",
         ],
         **kwargs
     )
@@ -87,6 +95,127 @@ def _ddk_module_conditional_srcs_test(name, kernel_build, **private_kwargs):
         targets = [
             name + "_module_y",
             name + "_module_m",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_module_config_test(name, kernel_build, **private_kwargs):
+    # Test that the module can be built with only the defconfig file.
+    # The defconfig mutates an item specified in Kconfig of the kernel_build.
+    # NOTE: Changing an item not specified in the Kconfig of this module is
+    # not recommended.
+    write_file(
+        name = name + "_defconfig_only_module_defconfig_target",
+        out = name + "_defconfig_only_module_defconfig",
+        content = [
+            "CONFIG_KLEAF_TEST_MAIN=m",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_defconfig_only_module",
+        out = name + "_mod.ko",
+        kernel_build = kernel_build,
+        defconfig = name + "_defconfig_only_module_defconfig",
+        srcs = ["client.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_MAIN": {
+                True: ["lib.c"],
+            },
+        },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    # Test that the module can be built with only the Kconfig file.
+    # The default value of the Kconfig is used.
+    write_file(
+        name = name + "_kconfig_only_module_kconfig_target",
+        out = name + "_kconfig_only_module_kconfig",
+        content = [
+            "config KLEAF_TEST_EXT_MOD",
+            '\ttristate "KLEAF_TEST_EXT_MOD"',
+            "\tdefault m",
+            "",
+        ],
+    )
+
+    ddk_module(
+        name = name + "_kconfig_only_module",
+        out = name + "_mod.ko",
+        kernel_build = kernel_build,
+        kconfig = name + "_kconfig_only_module_kconfig",
+        srcs = ["client.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_EXT_MOD": {
+                True: ["lib.c"],
+            },
+        },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    # Test that, when Kconfig is set, the Kconfig from kernel_build is still
+    # inherited from.
+    ddk_module(
+        name = name + "_kconfig_only_module_inherit_from_kernel_build",
+        out = name + "_mod.ko",
+        kernel_build = kernel_build,
+        kconfig = name + "_kconfig_only_module_kconfig",
+        srcs = ["client.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_M": {
+                True: ["lib.c"],
+            },
+        },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    # Test that the module can be be built with both the defconfig and the
+    # Kconfig file. The value in defconfig is used.
+    write_file(
+        name = name + "_module_kconfig_target",
+        out = name + "_module_kconfig",
+        content = [
+            "config KLEAF_TEST_EXT_MOD",
+            '\ttristate "description"',
+            "",
+        ],
+    )
+
+    write_file(
+        name = name + "_module_defconfig_target",
+        out = name + "_module_defconfig",
+        content = [
+            "CONFIG_KLEAF_TEST_EXT_MOD=m",
+        ],
+    )
+
+    ddk_module(
+        name = name + "_module",
+        out = name + "_mod.ko",
+        kernel_build = kernel_build,
+        defconfig = name + "_module_defconfig",
+        kconfig = name + "_module_kconfig",
+        srcs = ["client.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_EXT_MOD": {
+                True: ["lib.c"],
+            },
+        },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_defconfig_only_module",
+            name + "_kconfig_only_module",
+            name + "_kconfig_only_module_inherit_from_kernel_build",
+            name + "_module",
         ],
         **private_kwargs
     )
