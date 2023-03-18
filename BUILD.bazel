@@ -46,11 +46,9 @@ filegroup(
 
 filegroup(
     name = "arm_fragment",
-    srcs = glob(
-        [
-            "arm.fragment",
-        ],
-    ),
+    srcs = [
+        "arm.fragment",
+    ],
     visibility = ["//visibility:public"],
 )
 
