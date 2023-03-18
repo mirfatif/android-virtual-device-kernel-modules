@@ -6,3 +6,6 @@ config KLEAF_TEST_NOT_SET
 
 config KLEAF_TEST_M
 	tristate "KLEAF_TEST_M"
+
+config KLEAF_TEST_MAIN
+	tristate "KLEAF_TEST_MAIN"
