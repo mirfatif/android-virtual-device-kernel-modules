@@ -16,6 +16,7 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load(
     "//build/kernel/kleaf:kernel.bzl",
+    "ddk_config",
     "ddk_headers",
     "ddk_module",
     "kernel_build",
@@ -250,10 +251,18 @@ kernel_compile_commands(
     kernel_build = ":virtual_device_x86_64",
 )
 
+ddk_config(
+    name = "x86_64/goldfish_drivers/goldfish_address_space_config",
+    defconfig = "defconfig.goldfish_address_space",
+    kconfig = "Kconfig.goldfish_address_space",
+    kernel_build = ":virtual_device_x86_64",
+)
+
 ddk_module(
     name = "x86_64/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
+    config = ":x86_64/goldfish_drivers/goldfish_address_space_config",
     kernel_build = ":virtual_device_x86_64",
     deps = [":common_headers_x86_64"],
 )

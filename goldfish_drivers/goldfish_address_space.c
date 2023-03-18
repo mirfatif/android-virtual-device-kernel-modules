@@ -26,6 +26,12 @@ MODULE_LICENSE("GPL v2");
 
 #define AS_DEBUG 0
 
+#if !IS_ENABLED(CONFIG_GOLDFISH_SELECTED)
+#error CONFIG_GOLDFISH_SELECTED is not set!
+#else
+#pragma message "CONFIG_GOLDFISH_SELECTED is set"
+#endif
+
 #if AS_DEBUG
 	#define AS_DPRINT(fmt, ...) \
 		printk(KERN_ERR "%s:%d " fmt "\n", \
