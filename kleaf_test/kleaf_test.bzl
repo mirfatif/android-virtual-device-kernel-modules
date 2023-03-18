@@ -1,6 +1,7 @@
 """Tests on Kleaf using virtual device as a baseline."""
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_module",
@@ -41,10 +42,17 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_module_config_test(
+        name = name + "_ddk_module_config_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
             name + "_ddk_module_conditional_srcs_test",
+            name + "_ddk_module_config_test",
         ],
         **kwargs
     )
@@ -87,6 +95,39 @@ def _ddk_module_conditional_srcs_test(name, kernel_build, **private_kwargs):
         targets = [
             name + "_module_y",
             name + "_module_m",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_module_config_test(name, kernel_build, **private_kwargs):
+    write_file(
+        name = name + "_defconfig_target",
+        out = name + "_defconfig",
+        content = [
+            "CONFIG_KLEAF_TEST_EXT_MOD_FOO=m"
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module_with_defconfig",
+        out = name + "_module_with_defconfig.ko",
+        kernel_build = kernel_build,
+        defconfig = name + "_defconfig",
+        srcs = ["client.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_EXT_MOD_FOO": {
+                True: ["lib.c"],
+            },
+        },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module_with_defconfig",
         ],
         **private_kwargs
     )
