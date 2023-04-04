@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "665dd0f8_bd5114b8",
+        "filename": "kleaf_test/BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-04T19:52:38Z",
+      "side": 1,
+      "message": "virtual device is already in the name of the package",
+      "parentUuid": "fa4b701b_ef918a32",
+      "range": {
+        "startLine": 4,
+        "startChar": 19,
+        "endLine": 4,
+        "endChar": 29
+      },
+      "revId": "4cccd8e463ec03faeaa46a5698e20262c53342c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fdf5d73_f4fde8f7",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-04T08:47:06Z",
       "side": 1,
       "message": "Do you need to `EXPORT_*` the function?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 19
+      },
+      "revId": "4cccd8e463ec03faeaa46a5698e20262c53342c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfee8627_28ce65dd",
+        "filename": "kleaf_test/lib.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-04T19:52:38Z",
+      "side": 1,
+      "message": "no because it is the same module",
+      "parentUuid": "1fdf5d73_f4fde8f7",
       "range": {
         "startLine": 16,
         "startChar": 0,
