@@ -209,6 +209,24 @@ def _ddk_module_config_test(name, kernel_build, **private_kwargs):
         **private_kwargs
     )
 
+    # Test inheriting Kconfig and defconfig from dependent module.
+    ddk_module(
+        name = name + "_child",
+        out = name + "_child.ko",
+        kernel_build = kernel_build,
+        srcs = ["child.c"],
+        conditional_srcs = {
+            "CONFIG_KLEAF_TEST_EXT_MOD": {
+                True: ["child_lib.c"],
+            },
+        },
+        deps = [
+            "//common:all_headers_x86_64",
+            name + "_module",
+        ],
+        **private_kwargs
+    )
+
     build_test(
         name = name,
         targets = [
@@ -216,6 +234,7 @@ def _ddk_module_config_test(name, kernel_build, **private_kwargs):
             name + "_kconfig_only_module",
             name + "_kconfig_only_module_inherit_from_kernel_build",
             name + "_module",
+            name + "_child",
         ],
         **private_kwargs
     )
