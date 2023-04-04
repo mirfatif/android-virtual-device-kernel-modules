@@ -1,0 +1,4 @@
+load(":kleaf_test.bzl", "kleaf_test")
+
+# Tests on Kleaf functionality using virtual device as a baseline.
+kleaf_test(name = "kleaf_test")
