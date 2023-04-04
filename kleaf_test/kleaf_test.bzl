@@ -1,3 +1,5 @@
+"""Tests on Kleaf using virtual device as a baseline."""
+
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load(
     "//build/kernel/kleaf:kernel.bzl",
@@ -19,20 +21,6 @@ def kleaf_test(
         visibility = ["//visibility:private"],
     )
 
-    _ddk_module_conditional_srcs_test(
-        name = name + "_ddk_module_conditional_srcs_test",
-        **private_kwargs
-    )
-
-    native.test_suite(
-        name = name,
-        tests = [
-            name + "_ddk_module_conditional_srcs_test",
-        ],
-        **kwargs
-    )
-
-def _ddk_module_conditional_srcs_test(name, **private_kwargs):
     kernel_build(
         name = name + "_kernel_build",
         srcs = [
@@ -47,11 +35,26 @@ def _ddk_module_conditional_srcs_test(name, **private_kwargs):
         **private_kwargs
     )
 
+    _ddk_module_conditional_srcs_test(
+        name = name + "_ddk_module_conditional_srcs_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+    native.test_suite(
+        name = name,
+        tests = [
+            name + "_ddk_module_conditional_srcs_test",
+        ],
+        **kwargs
+    )
+
+def _ddk_module_conditional_srcs_test(name, kernel_build, **private_kwargs):
     # CONFIG_KLEAF_TEST_M is set to m. Check that lib.c is linked by having
     # client.c using a symbol from lib.c.
     ddk_module(
         name = name + "_module_y",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         srcs = ["client.c"],
         conditional_srcs = {
             "CONFIG_KLEAF_TEST_Y": {
@@ -67,7 +70,7 @@ def _ddk_module_conditional_srcs_test(name, **private_kwargs):
     # client.c using a symbol from lib.c.
     ddk_module(
         name = name + "_module_m",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         srcs = ["client.c"],
         conditional_srcs = {
             "CONFIG_KLEAF_TEST_M": {
