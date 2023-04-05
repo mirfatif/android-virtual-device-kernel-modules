@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "609a6438_c05459f3",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 11
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-05T19:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51bb8d5a_d38ca008",
+      "range": {
+        "startLine": 176,
+        "startChar": 34,
+        "endLine": 176,
+        "endChar": 40
+      },
+      "revId": "ce8e47f1cb2a36d9737aa6b385b313abcf9b2ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f6e2bb5_2e56d969",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-05T09:27:36Z",
       "side": 1,
       "message": "nit: Can we default this to `n` or is it an implicit default?",
+      "range": {
+        "startLine": 184,
+        "startChar": 12,
+        "endLine": 184,
+        "endChar": 13
+      },
+      "revId": "ce8e47f1cb2a36d9737aa6b385b313abcf9b2ba5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c3cbec_876b6a78",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-04-05T19:02:45Z",
+      "side": 1,
+      "message": "default is \"not set\", not \"n\".\n\nnot set means it is an empty value.",
+      "parentUuid": "9f6e2bb5_2e56d969",
       "range": {
         "startLine": 184,
         "startChar": 12,
