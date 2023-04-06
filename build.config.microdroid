@@ -13,7 +13,9 @@ if [ -n ${BUILD_WORKSPACE_DIRECTORY} ]; then
   UPDATE_CONFIG_DEST=${BUILD_WORKSPACE_DIRECTORY}/common-modules/virtual-device/configs/microdroid_${ARCH}.defconfig
 fi
 
-# HACK: The `true` at the end ensures that the following works:
-#   tools/bazel run //common-modules/virtual-device:microdroid_x86_64_config
+# HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
+#   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
+#   this hack in until bash becomes hermetic (unlikely).
+#   See b/275468906#comment8
 PRE_DEFCONFIG_CMDS="mkdir -p $(dirname ${COPIED_CONFIG}) && cp ${SRC_CONFIG} ${COPIED_CONFIG} && true"
 POST_DEFCONFIG_CMDS="if [ -f ${UPDATED_CONFIG} ] && [ -n ${UPDATE_CONFIG_DEST} ]; then mv ${UPDATED_CONFIG} ${UPDATE_CONFIG_DEST}; echo Updated ${UPDATE_CONFIG_DEST}; fi"
