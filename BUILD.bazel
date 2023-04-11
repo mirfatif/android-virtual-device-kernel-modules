@@ -148,13 +148,18 @@ _VIRT_COMMON_MODULES = [
     "btintel.ko",
     "btrtl.ko",
     "btusb.ko",
+<<<<<<< HEAD   (daebac Virtual_device: Build.bazel fix buildifier error)
     "dummy-cpufreq.ko",
+=======
+    "cfg80211.ko",
+>>>>>>> CHANGE (338cf4 virtual_device: CFG80211 & MAC80211 as vendor modules)
     "dummy_hcd.ko",
     "e1000.ko",
     "failover.ko",
     "goldfish_battery.ko",
     "gs_usb.ko",
     "hci_vhci.ko",
+    "mac80211.ko",
     "mac80211_hwsim.ko",
     "mt76.ko",
     "mt76-usb.ko",
