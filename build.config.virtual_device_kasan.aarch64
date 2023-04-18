@@ -4,8 +4,20 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki_kasan
 
 DEFCONFIG=vd_aarch_64_gki_defconfig
-PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment ${ROOT_DIR}/common-modules/virtual-device/aarch64.fragment"
-POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} && update_kasan_config"
+
+# HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
+#   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
+#   this hack in until bash becomes hermetic (unlikely).
+#   See b/275468906#comment8
+PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/arm64/configs && \
+     KCONFIG_CONFIG=\${OUT_DIR}/arch/arm64/configs/${DEFCONFIG} \
+          ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
+          ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig \
+          ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
+          ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment \
+          ${ROOT_DIR}/common-modules/virtual-device/aarch64.fragment && \
+     true"
+POST_DEFCONFIG_CMDS="update_kasan_config"
 EXT_MODULES="common-modules/virtual-device"
 
 function update_kasan_config() {
