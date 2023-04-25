@@ -182,6 +182,7 @@ _VIRT_COMMON_MODULES = [
     "mt76x2-common.ko",
     "mt76x2u.ko",
     "net_failover.ko",
+    "nci.ko",
     "pulse8-cec.ko",
     "rtc-test.ko",
     "system_heap.ko",
@@ -200,6 +201,7 @@ _VIRT_COMMON_MODULES = [
     "virtio_pci_legacy_dev.ko",
     "virtio_pci_modern_dev.ko",
     "virtio_snd.ko",
+    "virtual_ncidev.ko",
     "vkms.ko",
     "vmw_vsock_virtio_transport.ko",
 ]
