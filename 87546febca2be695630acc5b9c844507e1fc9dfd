@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c554fe_3e38bc91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2023-04-27T13:56:13Z",
+      "side": 1,
+      "message": "This change was merged as http://aosp/I05690eb47efc107010b137ab6a165afadabc8366, but the original changes didn\u0027t handle the mutex correctly on error cases. The upstream version of this change handles the exit correctly.\n\nThis change fixes a bug in the kernel that can hang SurfaceFlinger at boot.\n\nMany 5.10 branches suffer from this bug, e.g. `android12-5.10`, `android13-5.10`, `main-16k-gs-raviole-5.10`, `trout-android12-5.10`, while the 5.4 branches(the problematic CL isn\u0027t merged yet) and 5.15 branches(correctly use the upstream version of the CL) are not affected. Should I also cherry-pick this change to other branches?",
+      "revId": "87546febca2be695630acc5b9c844507e1fc9dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
