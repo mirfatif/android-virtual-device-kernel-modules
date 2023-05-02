@@ -36,6 +36,18 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_module_dep_test(
+        name = name + "_ddk_module_dep_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+    _ddk_module_include_test(
+        name = name + "_ddk_module_include_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     _ddk_module_conditional_srcs_test(
         name = name + "_ddk_module_conditional_srcs_test",
         kernel_build = name + "_kernel_build",
@@ -51,10 +63,124 @@ def kleaf_test(
     native.test_suite(
         name = name,
         tests = [
+            name + "_ddk_module_dep_test",
+            name + "_ddk_module_include_test",
             name + "_ddk_module_conditional_srcs_test",
             name + "_ddk_module_config_test",
         ],
         **kwargs
+    )
+
+def _ddk_module_dep_test(name, kernel_build, **private_kwargs):
+    """Tests that module dependency works.
+
+    This includes that Module.symvers files are restored properly.
+    """
+    ddk_module(
+        name = name + "_module",
+        out = name + "_mod.ko",
+        kernel_build = kernel_build,
+        srcs = ["client.c", "lib.c"],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+    ddk_module(
+        name = name + "_child",
+        out = name + "_child.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "child.c",
+            "child_lib.c",
+        ],
+        deps = [
+            "//common:all_headers_x86_64",
+            name + "_module",
+        ],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_child",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_module_include_test(name, kernel_build, **private_kwargs):
+    """Tests that include directory works.
+
+    This includes:
+    - exported includes via includes and linuxincludes
+    - local includes via copts
+    """
+    ddk_module(
+        name = name + "_includes_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test.c",
+            "include_test_lib.c",
+            "include/include_test_lib.h",
+        ],
+        includes = ["include"],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_linux_includes_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test.c",
+            "include_test_lib.c",
+            "include/include_test_lib.h",
+        ],
+        linux_includes = ["include"],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_local_includes_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test.c",
+            "include_test_lib.c",
+            "include/include_test_lib.h",
+        ],
+        # TODO(b/280368975): Find a better API for local include directories.
+        # Don't follow this pattern elsewhere as it may change in the future.
+        copts = ["-I", "$(ROOT_DIR)/{}/include".format(native.package_name())],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_include_file_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test_implicit.c",
+            "include_test_lib_implicit.c",
+            "include/include_test_lib.h",
+        ],
+        copts = ["-include", "$(location include/include_test_lib.h)"],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_includes_test_module",
+            name + "_linux_includes_test_module",
+            name + "_local_includes_test_module",
+            name + "_include_file_test_module",
+        ],
+        **private_kwargs
     )
 
 def _ddk_module_conditional_srcs_test(name, kernel_build, **private_kwargs):
