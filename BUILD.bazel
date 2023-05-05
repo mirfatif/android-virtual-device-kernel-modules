@@ -340,6 +340,7 @@ kernel_abi(
         ":virtual_device_aarch64_external_modules",
     ],
     kmi_symbol_list_add_only = True,
+    module_grouping = True,
 )
 
 ddk_module(
