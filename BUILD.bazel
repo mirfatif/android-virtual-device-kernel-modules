@@ -311,8 +311,8 @@ copy_to_dist_dir(
 exec(
     name = "virtual_device_x86_64_dist",
     data = [
-        ":virtual_device_x86_64_test_mappings_dist",
         ":virtual_device_x86_64_copy_to_dist_dir",
+        ":virtual_device_x86_64_test_mappings_dist",
     ],
     script = """
         $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
