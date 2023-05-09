@@ -16,6 +16,24 @@
       "message": "Not sure whether this is correct or not. Looks like without this also updates are per module basis.\n\n@elsk@google.com What is the correct in this case?",
       "revId": "65ade8803edcd62aebf54de5b93378aa5627b9f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42daee14_3eeb9dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-05-09T21:01:23Z",
+      "side": 1,
+      "message": "module_grouping is True by default, so your change has no effect.",
+      "parentUuid": "9d4ed136_bc24537c",
+      "revId": "65ade8803edcd62aebf54de5b93378aa5627b9f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
