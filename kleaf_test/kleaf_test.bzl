@@ -6,6 +6,7 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "ddk_submodule",
     "kernel_build",
 )
 
@@ -61,6 +62,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_submodule_config_test(
+        name = name + "_ddk_submodule_config_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -68,6 +75,7 @@ def kleaf_test(
             name + "_ddk_module_include_test",
             name + "_ddk_module_conditional_srcs_test",
             name + "_ddk_module_config_test",
+            name + "_ddk_submodule_config_test",
         ],
         **kwargs
     )
@@ -369,6 +377,51 @@ def _ddk_module_config_test(name, kernel_build, **private_kwargs):
             name + "_kconfig_only_module_inherit_from_kernel_build",
             name + "_module",
             name + "_child",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_submodule_config_test(name, kernel_build, **private_kwargs):
+    write_file(
+        name = name + "_defconfig_target",
+        out = name + "/defconfig",
+        content = [
+            "CONFIG_KLEAF_MUST_BE_SET=y",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_kconfig_target",
+        out = name + "/Kconfig",
+        content = [
+            "config KLEAF_MUST_BE_SET",
+            '\tbool "the prompt"',
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module",
+        kernel_build = kernel_build,
+        defconfig = name + "_defconfig_target",
+        kconfig = name + "_kconfig_target",
+        deps = [name + "_submodule"],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = name + "_submodule",
+        out = "submodule.ko",
+        srcs = ["must_be_set.c"],
+        deps = ["//common:all_headers_x86_64"],
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
         ],
         **private_kwargs
     )
