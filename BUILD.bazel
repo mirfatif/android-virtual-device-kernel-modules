@@ -234,6 +234,7 @@ kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = [],
+    arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _VIRT_COMMON_MODULES + [
@@ -544,6 +545,7 @@ kernel_build(
     name = "virtual_device_riscv64",
     srcs = [":virtual_device_riscv64_common_sources"],
     outs = [],
+    arch = "riscv64",
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
@@ -702,6 +704,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "x86_64",
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
     module_outs = sets.to_list(sets.make(
