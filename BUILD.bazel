@@ -228,6 +228,7 @@ kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = [],
+    arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _VIRT_COMMON_MODULES + [
@@ -549,6 +550,7 @@ kernel_build(
     name = "virtual_device_riscv64",
     srcs = [":virtual_device_riscv64_common_sources"],
     outs = [],
+    arch = "riscv64",
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
@@ -625,6 +627,7 @@ kernel_build(
         "vmlinux",
         "zImage",
     ],
+    # TODO(b/272164611): Set arch = "arm" once we have set up arm toolchain
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
     module_outs = sets.to_list(sets.make(
@@ -704,6 +707,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "x86_64",
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
     module_outs = sets.to_list(sets.make(
@@ -846,6 +850,7 @@ kernel_build(
         "vmlinux",
         "vmlinux.symvers",
     ],
+    arch = "x86_64",
     base_kernel = None,
     build_config = "build.config.server.x86_64",
     module_outs = sets.to_list(sets.make(
@@ -931,6 +936,7 @@ kernel_build(
     name = "microdroid_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = X86_64_OUTS,
+    arch = "x86_64",
     build_config = "build.config.microdroid.x86_64",
 )
 
@@ -967,6 +973,7 @@ kernel_build(
     name = "crashdump_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = X86_64_OUTS,
+    arch = "x86_64",
     build_config = "build.config.crashdump.x86_64",
 )
 
