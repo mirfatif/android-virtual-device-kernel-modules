@@ -52,6 +52,24 @@
       "parentUuid": "42daee14_3eeb9dce",
       "revId": "65ade8803edcd62aebf54de5b93378aa5627b9f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77f9d2ec_3d49b052",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-05-09T22:12:00Z",
+      "side": 1,
+      "message": "Thanks Yifan for confirming. That\u0027s the behavior I saw after the fact. I\u0027ll abandon this.",
+      "parentUuid": "09ef227c_a44150aa",
+      "revId": "65ade8803edcd62aebf54de5b93378aa5627b9f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
