@@ -1,22 +1,28 @@
+<<<<<<< HEAD   (9d0b27 Merge "virtual_device: CFG80211 & MAC80211 as vendor modules)
+=======
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.virtual_device
 
-. ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.riscv64
 
-DEFCONFIG=vd_x86_64_gki_defconfig
+DEFCONFIG=vd_riscv_64_gki_defconfig
 
 # HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
 #   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
 #   this hack in until bash becomes hermetic (unlikely).
 #   See b/275468906#comment8
-PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && \
-    KCONFIG_CONFIG=\${OUT_DIR}/arch/x86/configs/${DEFCONFIG} \
+PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/riscv/configs/ && \
+    KCONFIG_CONFIG=\${OUT_DIR}/arch/riscv/configs/${DEFCONFIG} \
         ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
-        ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig \
+        ${ROOT_DIR}/${KERNEL_DIR}/arch/riscv/configs/gki_defconfig \
+        ${ROOT_DIR}/${KERNEL_DIR}/arch/riscv/configs/64-bit.config \
+        ${ROOT_DIR}/${KERNEL_DIR}/arch/riscv/configs/gki.config \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment && \
     true"
 POST_DEFCONFIG_CMDS=""
+BUILD_GOLDFISH_DRIVERS=m
 EXT_MODULES="common-modules/virtual-device"
 
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
 FILES=""
+>>>>>>> CHANGE (3d5f41 ANDROID: Remove MAKE_GOALS from build.config's)
