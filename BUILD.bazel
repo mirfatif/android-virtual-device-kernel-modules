@@ -232,6 +232,9 @@ kernel_build(
     outs = [],
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
+    make_goals = [
+        "modules",
+    ],
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "dummy-cpufreq.ko",
@@ -342,6 +345,10 @@ kernel_build(
     build_config = "build.config.virtual_device.aarch64",
     collect_unstripped_modules = True,
     kmi_symbol_list = "//common:android/abi_gki_aarch64_virtual_device",
+    make_goals = [
+        "modules",
+        "arm/fvp-base-revc.dtb",
+    ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
 )
 
@@ -462,6 +469,10 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64_16k",
     build_config = "build.config.virtual_device.aarch64.16k",
+    make_goals = [
+        "modules",
+        "arm/fvp-base-revc.dtb",
+    ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
 )
 
@@ -553,6 +564,9 @@ kernel_build(
     outs = [],
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
+    make_goals = [
+        "modules",
+    ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
 )
 
@@ -915,6 +929,9 @@ kernel_build(
         "vmlinux.symvers",
     ],
     build_config = "build.config.microdroid.aarch64",
+    make_goals = [
+        "Image",
+    ],
 )
 
 copy_to_dist_dir(
@@ -934,6 +951,9 @@ kernel_build(
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = X86_64_OUTS,
     build_config = "build.config.microdroid.x86_64",
+    make_goals = [
+        "bzImage",
+    ],
 )
 
 copy_to_dist_dir(
@@ -953,6 +973,9 @@ kernel_build(
         "Image",
     ],
     build_config = "build.config.crashdump.aarch64",
+    make_goals = [
+        "Image",
+    ],
 )
 
 copy_to_dist_dir(
@@ -970,6 +993,9 @@ kernel_build(
     srcs = [":virtual_device_x86_64_common_sources"],
     outs = X86_64_OUTS,
     build_config = "build.config.crashdump.x86_64",
+    make_goals = [
+        "bzImage",
+    ],
 )
 
 copy_to_dist_dir(

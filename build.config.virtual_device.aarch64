@@ -21,4 +21,3 @@ EXT_MODULES="common-modules/virtual-device"
 
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
 FILES="arch/arm64/boot/dts/arm/fvp-base-revc.dtb"
-MAKE_GOALS="modules arm/fvp-base-revc.dtb"
