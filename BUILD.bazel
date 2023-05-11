@@ -237,6 +237,9 @@ kernel_build(
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
+    make_goals = [
+        "modules",
+    ],
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "nd_virtio.ko",
@@ -349,6 +352,10 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
+    make_goals = [
+        "modules",
+        "arm/fvp-base-revc.dtb",
+    ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     strip_modules = True,
 )
@@ -457,6 +464,10 @@ kernel_build(
     base_kernel = "//common:kernel_aarch64_16k",
     build_config = "build.config.virtual_device.aarch64.16k",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+    make_goals = [
+        "modules",
+        "arm/fvp-base-revc.dtb",
+    ],
     strip_modules = True,
 )
 
@@ -549,6 +560,9 @@ kernel_build(
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
+    make_goals = [
+        "modules",
+    ],
     strip_modules = True,
 )
 

@@ -9,4 +9,3 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && KCONFIG_CONFIG=\${
 POST_DEFCONFIG_CMDS=""
 
 FILES=""
-MAKE_GOALS="modules"
