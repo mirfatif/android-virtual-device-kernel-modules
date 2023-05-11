@@ -35,6 +35,9 @@ def kleaf_test(
         base_kernel = "//common:kernel_x86_64",
         build_config = "build.config.kleaf_test",
         module_outs = [],
+        make_goals = [
+            "modules",
+        ],
         **private_kwargs
     )
 
