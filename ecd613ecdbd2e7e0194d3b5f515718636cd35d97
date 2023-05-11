@@ -1,0 +1,71 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000044715225",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2585446?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "453e75e6_dd042ced",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 466,
+                "startChar": 0,
+                "endLine": 467,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 471,
+                "startChar": 0,
+                "endLine": 471,
+                "endChar": 0
+              },
+              "replacement": "    module_outs \u003d _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 562,
+                "startChar": 0,
+                "endLine": 563,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 566,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "    module_outs \u003d _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "ac9c8e86_277c8bac",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-11T16:04:14Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "ecd613ecdbd2e7e0194d3b5f515718636cd35d97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
