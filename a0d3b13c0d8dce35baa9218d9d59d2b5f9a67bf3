@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2e43bb_d9138e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1386891
+      },
+      "writtenOn": "2023-05-15T02:07:58Z",
+      "side": 1,
+      "message": "I can\u0027t +2 as well. +adelva for +2 review..",
+      "revId": "a0d3b13c0d8dce35baa9218d9d59d2b5f9a67bf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
