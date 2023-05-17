@@ -83,6 +83,13 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_submodule_config_conditional_srcs_test(
+        name = name + "_ddk_submodule_config_conditional_srcs_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+
     native.test_suite(
         name = name,
         tests = [
@@ -93,6 +100,7 @@ def kleaf_test(
             name + "_ddk_submodule_config_test",
             name + "_ddk_cflags_test",
             name + "_ddk_long_arg_list_test",
+            name + "_ddk_submodule_config_conditional_srcs_test",
         ],
         **kwargs
     )
@@ -534,4 +542,54 @@ def _ddk_long_arg_list_test(name, kernel_build, **private_kwargs):
             name + "_module",
         ],
         **private_kwargs
+    )
+
+def _ddk_submodule_config_conditional_srcs_test(name, kernel_build, **private_kwargs):
+    write_file(
+        name = name + "_defconfig_target",
+        out = name + "/defconfig",
+        content = [
+            "CONFIG_KLEAF_MUST_BE_SET=y",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_kconfig_target",
+        out = name + "/Kconfig",
+        content = [
+            "config KLEAF_MUST_BE_SET",
+            '\tbool "the prompt"',
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module",
+        kconfig = name + "_kconfig_target",
+        defconfig = name + "_defconfig_target",
+        kernel_build = kernel_build,
+        deps = [name + "_submodule"],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = name + "_submodule",
+        out = "mymodule.ko",
+        conditional_srcs = {
+            "CONFIG_KLEAF_MUST_BE_SET": {
+                True: ["must_be_set.c"],
+            }
+        }
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+        ],
     )
