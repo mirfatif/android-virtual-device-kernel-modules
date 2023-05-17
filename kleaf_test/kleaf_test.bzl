@@ -41,6 +41,16 @@ def kleaf_test(
         **private_kwargs
     )
 
+    ddk_module(
+        name = name + "_module",
+        out = name + "_mod.ko",
+        kernel_build = name + "_kernel_build",
+        srcs = ["client.c", "lib.c"],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [str(e) for e in range(1000)],
+        **private_kwargs
+    )
+
     _ddk_module_dep_test(
         name = name + "_ddk_module_dep_test",
         kernel_build = name + "_kernel_build",
