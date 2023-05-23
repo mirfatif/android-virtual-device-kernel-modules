@@ -713,7 +713,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 	int ret = 0;
 	uint32_t num_params, i, param, value;
 	size_t len;
-	struct drm_virtgpu_context_set_param *ctx_set_params;
+	struct drm_virtgpu_context_set_param *ctx_set_params = NULL;
 	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct drm_virtgpu_context_init *args = data;
@@ -746,31 +746,42 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 		switch (param) {
 		case VIRTGPU_CONTEXT_PARAM_CAPSET_ID:
-			if (value > MAX_CAPSET_ID)
-				return -EINVAL;
+			if (value > MAX_CAPSET_ID) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
 
-			if ((vgdev->capset_id_mask & (1 << value)) == 0)
-				return -EINVAL;
+			if ((vgdev->capset_id_mask & (1 << value)) == 0) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
 
 			/* Context capset ID already set */
 			if (vfpriv->context_init &
-			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK)
-				return -EINVAL;
+			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
 
 			vfpriv->context_init |= value;
 			break;
 		case VIRTGPU_CONTEXT_PARAM_NUM_FENCE_CONTEXTS:
-			if (vfpriv->base_fence_ctx)
-				return -EINVAL;
+			if (vfpriv->base_fence_ctx) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
 
-			if (value > MAX_FENCE_CONTEXTS)
-				return -EINVAL;
+			if (value > MAX_FENCE_CONTEXTS) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
 
 			vfpriv->base_fence_ctx = dma_fence_context_alloc(value);
 			vfpriv->num_fence_contexts = value;
 			break;
 		default:
-			return -EINVAL;
+			ret = -EINVAL;
+			goto out_unlock;
 		}
 	}
 
@@ -779,6 +790,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 out_unlock:
 	mutex_unlock(&vfpriv->context_lock);
+	kfree(ctx_set_params);
 	return ret;
 }
 
