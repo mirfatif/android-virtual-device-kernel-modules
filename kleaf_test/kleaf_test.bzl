@@ -77,6 +77,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_long_arg_list_test(
+        name = name + "_ddk_long_arg_list_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -86,6 +92,7 @@ def kleaf_test(
             name + "_ddk_module_config_test",
             name + "_ddk_submodule_config_test",
             name + "_ddk_cflags_test",
+            name + "_ddk_long_arg_list_test",
         ],
         **kwargs
     )
@@ -506,6 +513,25 @@ def _ddk_cflags_test(name, kernel_build, **private_kwargs):
             name + "_copts",
             name + "_copts_source_is_out",
             name + "_copts_out_is_nested",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_long_arg_list_test(name, kernel_build, **private_kwargs):
+    ddk_module(
+        name = name + "_module",
+        out = name + "_module.ko",
+        kernel_build = kernel_build,
+        srcs = ["client.c", "lib.c"],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [str(e) for e in range(100000)],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
         ],
         **private_kwargs
     )
