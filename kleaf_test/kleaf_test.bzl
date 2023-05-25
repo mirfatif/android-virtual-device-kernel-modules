@@ -71,6 +71,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_cflags_test(
+        name = name + "_ddk_cflags_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -79,6 +85,7 @@ def kleaf_test(
             name + "_ddk_module_conditional_srcs_test",
             name + "_ddk_module_config_test",
             name + "_ddk_submodule_config_test",
+            name + "_ddk_cflags_test",
         ],
         **kwargs
     )
@@ -425,6 +432,80 @@ def _ddk_submodule_config_test(name, kernel_build, **private_kwargs):
         name = name,
         targets = [
             name + "_module",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_cflags_test(name, kernel_build, **private_kwargs):
+    ddk_module(
+        name = name + "_copts",
+        kernel_build = kernel_build,
+        out = "mymodule.ko",
+        srcs = [
+            "copts_test/copts.c",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        local_defines = [
+            "NUMBER=123",
+            "BOOLDEF",
+            "STR=MYTOKEN",
+            "MY_FUNC_DECL=VOID FUNC SEMICOLON",
+        ],
+        copts = [
+            "-Wno-null-dereference",
+            "-Wno-unused-value",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_copts_source_is_out",
+        kernel_build = kernel_build,
+        out = "copts.ko",
+        srcs = [
+            "copts_test/copts.c",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        local_defines = [
+            "NUMBER=123",
+            "BOOLDEF",
+            "STR=MYTOKEN",
+            "MY_FUNC_DECL=VOID FUNC SEMICOLON",
+        ],
+        copts = [
+            "-Wno-null-dereference",
+            "-Wno-unused-value",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_copts_out_is_nested",
+        kernel_build = kernel_build,
+        out = "copts_test/mymodule.ko",
+        srcs = [
+            "copts_test/copts.c",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        local_defines = [
+            "NUMBER=123",
+            "BOOLDEF",
+            "STR=MYTOKEN",
+            "MY_FUNC_DECL=VOID FUNC SEMICOLON",
+        ],
+        copts = [
+            "-Wno-null-dereference",
+            "-Wno-unused-value",
+        ],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_copts",
+            name + "_copts_source_is_out",
+            name + "_copts_out_is_nested",
         ],
         **private_kwargs
     )
