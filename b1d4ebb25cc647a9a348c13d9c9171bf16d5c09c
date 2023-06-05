@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be97d82f_6658576a",
+        "filename": "configs/microdroid_arm64.defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2023-06-05T08:05:27Z",
+      "side": 0,
+      "message": "Isn\u0027t the convention to comment out rather than delete?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 18
+      },
+      "revId": "b1d4ebb25cc647a9a348c13d9c9171bf16d5c09c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
