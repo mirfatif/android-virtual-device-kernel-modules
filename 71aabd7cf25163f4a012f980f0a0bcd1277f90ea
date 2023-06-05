@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62098aec_6c8b7777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-05T13:26:14Z",
+      "side": 1,
+      "message": "Please review this. (The failed build is unrelated; is broken even at tot)",
+      "revId": "71aabd7cf25163f4a012f980f0a0bcd1277f90ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
