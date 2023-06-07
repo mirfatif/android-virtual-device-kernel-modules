@@ -33,6 +33,24 @@
       "message": "Why only arm64?",
       "revId": "71aabd7cf25163f4a012f980f0a0bcd1277f90ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1467015a_bcef271f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-07T01:07:30Z",
+      "side": 1,
+      "message": "My bad. Did the same for x86_64.",
+      "parentUuid": "7c4e8be6_e631daba",
+      "revId": "71aabd7cf25163f4a012f980f0a0bcd1277f90ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
