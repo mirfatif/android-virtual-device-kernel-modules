@@ -46,6 +46,53 @@
       "message": "File is not formatted. Run `buildifier kleaf_test/kleaf_test.bzl` to format the file, or apply the suggested fix.",
       "revId": "51283bb86acc672233b5797add69fab2ee970145",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046279302",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2593366?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "f82a17b1_a16e79f9",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 584,
+                "startChar": 0,
+                "endLine": 585,
+                "endChar": 0
+              },
+              "replacement": "            },\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "0d3e0c1f_784a4847",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-07T01:32:48Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier kleaf_test/kleaf_test.bzl` to format the file, or apply the suggested fix.",
+      "revId": "51283bb86acc672233b5797add69fab2ee970145",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
