@@ -23,6 +23,7 @@ load(
     "kernel_dtstree",
     "kernel_images",
     "kernel_module_group",
+    "kernel_module_test",
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
@@ -344,6 +345,27 @@ exec(
         $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
     """,
+)
+
+# artifact tests for x86_64
+
+kernel_module_test(
+    name = "virtual_device_x86_64_external_modules_test",
+    modules = [":virtual_device_x86_64_external_modules"],
+)
+
+test_suite(
+    name = "virtual_device_x86_64_tests",
+    tests = [
+        # scmversion for vmlinux
+        "//common:kernel_x86_64_test",
+        # scmversion for GKI modules
+        "//common:kernel_x86_64_modules_test",
+        # scmversion for in-tree device modules
+        ":virtual_device_x86_64_modules_test",
+        # scmversion for external modules
+        ":virtual_device_x86_64_external_modules_test",
+    ],
 )
 
 kernel_build(
