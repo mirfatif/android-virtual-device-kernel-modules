@@ -643,7 +643,7 @@ kernel_build(
         "vmlinux",
         "zImage",
     ],
-    # TODO(b/272164611): Set arch = "arm" once we have set up arm toolchain
+    arch = "arm",
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
     module_outs = sets.to_list(sets.make(
