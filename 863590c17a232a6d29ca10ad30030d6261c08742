@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c905b7_46dab649",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-08T16:49:38Z",
+      "side": 1,
+      "message": "in fact, this is potentially 6MiB smaller; see CL:2596396 (not cherry-picked to andorid14-6.1 yet but it might be)",
+      "range": {
+        "startLine": 14,
+        "startChar": 48,
+        "endLine": 14,
+        "endChar": 53
+      },
+      "revId": "863590c17a232a6d29ca10ad30030d6261c08742",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
