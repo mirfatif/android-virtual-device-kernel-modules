@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04889cf_f5945c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-08T18:51:08Z",
+      "side": 1,
+      "message": "Presubmit error due to b/286250297. Will bypass once this round of presubmit finishes.",
+      "revId": "4f2474d5a8af85a5e81d4669ce6fdd03d8757f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
