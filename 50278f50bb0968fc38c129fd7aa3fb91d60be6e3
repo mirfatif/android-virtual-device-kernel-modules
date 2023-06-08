@@ -22,6 +22,30 @@
       },
       "revId": "50278f50bb0968fc38c129fd7aa3fb91d60be6e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd8fbdd0_af0a0267",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-08T18:46:47Z",
+      "side": 1,
+      "message": "This is an implementation detail of `:virtual_device_x86_64` (in kernel_build). This is documented in https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/docs/scmversion.md;l\u003d74;drc\u003d9759edef52b0f9244b37354d0b7c9d65c53860ef, but yeah this is a great example of why DAMP (https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/docs/kleaf_development.md;l\u003d26;drc\u003dde4367020aeb979446d159c324e8739991cbd673 ) should be preferred",
+      "parentUuid": "b0af5cfb_8e9e4c98",
+      "range": {
+        "startLine": 365,
+        "startChar": 10,
+        "endLine": 365,
+        "endChar": 44
+      },
+      "revId": "50278f50bb0968fc38c129fd7aa3fb91d60be6e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
