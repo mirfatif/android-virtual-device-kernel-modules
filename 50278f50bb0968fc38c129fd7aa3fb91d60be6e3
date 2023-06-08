@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0af5cfb_8e9e4c98",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-06-08T10:18:47Z",
+      "side": 1,
+      "message": "where is this defined? or is it an implementation detail?",
+      "range": {
+        "startLine": 365,
+        "startChar": 10,
+        "endLine": 365,
+        "endChar": 44
+      },
+      "revId": "50278f50bb0968fc38c129fd7aa3fb91d60be6e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
