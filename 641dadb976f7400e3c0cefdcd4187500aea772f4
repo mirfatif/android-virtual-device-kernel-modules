@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4820217_93817484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-09T05:50:36Z",
+      "side": 1,
+      "message": "The test error [1] seems unrelated. Retrying.\n\n[1]\n```\ncom.android.tradefed.error.HarnessRuntimeException[OPTION_CONFIGURATION_ERROR|500008|CUSTOMER_ISSUE]: At least one of the options, --test-mapping-test-group or --include-filter, should be set.\n```",
+      "revId": "641dadb976f7400e3c0cefdcd4187500aea772f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
