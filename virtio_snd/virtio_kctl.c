@@ -76,6 +76,7 @@ static int virtsnd_kctl_info(struct snd_kcontrol *kcontrol,
 
 		break;
 	case SNDRV_CTL_ELEM_TYPE_ENUMERATED:
+		uinfo->value.enumerated.items = kinfo->value.enumerated.items;
 		i = uinfo->value.enumerated.item;
 		if (i >= le32_to_cpu(kinfo->value.enumerated.items))
 			return -EINVAL;
