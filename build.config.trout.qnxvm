@@ -1,0 +1,16 @@
+. ${ROOT_DIR}/common-modules/virtual-device/build.config.virtual_device
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
+
+DEFCONFIG=vd_aarch_64_gki_defconfig
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/trout.qnxvm.fragment"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG}"
+
+# HACK(chenhaosjtuacm, b/228238529): Remove this when we do not need to fork SCMI and/or Virtio GPU module
+EXTRA_CMDS="
+find ${MODULES_STAGING_DIR} -path '*/drivers/firmware/arm_scmi/scmi-module.ko' -print -delete && \
+find ${MODULES_STAGING_DIR} -path '*/drivers/gpu/drm/virtio/virtio-gpu.ko' -print -delete
+"
+
+FILES="
+arch/arm64/boot/Image
+System.map"
