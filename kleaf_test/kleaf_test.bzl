@@ -26,6 +26,7 @@ def kleaf_test(
 
     kernel_build(
         name = name + "_kernel_build",
+        arch = "x86_64",
         srcs = [
             "//common:kernel_x86_64_sources",
             "kleaf_test.fragment",
