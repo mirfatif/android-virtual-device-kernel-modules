@@ -22,6 +22,30 @@
       },
       "revId": "26fbfe7ba22cce5f8d681b79f12fe3a544c308ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb66ae7_a6a8a25f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-06-15T20:42:32Z",
+      "side": 1,
+      "message": "No. I\u0027ll delete in upcoming CL",
+      "parentUuid": "3345c3de_7d8ff80a",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 56
+      },
+      "revId": "26fbfe7ba22cce5f8d681b79f12fe3a544c308ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
