@@ -27,9 +27,9 @@ load(
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
+load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 filegroup(
@@ -335,7 +335,7 @@ copy_to_dist_dir(
     flat = True,
 )
 
-exec(
+hermetic_exec(
     name = "virtual_device_x86_64_dist",
     data = [
         ":virtual_device_x86_64_copy_to_dist_dir",
@@ -467,7 +467,7 @@ copy_to_dist_dir(
     flat = True,
 )
 
-exec(
+hermetic_exec(
     name = "virtual_device_aarch64_dist",
     data = [
         ":virtual_device_aarch64_copy_to_dist_dir",
@@ -564,7 +564,7 @@ copy_to_dist_dir(
     flat = True,
 )
 
-exec(
+hermetic_exec(
     name = "virtual_device_aarch64_16k_dist",
     data = [
         ":virtual_device_aarch64_16k_copy_to_dist_dir",
