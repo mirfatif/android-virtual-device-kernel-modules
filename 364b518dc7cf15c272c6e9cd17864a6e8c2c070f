@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79d4c9f7_186f8540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2023-06-16T07:22:35Z",
+      "side": 1,
+      "message": "Why did `Buildifier` did not complain about this?",
+      "revId": "364b518dc7cf15c272c6e9cd17864a6e8c2c070f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
