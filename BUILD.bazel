@@ -30,7 +30,6 @@ load(
 load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
