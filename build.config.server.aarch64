@@ -17,6 +17,7 @@ DEFCONFIG=vd_aarch64_gce_defconfig
 #   See b/275468906#comment8
 PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/arm64/configs && \
      KCONFIG_CONFIG=\${OUT_DIR}/arch/arm64/configs/${DEFCONFIG} \
+        ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
         ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
         ${ROOT_DIR}/common-modules/virtual-device/linux_distro.fragment && \
