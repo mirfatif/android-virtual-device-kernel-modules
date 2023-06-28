@@ -70,6 +70,24 @@
       "parentUuid": "d9bf3d11_2a8eedda",
       "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef56613_ba311a12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-28T06:22:14Z",
+      "side": 1,
+      "message": "Hold on. On second thought, we may have to go back to 5.15 kernel if we are to share vendor modules across host and guest. Let\u0027s keep it for now.\n\n+1\u0027ed. (I can\u0027t +2 here)",
+      "parentUuid": "e9e40a7a_baa4d70b",
+      "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
