@@ -52,6 +52,24 @@
       "parentUuid": "d4146851_d1e4852f",
       "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e40a7a_baa4d70b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-28T06:20:06Z",
+      "side": 1,
+      "message": "I am fine with removing the target from the branch.",
+      "parentUuid": "d9bf3d11_2a8eedda",
+      "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
