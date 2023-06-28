@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d25335b_ec3684dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-06-28T00:03:26Z",
+      "side": 1,
+      "message": "note: We don\u0027t use microdroid kernel built from 14-5.15",
+      "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
