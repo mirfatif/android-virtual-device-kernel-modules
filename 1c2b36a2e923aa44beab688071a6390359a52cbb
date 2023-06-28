@@ -88,6 +88,24 @@
       "parentUuid": "e9e40a7a_baa4d70b",
       "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f0c830_562749cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2023-06-28T09:23:07Z",
+      "side": 1,
+      "message": "I am not sure we will need to switch back to 5.15 for vendor modules. I prefer if we disable the target on CI, but keep it\u0027s definition in the source tree. We can always re-enable it later",
+      "parentUuid": "0ef56613_ba311a12",
+      "revId": "1c2b36a2e923aa44beab688071a6390359a52cbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
