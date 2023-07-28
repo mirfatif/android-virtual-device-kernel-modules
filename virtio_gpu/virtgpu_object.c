@@ -25,28 +25,11 @@
 
 #include <linux/dma-mapping.h>
 #include <linux/moduleparam.h>
-#ifdef CONFIG_TRACE_GPU_MEM
-#include <trace/events/gpu_mem.h>
-#endif
 
 #include "virtgpu_drv.h"
 
 static int virtio_gpu_virglrenderer_workaround = 1;
 module_param_named(virglhack, virtio_gpu_virglrenderer_workaround, int, 0400);
-
-#ifdef CONFIG_TRACE_GPU_MEM
-static inline void virtio_gpu_trace_total_mem(struct virtio_gpu_device *vgdev,
-					      s64 delta)
-{
-	u64 total_mem = atomic64_add_return(delta, &vgdev->total_mem);
-
-	trace_gpu_mem_total(0, 0, total_mem);
-}
-#else
-static inline void virtio_gpu_trace_total_mem(struct virtio_gpu_device *, s64)
-{
-}
-#endif
 
 int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev, uint32_t *resid)
 {
@@ -71,7 +54,7 @@ int virtio_gpu_resource_id_get(struct virtio_gpu_device *vgdev, uint32_t *resid)
 	return 0;
 }
 
-static void virtio_gpu_resource_id_put(struct virtio_gpu_device *vgdev, uint32_t id)
+void virtio_gpu_resource_id_put(struct virtio_gpu_device *vgdev, uint32_t id)
 {
 	if (!virtio_gpu_virglrenderer_workaround) {
 		ida_free(&vgdev->resource_ida, id - 1);
@@ -121,7 +104,6 @@ static void virtio_gpu_free_object(struct drm_gem_object *obj)
 	struct virtio_gpu_device *vgdev = bo->base.base.dev->dev_private;
 
 	if (bo->created) {
-		virtio_gpu_trace_total_mem(vgdev, -(obj->size));
 		virtio_gpu_cmd_unref_resource(vgdev, bo);
 		virtio_gpu_notify(vgdev);
 		/* completion handler calls virtio_gpu_cleanup_object() */
@@ -136,7 +118,6 @@ static const struct drm_gem_object_funcs virtio_gpu_shmem_funcs = {
 	.close = virtio_gpu_gem_object_close,
 
 	.print_info = drm_gem_shmem_print_info,
-	.export = virtgpu_gem_prime_export,
 	.pin = drm_gem_shmem_pin,
 	.unpin = drm_gem_shmem_unpin,
 	.get_sg_table = drm_gem_shmem_get_sg_table,
@@ -187,9 +168,11 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
 	 * since virtio_gpu doesn't support dma-buf import from other devices.
 	 */
 	shmem->pages = drm_gem_shmem_get_sg_table(&bo->base.base);
-	if (!shmem->pages) {
+	if (IS_ERR(shmem->pages)) {
 		drm_gem_shmem_unpin(&bo->base.base);
-		return -EINVAL;
+		ret = PTR_ERR(shmem->pages);
+		shmem->pages = NULL;
+		return ret;
 	}
 
 	if (use_dma_api) {
@@ -253,13 +236,13 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 
 	bo->dumb = params->dumb;
 
-	if (fence) {
-		ret = -ENOMEM;
-		objs = virtio_gpu_array_alloc(1);
-		if (!objs)
-			goto err_put_id;
-		virtio_gpu_array_add_obj(objs, &bo->base.base);
+	ret = -ENOMEM;
+	objs = virtio_gpu_array_alloc(1);
+	if (!objs)
+		goto err_put_id;
+	virtio_gpu_array_add_obj(objs, &bo->base.base);
 
+	if (fence) {
 		ret = virtio_gpu_array_lock_resv(objs);
 		if (ret != 0)
 			goto err_put_objs;
@@ -267,13 +250,14 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 
 	ret = virtio_gpu_object_shmem_init(vgdev, bo, &ents, &nents);
 	if (ret != 0) {
+		virtio_gpu_array_put_free(objs);
 		virtio_gpu_free_object(&shmem_obj->base);
-		return ret;
+		goto err_unlock_resv;
 	}
 
 	if (params->blob) {
 		virtio_gpu_cmd_resource_create_blob(vgdev, bo, params,
-						    ents, nents);
+						    ents, nents, objs);
 	} else if (params->virgl) {
 		virtio_gpu_cmd_resource_create_3d(vgdev, bo, params,
 						  objs, fence);
@@ -284,10 +268,12 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 		virtio_gpu_object_attach(vgdev, bo, ents, nents);
 	}
 
-	virtio_gpu_trace_total_mem(vgdev, shmem_obj->base.size);
 	*bo_ptr = bo;
 	return 0;
 
+err_unlock_resv:
+	if (fence)
+		virtio_gpu_array_unlock_resv(objs);
 err_put_objs:
 	virtio_gpu_array_put_free(objs);
 err_put_id:

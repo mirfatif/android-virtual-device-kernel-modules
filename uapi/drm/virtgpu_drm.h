@@ -24,7 +24,7 @@
 #ifndef VIRTGPU_DRM_H
 #define VIRTGPU_DRM_H
 
-#include <drm/drm.h>
+#include "drm.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -51,11 +51,11 @@ extern "C" {
 
 #define VIRTGPU_EXECBUF_FENCE_FD_IN	0x01
 #define VIRTGPU_EXECBUF_FENCE_FD_OUT	0x02
-#define VIRTGPU_EXECBUF_FENCE_CONTEXT	0x04
+#define VIRTGPU_EXECBUF_RING_IDX	0x04
 #define VIRTGPU_EXECBUF_FLAGS  (\
 		VIRTGPU_EXECBUF_FENCE_FD_IN |\
 		VIRTGPU_EXECBUF_FENCE_FD_OUT |\
-		VIRTGPU_EXECBUF_FENCE_CONTEXT |\
+		VIRTGPU_EXECBUF_RING_IDX |\
 		0)
 
 struct drm_virtgpu_map {
@@ -64,6 +64,7 @@ struct drm_virtgpu_map {
 	__u32 pad;
 };
 
+/* fence_fd is modified on success if VIRTGPU_EXECBUF_FENCE_FD_OUT flag is set. */
 struct drm_virtgpu_execbuffer {
 	__u32 flags;
 	__u32 size;
@@ -71,7 +72,7 @@ struct drm_virtgpu_execbuffer {
 	__u64 bo_handles;
 	__u32 num_bo_handles;
 	__s32 fence_fd; /* in/out fence fd (see VIRTGPU_EXECBUF_FENCE_FD_IN/OUT) */
-	__u32 fence_ctx_idx;  /* which fence timeline to use */
+	__u32 ring_idx; /* command ring index (see VIRTGPU_EXECBUF_RING_IDX) */
 	__u32 pad;
 };
 
@@ -82,7 +83,6 @@ struct drm_virtgpu_execbuffer {
 #define VIRTGPU_PARAM_CROSS_DEVICE 5 /* Cross virtio-device resource sharing  */
 #define VIRTGPU_PARAM_CONTEXT_INIT 6 /* DRM_VIRTGPU_CONTEXT_INIT */
 #define VIRTGPU_PARAM_SUPPORTED_CAPSET_IDs 7 /* Bitmask of supported capability set ids */
-#define VIRTGPU_PARAM_CREATE_GUEST_HANDLE 8 /* Host OS handle can be created from guest memory. */
 
 struct drm_virtgpu_getparam {
 	__u64 param;
@@ -113,6 +113,34 @@ struct drm_virtgpu_resource_info {
 	__u32 res_handle;
 	__u32 size;
 	__u32 blob_mem;
+};
+
+/* CHROMIUM */
+struct drm_virtgpu_resource_info_cros {
+	__u32 bo_handle;
+	__u32 res_handle;
+	__u32 size;
+
+/* Always returns res_handle, size, and blob_mem.
+ * !! RETURN SEMANTICS ARE CHANGED BY THIS COMMIT.
+ * !! User space changes are likely required for anything relying on
+ * !! getting extended info from VIRTGPU_RESOURCE_INFO_TYPE_DEFAULT.
+ */
+#define VIRTGPU_RESOURCE_INFO_TYPE_DEFAULT 0
+/* Always returns res_handle, size, and "extended info".
+ * !! Produces an error (EINVAL) for blob resources created with blob_mem ==
+ * !! VIRTGPU_BLOB_MEM_GUEST, which doesn't use host storage.
+ */
+#define VIRTGPU_RESOURCE_INFO_TYPE_EXTENDED 1
+	union {
+		__u32 type; /* in, VIRTGPU_RESOURCE_INFO_TYPE_* */
+		__u32 blob_mem;
+		__u32 stride;
+		__u32 strides[4]; /* strides[0] is accessible with stride. */
+	};
+	__u32 num_planes;
+	__u32 offsets[4];
+	__u64 format_modifier;
 };
 
 struct drm_virtgpu_3d_box {
@@ -161,10 +189,9 @@ struct drm_virtgpu_resource_create_blob {
 #define VIRTGPU_BLOB_MEM_HOST3D            0x0002
 #define VIRTGPU_BLOB_MEM_HOST3D_GUEST      0x0003
 
-#define VIRTGPU_BLOB_FLAG_USE_MAPPABLE        0x0001
-#define VIRTGPU_BLOB_FLAG_USE_SHAREABLE       0x0002
-#define VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE    0x0004
-#define VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE 0x0008
+#define VIRTGPU_BLOB_FLAG_USE_MAPPABLE     0x0001
+#define VIRTGPU_BLOB_FLAG_USE_SHAREABLE    0x0002
+#define VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE 0x0004
 	/* zero is invalid blob_mem */
 	__u32 blob_mem;
 	__u32 blob_flags;
@@ -173,9 +200,8 @@ struct drm_virtgpu_resource_create_blob {
 	__u64 size;
 
 	/*
-	 * for 3D contexts with VIRTGPU_BLOB_MEM_HOST3D_GUEST, VIRTGPU_BLOB_MEM_HOST3D,
-	 * VIRTGPU_BLOB_MEM_GUEST + VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE.
-	 * Otherwise, must be zero.
+	 * for 3D contexts with VIRTGPU_BLOB_MEM_HOST3D_GUEST and
+	 * VIRTGPU_BLOB_MEM_HOST3D otherwise, must be zero.
 	 */
 	__u32 pad;
 	__u32 cmd_size;
@@ -183,9 +209,9 @@ struct drm_virtgpu_resource_create_blob {
 	__u64 blob_id;
 };
 
-#define VIRTGPU_CONTEXT_PARAM_CAPSET_ID                0x0001
-#define VIRTGPU_CONTEXT_PARAM_NUM_FENCE_CONTEXTS       0x0002
-#define VIRTGPU_CONTEXT_PARAM_POLL_FENCE_CONTEXT_MASK  0x0003
+#define VIRTGPU_CONTEXT_PARAM_CAPSET_ID       0x0001
+#define VIRTGPU_CONTEXT_PARAM_NUM_RINGS       0x0002
+#define VIRTGPU_CONTEXT_PARAM_POLL_RINGS_MASK 0x0003
 struct drm_virtgpu_context_set_param {
 	__u64 param;
 	__u64 value;
@@ -198,6 +224,13 @@ struct drm_virtgpu_context_init {
 	/* pointer to drm_virtgpu_context_set_param array */
 	__u64 ctx_set_params;
 };
+
+/*
+ * Event code that's given when VIRTGPU_CONTEXT_PARAM_POLL_RINGS_MASK is in
+ * effect.  The event size is sizeof(drm_event), since there is no additional
+ * payload.
+ */
+#define VIRTGPU_EVENT_FENCE_SIGNALED 0x90000000
 
 #define DRM_IOCTL_VIRTGPU_MAP \
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_MAP, struct drm_virtgpu_map)
@@ -217,6 +250,11 @@ struct drm_virtgpu_context_init {
 #define DRM_IOCTL_VIRTGPU_RESOURCE_INFO \
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_RESOURCE_INFO, \
 		 struct drm_virtgpu_resource_info)
+
+/* same ioctl number as DRM_IOCTL_VIRTGPU_RESOURCE_INFO */
+#define DRM_IOCTL_VIRTGPU_RESOURCE_INFO_CROS \
+	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_RESOURCE_INFO, \
+		 struct drm_virtgpu_resource_info_cros)
 
 #define DRM_IOCTL_VIRTGPU_TRANSFER_FROM_HOST \
 	DRM_IOWR(DRM_COMMAND_BASE + DRM_VIRTGPU_TRANSFER_FROM_HOST,	\

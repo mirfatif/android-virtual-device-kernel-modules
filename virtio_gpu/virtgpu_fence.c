@@ -73,10 +73,9 @@ static const struct dma_fence_ops virtio_gpu_fence_ops = {
 
 struct virtio_gpu_fence *virtio_gpu_fence_alloc(struct virtio_gpu_device *vgdev,
 						uint64_t base_fence_ctx,
-						uint32_t fence_ctx_idx)
+						uint32_t ring_idx)
 {
-	uint64_t fence_context = base_fence_ctx + fence_ctx_idx;
-
+	uint64_t fence_context = base_fence_ctx + ring_idx;
 	struct virtio_gpu_fence_driver *drv = &vgdev->fence_drv;
 	struct virtio_gpu_fence *fence = kzalloc(sizeof(struct virtio_gpu_fence),
 							GFP_KERNEL);
@@ -85,7 +84,7 @@ struct virtio_gpu_fence *virtio_gpu_fence_alloc(struct virtio_gpu_device *vgdev,
 		return fence;
 
 	fence->drv = drv;
-	fence->fence_ctx_idx = fence_ctx_idx;
+	fence->ring_idx = ring_idx;
 	fence->emit_fence_info = !(base_fence_ctx == drv->context);
 
 	/* This only partially initializes the fence because the seqno is
@@ -120,8 +119,8 @@ void virtio_gpu_fence_emit(struct virtio_gpu_device *vgdev,
 	/* Only currently defined fence param. */
 	if (fence->emit_fence_info) {
 		cmd_hdr->flags |=
-			cpu_to_le32(VIRTIO_GPU_FLAG_INFO_FENCE_CTX_IDX);
-		cmd_hdr->info = cpu_to_le64(fence->fence_ctx_idx);
+			cpu_to_le32(VIRTIO_GPU_FLAG_INFO_RING_IDX);
+		cmd_hdr->ring_idx = (u8)fence->ring_idx;
 	}
 }
 
@@ -153,11 +152,21 @@ void virtio_gpu_fence_event_process(struct virtio_gpu_device *vgdev,
 				continue;
 
 			dma_fence_signal_locked(&curr->f);
+			if (curr->e) {
+				drm_send_event(vgdev->ddev, &curr->e->base);
+				curr->e = NULL;
+			}
+
 			list_del(&curr->node);
 			dma_fence_put(&curr->f);
 		}
 
 		dma_fence_signal_locked(&signaled->f);
+		if (signaled->e) {
+			drm_send_event(vgdev->ddev, &signaled->e->base);
+			signaled->e = NULL;
+		}
+
 		list_del(&signaled->node);
 		dma_fence_put(&signaled->f);
 		break;

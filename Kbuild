@@ -1,5 +1,4 @@
-# TODO(280902741): Add back after virtio_gpu is migrated.
-# obj-m += virtio_gpu/
+obj-m += virtio_gpu/
 
 obj-m += virtio_snd/
 

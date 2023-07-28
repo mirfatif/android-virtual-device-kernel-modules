@@ -34,10 +34,39 @@
 
 #include "virtgpu_drv.h"
 
-#define VIRTGPU_BLOB_FLAG_MASK (VIRTGPU_BLOB_FLAG_USE_MAPPABLE | \
-				VIRTGPU_BLOB_FLAG_USE_SHAREABLE | \
-				VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE | \
-				VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE)
+#define VIRTGPU_BLOB_FLAG_USE_MASK (VIRTGPU_BLOB_FLAG_USE_MAPPABLE | \
+				    VIRTGPU_BLOB_FLAG_USE_SHAREABLE | \
+				    VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE)
+
+static int virtio_gpu_fence_event_create(struct drm_device *dev,
+					 struct drm_file *file,
+					 struct virtio_gpu_fence *fence,
+					 uint32_t ring_idx)
+{
+	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
+	struct virtio_gpu_fence_event *e = NULL;
+	int ret;
+
+	if (!(vfpriv->ring_idx_mask & (1 << ring_idx)))
+		return 0;
+
+	e = kzalloc(sizeof(*e), GFP_KERNEL);
+	if (!e)
+		return -ENOMEM;
+
+	e->event.type = VIRTGPU_EVENT_FENCE_SIGNALED;
+	e->event.length = sizeof(e->event);
+
+	ret = drm_event_reserve_init(dev, file, &e->base, &e->event);
+	if (ret)
+		goto free;
+
+	fence->e = e;
+	return 0;
+free:
+	kfree(e);
+	return ret;
+}
 
 /* Must be called with &virtio_gpu_fpriv.struct_mutex held. */
 static void virtio_gpu_create_context_locked(struct virtio_gpu_device *vgdev,
@@ -97,13 +126,13 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 	void __user *user_bo_handles = NULL;
 	struct virtio_gpu_object_array *buflist = NULL;
 	struct sync_file *sync_file;
-	int in_fence_fd = exbuf->fence_fd;
 	int out_fence_fd = -1;
 	void *buf;
-	uint64_t fence_ctx, fence_ctx_idx;
+	uint64_t fence_ctx;
+	uint32_t ring_idx;
 
 	fence_ctx = vgdev->fence_drv.context;
-	fence_ctx_idx = 0;
+	ring_idx = 0;
 
 	if (vgdev->has_virgl_3d == false)
 		return -ENOSYS;
@@ -111,24 +140,22 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 	if ((exbuf->flags & ~VIRTGPU_EXECBUF_FLAGS))
 		return -EINVAL;
 
-	if ((exbuf->flags & VIRTGPU_EXECBUF_FENCE_CONTEXT)) {
-		if (exbuf->fence_ctx_idx >= vfpriv->num_fence_contexts)
+	if ((exbuf->flags & VIRTGPU_EXECBUF_RING_IDX)) {
+		if (exbuf->ring_idx >= vfpriv->num_rings)
 			return -EINVAL;
 
 		if (!vfpriv->base_fence_ctx)
 			return -EINVAL;
 
 		fence_ctx = vfpriv->base_fence_ctx;
-		fence_ctx_idx = exbuf->fence_ctx_idx;
+		ring_idx = exbuf->ring_idx;
 	}
-
-	exbuf->fence_fd = -1;
 
 	virtio_gpu_create_context(dev, file);
 	if (exbuf->flags & VIRTGPU_EXECBUF_FENCE_FD_IN) {
 		struct dma_fence *in_fence;
 
-		in_fence = sync_file_get_fence(in_fence_fd);
+		in_fence = sync_file_get_fence(exbuf->fence_fd);
 
 		if (!in_fence)
 			return -EINVAL;
@@ -189,18 +216,22 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 			goto out_memdup;
 	}
 
-	out_fence = virtio_gpu_fence_alloc(vgdev, fence_ctx, fence_ctx_idx);
+	out_fence = virtio_gpu_fence_alloc(vgdev, fence_ctx, ring_idx);
 	if(!out_fence) {
 		ret = -ENOMEM;
 		goto out_unresv;
 	}
+
+	ret = virtio_gpu_fence_event_create(dev, file, out_fence, ring_idx);
+	if (ret)
+		goto out_unresv;
 
 	if (out_fence_fd >= 0) {
 		sync_file = sync_file_create(&out_fence->f);
 		if (!sync_file) {
 			dma_fence_put(&out_fence->f);
 			ret = -ENOMEM;
-			goto out_memdup;
+			goto out_unresv;
 		}
 
 		exbuf->fence_fd = out_fence_fd;
@@ -257,9 +288,6 @@ static int virtio_gpu_getparam_ioctl(struct drm_device *dev, void *data,
 		break;
 	case VIRTGPU_PARAM_SUPPORTED_CAPSET_IDs:
 		value = vgdev->capset_id_mask;
-		break;
-	case VIRTGPU_PARAM_CREATE_GUEST_HANDLE:
-		value = vgdev->has_create_guest_handle ? 1 : 0;
 		break;
 	default:
 		return -EINVAL;
@@ -327,21 +355,39 @@ static int virtio_gpu_resource_create_ioctl(struct drm_device *dev, void *data,
 		drm_gem_object_release(obj);
 		return ret;
 	}
-	drm_gem_object_put(obj);
 
 	rc->res_handle = qobj->hw_res_handle; /* similiar to a VM address */
 	rc->bo_handle = handle;
+
+	/*
+	 * The handle owns the reference now.  But we must drop our
+	 * remaining reference *after* we no longer need to dereference
+	 * the obj.  Otherwise userspace could guess the handle and
+	 * race closing it from another thread.
+	 */
+	drm_gem_object_put(obj);
+
 	return 0;
 }
 
-static int virtio_gpu_resource_info_ioctl(struct drm_device *dev, void *data,
-					  struct drm_file *file)
+static int virtio_gpu_resource_info_cros_ioctl(struct drm_device *dev,
+					       void *data,
+					       struct drm_file *file)
 {
-	struct drm_virtgpu_resource_info *ri = data;
+	struct virtio_gpu_device *vgdev = dev->dev_private;
+	struct drm_virtgpu_resource_info_cros *ri = data;
+	const u32 type = ri->type;
 	struct drm_gem_object *gobj = NULL;
 	struct virtio_gpu_object *qobj = NULL;
+	int ret = 0;
+
+	/* validate only as the extended info is returned in either case */
+	if (type != VIRTGPU_RESOURCE_INFO_TYPE_DEFAULT &&
+	    type != VIRTGPU_RESOURCE_INFO_TYPE_EXTENDED)
+		return -EINVAL;
 
 	gobj = drm_gem_object_lookup(file, ri->bo_handle);
+
 	if (gobj == NULL)
 		return -ENOENT;
 
@@ -349,11 +395,39 @@ static int virtio_gpu_resource_info_ioctl(struct drm_device *dev, void *data,
 
 	ri->size = qobj->base.base.size;
 	ri->res_handle = qobj->hw_res_handle;
-	if (qobj->host3d_blob || qobj->guest_blob)
-		ri->blob_mem = qobj->blob_mem;
 
+	if (type == VIRTGPU_RESOURCE_INFO_TYPE_DEFAULT) {
+		ri->blob_mem = qobj->blob_mem;
+		goto out;
+	} else if (qobj->blob_mem == VIRTGPU_BLOB_MEM_GUEST) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	ri->stride = 0;
+
+	if (!qobj->create_callback_done) {
+		ret = wait_event_interruptible(vgdev->resp_wq,
+					       qobj->create_callback_done);
+		if (ret)
+			goto out;
+	}
+
+	if (qobj->num_planes) {
+		int i;
+
+		ri->num_planes = qobj->num_planes;
+		for (i = 0; i < qobj->num_planes; i++) {
+			ri->strides[i] = qobj->strides[i];
+			ri->offsets[i] = qobj->offsets[i];
+		}
+	}
+
+	ri->format_modifier = qobj->format_modifier;
+
+out:
 	drm_gem_object_put(gobj);
-	return 0;
+	return ret;
 }
 
 static int virtio_gpu_transfer_from_host_ioctl(struct drm_device *dev,
@@ -549,8 +623,10 @@ static int virtio_gpu_get_caps_ioctl(struct drm_device *dev,
 	spin_unlock(&vgdev->display_info_lock);
 
 	/* not in cache - need to talk to hw */
-	virtio_gpu_cmd_get_capset(vgdev, found_valid, args->cap_set_ver,
-				  &cache_ent);
+	ret = virtio_gpu_cmd_get_capset(vgdev, found_valid, args->cap_set_ver,
+					&cache_ent);
+	if (ret)
+		return ret;
 	virtio_gpu_notify(vgdev);
 
 copy_exit:
@@ -576,24 +652,15 @@ static int verify_blob(struct virtio_gpu_device *vgdev,
 		       struct drm_virtgpu_resource_create_blob *rc_blob,
 		       bool *guest_blob, bool *host3d_blob)
 {
-	bool create_guest_handle = false;
 	if (!vgdev->has_resource_blob)
 		return -EINVAL;
 
-	if ((rc_blob->blob_flags & ~VIRTGPU_BLOB_FLAG_MASK) ||
-	    !rc_blob->blob_flags)
+	if (rc_blob->blob_flags & ~VIRTGPU_BLOB_FLAG_USE_MASK)
 		return -EINVAL;
 
 	if (rc_blob->blob_flags & VIRTGPU_BLOB_FLAG_USE_CROSS_DEVICE) {
 		if (!vgdev->has_resource_assign_uuid)
 			return -EINVAL;
-	}
-
-	if (rc_blob->blob_flags & VIRTGPU_BLOB_FLAG_CREATE_GUEST_HANDLE) {
-		if (!vgdev->has_create_guest_handle)
-			return -EINVAL;
-
-		create_guest_handle = true;
 	}
 
 	switch (rc_blob->blob_mem) {
@@ -610,7 +677,7 @@ static int verify_blob(struct virtio_gpu_device *vgdev,
 		return -EINVAL;
 	}
 
-	if (*host3d_blob || (vgdev->has_virgl_3d && create_guest_handle)) {
+	if (*host3d_blob) {
 		if (!vgdev->has_virgl_3d)
 			return -EINVAL;
 
@@ -699,10 +766,17 @@ static int virtio_gpu_resource_create_blob_ioctl(struct drm_device *dev,
 		drm_gem_object_release(obj);
 		return ret;
 	}
-	drm_gem_object_put(obj);
 
 	rc_blob->res_handle = bo->hw_res_handle;
 	rc_blob->bo_handle = handle;
+
+	/*
+	 * The handle owns the reference now.  But we must drop our
+	 * remaining reference *after* we no longer need to dereference
+	 * the obj.  Otherwise userspace could guess the handle and
+	 * race closing it from another thread.
+	 */
+	drm_gem_object_put(obj);
 
 	return 0;
 }
@@ -712,8 +786,9 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 {
 	int ret = 0;
 	uint32_t num_params, i, param, value;
+	uint64_t valid_ring_mask;
 	size_t len;
-	struct drm_virtgpu_context_set_param *ctx_set_params = NULL;
+	struct drm_virtgpu_context_set_param *ctx_set_params;
 	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct drm_virtgpu_context_init *args = data;
@@ -725,7 +800,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 		return -EINVAL;
 
 	/* Number of unique parameters supported at this time. */
-	if (num_params > 2)
+	if (num_params > 3)
 		return -EINVAL;
 
 	ctx_set_params = memdup_user(u64_to_user_ptr(args->ctx_set_params),
@@ -746,40 +821,52 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 		switch (param) {
 		case VIRTGPU_CONTEXT_PARAM_CAPSET_ID:
-			if (value > MAX_CAPSET_ID) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			if (value > MAX_CAPSET_ID)
+				return -EINVAL;
 
-			if ((vgdev->capset_id_mask & (1 << value)) == 0) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			if ((vgdev->capset_id_mask & (1ULL << value)) == 0)
+				return -EINVAL;
 
 			/* Context capset ID already set */
 			if (vfpriv->context_init &
-			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK)
+				return -EINVAL;
 
 			vfpriv->context_init |= value;
 			break;
-		case VIRTGPU_CONTEXT_PARAM_NUM_FENCE_CONTEXTS:
+		case VIRTGPU_CONTEXT_PARAM_NUM_RINGS:
 			if (vfpriv->base_fence_ctx) {
 				ret = -EINVAL;
 				goto out_unlock;
 			}
 
-			if (value > MAX_FENCE_CONTEXTS) {
+			if (value > MAX_RINGS) {
 				ret = -EINVAL;
 				goto out_unlock;
 			}
 
 			vfpriv->base_fence_ctx = dma_fence_context_alloc(value);
-			vfpriv->num_fence_contexts = value;
+			vfpriv->num_rings = value;
+			break;
+		case VIRTGPU_CONTEXT_PARAM_POLL_RINGS_MASK:
+			if (vfpriv->ring_idx_mask) {
+				ret = -EINVAL;
+				goto out_unlock;
+			}
+
+			vfpriv->ring_idx_mask = value;
 			break;
 		default:
+			return -EINVAL;
+		}
+	}
+
+	if (vfpriv->ring_idx_mask) {
+		valid_ring_mask = 0;
+		for (i = 0; i < vfpriv->num_rings; i++)
+			valid_ring_mask |= 1ULL << i;
+
+		if (~valid_ring_mask & vfpriv->ring_idx_mask) {
 			ret = -EINVAL;
 			goto out_unlock;
 		}
@@ -790,7 +877,6 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 out_unlock:
 	mutex_unlock(&vfpriv->context_lock);
-	kfree(ctx_set_params);
 	return ret;
 }
 
@@ -808,7 +894,8 @@ struct drm_ioctl_desc virtio_gpu_ioctls[DRM_VIRTIO_NUM_IOCTLS] = {
 			  virtio_gpu_resource_create_ioctl,
 			  DRM_RENDER_ALLOW),
 
-	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_INFO, virtio_gpu_resource_info_ioctl,
+	DRM_IOCTL_DEF_DRV(VIRTGPU_RESOURCE_INFO_CROS,
+			  virtio_gpu_resource_info_cros_ioctl,
 			  DRM_RENDER_ALLOW),
 
 	/* make transfer async to the main ring? - no sure, can we
