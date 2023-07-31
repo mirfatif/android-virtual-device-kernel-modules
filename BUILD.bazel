@@ -80,11 +80,25 @@ filegroup(
 )
 
 filegroup(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "v4l2loopback_sources",
     srcs = [
         "v4l2loopback/v4l2loopback.c",
         "v4l2loopback/v4l2loopback.h",
         "v4l2loopback/v4l2loopback_formats.h",
+=======
+    name = "virtio_video_sources",
+    srcs = [
+        "virtio_video/virtio_video.h",
+        "virtio_video/virtio_video_cam.c",
+        "virtio_video/virtio_video_caps.c",
+        "virtio_video/virtio_video_dec.c",
+        "virtio_video/virtio_video_device.c",
+        "virtio_video/virtio_video_driver.c",
+        "virtio_video/virtio_video_enc.c",
+        "virtio_video/virtio_video_helpers.c",
+        "virtio_video/virtio_video_vq.c",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
@@ -261,10 +275,18 @@ ddk_module(
 )
 
 ddk_module(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "x86_64/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_x86_64",
+=======
+    name = "x86_64/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     deps = [":common_headers_x86_64"],
 )
 
@@ -274,7 +296,11 @@ kernel_module_group(
         ":x86_64/goldfish_drivers/goldfish_address_space",
         ":x86_64/goldfish_drivers/goldfish_pipe",
         ":x86_64/goldfish_drivers/goldfish_sync",
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
         ":x86_64/v4l2loopback",
+=======
+        ":x86_64/virtio_video",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
@@ -448,10 +474,18 @@ ddk_module(
 )
 
 ddk_module(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "aarch64/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_aarch64",
+=======
+    name = "aarch64/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_aarch64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     deps = [":common_headers_aarch64"],
 )
 
@@ -461,7 +495,11 @@ kernel_module_group(
         ":aarch64/goldfish_drivers/goldfish_address_space",
         ":aarch64/goldfish_drivers/goldfish_pipe",
         ":aarch64/goldfish_drivers/goldfish_sync",
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
         ":aarch64/v4l2loopback",
+=======
+        ":aarch64/virtio_video",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
@@ -603,10 +641,18 @@ ddk_module(
 )
 
 ddk_module(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "aarch64_16k/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_aarch64_16k",
+=======
+    name = "aarch64_16k/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     deps = [":common_headers_aarch64"],
 )
 
@@ -616,7 +662,11 @@ kernel_module_group(
         ":aarch64_16k/goldfish_drivers/goldfish_address_space",
         ":aarch64_16k/goldfish_drivers/goldfish_pipe",
         ":aarch64_16k/goldfish_drivers/goldfish_sync",
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
         ":aarch64_16k/v4l2loopback",
+=======
+        ":aarch64_16k/virtio_video",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
@@ -649,6 +699,108 @@ copy_to_dist_dir(
     ],
     dist_dir = "out/virtual_device_aarch64_16k/dist",
     flat = True,
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
+=======
+    log = "info",
+)
+
+hermetic_exec(
+    name = "virtual_device_aarch64_16k_dist",
+    data = [
+        ":virtual_device_aarch64_16k_copy_to_dist_dir",
+        ":virtual_device_aarch64_16k_test_mappings_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_aarch64_16k_test_mappings_dist) $@
+        $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
+    """,
+)
+
+kernel_build(
+    name = "virtual_device_riscv64",
+    srcs = [":virtual_device_riscv64_common_sources"],
+    outs = [],
+    arch = "riscv64",
+    base_kernel = "//common:kernel_riscv64",
+    build_config = "build.config.virtual_device.riscv64",
+    make_goals = [
+        "modules",
+    ],
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_pipe",
+    srcs = [":goldfish_pipe_sources"],
+    out = "goldfish_drivers/goldfish_pipe.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+ddk_module(
+    name = "riscv64/goldfish_drivers/goldfish_sync",
+    srcs = [":goldfish_sync_sources"],
+    out = "goldfish_drivers/goldfish_sync.ko",
+    kernel_build = ":virtual_device_riscv64",
+    deps = [":common_headers_riscv64"],
+)
+
+ddk_module(
+    name = "riscv64/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_riscv64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_riscv64"],
+)
+
+kernel_module_group(
+    name = "virtual_device_riscv64_external_modules",
+    srcs = [
+        ":riscv64/goldfish_drivers/goldfish_address_space",
+        ":riscv64/goldfish_drivers/goldfish_pipe",
+        ":riscv64/goldfish_drivers/goldfish_sync",
+        ":riscv64/virtio_video",
+    ],
+)
+
+kernel_modules_install(
+    name = "virtual_device_riscv64_modules_install",
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules = [
+        ":virtual_device_riscv64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "virtual_device_riscv64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_riscv64",
+    kernel_modules_install = ":virtual_device_riscv64_modules_install",
+    modules_blocklist = "modules.blocklist",
+)
+
+copy_to_dist_dir(
+    name = "virtual_device_riscv64_dist",
+    data = [
+        ":virtual_device_riscv64",
+        ":virtual_device_riscv64_images",
+        ":virtual_device_riscv64_modules_install",
+        "//common:kernel_riscv64",
+        "//common:kernel_riscv64_images",
+    ],
+    dist_dir = "out/virtual_device_riscv64/dist",
+    flat = True,
+    log = "info",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
 )
 
 kernel_build(
@@ -697,10 +849,18 @@ ddk_module(
 )
 
 ddk_module(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "arm/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_arm",
+=======
+    name = "arm/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_arm",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     deps = [":common_headers_arm"],
 )
 
@@ -710,7 +870,11 @@ kernel_module_group(
         ":arm/goldfish_drivers/goldfish_address_space",
         ":arm/goldfish_drivers/goldfish_pipe",
         ":arm/goldfish_drivers/goldfish_sync",
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
         ":arm/v4l2loopback",
+=======
+        ":arm/virtio_video",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
@@ -792,10 +956,18 @@ ddk_module(
 )
 
 ddk_module(
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
     name = "i686/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_i686",
+=======
+    name = "i686/virtio_video",
+    srcs = [":virtio_video_sources"],
+    out = "virtio_video.ko",
+    kernel_build = ":virtual_device_i686",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     deps = [":common_headers_x86_64"],
 )
 
@@ -805,7 +977,11 @@ kernel_module_group(
         ":i686/goldfish_drivers/goldfish_address_space",
         ":i686/goldfish_drivers/goldfish_pipe",
         ":i686/goldfish_drivers/goldfish_sync",
+<<<<<<< HEAD   (70e721 Merge "Revert "virtual-device: Update configs and list of mo)
         ":i686/v4l2loopback",
+=======
+        ":i686/virtio_video",
+>>>>>>> CHANGE (e513a0 Add virtio_video to BUILD.bazel)
     ],
 )
 
