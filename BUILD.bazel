@@ -188,6 +188,8 @@ _VIRT_COMMON_MODULES = [
     "system_heap.ko",
     "usbip-core.ko",
     "vhci-hcd.ko",
+    "vhost.ko",
+    "vhost_vsock.ko",
     "virt_wifi.ko",
     "virtio-gpu.ko",
     "virtio-rng.ko",
@@ -202,7 +204,9 @@ _VIRT_COMMON_MODULES = [
     "virtio_pci_modern_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
+    "vsock.ko",
     "vmw_vsock_virtio_transport.ko",
+    "vmw_vsock_virtio_transport_common.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
@@ -830,6 +834,8 @@ kernel_build(
             # keep sorted
             "failover.ko",
             "net_failover.ko",
+            "vhost.ko",
+            "vhost_vsock.ko",
             "virtio-gpu.ko",
             "virtio-rng.ko",
             "virtio_blk.ko",
@@ -841,7 +847,9 @@ kernel_build(
             "virtio_pci_legacy_dev.ko",
             "virtio_pci_modern_dev.ko",
             "virtio_snd.ko",
+            "vsock.ko",
             "vmw_vsock_virtio_transport.ko",
+            "vmw_vsock_virtio_transport_common.ko",
         ],
     )),
     strip_modules = False,
@@ -889,6 +897,8 @@ kernel_build(
             # keep sorted
             "failover.ko",
             "net_failover.ko",
+            "vhost.ko",
+            "vhost_vsock.ko",
             "virtio-gpu.ko",
             "virtio-rng.ko",
             "virtio_blk.ko",
@@ -900,7 +910,9 @@ kernel_build(
             "virtio_pci_legacy_dev.ko",
             "virtio_pci_modern_dev.ko",
             "virtio_snd.ko",
+            "vsock.ko",
             "vmw_vsock_virtio_transport.ko",
+            "vmw_vsock_virtio_transport_common.ko",
         ],
     )),
     strip_modules = False,
