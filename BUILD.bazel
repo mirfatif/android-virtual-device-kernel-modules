@@ -188,7 +188,11 @@ _VIRT_COMMON_MODULES = [
     "system_heap.ko",
     "usbip-core.ko",
     "vhci-hcd.ko",
+    "vhost.ko",
+    "vhost_iotlb.ko",
+    "vhost_vsock.ko",
     "virt_wifi.ko",
+    "virtiofs.ko",
     "virtio-gpu.ko",
     "virtio-rng.ko",
     "virtio_balloon.ko",
@@ -203,6 +207,8 @@ _VIRT_COMMON_MODULES = [
     "virtio_snd.ko",
     "vkms.ko",
     "vmw_vsock_virtio_transport.ko",
+    "vmw_vsock_virtio_transport_common.ko",
+    "vsock.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
