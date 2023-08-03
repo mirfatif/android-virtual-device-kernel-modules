@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "054081f0_c3ad07b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-08-03T11:42:07Z",
+      "side": 1,
+      "message": "Hi Alistair, could you please take a look and suggest if this is the right way to get virtio-video.ko for GKI 6.1 into Android?",
+      "revId": "e513a0ad95813fa17ad32fffd2b0f9ac32206255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
