@@ -186,6 +186,7 @@ _VIRT_COMMON_MODULES = [
     "virtio_snd.ko",
     "vkms.ko",
     "vmw_vsock_virtio_transport.ko",
+    "vmw_vsock_virtio_transport_common.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
@@ -796,6 +797,7 @@ kernel_build(
             "virtio_pci_modern_dev.ko",
             "virtio_snd.ko",
             "vmw_vsock_virtio_transport.ko",
+            "vmw_vsock_virtio_transport_common.ko",
         ],
     )),
     strip_modules = False,
@@ -870,6 +872,7 @@ kernel_build(
             "virtio_pci_modern_dev.ko",
             "virtio_snd.ko",
             "vmw_vsock_virtio_transport.ko",
+            "vmw_vsock_virtio_transport_common.ko",
         ],
     )),
     strip_modules = False,
