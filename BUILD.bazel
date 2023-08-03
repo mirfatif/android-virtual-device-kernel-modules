@@ -189,6 +189,7 @@ _VIRT_COMMON_MODULES = [
     "usbip-core.ko",
     "vhci-hcd.ko",
     "virt_wifi.ko",
+    "virtiofs.ko",
     "virtio-gpu.ko",
     "virtio-rng.ko",
     "virtio_balloon.ko",
