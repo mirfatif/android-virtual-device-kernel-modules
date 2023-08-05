@@ -16,6 +16,24 @@
       "message": "This has not passed TH",
       "revId": "d3815175f1818de9fd7a1e0a2be5cb041fac0518",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e702b8b8_6d462e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-08-05T01:05:31Z",
+      "side": 1,
+      "message": "The module doesn\u0027t seem to be built. Is the config enabled?",
+      "parentUuid": "96720a36_cf1f2af9",
+      "revId": "d3815175f1818de9fd7a1e0a2be5cb041fac0518",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
