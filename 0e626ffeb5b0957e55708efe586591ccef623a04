@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18aec746_ee617b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-09T20:25:32Z",
+      "side": 1,
+      "message": "Fixes presubmit [error](http://android-build/artifact/pending/P60927407/kernel_virt_arm/latest/view/logs%2Fbuild_error.log) on http://aosp/2679479",
+      "revId": "0e626ffeb5b0957e55708efe586591ccef623a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
