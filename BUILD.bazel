@@ -30,7 +30,13 @@ load(
 load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
+<<<<<<< HEAD   (42e68d virtual-device: Build fix for riscv64)
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
+=======
+load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
+load("//common:modules.bzl", "get_gki_modules_list")
+>>>>>>> CHANGE (0e626f kleaf: virtual_device: Replace COMMON_GKI_MODULES_LIST with )
 
 filegroup(
     name = "common_sources",
@@ -224,11 +230,6 @@ _VIRT_RISCV64_MODULES = [
     # keep sorted
     "nd_virtio.ko",
     "virtio_pmem.ko",
-]
-
-_GKI_MODULES_BASENAMES = [
-    paths.basename(module)
-    for module in COMMON_GKI_MODULES_LIST
 ]
 
 kernel_build(
@@ -667,7 +668,15 @@ kernel_build(
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
     module_outs = sets.to_list(sets.make(
+<<<<<<< HEAD   (42e68d virtual-device: Build fix for riscv64)
         _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
+=======
+        _VIRT_COMMON_MODULES + [
+            paths.basename(module)
+            for module in get_gki_modules_list("arm64")
+        ] + [
+            "dummy-cpufreq.ko",
+>>>>>>> CHANGE (0e626f kleaf: virtual_device: Replace COMMON_GKI_MODULES_LIST with )
             "test_meminit.ko",
         ],
     )),
@@ -745,7 +754,10 @@ kernel_build(
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
     module_outs = sets.to_list(sets.make(
-        _VIRT_COMMON_MODULES + _GKI_MODULES_BASENAMES + [
+        _VIRT_COMMON_MODULES + [
+            paths.basename(module)
+            for module in get_gki_modules_list("x86_64")
+        ] + [
             # keep sorted
             "nd_virtio.ko",
             "test_meminit.ko",
@@ -826,7 +838,10 @@ kernel_build(
     base_kernel = None,
     build_config = "build.config.server.aarch64",
     module_outs = sets.to_list(sets.make(
-        _GKI_MODULES_BASENAMES + [
+        [
+            paths.basename(module)
+            for module in get_gki_modules_list("arm64")
+        ] + [
             # keep sorted
             "failover.ko",
             "net_failover.ko",
@@ -885,7 +900,10 @@ kernel_build(
     base_kernel = None,
     build_config = "build.config.server.x86_64",
     module_outs = sets.to_list(sets.make(
-        _GKI_MODULES_BASENAMES + [
+        [
+            paths.basename(module)
+            for module in get_gki_modules_list("x86_64")
+        ] + [
             # keep sorted
             "failover.ko",
             "net_failover.ko",
