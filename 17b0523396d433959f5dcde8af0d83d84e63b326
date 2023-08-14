@@ -93,6 +93,53 @@
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "17b0523396d433959f5dcde8af0d83d84e63b326",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000051027126",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2693506?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "22b5e941_0c0bcfe1",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 205,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": "    \"virtiofs.ko\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "354b25da_a2f08c33",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-14T19:23:34Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "17b0523396d433959f5dcde8af0d83d84e63b326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
