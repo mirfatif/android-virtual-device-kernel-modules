@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec60203_76dea38c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-26T02:06:20Z",
+      "side": 1,
+      "message": "This will be required when https://r.android.com/2712133 lands.",
+      "revId": "69ce8e69bb678818f48e49cd16db49eec2d6d495",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
