@@ -670,7 +670,7 @@ kernel_build(
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + [
             paths.basename(module)
-            for module in get_gki_modules_list("arm64")
+            for module in get_gki_modules_list("arm")
         ] + [
             "test_meminit.ko",
         ],
