@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b82770c_e6d99a0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-30T22:22:20Z",
+      "side": 1,
+      "message": "Bypassed presubmit as unrelated tests running and failing.\n\n b/298254027",
+      "revId": "045729aaa3db681f1f5e8b8ce4244ecdeff1b222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
