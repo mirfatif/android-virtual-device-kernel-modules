@@ -14,6 +14,9 @@
 
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
+load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
@@ -27,9 +30,6 @@ load(
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
-load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
-load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
-load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//common:modules.bzl", "get_gki_modules_list")
 
 filegroup(
