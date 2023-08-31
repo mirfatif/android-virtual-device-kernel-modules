@@ -820,7 +820,7 @@ kernel_build(
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + [
             paths.basename(module)
-            for module in get_gki_modules_list("x86_64")
+            for module in get_gki_modules_list("i386")
         ] + [
             # keep sorted
             "dummy-cpufreq.ko",
