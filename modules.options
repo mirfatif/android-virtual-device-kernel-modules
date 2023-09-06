@@ -1,0 +1,2 @@
+# TODO(b/176860479): Remove once goldfish and cuttlefish share a wifi implementation
+options mac80211_hwsim radios=0
