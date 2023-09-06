@@ -148,6 +148,7 @@ kernel_images(
     kernel_build = ":virtual_device_x86_64",
     kernel_modules_install = ":virtual_device_x86_64_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 copy_to_dist_dir(
@@ -241,6 +242,7 @@ kernel_images(
     kernel_build = ":virtual_device_aarch64",
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 copy_to_dist_dir(
