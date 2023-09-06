@@ -311,6 +311,7 @@ kernel_images(
     kernel_build = ":virtual_device_x86_64",
     kernel_modules_install = ":virtual_device_x86_64_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 # Workaround for b/201687176.
@@ -443,6 +444,7 @@ kernel_images(
     kernel_build = ":virtual_device_aarch64",
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 # Workaround for b/201687176.
@@ -541,6 +543,7 @@ kernel_images(
     kernel_build = ":virtual_device_aarch64_16k",
     kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 # Workaround for b/201687176.
@@ -641,6 +644,7 @@ kernel_images(
     kernel_build = ":virtual_device_riscv64",
     kernel_modules_install = ":virtual_device_riscv64_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 copy_to_dist_dir(
@@ -722,6 +726,7 @@ kernel_images(
     kernel_build = "//common-modules/virtual-device:virtual_device_arm",
     kernel_modules_install = "//common-modules/virtual-device:virtual_device_arm_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 copy_to_dist_dir(
@@ -807,6 +812,7 @@ kernel_images(
     kernel_build = "//common-modules/virtual-device:virtual_device_i686",
     kernel_modules_install = "//common-modules/virtual-device:virtual_device_i686_modules_install",
     modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
 )
 
 copy_to_dist_dir(
