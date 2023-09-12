@@ -952,3 +952,20 @@ kernel_dtstree(
     name = "rockpi4_dts",
     visibility = ["//common:__pkg__"],
 )
+
+kernel_build(
+    name = "pure_aarch64",
+    srcs = [":common_sources"],
+    base_kernel = "//common:kernel_aarch64_download_or_build",
+    make_goals = ["include/config/kernel.release"],
+    build_config = "build.config.pure.aarch64",
+    outs = [".config"], # hack to force build
+)
+
+ddk_module(
+    name = "pure_aarch64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    kernel_build = ":pure_aarch64",
+    deps = [":common_headers_aarch64"],
+)
