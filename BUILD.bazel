@@ -952,3 +952,32 @@ kernel_dtstree(
     name = "rockpi4_dts",
     visibility = ["//common:__pkg__"],
 )
+
+
+ddk_headers(
+    name = "common_headers_aarch64_download_or_build",
+    hdrs = [
+        # uapi/ has highest priority
+        # do not sort
+        ":common_headers",
+        "//common:all_headers_aarch64_download_or_build",
+    ],
+)
+
+ddk_module(
+    name = "pure_aarch64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    defconfig = "no_sig_mod.fragment",
+    kernel_build = "//common:kernel_aarch64_download_or_build",
+    deps = [
+        ":common_headers_aarch64_download_or_build"
+    ],
+)
+
+kernel_modules_install(
+    name = "pure_aarch64_modules_install",
+    kernel_modules = [
+        ":pure_aarch64/goldfish_drivers/goldfish_address_space",
+    ],
+)
