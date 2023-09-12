@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053496555",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2748799?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "d93dffe6_bc202dc6",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 959,
+                "startChar": 0,
+                "endLine": 959,
+                "endChar": 0
+              },
+              "replacement": "    outs \u003d [\".config\"],  # hack to force build\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 960,
+                "startChar": 0,
+                "endLine": 960,
+                "endChar": 0
+              },
+              "replacement": "    build_config \u003d \"build.config.pure.aarch64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 961,
+                "startChar": 0,
+                "endLine": 963,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "d4e8b99a_00ca3532",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-12T23:07:22Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "7ba77d25e89b05696f6da74a43fb19e7594b9cbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
