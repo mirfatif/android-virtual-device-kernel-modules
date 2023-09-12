@@ -952,3 +952,23 @@ kernel_dtstree(
     name = "rockpi4_dts",
     visibility = ["//common:__pkg__"],
 )
+
+# FIXME need to build with --debug_modpost_warn
+ddk_module(
+    name = "pure_aarch64/goldfish_drivers/goldfish_address_space",
+    srcs = [":goldfish_address_space_sources"],
+    out = "goldfish_drivers/goldfish_address_space.ko",
+    defconfig = "no_sig_mod.fragment",
+    kernel_build = "//common:kernel_aarch64_download_or_build",
+    deps = [
+        # FIXME (b/301150319) think of a way to include headers
+        ":common_headers_x86_64"
+    ],
+)
+
+kernel_modules_install(
+    name = "pure_aarch64_modules_install",
+    kernel_modules = [
+        ":pure_aarch64/goldfish_drivers/goldfish_address_space",
+    ],
+)
