@@ -52,5 +52,5 @@ DEFINE_EVENT(virtio_gpu_cmd, virtio_gpu_cmd_response,
 #endif
 
 #undef TRACE_INCLUDE_PATH
-#define TRACE_INCLUDE_PATH ../../drivers/gpu/drm/virtio
+#define TRACE_INCLUDE_PATH ../../../common-modules/virtual-device/virtio_gpu
 #include <trace/define_trace.h>
