@@ -77,6 +77,40 @@ filegroup(
 )
 
 filegroup(
+    name = "dev_sw_sync_sources",
+    srcs = [
+        "dev-sw-sync/sync_timeline.h",
+        "dev-sw-sync/sync_trace.h",
+        "dev-sw-sync/sw_sync.c",
+    ],
+)
+
+filegroup(
+    name = "virtio_snd_sources",
+    srcs = [
+        "virtio_snd/virtio_card.h",
+        "virtio_snd/virtio_ctl_msg.h",
+        "virtio_snd/virtio_pcm.h",
+        "virtio_snd/virtio_snd.h",
+        "virtio_snd/virtio_card.c",
+        "virtio_snd/virtio_chmap.c",
+        "virtio_snd/virtio_ctl_msg.c",
+        "virtio_snd/virtio_jack.c",
+        "virtio_snd/virtio_pcm.c",
+        "virtio_snd/virtio_pcm_msg.c",
+        "virtio_snd/virtio_pcm_ops.c",
+    ],
+)
+
+filegroup(
+    name = "virtio_wl_sources",
+    srcs = [
+        "virtio_wl/virtio_wl.c",
+    ],
+)
+
+
+filegroup(
     name = "virtio_video_sources",
     srcs = [
         "virtio_video/virtio_video.h",
@@ -258,6 +292,12 @@ kernel_build(
         "nd_virtio.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
+
+        "fs/squashfs/squashfs.ko",
+        "net/9p/9pnet_virtio.ko",
+        "fs/9p/9p.ko",
+        "net/9p/9pnet_fd.ko",
+        "net/9p/9pnet.ko",
     ],
 )
 
@@ -286,6 +326,33 @@ ddk_module(
 )
 
 ddk_module(
+    name = "x86_64/dev_sw_sync",
+    srcs = [":dev_sw_sync_sources"],
+    out = "sw_sync.ko",
+    kernel_build = ":virtual_device_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/virtio_snd",
+    srcs = [":virtio_snd_sources"],
+    out = "virtio_snd.ko",
+    kernel_build = ":virtual_device_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
+    name = "x86_64/virtio_wl",
+    srcs = [":virtio_wl_sources"],
+    out = "virtio_wl.ko",
+    kernel_build = ":virtual_device_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
     name = "x86_64/virtio_video",
     srcs = [":virtio_video_sources"],
     out = "virtio_video.ko",
@@ -300,6 +367,9 @@ kernel_module_group(
         ":x86_64/goldfish_drivers/goldfish_address_space",
         ":x86_64/goldfish_drivers/goldfish_pipe",
         ":x86_64/goldfish_drivers/goldfish_sync",
+        ":x86_64/dev_sw_sync",
+        # ":x86_64/virtio_snd",
+        ":x86_64/virtio_wl",
         ":x86_64/virtio_video",
     ],
 )
