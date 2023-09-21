@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3dfe02d_a599debc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-21T14:15:24Z",
+      "side": 1,
+      "message": "Thanks. I can\u0027t +2 here.",
+      "revId": "94f759d992c4d148c51398a56cd615570145cb9c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
