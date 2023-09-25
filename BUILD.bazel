@@ -1017,97 +1017,45 @@ kernel_dtstree(
     visibility = ["//common:__pkg__"],
 )
 
-# Microdroid is not a real device. The kernel image is built with special
-#  configs to reduce the size. Hence, not using mixed build.
-kernel_build(
+# Don't use these aliases for microdroid and crashdump kernels.
+# Use the actual names. These aliases will get removed in the future.
+
+alias(
     name = "microdroid_aarch64",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = [
-        "Image",
-        "System.map",
-        "modules.builtin",
-        "modules.builtin.modinfo",
-        "vmlinux",
-        "vmlinux.symvers",
-    ],
-    build_config = "build.config.microdroid.aarch64",
-    make_goals = [
-        "Image",
-    ],
+    actual = "//common:kernel_aarch64_microdroid",
 )
 
-copy_to_dist_dir(
+alias(
     name = "microdroid_aarch64_dist",
-    data = [
-        ":microdroid_aarch64",
-    ],
-    dist_dir = "out/microdroid_aarch64/dist",
-    flat = True,
-    log = "info",
+    actual = "//common:kernel_aarch64_microdroid_dist",
 )
 
-# Microdroid is not a real device. The kernel image is built with special
-#  configs to reduce the size. Hence, not using mixed build.
-kernel_build(
+alias(
     name = "microdroid_x86_64",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = X86_64_OUTS,
-    arch = "x86_64",
-    build_config = "build.config.microdroid.x86_64",
-    make_goals = [
-        "bzImage",
-    ],
+    actual = "//common:kernel_x86_64_microdroid",
 )
 
-copy_to_dist_dir(
+alias(
     name = "microdroid_x86_64_dist",
-    data = [
-        ":microdroid_x86_64",
-    ],
-    dist_dir = "out/microdroid_x86_64/dist",
-    flat = True,
-    log = "info",
+    actual = "//common:kernel_x86_64__microdroid_dist",
 )
 
-kernel_build(
+alias(
     name = "crashdump_aarch64",
-    srcs = [":virtual_device_aarch64_common_sources"],
-    outs = [
-        "Image",
-    ],
-    build_config = "build.config.crashdump.aarch64",
-    make_goals = [
-        "Image",
-    ],
+    actual = "//common:kernel_aarch64_crashdump",
 )
 
-copy_to_dist_dir(
+alias(
     name = "crashdump_aarch64_dist",
-    data = [
-        ":crashdump_aarch64",
-    ],
-    dist_dir = "out/crashdump_aarch64/dist",
-    flat = True,
-    log = "info",
+    actual = "//common:kernel_aarch64_crashdump_dist",
 )
 
-kernel_build(
+alias(
     name = "crashdump_x86_64",
-    srcs = [":virtual_device_x86_64_common_sources"],
-    outs = X86_64_OUTS,
-    arch = "x86_64",
-    build_config = "build.config.crashdump.x86_64",
-    make_goals = [
-        "bzImage",
-    ],
+    actual = "//common:kernel_x86_64_crashdump",
 )
 
-copy_to_dist_dir(
+alias(
     name = "crashdump_x86_64_dist",
-    data = [
-        ":crashdump_x86_64",
-    ],
-    dist_dir = "out/crashdump_x86_64/dist",
-    flat = True,
-    log = "info",
+    actual = "//common:kernel_x86_64__crashdump_dist",
 )
