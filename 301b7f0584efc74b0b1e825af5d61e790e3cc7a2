@@ -16,6 +16,23 @@
       "message": "The test failure on Pixel 6\u00267 must be unrelated with this change. Retrying.",
       "revId": "301b7f0584efc74b0b1e825af5d61e790e3cc7a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "377ba0d1_e73a3bd5",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-25T09:12:22Z",
+      "side": 1,
+      "message": "Have you considered replacing the targets with aliases?\n\nSomething like this should work and should help migrating in-place without breaking users and without having copies.\n\n```\nalias(\n name \u003d \"microdroid_aarch64\",\n actual \u003d \"//common:microdroid_aarch64\",\n)\n```\n\nhttps://bazel.build/reference/be/general#alias",
+      "revId": "301b7f0584efc74b0b1e825af5d61e790e3cc7a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
