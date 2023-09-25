@@ -16,6 +16,24 @@
       "message": "Since the targets got renamed, likely the tests need to be repeated with new names and with their (new) alias names.",
       "revId": "94862cbc34e549a6266bf2ca995cc151604aaa1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b54147_a5543b98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T13:47:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0325c2d3_51c2137c",
+      "revId": "94862cbc34e549a6266bf2ca995cc151604aaa1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
