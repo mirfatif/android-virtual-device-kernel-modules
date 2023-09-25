@@ -1017,6 +1017,12 @@ kernel_dtstree(
     visibility = ["//common:__pkg__"],
 )
 
+################################################################################
+# DO NOT USE BELOW TARGETS
+# Use //common:microdroid_* and //common:crashdump_* instead.
+#
+# b/301852599 delete below
+################################################################################
 # Microdroid is not a real device. The kernel image is built with special
 #  configs to reduce the size. Hence, not using mixed build.
 kernel_build(
