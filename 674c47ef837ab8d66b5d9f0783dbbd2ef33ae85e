@@ -16,6 +16,29 @@
       "message": "nit: you could leave a comment that those are deprecated names and might get removed in the future. In particular that would help anybody cherry-picking from android15-6.1 where these likely actually get removed.",
       "revId": "674c47ef837ab8d66b5d9f0783dbbd2ef33ae85e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3e34ba_7e99b165",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-25T13:24:45Z",
+      "side": 1,
+      "message": "why the double underscore?",
+      "range": {
+        "startLine": 1037,
+        "startChar": 37,
+        "endLine": 1037,
+        "endChar": 38
+      },
+      "revId": "674c47ef837ab8d66b5d9f0783dbbd2ef33ae85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
