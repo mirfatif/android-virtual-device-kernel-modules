@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92cc109_98689d05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-25T03:31:14Z",
+      "side": 1,
+      "message": "The test failure on Pixel 6\u00267 must be unrelated with this change. Retrying.",
+      "revId": "301b7f0584efc74b0b1e825af5d61e790e3cc7a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
