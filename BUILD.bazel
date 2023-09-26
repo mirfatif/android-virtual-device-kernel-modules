@@ -16,6 +16,7 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
+load("//build/bazel_common_rules/zip:zip.bzl", "zip_dist")
 load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load(
     "//build/kernel/kleaf:kernel.bzl",
@@ -321,6 +322,13 @@ test_mappings_dist(
     dist_dir = "out/virtual_device_x86_64/dist",
 )
 
+zip_dist(
+    name = "virtual_device_x86_64_tests_dist",
+    srcs = ["//common/tools/testing:test_files_x86_64"],
+    dist_dir = "out/virtual_device_x86_64/dist",
+    zip_file = "tests.zip",
+)
+
 copy_to_dist_dir(
     name = "virtual_device_x86_64_copy_to_dist_dir",
     data = [
@@ -340,10 +348,12 @@ hermetic_exec(
     data = [
         ":virtual_device_x86_64_copy_to_dist_dir",
         ":virtual_device_x86_64_test_mappings_dist",
+        ":virtual_device_x86_64_tests_dist",
     ],
     script = """
         $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
+        $(rootpath :virtual_device_x86_64_tests_dist) $@
     """,
 )
 
@@ -454,6 +464,13 @@ test_mappings_dist(
     dist_dir = "out/virtual_device_aarch64/dist",
 )
 
+zip_dist(
+    name = "virtual_device_aarch64_tests_dist",
+    srcs = ["//common/tools/testing:test_files_aarch64"],
+    dist_dir = "out/virtual_device_aarch64/dist",
+    zip_file = "tests.zip",
+)
+
 copy_to_dist_dir(
     name = "virtual_device_aarch64_copy_to_dist_dir",
     data = [
@@ -473,10 +490,12 @@ hermetic_exec(
     data = [
         ":virtual_device_aarch64_copy_to_dist_dir",
         ":virtual_device_aarch64_test_mappings_dist",
+        ":virtual_device_aarch64_tests_dist",
     ],
     script = """
         $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+        $(rootpath :virtual_device_aarch64_tests_dist) $@
     """,
 )
 
