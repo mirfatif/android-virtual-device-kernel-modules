@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7010cdea_7f118653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2023-09-26T11:13:42Z",
+      "side": 1,
+      "message": "Please clarify the commit message.\n\ngki -\u003e GKI\n\nMake the reasons for this change clear. Where are the space savings in reality?",
+      "revId": "d4fe208923247badad4bb99b89574dccd1462294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
