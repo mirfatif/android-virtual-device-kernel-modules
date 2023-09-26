@@ -234,7 +234,7 @@ _VIRT_RISCV64_MODULES = [
 
 kernel_build(
     name = "virtual_device_x86_64",
-    srcs = [":virtual_device_x86_64_common_sources"],
+    srcs = [":virtual_device_x86_64_common_sources", "//common/tools/testing/selftests:kselftest_tests_x86_64"],
     outs = [],
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
@@ -330,6 +330,7 @@ copy_to_dist_dir(
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
+        "//common/tools/testing/selftests:kselftest_tests_x86_64",
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
