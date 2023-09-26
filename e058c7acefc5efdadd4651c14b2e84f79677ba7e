@@ -16,6 +16,24 @@
       "message": "uh, this is interesting, did you alias them because you got a build error or because of consistency? I would not expect them to be required here. Hence, if this is for consistency, I would rather omit them. If this is because of a build issue, then you might have found a bug. Cc: @elsk@google.com Can you clarify?",
       "revId": "e058c7acefc5efdadd4651c14b2e84f79677ba7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6400fe56_28196ee3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-26T12:16:59Z",
+      "side": 1,
+      "message": "I got a build error. The *_config targets were not automatically added in this package. Will file a bug.",
+      "parentUuid": "dd32a707_952d8ee1",
+      "revId": "e058c7acefc5efdadd4651c14b2e84f79677ba7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
