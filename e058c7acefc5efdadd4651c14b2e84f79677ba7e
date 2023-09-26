@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13c9d2a2_143a337f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-09-26T16:42:16Z",
+      "side": 1,
+      "message": "You can add a `deprecation` attribute to aliases.\n\nhttps://bazel.build/reference/be/common-definitions#common-attributes\n\nThis will emit a warning message when someone tries to build it, or build something that depends on this alias.",
+      "range": {
+        "startLine": 1020,
+        "startChar": 2,
+        "endLine": 1020,
+        "endChar": 25
+      },
+      "revId": "e058c7acefc5efdadd4651c14b2e84f79677ba7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd32a707_952d8ee1",
         "filename": "BUILD.bazel",
         "patchSetId": 6
