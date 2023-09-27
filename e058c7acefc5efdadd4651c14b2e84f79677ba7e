@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ff8f6f_5207e451",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-27T08:39:54Z",
+      "side": 1,
+      "message": "Thanks. aosp/2762795",
+      "parentUuid": "13c9d2a2_143a337f",
+      "range": {
+        "startLine": 1020,
+        "startChar": 2,
+        "endLine": 1020,
+        "endChar": 25
+      },
+      "revId": "e058c7acefc5efdadd4651c14b2e84f79677ba7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd32a707_952d8ee1",
