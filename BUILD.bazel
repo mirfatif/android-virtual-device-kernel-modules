@@ -31,7 +31,6 @@ load(
 load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 filegroup(
@@ -1023,59 +1022,71 @@ kernel_dtstree(
 alias(
     name = "microdroid_aarch64",
     actual = "//common:kernel_aarch64_microdroid",
+    deprecation = "Use //common:kernel_aarch64_microdroid",
 )
 
 alias(
     name = "microdroid_aarch64_dist",
     actual = "//common:kernel_aarch64_microdroid_dist",
+    deprecation = "Use //common:kernel_aarch64_microdroid_dist",
 )
 
 alias(
     name = "microdroid_x86_64",
     actual = "//common:kernel_x86_64_microdroid",
+    deprecation = "Use //common:kernel_x86_64_microdroid",
 )
 
 alias(
     name = "microdroid_x86_64_dist",
     actual = "//common:kernel_x86_64_microdroid_dist",
+    deprecation = "Use //common:kernel_x86_64_microdroid_dist",
 )
 
 alias(
     name = "crashdump_aarch64",
     actual = "//common:kernel_aarch64_crashdump",
+    deprecation = "Use //common:kernel_aarch64_crashdump",
 )
 
 alias(
     name = "crashdump_aarch64_dist",
     actual = "//common:kernel_aarch64_crashdump_dist",
+    deprecation = "Use //common:kernel_aarch64_crashdump_dist",
 )
 
 alias(
     name = "crashdump_x86_64",
     actual = "//common:kernel_x86_64_crashdump",
+    deprecation = "Use //common:kernel_x86_64_crashdump",
 )
 
 alias(
     name = "crashdump_x86_64_dist",
     actual = "//common:kernel_x86_64_crashdump_dist",
+    deprecation = "Use //common:kernel_x86_64_crashdump_dist",
 )
 
 alias(
     name = "microdroid_aarch64_config",
     actual = "//common:kernel_aarch64_microdroid_config",
+    deprecation = "Use //common:kernel_aarch64_microdroid_config",
 )
 
 alias(
     name = "microdroid_x86_64_config",
     actual = "//common:kernel_x86_64_microdroid_config",
+    deprecation = "Use //common:kernel_x86_64_microdroid_config",
 )
 
 alias(
     name = "crashdump_aarch64_config",
     actual = "//common:kernel_aarch64_crashdump_config",
+    deprecation = "Use //common:kernel_aarch64_crashdump_config",
 )
 
 alias(
     name = "crashdump_x86_64_config",
     actual = "//common:kernel_x86_64_crashdump_config",
+    deprecation = "Use //common:kernel_x86_64_crashdump_config",
 )
