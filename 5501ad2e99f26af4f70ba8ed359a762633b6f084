@@ -16,6 +16,24 @@
       "message": "The linter is so picky here. I\u0027v lost +2 again.",
       "revId": "5501ad2e99f26af4f70ba8ed359a762633b6f084",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db0d39d_84948a68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-28T07:16:10Z",
+      "side": 1,
+      "message": "I have no idea how to fix the linter error. I sorted the lines but it is still complaining, and I can\u0027t ignore linter in gerrit.",
+      "parentUuid": "756ea11f_06635769",
+      "revId": "5501ad2e99f26af4f70ba8ed359a762633b6f084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
