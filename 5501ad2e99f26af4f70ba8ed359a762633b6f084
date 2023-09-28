@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "756ea11f_06635769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2023-09-28T05:16:26Z",
+      "side": 1,
+      "message": "The linter is so picky here. I\u0027v lost +2 again.",
+      "revId": "5501ad2e99f26af4f70ba8ed359a762633b6f084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
