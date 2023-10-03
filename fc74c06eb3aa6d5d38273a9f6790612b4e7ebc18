@@ -1,0 +1,71 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055226789",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2762735?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "c2e61695_1b82becf",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\n        \":virtual_device_x86_64_common_sources\",\n        \"//common/tools/testing/selftests:kselftest_tests_x86_64\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"tests_dist\",\n    srcs \u003d [\"//common/tools/testing/selftests:test_files\"],\n    dist_dir \u003d \"out/virtual_device_x86_64/dist\",\n    zip_file \u003d \"tests.zip\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 349,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": "        \":tests_dist\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 352,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "31657ea8_f2f2f97c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-03T21:17:13Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "fc74c06eb3aa6d5d38273a9f6790612b4e7ebc18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
