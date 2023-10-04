@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34a1a97_5e3ca9ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2023-10-04T11:46:03Z",
+      "side": 1,
+      "message": "The boot failure is a known configuration problem and the test failures are known flakes which are in the process of being excluded from presubmit testing.",
+      "revId": "46e845036c647443672c37080419bc8adbf5dfe9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
