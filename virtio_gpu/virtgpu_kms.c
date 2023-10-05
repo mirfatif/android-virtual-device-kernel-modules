@@ -195,13 +195,11 @@ int virtio_gpu_init(struct drm_device *dev)
 		vgdev->has_context_init = true;
 	}
 
-	DRM_INFO("features: %cvirgl %cedid %cresource_blob %chost_visible",
+	DRM_INFO("features: %cvirgl %cedid %cresource_blob %chost_visible %ccontext_init\n",
 		 vgdev->has_virgl_3d    ? '+' : '-',
 		 vgdev->has_edid        ? '+' : '-',
 		 vgdev->has_resource_blob ? '+' : '-',
-		 vgdev->has_host_visible ? '+' : '-');
-
-	DRM_INFO("features: %ccontext_init\n",
+		 vgdev->has_host_visible ? '+' : '-',
 		 vgdev->has_context_init ? '+' : '-');
 
 	ret = virtio_find_vqs(vgdev->vdev, 2, vqs, callbacks, names, NULL);
@@ -286,9 +284,6 @@ void virtio_gpu_deinit(struct drm_device *dev)
 void virtio_gpu_release(struct drm_device *dev)
 {
 	struct virtio_gpu_device *vgdev = dev->dev_private;
-
-	if (!vgdev)
-		return;
 
 	virtio_gpu_modeset_fini(vgdev);
 	virtio_gpu_free_vbufs(vgdev);

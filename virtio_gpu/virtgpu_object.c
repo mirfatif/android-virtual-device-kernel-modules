@@ -118,7 +118,6 @@ static const struct drm_gem_object_funcs virtio_gpu_shmem_funcs = {
 	.close = virtio_gpu_gem_object_close,
 
 	.print_info = drm_gem_shmem_print_info,
-	.export = virtgpu_gem_prime_export,
 	.pin = drm_gem_shmem_pin,
 	.unpin = drm_gem_shmem_unpin,
 	.get_sg_table = drm_gem_shmem_get_sg_table,
@@ -144,6 +143,7 @@ struct drm_gem_object *virtio_gpu_create_object(struct drm_device *dev,
 
 	dshmem = &shmem->base.base;
 	dshmem->base.funcs = &virtio_gpu_shmem_funcs;
+	dshmem->map_cached = true;
 	return &dshmem->base;
 }
 
@@ -168,9 +168,11 @@ static int virtio_gpu_object_shmem_init(struct virtio_gpu_device *vgdev,
 	 * since virtio_gpu doesn't support dma-buf import from other devices.
 	 */
 	shmem->pages = drm_gem_shmem_get_sg_table(&bo->base.base);
-	if (!shmem->pages) {
+	if (IS_ERR(shmem->pages)) {
 		drm_gem_shmem_unpin(&bo->base.base);
-		return -EINVAL;
+		ret = PTR_ERR(shmem->pages);
+		shmem->pages = NULL;
+		return ret;
 	}
 
 	if (use_dma_api) {
@@ -254,9 +256,6 @@ int virtio_gpu_object_create(struct virtio_gpu_device *vgdev,
 	}
 
 	if (params->blob) {
-		if (params->blob_mem == VIRTGPU_BLOB_MEM_GUEST)
-			bo->guest_blob = true;
-
 		virtio_gpu_cmd_resource_create_blob(vgdev, bo, params,
 						    ents, nents, objs);
 	} else if (params->virgl) {

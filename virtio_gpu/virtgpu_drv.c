@@ -33,14 +33,13 @@
 #include <linux/wait.h>
 
 #include <drm/drm.h>
-#include <drm/drm_aperture.h>
 #include <drm/drm_atomic_helper.h>
 #include <drm/drm_drv.h>
 #include <drm/drm_file.h>
 
 #include "virtgpu_drv.h"
 
-static const struct drm_driver driver;
+static struct drm_driver driver;
 
 static int virtio_gpu_modeset = -1;
 
@@ -53,16 +52,14 @@ static int virtio_gpu_pci_quirk(struct drm_device *dev, struct virtio_device *vd
 	const char *pname = dev_name(&pdev->dev);
 	bool vga = (pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA;
 	char unique[20];
-	int ret;
 
 	DRM_INFO("pci: %s detected at %s\n",
 		 vga ? "virtio-vga" : "virtio-gpu-pci",
 		 pname);
-	if (vga) {
-		ret = drm_aperture_remove_conflicting_pci_framebuffers(pdev, &driver);
-		if (ret)
-			return ret;
-	}
+	dev->pdev = pdev;
+	if (vga)
+		drm_fb_helper_remove_conflicting_pci_framebuffers(pdev,
+								  "virtiodrmfb");
 
 	/*
 	 * Normally the drm_dev_set_unique() call is done by core DRM.
@@ -127,13 +124,11 @@ static int virtio_gpu_probe(struct virtio_device *vdev)
 
 	ret = drm_dev_register(dev, 0);
 	if (ret)
-		goto err_deinit;
+		goto err_free;
 
 	drm_fbdev_generic_setup(vdev->priv, 32);
 	return 0;
 
-err_deinit:
-	virtio_gpu_deinit(dev);
 err_free:
 	drm_dev_put(dev);
 	return ret;
@@ -198,7 +193,7 @@ MODULE_AUTHOR("Alon Levy");
 
 DEFINE_DRM_GEM_FOPS(virtio_gpu_driver_fops);
 
-static const struct drm_driver driver = {
+static struct drm_driver driver = {
 	.driver_features = DRIVER_MODESET | DRIVER_GEM | DRIVER_RENDER | DRIVER_ATOMIC,
 	.open = virtio_gpu_driver_open,
 	.postclose = virtio_gpu_driver_postclose,
@@ -212,6 +207,7 @@ static const struct drm_driver driver = {
 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
 	.gem_prime_mmap = drm_gem_prime_mmap,
+	.gem_prime_export = virtgpu_gem_prime_export,
 	.gem_prime_import = virtgpu_gem_prime_import,
 	.gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
 
