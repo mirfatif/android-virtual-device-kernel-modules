@@ -22,6 +22,30 @@
       },
       "revId": "4b371311af6fe5b3fc05be97da100db08db65a1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dfb88f0_87294b76",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-05T22:28:17Z",
+      "side": 1,
+      "message": "The kernel_sbom rule may be a good reference for you to create a `zip_archive` rule:\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kernel_sbom.bzl",
+      "parentUuid": "87a5c8a9_d26f00e1",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 1
+      },
+      "revId": "4b371311af6fe5b3fc05be97da100db08db65a1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
