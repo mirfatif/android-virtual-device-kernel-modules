@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a5c8a9_d26f00e1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-05T22:25:46Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be a target that is only effective when `bazel run`. All this needs to do is to get all the sources and zip them up. So it should be executed during `bazel build` not `bazel run`.\n\nOtherwise, like test_mapping, this will run EVERY TIME without caching.",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 1
+      },
+      "revId": "4b371311af6fe5b3fc05be97da100db08db65a1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
