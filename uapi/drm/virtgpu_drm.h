@@ -24,7 +24,7 @@
 #ifndef VIRTGPU_DRM_H
 #define VIRTGPU_DRM_H
 
-#include <drm/drm.h>
+#include "drm.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -64,6 +64,7 @@ struct drm_virtgpu_map {
 	__u32 pad;
 };
 
+/* fence_fd is modified on success if VIRTGPU_EXECBUF_FENCE_FD_OUT flag is set. */
 struct drm_virtgpu_execbuffer {
 	__u32 flags;
 	__u32 size;

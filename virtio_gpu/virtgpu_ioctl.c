@@ -126,7 +126,6 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 	void __user *user_bo_handles = NULL;
 	struct virtio_gpu_object_array *buflist = NULL;
 	struct sync_file *sync_file;
-	int in_fence_fd = exbuf->fence_fd;
 	int out_fence_fd = -1;
 	void *buf;
 	uint64_t fence_ctx;
@@ -152,13 +151,11 @@ static int virtio_gpu_execbuffer_ioctl(struct drm_device *dev, void *data,
 		ring_idx = exbuf->ring_idx;
 	}
 
-	exbuf->fence_fd = -1;
-
 	virtio_gpu_create_context(dev, file);
 	if (exbuf->flags & VIRTGPU_EXECBUF_FENCE_FD_IN) {
 		struct dma_fence *in_fence;
 
-		in_fence = sync_file_get_fence(in_fence_fd);
+		in_fence = sync_file_get_fence(exbuf->fence_fd);
 
 		if (!in_fence)
 			return -EINVAL;
@@ -286,6 +283,12 @@ static int virtio_gpu_getparam_ioctl(struct drm_device *dev, void *data,
 	case VIRTGPU_PARAM_CROSS_DEVICE:
 		value = vgdev->has_resource_assign_uuid ? 1 : 0;
 		break;
+	case VIRTGPU_PARAM_CONTEXT_INIT:
+		value = vgdev->has_context_init ? 1 : 0;
+		break;
+	case VIRTGPU_PARAM_SUPPORTED_CAPSET_IDs:
+		value = vgdev->capset_id_mask;
+		break;
 	default:
 		return -EINVAL;
 	}
@@ -352,10 +355,18 @@ static int virtio_gpu_resource_create_ioctl(struct drm_device *dev, void *data,
 		drm_gem_object_release(obj);
 		return ret;
 	}
-	drm_gem_object_put(obj);
 
 	rc->res_handle = qobj->hw_res_handle; /* similiar to a VM address */
 	rc->bo_handle = handle;
+
+	/*
+	 * The handle owns the reference now.  But we must drop our
+	 * remaining reference *after* we no longer need to dereference
+	 * the obj.  Otherwise userspace could guess the handle and
+	 * race closing it from another thread.
+	 */
+	drm_gem_object_put(obj);
+
 	return 0;
 }
 
@@ -370,7 +381,13 @@ static int virtio_gpu_resource_info_cros_ioctl(struct drm_device *dev,
 	struct virtio_gpu_object *qobj = NULL;
 	int ret = 0;
 
+	/* validate only as the extended info is returned in either case */
+	if (type != VIRTGPU_RESOURCE_INFO_TYPE_DEFAULT &&
+	    type != VIRTGPU_RESOURCE_INFO_TYPE_EXTENDED)
+		return -EINVAL;
+
 	gobj = drm_gem_object_lookup(file, ri->bo_handle);
+
 	if (gobj == NULL)
 		return -ENOENT;
 
@@ -544,9 +561,10 @@ static int virtio_gpu_wait_ioctl(struct drm_device *dev, void *data,
 		return -ENOENT;
 
 	if (args->flags & VIRTGPU_WAIT_NOWAIT) {
-		ret = dma_resv_test_signaled(obj->resv, true);
+		ret = dma_resv_test_signaled_rcu(obj->resv, true);
 	} else {
-		ret = dma_resv_wait_timeout(obj->resv, true, true, timeout);
+		ret = dma_resv_wait_timeout_rcu(obj->resv, true, true,
+						timeout);
 	}
 	if (ret == 0)
 		ret = -EBUSY;
@@ -748,10 +766,17 @@ static int virtio_gpu_resource_create_blob_ioctl(struct drm_device *dev,
 		drm_gem_object_release(obj);
 		return ret;
 	}
-	drm_gem_object_put(obj);
 
 	rc_blob->res_handle = bo->hw_res_handle;
 	rc_blob->bo_handle = handle;
+
+	/*
+	 * The handle owns the reference now.  But we must drop our
+	 * remaining reference *after* we no longer need to dereference
+	 * the obj.  Otherwise userspace could guess the handle and
+	 * race closing it from another thread.
+	 */
+	drm_gem_object_put(obj);
 
 	return 0;
 }
@@ -763,7 +788,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 	uint32_t num_params, i, param, value;
 	uint64_t valid_ring_mask;
 	size_t len;
-	struct drm_virtgpu_context_set_param *ctx_set_params = NULL;
+	struct drm_virtgpu_context_set_param *ctx_set_params;
 	struct virtio_gpu_device *vgdev = dev->dev_private;
 	struct virtio_gpu_fpriv *vfpriv = file->driver_priv;
 	struct drm_virtgpu_context_init *args = data;
@@ -796,22 +821,16 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 		switch (param) {
 		case VIRTGPU_CONTEXT_PARAM_CAPSET_ID:
-			if (value > MAX_CAPSET_ID) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			if (value > MAX_CAPSET_ID)
+				return -EINVAL;
 
-			if ((vgdev->capset_id_mask & (1ULL << value)) == 0) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			if ((vgdev->capset_id_mask & (1ULL << value)) == 0)
+				return -EINVAL;
 
 			/* Context capset ID already set */
 			if (vfpriv->context_init &
-			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK) {
-				ret = -EINVAL;
-				goto out_unlock;
-			}
+			    VIRTIO_GPU_CONTEXT_INIT_CAPSET_ID_MASK)
+				return -EINVAL;
 
 			vfpriv->context_init |= value;
 			break;
@@ -838,8 +857,7 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 			vfpriv->ring_idx_mask = value;
 			break;
 		default:
-			ret = -EINVAL;
-			goto out_unlock;
+			return -EINVAL;
 		}
 	}
 
@@ -859,7 +877,6 @@ static int virtio_gpu_context_init_ioctl(struct drm_device *dev,
 
 out_unlock:
 	mutex_unlock(&vfpriv->context_lock);
-	kfree(ctx_set_params);
 	return ret;
 }
 

@@ -109,6 +109,7 @@ enum virtio_gpu_ctrl_type {
 	VIRTIO_GPU_RESP_OK_RESOURCE_UUID,
 	VIRTIO_GPU_RESP_OK_MAP_INFO,
 
+	/* CHROMIUM: legacy responses */
 	VIRTIO_GPU_RESP_OK_RESOURCE_PLANE_INFO_LEGACY = 0x1104,
 	/* CHROMIUM: success responses */
 	VIRTIO_GPU_RESP_OK_RESOURCE_PLANE_INFO = 0x11FF,
@@ -124,10 +125,6 @@ enum virtio_gpu_ctrl_type {
 
 enum virtio_gpu_shm_id {
 	VIRTIO_GPU_SHM_ID_UNDEFINED = 0,
-	/*
-	 * VIRTIO_GPU_CMD_RESOURCE_MAP_BLOB
-	 * VIRTIO_GPU_CMD_RESOURCE_UNMAP_BLOB
-	 */
 	VIRTIO_GPU_SHM_ID_HOST_VISIBLE = 1
 };
 
