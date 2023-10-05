@@ -56,6 +56,63 @@
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "b7287b3f89eb630817df253c9fe0025b0bb980f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000055368255",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2762735?revision\u003d4",
+      "fixSuggestions": [
+        {
+          "fixId": "eaa81535_82544ddc",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "    srcs \u003d [\n        \":virtual_device_x86_64_common_sources\",\n        \"//common/tools/testing/selftests:kselftest_tests_x86_64\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"virtual_device_x86_64_tests_dist\",\n    srcs \u003d [\"//common/tools/testing:test_files_x86_64\"],\n    dist_dir \u003d \"out/virtual_device_x86_64/dist\",\n    zip_file \u003d \"tests.zip\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 468,
+                "startChar": 0,
+                "endLine": 472,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"virtual_device_aarch64_tests_dist\",\n    srcs \u003d [\"//common/tools/testing:test_files_aarch64\"],\n    dist_dir \u003d \"out/virtual_device_aarch64/dist\",\n    zip_file \u003d \"tests.zip\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "9d55974b_4c4f09ae",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-05T00:44:21Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "b7287b3f89eb630817df253c9fe0025b0bb980f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
