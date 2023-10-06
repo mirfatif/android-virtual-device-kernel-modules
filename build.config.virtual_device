@@ -6,3 +6,6 @@ KERNEL_DIR=common
 MODULES_BLOCKLIST=common-modules/virtual-device/modules.blocklist
 BUILD_INITRAMFS=1
 LZ4_RAMDISK=1
+
+# TODO(b/176860479): Remove once goldfish and cuttlefish share a wifi implementation
+MODULES_OPTIONS="options mac80211_hwsim radios=0"
