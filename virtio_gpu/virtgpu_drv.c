@@ -33,6 +33,7 @@
 #include <linux/wait.h>
 
 #include <drm/drm.h>
+#include <drm/drm_aperture.h>
 #include <drm/drm_atomic_helper.h>
 #include <drm/drm_drv.h>
 #include <drm/drm_file.h>
@@ -52,14 +53,16 @@ static int virtio_gpu_pci_quirk(struct drm_device *dev, struct virtio_device *vd
 	const char *pname = dev_name(&pdev->dev);
 	bool vga = (pdev->class >> 8) == PCI_CLASS_DISPLAY_VGA;
 	char unique[20];
+	int ret;
 
 	DRM_INFO("pci: %s detected at %s\n",
 		 vga ? "virtio-vga" : "virtio-gpu-pci",
 		 pname);
-	dev->pdev = pdev;
-	if (vga)
-		drm_fb_helper_remove_conflicting_pci_framebuffers(pdev,
-								  "virtiodrmfb");
+	if (vga) {
+		ret = drm_aperture_remove_conflicting_pci_framebuffers(pdev, &driver);
+		if (ret)
+			return ret;
+	}
 
 	/*
 	 * Normally the drm_dev_set_unique() call is done by core DRM.
@@ -207,7 +210,6 @@ static struct drm_driver driver = {
 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
 	.gem_prime_mmap = drm_gem_prime_mmap,
-	.gem_prime_export = virtgpu_gem_prime_export,
 	.gem_prime_import = virtgpu_gem_prime_import,
 	.gem_prime_import_sg_table = virtgpu_gem_prime_import_sg_table,
 
