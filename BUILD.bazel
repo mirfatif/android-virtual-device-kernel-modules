@@ -115,6 +115,10 @@ kernel_build(
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _virt_common_modules + [
         # keep sorted
+        "net/9p/9pnet_virtio.ko",
+        "fs/squashfs/squashfs.ko",
+        "fs/9p/9p.ko",
+        "net/9p/9pnet.ko",
         "test_meminit.ko",
         "test_stackinit.ko",
     ],
