@@ -13,6 +13,9 @@
 # limitations under the License.
 
 load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/bazel_common_rules/exec:exec.bzl", "exec")
+load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
@@ -21,9 +24,6 @@ load(
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
-load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
-load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 
 _dist_dir = "out/{branch}/dist".format(branch = BRANCH)
 
