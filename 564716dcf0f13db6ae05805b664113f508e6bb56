@@ -16,6 +16,24 @@
       "message": "nit: can we separate put Squashfs and 9P into separate blocks?",
       "revId": "564716dcf0f13db6ae05805b664113f508e6bb56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d7cab3_20e05262",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2023-10-10T22:27:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85fb52cb_cad0bbe2",
+      "revId": "564716dcf0f13db6ae05805b664113f508e6bb56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
