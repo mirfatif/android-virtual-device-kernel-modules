@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #undef TRACE_SYSTEM
-#define TRACE_INCLUDE_PATH ../../../common-modules/virtual-device/arcvm_drivers/dev-sw-sync
+#define TRACE_INCLUDE_PATH ../../../common-modules/virtual-device/drivers/staging/dev-sw-sync
 #define TRACE_SYSTEM sync_trace
 
 #if !defined(_TRACE_SYNC_H) || defined(TRACE_HEADER_MULTI_READ)
