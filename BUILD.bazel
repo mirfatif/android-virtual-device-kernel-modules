@@ -100,6 +100,7 @@ _virt_common_modules = [
 
 _virt_common_ext_modules = [
     "drivers/gpu/drm/virtio/virtio-gpu.ko",
+    "drivers/media/virtio/virtio-video.ko",
     "drivers/staging/dev-sw-sync/sw_sync.ko",
     "drivers/virtio/virtio_wl.ko",
     "goldfish_drivers/goldfish_address_space.ko",
