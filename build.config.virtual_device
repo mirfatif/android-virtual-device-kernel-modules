@@ -6,3 +6,6 @@ KERNEL_DIR=common
 BUILD_INITRAMFS=1
 EXT_MODULES="common-modules/virtual-device"
 LZ4_RAMDISK=1
+
+# TODO(b/176860479): Remove once goldfish and cuttlefish share a wifi implementation
+MODULES_OPTIONS="options mac80211_hwsim radios=0"
