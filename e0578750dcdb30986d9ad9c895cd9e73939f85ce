@@ -16,6 +16,24 @@
       "message": "Can you also add this patch to android-mainline?",
       "revId": "e0578750dcdb30986d9ad9c895cd9e73939f85ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "699736b4_d731cfa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955333
+      },
+      "writtenOn": "2023-11-13T13:37:51Z",
+      "side": 1,
+      "message": "https://android-review.googlesource.com/c/kernel/common-modules/virtual-device/+/2824593",
+      "parentUuid": "c173a6be_04dde432",
+      "revId": "e0578750dcdb30986d9ad9c895cd9e73939f85ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
