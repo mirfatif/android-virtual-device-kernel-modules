@@ -17,6 +17,7 @@ load("@bazel_skylib//lib:sets.bzl", "sets")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
+load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
@@ -31,7 +32,11 @@ load(
     "kernel_unstripped_modules_archive",
     "merged_kernel_uapi_headers",
 )
+<<<<<<< HEAD   (e73040 Fix unused symbol X86_64_OUTS)
 load("//common:modules.bzl", "get_gki_modules_list")
+=======
+load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
+>>>>>>> CHANGE (d44cbc Build v4l2loopback for x86_64, aarch64, and aarch64_16k)
 
 filegroup(
     name = "common_sources",
@@ -87,6 +92,15 @@ filegroup(
         "virtio_video/virtio_video_enc.c",
         "virtio_video/virtio_video_helpers.c",
         "virtio_video/virtio_video_vq.c",
+    ],
+)
+
+filegroup(
+    name = "v4l2loopback_sources",
+    srcs = [
+        "v4l2loopback/v4l2loopback.c",
+        "v4l2loopback/v4l2loopback.h",
+        "v4l2loopback/v4l2loopback_formats.h",
     ],
 )
 
@@ -294,12 +308,22 @@ ddk_module(
     deps = [":common_headers_x86_64"],
 )
 
+ddk_module(
+    name = "x86_64/v4l2loopback",
+    srcs = [":v4l2loopback_sources"],
+    out = "v4l2loopback.ko",
+    kernel_build = ":virtual_device_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
 kernel_module_group(
     name = "virtual_device_x86_64_external_modules",
     srcs = [
         ":x86_64/goldfish_drivers/goldfish_address_space",
         ":x86_64/goldfish_drivers/goldfish_pipe",
         ":x86_64/goldfish_drivers/goldfish_sync",
+        ":x86_64/v4l2loopback",
         ":x86_64/virtio_video",
     ],
 )
@@ -443,12 +467,22 @@ ddk_module(
     deps = [":common_headers_aarch64"],
 )
 
+ddk_module(
+    name = "aarch64/v4l2loopback",
+    srcs = [":v4l2loopback_sources"],
+    out = "v4l2loopback.ko",
+    kernel_build = ":virtual_device_aarch64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_aarch64"],
+)
+
 kernel_module_group(
     name = "virtual_device_aarch64_external_modules",
     srcs = [
         ":aarch64/goldfish_drivers/goldfish_address_space",
         ":aarch64/goldfish_drivers/goldfish_pipe",
         ":aarch64/goldfish_drivers/goldfish_sync",
+        ":aarch64/v4l2loopback",
         ":aarch64/virtio_video",
     ],
 )
@@ -569,12 +603,22 @@ ddk_module(
     deps = [":common_headers_aarch64"],
 )
 
+ddk_module(
+    name = "aarch64_16k/v4l2loopback",
+    srcs = [":v4l2loopback_sources"],
+    out = "v4l2loopback.ko",
+    kernel_build = ":virtual_device_aarch64_16k",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_aarch64"],
+)
+
 kernel_module_group(
     name = "virtual_device_aarch64_16k_external_modules",
     srcs = [
         ":aarch64_16k/goldfish_drivers/goldfish_address_space",
         ":aarch64_16k/goldfish_drivers/goldfish_pipe",
         ":aarch64_16k/goldfish_drivers/goldfish_sync",
+        ":aarch64_16k/v4l2loopback",
         ":aarch64_16k/virtio_video",
     ],
 )
