@@ -161,6 +161,163 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000059099083",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2831430?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "80ff856c_10a83f3e",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "    linux_includes \u003d [\n        \"uapi\",\n        \"include\",\n    ],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 321,
+                "startChar": 0,
+                "endLine": 321,
+                "endChar": 0
+              },
+              "replacement": "        \":x86_64/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 322,
+                "startChar": 0,
+                "endLine": 323,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 480,
+                "startChar": 0,
+                "endLine": 480,
+                "endChar": 0
+              },
+              "replacement": "        \":aarch64/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 481,
+                "startChar": 0,
+                "endLine": 482,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 616,
+                "startChar": 0,
+                "endLine": 616,
+                "endChar": 0
+              },
+              "replacement": "        \":aarch64_16k/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 617,
+                "startChar": 0,
+                "endLine": 618,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 732,
+                "startChar": 0,
+                "endLine": 732,
+                "endChar": 0
+              },
+              "replacement": "        \":riscv64/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 733,
+                "startChar": 0,
+                "endLine": 734,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 835,
+                "startChar": 0,
+                "endLine": 835,
+                "endChar": 0
+              },
+              "replacement": "        \":arm/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 836,
+                "startChar": 0,
+                "endLine": 837,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 940,
+                "startChar": 0,
+                "endLine": 940,
+                "endChar": 0
+              },
+              "replacement": "        \":i686/v4l2loopback\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 941,
+                "startChar": 0,
+                "endLine": 942,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "b1963527_69b3ad29",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-15T04:47:48Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "a71b7475f796580fe4caf4abd72404a9d62a8b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059099083",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2831430?revision\u003d1",
       "fixSuggestions": [],
       "key": {
         "uuid": "e405c3e8_746b5d6b",
@@ -172,6 +329,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-11-15T04:47:43Z",
+      "side": 1,
+      "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 64
+      },
+      "revId": "a71b7475f796580fe4caf4abd72404a9d62a8b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059099083",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2831430?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f4b3e9bc_20ce8cdc",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-15T04:47:48Z",
       "side": 1,
       "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
       "range": {
