@@ -1,4 +1,5 @@
 # Drivers needed by any virtual device
+CONFIG_DRM_PANEL_SIMPLE=m
 CONFIG_DRM_VIRTIO_GPU=m
 CONFIG_HW_RANDOM_VIRTIO=m
 CONFIG_SND_VIRTIO=m
