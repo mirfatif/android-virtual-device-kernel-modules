@@ -190,6 +190,7 @@ _VIRT_COMMON_MODULES = [
     "mt76x2-common.ko",
     "mt76x2u.ko",
     "net_failover.ko",
+    "panel-simple.ko",
     "pulse8-cec.ko",
     "rtc-test.ko",
     "system_heap.ko",
