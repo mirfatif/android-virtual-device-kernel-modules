@@ -219,6 +219,7 @@ _VIRT_AARCH64_MODULES = [
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
     "nd_virtio.ko",
+    "panel-simple.ko",
     "pl111_drm.ko",
     "psmouse.ko",
     "vexpress-config.ko",
