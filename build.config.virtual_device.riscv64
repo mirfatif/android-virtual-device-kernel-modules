@@ -16,7 +16,6 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/riscv/configs/ && \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment && \
     true"
 POST_DEFCONFIG_CMDS=""
-BUILD_GOLDFISH_DRIVERS=m
 EXT_MODULES="common-modules/virtual-device"
 
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
