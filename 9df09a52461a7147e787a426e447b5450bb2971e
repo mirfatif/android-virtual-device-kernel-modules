@@ -61,6 +61,63 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000059483517",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2835781?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "d352f4b0_516f02a8",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "        \"v4l2loopback/v4l2loopback.c\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "    linux_includes \u003d [\n        \"uapi\",\n        \"include\",\n    ],\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "cba47c10_91d798ec",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-19T05:17:17Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "9df09a52461a7147e787a426e447b5450bb2971e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059483517",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2835781?revision\u003d1",
       "fixSuggestions": [],
       "key": {
         "uuid": "1ff6f3ea_452cc2ad",
@@ -72,6 +129,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-11-19T05:17:10Z",
+      "side": 1,
+      "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 64
+      },
+      "revId": "9df09a52461a7147e787a426e447b5450bb2971e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059483517",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2835781?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8149bfd7_0e78f156",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-19T05:17:17Z",
       "side": 1,
       "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
       "range": {
