@@ -809,12 +809,22 @@ ddk_module(
     deps = [":common_headers_arm"],
 )
 
+ddk_module(
+    name = "arm/v4l2loopback",
+    srcs = [":v4l2loopback_sources"],
+    out = "v4l2loopback.ko",
+    kernel_build = ":virtual_device_arm",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_arm"],
+)
+
 kernel_module_group(
     name = "virtual_device_arm_external_modules",
     srcs = [
         ":arm/goldfish_drivers/goldfish_address_space",
         ":arm/goldfish_drivers/goldfish_pipe",
         ":arm/goldfish_drivers/goldfish_sync",
+        ":arm/v4l2loopback",
         ":arm/virtio_video",
     ],
 )
@@ -904,12 +914,22 @@ ddk_module(
     deps = [":common_headers_x86_64"],
 )
 
+ddk_module(
+    name = "i686/v4l2loopback",
+    srcs = [":v4l2loopback_sources"],
+    out = "v4l2loopback.ko",
+    kernel_build = ":virtual_device_i686",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
 kernel_module_group(
     name = "virtual_device_i686_external_modules",
     srcs = [
         ":i686/goldfish_drivers/goldfish_address_space",
         ":i686/goldfish_drivers/goldfish_pipe",
         ":i686/goldfish_drivers/goldfish_sync",
+        ":i686/v4l2loopback",
         ":i686/virtio_video",
     ],
 )
