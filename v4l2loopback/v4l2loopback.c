@@ -33,6 +33,8 @@
 #include <linux/miscdevice.h>
 #include "v4l2loopback.h"
 
+#include <asm/div64.h>  /* do_div */
+
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4, 0, 0)
 #error This module is not supported on kernels before 4.0.0.
 #endif
@@ -1541,7 +1543,8 @@ static int vidioc_reqbufs(struct file *file, void *fh,
 {
 	struct v4l2_loopback_device *dev;
 	struct v4l2_loopback_opener *opener;
-	int i;
+	unsigned int i;
+	unsigned long long num;
 	MARK();
 
 	dev = v4l2loopback_getdevice(file);
@@ -1594,7 +1597,8 @@ static int vidioc_reqbufs(struct file *file, void *fh,
 
 			/* after we update dev->used_buffers, buffers in outbufs_list will
 			 * correspond to dev->write_position + [0;b->count-1] range */
-			i = dev->write_position % b->count;
+			num = dev->write_position;
+			i = do_div(num, b->count);
 			list_for_each_entry(pos, &dev->outbufs_list,
 					    list_head) {
 				dev->bufpos2index[i % b->count] =
@@ -1620,7 +1624,7 @@ static int vidioc_reqbufs(struct file *file, void *fh,
 static int vidioc_querybuf(struct file *file, void *fh, struct v4l2_buffer *b)
 {
 	enum v4l2_buf_type type;
-	int index;
+	unsigned int index;
 	struct v4l2_loopback_device *dev;
 	struct v4l2_loopback_opener *opener;
 
@@ -1640,8 +1644,11 @@ static int vidioc_querybuf(struct file *file, void *fh, struct v4l2_buffer *b)
 
 	if (opener->timeout_image_io)
 		*b = dev->timeout_image_buffer.buffer;
-	else
-		*b = dev->buffers[b->index % dev->used_buffers].buffer;
+	else {
+		unsigned long long temp = b->index;
+		index = do_div(temp, dev->used_buffers);
+		*b = dev->buffers[index].buffer;
+	}
 
 	b->type = type;
 	b->index = index;
@@ -1659,6 +1666,8 @@ static int vidioc_querybuf(struct file *file, void *fh, struct v4l2_buffer *b)
 static void buffer_written(struct v4l2_loopback_device *dev,
 			   struct v4l2l_buffer *buf)
 {
+	unsigned int index;
+	unsigned long long temp;
 	del_timer_sync(&dev->sustain_timer);
 	del_timer_sync(&dev->timeout_timer);
 
@@ -1667,8 +1676,10 @@ static void buffer_written(struct v4l2_loopback_device *dev,
 	spin_unlock_bh(&dev->list_lock);
 
 	spin_lock_bh(&dev->lock);
-	dev->bufpos2index[dev->write_position % dev->used_buffers] =
-		buf->buffer.index;
+
+	temp = dev->write_position;
+	index = do_div(temp, dev->used_buffers);
+	dev->bufpos2index[index] = buf->buffer.index;
 	++dev->write_position;
 	dev->reread_count = 0;
 
@@ -1772,7 +1783,9 @@ static int get_capture_buffer(struct file *file)
 {
 	struct v4l2_loopback_device *dev = v4l2loopback_getdevice(file);
 	struct v4l2_loopback_opener *opener = fh_to_opener(file->private_data);
-	int pos, ret;
+	int ret;
+	unsigned int pos;
+	unsigned long long num;
 	int timeout_happened;
 
 	if ((file->f_flags & O_NONBLOCK) &&
@@ -1787,14 +1800,15 @@ static int get_capture_buffer(struct file *file)
 		if (dev->reread_count > opener->reread_count + 2)
 			opener->reread_count = dev->reread_count - 1;
 		++opener->reread_count;
-		pos = (opener->read_position + dev->used_buffers - 1) %
-		      dev->used_buffers;
+		num = opener->read_position + dev->used_buffers - 1,
+		pos = do_div(num, dev->used_buffers);
 	} else {
 		opener->reread_count = 0;
 		if (dev->write_position >
 		    opener->read_position + dev->used_buffers)
 			opener->read_position = dev->write_position - 1;
-		pos = opener->read_position % dev->used_buffers;
+		num = opener->read_position;
+		pos = do_div(num, dev->used_buffers);
 		++opener->read_position;
 	}
 	timeout_happened = dev->timeout_happened;
@@ -2284,7 +2298,8 @@ static ssize_t v4l2_loopback_write(struct file *file, const char __user *buf,
 {
 	struct v4l2_loopback_opener *opener;
 	struct v4l2_loopback_device *dev;
-	int write_index;
+	unsigned int write_index;
+	unsigned long long temp;
 	struct v4l2_buffer *b;
 	int err = 0;
 
@@ -2320,7 +2335,8 @@ static ssize_t v4l2_loopback_write(struct file *file, const char __user *buf,
 	if (count > dev->buffer_size)
 		count = dev->buffer_size;
 
-	write_index = dev->write_position % dev->used_buffers;
+	temp = dev->write_position;
+	write_index = do_div(temp, dev->used_buffers);
 	b = &dev->buffers[write_index].buffer;
 
 	if (copy_from_user((void *)(dev->image + b->m.offset), (void *)buf,
