@@ -16,6 +16,24 @@
       "message": "(nit)This looks like you imported the driver from somewhere else, can you provide a link? Reviewing this driver in detail would take a lot of time.",
       "revId": "b24312a249aee508cec15b1ee31a767fb7fb6761",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "891367d5_8143d14f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1384660
+      },
+      "writtenOn": "2023-11-20T12:56:54Z",
+      "side": 1,
+      "message": "Hi Markus,\n\n`v4l2loopback` source is available at [this place](https://github.com/umlaeute/v4l2loopback). Please take a look. Thanks!",
+      "parentUuid": "44b9a3bf_1ff34964",
+      "revId": "b24312a249aee508cec15b1ee31a767fb7fb6761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
