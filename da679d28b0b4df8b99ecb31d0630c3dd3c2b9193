@@ -35,6 +35,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a52d22_c7b2e43b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1384660
+      },
+      "writtenOn": "2023-11-21T15:09:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c07f66_8a2ba901",
+      "revId": "da679d28b0b4df8b99ecb31d0630c3dd3c2b9193",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ac179e_3892c7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1384660
+      },
+      "writtenOn": "2023-11-21T15:09:44Z",
+      "side": 1,
+      "message": "I\u0027d prefer not fixing a lint error on line 33 because it\u0027s not what this change intends to modify.",
+      "parentUuid": "f5c07f66_8a2ba901",
+      "revId": "da679d28b0b4df8b99ecb31d0630c3dd3c2b9193",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfefbae0_fada2362",
@@ -48,6 +84,30 @@
       "writtenOn": "2023-11-20T15:38:54Z",
       "side": 1,
       "message": "Nit: should this be unsigned? Here and in other places we call `do_div`.",
+      "range": {
+        "startLine": 1601,
+        "startChar": 3,
+        "endLine": 1601,
+        "endChar": 4
+      },
+      "revId": "da679d28b0b4df8b99ecb31d0630c3dd3c2b9193",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a97586_1e09ebbb",
+        "filename": "v4l2loopback/v4l2loopback.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 1384660
+      },
+      "writtenOn": "2023-11-21T15:09:44Z",
+      "side": 1,
+      "message": "Thanks for pointing it out. Yes, they need to be `u32`.",
+      "parentUuid": "cfefbae0_fada2362",
       "range": {
         "startLine": 1601,
         "startChar": 3,
