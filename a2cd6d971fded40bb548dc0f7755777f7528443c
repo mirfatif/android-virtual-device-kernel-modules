@@ -25,6 +25,32 @@
       },
       "revId": "a2cd6d971fded40bb548dc0f7755777f7528443c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059712252",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2841975?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bfef19f2_eb3f7e87",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-21T21:59:38Z",
+      "side": 1,
+      "message": "Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 20,
+        "startChar": 44,
+        "endLine": 20,
+        "endChar": 55
+      },
+      "revId": "a2cd6d971fded40bb548dc0f7755777f7528443c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
