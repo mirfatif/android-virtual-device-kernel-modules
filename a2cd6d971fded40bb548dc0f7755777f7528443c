@@ -23,6 +23,30 @@
       },
       "revId": "a2cd6d971fded40bb548dc0f7755777f7528443c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66eb155f_5fa48394",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-21T22:22:34Z",
+      "side": 1,
+      "message": "Caused by aosp/2770538",
+      "parentUuid": "d0b5e5f5_b479351b",
+      "range": {
+        "startLine": 20,
+        "startChar": 44,
+        "endLine": 20,
+        "endChar": 55
+      },
+      "revId": "a2cd6d971fded40bb548dc0f7755777f7528443c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
