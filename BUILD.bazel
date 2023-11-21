@@ -17,7 +17,6 @@ load("@bazel_skylib//lib:sets.bzl", "sets")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/exec:exec.bzl", "exec")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
