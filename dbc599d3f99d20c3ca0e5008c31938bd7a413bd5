@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9366021e_5929d538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-22T19:37:49Z",
+      "side": 1,
+      "message": "Don\u0027t forget about android15-6.6",
+      "revId": "dbc599d3f99d20c3ca0e5008c31938bd7a413bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
