@@ -22,6 +22,30 @@
       },
       "revId": "e0435d06e6112a058d4eb7476f62379048495bd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ecbbb6_6c190f3d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1384660
+      },
+      "writtenOn": "2023-11-23T15:29:16Z",
+      "side": 1,
+      "message": "Thanks for finding this unnecessary change!",
+      "parentUuid": "61f68e20_e9b5511d",
+      "range": {
+        "startLine": 141,
+        "startChar": 9,
+        "endLine": 141,
+        "endChar": 16
+      },
+      "revId": "e0435d06e6112a058d4eb7476f62379048495bd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
