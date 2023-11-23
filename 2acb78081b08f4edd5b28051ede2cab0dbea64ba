@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059897028",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2845004?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "c1e6911d_afa64bca",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "3e0e8e68_48f7b2bd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-23T17:27:34Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "2acb78081b08f4edd5b28051ede2cab0dbea64ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059897028",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2845004?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "38aa80d9_a3fd7b99",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-23T17:27:34Z",
+      "side": 1,
+      "message": "Loaded symbol \"hermetic_exec\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 20,
+        "startChar": 49,
+        "endLine": 20,
+        "endChar": 62
+      },
+      "revId": "2acb78081b08f4edd5b28051ede2cab0dbea64ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
