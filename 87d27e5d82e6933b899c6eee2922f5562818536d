@@ -25,6 +25,32 @@
       },
       "revId": "87d27e5d82e6933b899c6eee2922f5562818536d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059899302",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2845005?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "51f74147_611ec6c6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-23T18:33:24Z",
+      "side": 1,
+      "message": "Loaded symbol \"hermetic_exec\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 20,
+        "startChar": 49,
+        "endLine": 20,
+        "endChar": 62
+      },
+      "revId": "87d27e5d82e6933b899c6eee2922f5562818536d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
