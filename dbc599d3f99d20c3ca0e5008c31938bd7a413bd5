@@ -16,6 +16,24 @@
       "message": "Don\u0027t forget about android15-6.6",
       "revId": "dbc599d3f99d20c3ca0e5008c31938bd7a413bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a545ac_474a881a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-11-27T03:22:53Z",
+      "side": 1,
+      "message": "I don\u0027t see android15-6.6 here: https://android.googlesource.com/kernel/common-modules/virtual-device/+refs\nIs it set up already?",
+      "parentUuid": "9366021e_5929d538",
+      "revId": "dbc599d3f99d20c3ca0e5008c31938bd7a413bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
