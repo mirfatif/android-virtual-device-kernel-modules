@@ -34,6 +34,24 @@
       "parentUuid": "9366021e_5929d538",
       "revId": "dbc599d3f99d20c3ca0e5008c31938bd7a413bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e02bc7c6_2d0c0b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-11-28T00:36:06Z",
+      "side": 1,
+      "message": "It will soon be. See b/311450232.\n\nIt will be forked from mainline, so your change should be there once it is forked. This is just a reminder for you to ensure your change is not accidentally dropped.",
+      "parentUuid": "b4a545ac_474a881a",
+      "revId": "dbc599d3f99d20c3ca0e5008c31938bd7a413bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
