@@ -14,6 +14,7 @@
 
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
@@ -21,6 +22,7 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "initramfs_modules_lists_test",
     "kernel_build",
     "kernel_compile_commands",
     "kernel_dtstree",
@@ -384,6 +386,63 @@ test_suite(
         ":virtual_device_x86_64_modules_test",
         # scmversion for external modules
         ":virtual_device_x86_64_external_modules_test",
+    ],
+)
+
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = get_gki_modules_list("x86_64") + _VIRT_COMMON_MODULES + [
+        "goldfish_address_space.ko",
+        "nd_virtio.ko",
+        "test_meminit.ko",
+        "v4l2loopback.ko",
+        "virtio_pmem.ko",
+]
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_list",
+    out = "modules_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST,
+)
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_recovery_list",
+    out = "modules_recovery_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST + [
+        "goldfish_sync.ko",
+    ],
+)
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_charger_list",
+    out = "modules_charger_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST + [
+        "goldfish_pipe.ko",
+    ],
+)
+
+kernel_images(
+    name = "fake_virtual_device_x86_64_images",
+    build_initramfs = True,
+    ramdisk_compression = "gzip",
+    modules_list = "modules_list.fake_virtual_device_x86_64",
+    modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
+    modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules_install = ":virtual_device_x86_64_modules_install",
+)
+
+initramfs_modules_lists_test(
+    name = "fake_virtual_device_x86_64_modules_lists_test",
+    kernel_images = ":fake_virtual_device_x86_64_images",
+    expected_modules_list = "modules_list.fake_virtual_device_x86_64",
+    expected_modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
+    expected_modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
+)
+
+test_suite(
+    name = "fake_virtual_device_x86_64_tests",
+    tests = [
+        # modules lists tests
+        ":fake_virtual_device_x86_64_modules_lists_test",
     ],
 )
 
