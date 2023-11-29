@@ -8,6 +8,9 @@ load(
     "ddk_module",
     "ddk_submodule",
     "kernel_build",
+    "kernel_module",
+    "kernel_modules_install",
+    "kernel_images",
 )
 
 def kleaf_test(
@@ -90,6 +93,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _kernel_images_test(
+        name = name + "_images_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -101,6 +110,7 @@ def kleaf_test(
             name + "_ddk_cflags_test",
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
+            name + "_images_test"
         ],
         **kwargs
     )
@@ -591,5 +601,40 @@ def _ddk_submodule_config_conditional_srcs_test(name, kernel_build, **private_kw
         name = name,
         targets = [
             name + "_module",
+        ],
+    )
+
+def _kernel_images_test(name, kernel_build, **private_kwargs):
+
+    ddk_module(
+        name = name + "_module",
+        out = name + "_module.ko",
+        kernel_build = kernel_build,
+        srcs = ["client.c", "lib.c"],
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    kernel_modules_install(
+        name = name + "_modules_install",
+        kernel_build = kernel_build,
+        kernel_modules = [
+            ":{}_module".format(name),
+        ],
+    )
+
+    kernel_images(
+        name = name + "_images",
+        kernel_modules_install = ":{}_modules_install".format(name),
+        build_initramfs = True,
+        build_vendor_boot = True,
+        modules_list = "vendor_boot_modules_list",
+        kernel_build = kernel_build,
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_images",
         ],
     )
