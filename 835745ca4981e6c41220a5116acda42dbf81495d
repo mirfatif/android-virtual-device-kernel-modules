@@ -1,0 +1,97 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060211122",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2849975?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "3fc964fb_8e33ef47",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 0
+              },
+              "replacement": "    \"kernel_images\",\n"
+            },
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": "            name + \"_images_test\",\n"
+            },
+            {
+              "path": "kleaf_test/kleaf_test.bzl",
+              "range": {
+                "startLine": 608,
+                "startChar": 0,
+                "endLine": 609,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "f89874be_7dcc8b98",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-29T00:58:02Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier kleaf_test/kleaf_test.bzl` to format the file, or apply the suggested fix.",
+      "revId": "835745ca4981e6c41220a5116acda42dbf81495d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060211122",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2849975?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "beee0e9b_18db9733",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-29T00:58:02Z",
+      "side": 1,
+      "message": "Loaded symbol \"kernel_module\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment.\nIf you want to re-export a symbol, use the following pattern:\n\n    load(..., _kernel_module \u003d \"kernel_module\", ...)\n    kernel_module \u003d _kernel_module\n http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "835745ca4981e6c41220a5116acda42dbf81495d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
