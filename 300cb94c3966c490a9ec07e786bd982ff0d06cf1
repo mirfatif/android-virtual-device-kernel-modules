@@ -76,6 +76,83 @@
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "300cb94c3966c490a9ec07e786bd982ff0d06cf1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000060809478",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2849975?revision\u003d3",
+      "fixSuggestions": [
+        {
+          "fixId": "43b14a68_c91d4109",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 393,
+                "startChar": 0,
+                "endLine": 398,
+                "endChar": 0
+              },
+              "replacement": "    \"goldfish_address_space.ko\",\n    \"nd_virtio.ko\",\n    \"test_meminit.ko\",\n    \"v4l2loopback.ko\",\n    \"virtio_pmem.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 425,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "    kernel_build \u003d \":virtual_device_x86_64\",\n    kernel_modules_install \u003d \":virtual_device_x86_64_modules_install\",\n    modules_charger_list \u003d \"modules_charger_list.fake_virtual_device_x86_64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 428,
+                "startChar": 0,
+                "endLine": 431,
+                "endChar": 0
+              },
+              "replacement": "    ramdisk_compression \u003d \"gzip\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 435,
+                "startChar": 0,
+                "endLine": 436,
+                "endChar": 0
+              },
+              "replacement": "    expected_modules_charger_list \u003d \"modules_charger_list.fake_virtual_device_x86_64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 438,
+                "startChar": 0,
+                "endLine": 439,
+                "endChar": 0
+              },
+              "replacement": "    kernel_images \u003d \":fake_virtual_device_x86_64_images\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8bcd3a5e_c7bfc64b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-05T08:48:54Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "300cb94c3966c490a9ec07e786bd982ff0d06cf1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
