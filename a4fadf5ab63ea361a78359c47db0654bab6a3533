@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b76b046_8788b2fa",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-06T01:32:45Z",
+      "side": 1,
+      "message": "Are you going to add these tests somewhere? If you don\u0027t, it will not run on presubmit.",
+      "range": {
+        "startLine": 442,
+        "startChar": 12,
+        "endLine": 442,
+        "endChar": 44
+      },
+      "revId": "a4fadf5ab63ea361a78359c47db0654bab6a3533",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
