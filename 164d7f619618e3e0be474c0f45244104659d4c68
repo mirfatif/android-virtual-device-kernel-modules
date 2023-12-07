@@ -41,6 +41,43 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000061010301",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "8d174807_77a53b60",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 642,
+                "startChar": 0,
+                "endLine": 643,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "264be574_5631dad6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
       "fixSuggestions": [],
       "key": {
         "uuid": "2e2b1f02_40bf6479",
@@ -52,6 +89,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-12-07T00:34:20Z",
+      "side": 1,
+      "message": "Variable \"_FAKE_VIRT_DEVICE_AARCH64_MODULES\" is unused. Please remove it. http://go/buildifier-warnings#unused-variable",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 33
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b5f4827c_8802698d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
       "side": 1,
       "message": "Variable \"_FAKE_VIRT_DEVICE_AARCH64_MODULES\" is unused. Please remove it. http://go/buildifier-warnings#unused-variable",
       "range": {
@@ -95,6 +158,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "787cbbd4_28f9d9c4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
+      "side": 1,
+      "message": "Variable \"_FAKE_VIRT_DEVICE_RISCV64_MODULES\" is unused. Please remove it. http://go/buildifier-warnings#unused-variable",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 33
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "db77b4bf_6048eb7e",
         "filename": "BUILD.bazel",
         "patchSetId": 1
@@ -104,6 +193,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-12-07T00:34:20Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_modules_list\" was already found on line 410. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 597,
+        "startChar": 11,
+        "endLine": 597,
+        "endChar": 52
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b4e18f14_0f3add41",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
       "side": 1,
       "message": "A rule with name \"fake_virtual_device_x86_64_modules_list\" was already found on line 410. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
       "range": {
@@ -147,6 +262,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "d5b45b5a_073d33cf",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_modules_recovery_list\" was already found on line 416. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 603,
+        "startChar": 11,
+        "endLine": 603,
+        "endChar": 61
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "6330e60b_887a934d",
         "filename": "BUILD.bazel",
         "patchSetId": 1
@@ -156,6 +297,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-12-07T00:34:20Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_modules_charger_list\" was already found on line 422. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 609,
+        "startChar": 11,
+        "endLine": 609,
+        "endChar": 60
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d8986396_986cbaeb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
       "side": 1,
       "message": "A rule with name \"fake_virtual_device_x86_64_modules_charger_list\" was already found on line 422. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
       "range": {
@@ -199,6 +366,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "cd2f9f7e_795865c4",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_modules_install\" was already found on line 428. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 615,
+        "startChar": 11,
+        "endLine": 615,
+        "endChar": 55
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "e5a8416c_d68ee516",
         "filename": "BUILD.bazel",
         "patchSetId": 1
@@ -225,6 +418,32 @@
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
       "fixSuggestions": [],
       "key": {
+        "uuid": "186544f3_a924e74b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_images\" was already found on line 437. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 624,
+        "startChar": 11,
+        "endLine": 624,
+        "endChar": 46
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
         "uuid": "c4247cd2_a04dd807",
         "filename": "BUILD.bazel",
         "patchSetId": 1
@@ -234,6 +453,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-12-07T00:34:20Z",
+      "side": 1,
+      "message": "A rule with name \"fake_virtual_device_x86_64_modules_lists_test\" was already found on line 448. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
+      "range": {
+        "startLine": 635,
+        "startChar": 11,
+        "endLine": 635,
+        "endChar": 58
+      },
+      "revId": "164d7f619618e3e0be474c0f45244104659d4c68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061010301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863547?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "71447eb6_94ca221f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T00:34:33Z",
       "side": 1,
       "message": "A rule with name \"fake_virtual_device_x86_64_modules_lists_test\" was already found on line 448. Even if it\u0027s valid for Blaze, this may confuse other tools. Please rename it and use different names. http://go/buildifier-warnings#duplicated-name",
       "range": {
