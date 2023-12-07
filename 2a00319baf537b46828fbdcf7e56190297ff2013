@@ -25,6 +25,32 @@
       },
       "revId": "2a00319baf537b46828fbdcf7e56190297ff2013",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061115796",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863356?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "bd62a8eb_f52e8620",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T21:18:46Z",
+      "side": 1,
+      "message": "syntax error near \u003c\u003c",
+      "range": {
+        "startLine": 17,
+        "startChar": 3,
+        "endLine": 17,
+        "endChar": 3
+      },
+      "revId": "2a00319baf537b46828fbdcf7e56190297ff2013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
