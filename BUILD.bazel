@@ -222,6 +222,13 @@ _VIRT_COMMON_MODULES = [
     "vsock.ko",
 ]
 
+_VIRT_X86_64_MODULES = [
+    # keep sorted
+    "nd_virtio.ko",
+    "test_meminit.ko",
+    "virtio_pmem.ko",
+]
+
 _VIRT_AARCH64_MODULES = [
     # keep sorted
     "ambakmi.ko",
@@ -243,6 +250,20 @@ _VIRT_RISCV64_MODULES = [
     "virtio_pmem.ko",
 ]
 
+_FAKE_VIRT_DEVICE_X86_64_MODULES = get_gki_modules_list("x86_64") + _VIRT_COMMON_MODULES
+
+_FAKE_VIRT_DEVICE_AARCH64_MODULES = get_gki_modules_list("arm64") + _VIRT_COMMON_MODULES
+
+_FAKE_VIRT_DEVICE_RISCV64_MODULES = get_gki_modules_list("riscv64") + _VIRT_COMMON_MODULES
+
+_FAKE_VIRT_DEVICE_RECOVERY_MODULES = [
+    "goldfish_sync.ko",
+]
+
+_FAKE_VIRT_DEVICE_CHARGER_MODULES = [
+    "goldfish_pipe.ko",
+]
+
 kernel_build(
     name = "virtual_device_x86_64",
     srcs = [":virtual_device_x86_64_common_sources"],
@@ -253,12 +274,7 @@ kernel_build(
     make_goals = [
         "modules",
     ],
-    module_outs = _VIRT_COMMON_MODULES + [
-        # keep sorted
-        "nd_virtio.ko",
-        "test_meminit.ko",
-        "virtio_pmem.ko",
-    ],
+    module_outs = _VIRT_COMMON_MODULES + _VIRT_X86_64_MODULES,
     strip_modules = True,
 )
 
@@ -391,33 +407,30 @@ test_suite(
     ],
 )
 
-_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = get_gki_modules_list("x86_64") + _VIRT_COMMON_MODULES + [
-    "goldfish_address_space.ko",
-    "nd_virtio.ko",
-    "test_meminit.ko",
-    "v4l2loopback.ko",
-    "virtio_pmem.ko",
-]
-
 write_file(
     name = "fake_virtual_device_x86_64_modules_list",
     out = "modules_list.fake_virtual_device_x86_64",
-    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST,
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES,
 )
 
 write_file(
     name = "fake_virtual_device_x86_64_modules_recovery_list",
     out = "modules_recovery_list.fake_virtual_device_x86_64",
-    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST + [
-        "goldfish_sync.ko",
-    ],
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES + _FAKE_VIRT_DEVICE_RECOVERY_MODULES,
 )
 
 write_file(
     name = "fake_virtual_device_x86_64_modules_charger_list",
     out = "modules_charger_list.fake_virtual_device_x86_64",
-    content = _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST + [
-        "goldfish_pipe.ko",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES + _FAKE_VIRT_DEVICE_CHARGER_MODULES,
+)
+
+kernel_modules_install(
+    name = "fake_virtual_device_x86_64_modules_install",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":x86_64/goldfish_drivers/goldfish_pipe",
+        ":x86_64/goldfish_drivers/goldfish_sync",
     ],
 )
 
@@ -425,7 +438,7 @@ kernel_images(
     name = "fake_virtual_device_x86_64_images",
     build_initramfs = True,
     kernel_build = ":virtual_device_x86_64",
-    kernel_modules_install = ":virtual_device_x86_64_modules_install",
+    kernel_modules_install = ":fake_virtual_device_x86_64_modules_install",
     modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
     modules_list = "modules_list.fake_virtual_device_x86_64",
     modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
@@ -561,6 +574,71 @@ hermetic_exec(
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
     """,
 )
+
+#artifact tests for aarch64
+
+test_suite(
+    name = "virtual_device_aarch64_tests",
+    tests = [
+        # scmversion for vmlinux
+        "//common:kernel_x86_64_test",
+        # scmversion for GKI modules
+        "//common:kernel_x86_64_modules_test",
+        # scmversion for in-tree device modules
+        ":virtual_device_x86_64_modules_test",
+        # scmversion for external modules
+        ":virtual_device_x86_64_external_modules_test",
+        # modules lists tests
+        ":fake_virtual_device_x86_64_modules_lists_test",
+    ],
+)
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_list",
+    out = "modules_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES,
+)
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_recovery_list",
+    out = "modules_recovery_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES + _FAKE_VIRT_DEVICE_RECOVERY_MODULES,
+)
+
+write_file(
+    name = "fake_virtual_device_x86_64_modules_charger_list",
+    out = "modules_charger_list.fake_virtual_device_x86_64",
+    content = _FAKE_VIRT_DEVICE_X86_64_MODULES + _FAKE_VIRT_DEVICE_CHARGER_MODULES,
+)
+
+kernel_modules_install(
+    name = "fake_virtual_device_x86_64_modules_install",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":x86_64/goldfish_drivers/goldfish_pipe",
+        ":x86_64/goldfish_drivers/goldfish_sync",
+    ],
+)
+
+kernel_images(
+    name = "fake_virtual_device_x86_64_images",
+    build_initramfs = True,
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules_install = ":fake_virtual_device_x86_64_modules_install",
+    modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
+    modules_list = "modules_list.fake_virtual_device_x86_64",
+    modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
+    ramdisk_compression = "gzip",
+)
+
+initramfs_modules_lists_test(
+    name = "fake_virtual_device_x86_64_modules_lists_test",
+    expected_modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
+    expected_modules_list = "modules_list.fake_virtual_device_x86_64",
+    expected_modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
+    kernel_images = ":fake_virtual_device_x86_64_images",
+)
+
 
 kernel_build(
     name = "virtual_device_aarch64_16k",
