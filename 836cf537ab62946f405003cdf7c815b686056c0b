@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d509e878_0c2a04de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2023-12-08T00:39:34Z",
+      "side": 1,
+      "message": "Bypassing Pre-submit as the boot up issue is unrelated to this change. A teammate verified that the build boots up fine on their pixel 7 device for the device that was failing. It is likely related to a different failure, http://b/313717578",
+      "revId": "836cf537ab62946f405003cdf7c815b686056c0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
