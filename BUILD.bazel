@@ -350,7 +350,6 @@ copy_to_dist_dir(
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
-        "//common:tests_zip_x86_64",
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
@@ -365,6 +364,18 @@ hermetic_exec(
     script = """
         $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
+    """,
+)
+
+hermetic_exec(
+    name = "virtual_device_x86_64_dist_with_tests",
+    data = [
+        ":virtual_device_x86_64_dist",
+        "//common:tests_zip_x86_64_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_x86_64_dist) $@
+        $(rootpath //common:tests_zip_x86_64_dist) $@
     """,
 )
 
@@ -544,7 +555,6 @@ copy_to_dist_dir(
         ":virtual_device_aarch64_modules_install",
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
-        "//common:tests_zip_arm64",
     ],
     dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
@@ -559,6 +569,18 @@ hermetic_exec(
     script = """
         $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+    """,
+)
+
+hermetic_exec(
+    name = "virtual_device_aarch64_dist_with_tests",
+    data = [
+        ":virtual_device_aarch64_dist",
+        "//common:tests_zip_arm64_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_aarch64_dist) $@
+        $(rootpath //common:tests_zip_arm64_dist) $@
     """,
 )
 
