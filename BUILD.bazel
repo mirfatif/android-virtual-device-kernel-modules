@@ -366,14 +366,18 @@ copy_to_dist_dir(
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
-        "//common:tests_zip_x86_64",
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
     log = "info",
 )
 
+<<<<<<< HEAD   (7723cf Add tests to exercise module recovery/charger lists feature)
 exec(
+=======
+# Rule for disting virtual device kernel builds. Compatible with --debug.
+hermetic_exec(
+>>>>>>> CHANGE (258515 Add _dist_with_tests rules to decouple disting of tests.)
     name = "virtual_device_x86_64_dist",
     data = [
         ":virtual_device_x86_64_copy_to_dist_dir",
@@ -382,6 +386,20 @@ exec(
     script = """
         $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
         $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
+    """,
+)
+
+# Rule for disting virtual device kernel builds with tests.
+# This rule includes disting of kunit tests. Not compatible with --debug.
+hermetic_exec(
+    name = "virtual_device_x86_64_dist_with_tests",
+    data = [
+        ":virtual_device_x86_64_dist",
+        "//common:tests_zip_x86_64_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_x86_64_dist) $@
+        $(rootpath //common:tests_zip_x86_64_dist) $@
     """,
 )
 
@@ -586,7 +604,6 @@ copy_to_dist_dir(
         ":virtual_device_aarch64_unstripped_modules_archive",
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
-        "//common:tests_zip_arm64",
     ],
     dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
@@ -602,6 +619,18 @@ exec(
     script = """
         $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
+    """,
+)
+
+hermetic_exec(
+    name = "virtual_device_aarch64_dist_with_tests",
+    data = [
+        ":virtual_device_aarch64_dist",
+        "//common:tests_zip_arm64_dist",
+    ],
+    script = """
+        $(rootpath :virtual_device_aarch64_dist) $@
+        $(rootpath //common:tests_zip_arm64_dist) $@
     """,
 )
 
