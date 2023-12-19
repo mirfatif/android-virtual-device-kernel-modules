@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6b690c_6f94444d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-12-19T21:02:04Z",
+      "side": 1,
+      "message": "There are more and more \"dist\" targets in this package. Perhaps add some comments to explain the purpose of each of them?",
+      "revId": "058624cd66811f930f26eb8efae916e9f33ffe3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
