@@ -34,6 +34,24 @@
       "parentUuid": "4e6b690c_6f94444d",
       "revId": "058624cd66811f930f26eb8efae916e9f33ffe3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe1ffa1_c8dea2ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-12-20T03:49:36Z",
+      "side": 1,
+      "message": "I\u0027ve at least added comments for the targets affected by this cl.",
+      "parentUuid": "f80a7ba0_1870db90",
+      "revId": "058624cd66811f930f26eb8efae916e9f33ffe3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
