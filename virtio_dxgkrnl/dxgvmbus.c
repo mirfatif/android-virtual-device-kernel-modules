@@ -660,8 +660,7 @@ int dxgvmb_send_close_adapter(struct dxgadapter *adapter)
 	command_vgpu_to_host_init1(&command->hdr, DXGK_VMBCOMMAND_CLOSEADAPTER);
 	command->host_handle = adapter->host_handle;
 
-	ret = dxgvmb_send_sync_msg(msg.channel, msg.hdr, msg.size,
-				   NULL, 0);
+	ret = dxgvmb_send_sync_msg_ntstatus(msg.channel, msg.hdr, msg.size);
 	free_message(&msg, NULL);
 	if (ret)
 		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
@@ -948,7 +947,7 @@ int dxgvmb_send_destroy_paging_queue(struct dxgprocess *process,
 				   process->host_handle);
 	command->paging_queue = h;
 
-	ret = dxgvmb_send_sync_msg(msg.channel, msg.hdr, msg.size, NULL, 0);
+	ret = dxgvmb_send_sync_msg_ntstatus(msg.channel, msg.hdr, msg.size);
 
 cleanup:
 	free_message(&msg, process);
