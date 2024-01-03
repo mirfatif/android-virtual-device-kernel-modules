@@ -1809,6 +1809,18 @@ struct d3dkmt_createsyncfile {
 	__u64			sync_file_handle;	/* out */
 };
 
+struct d3dkmt_presentvirtual {
+	__s32	acquire_semaphore_fd;
+	__s32	release_semaphore_fd;
+	__s32	composition_memory_fd;
+	__u64	private_data_size;
+#ifdef __KERNEL__
+	void			*private_data;
+#else
+	__u64			private_data;
+#endif
+};
+
 /*
  * Dxgkrnl Graphics Port Driver ioctl definitions
  *
@@ -1952,7 +1964,9 @@ struct d3dkmt_createsyncfile {
 	_IOWR(0x47, 0x44, struct d3dkmt_shareobjectwithhost)
 #define LX_DXCREATESYNCFILE	\
 	_IOWR(0x47, 0x45, struct d3dkmt_createsyncfile)
+#define LX_DXPRESENTVIRTUAL \
+	_IOWR(0x47, 0x46, struct d3dkmt_presentvirtual)
 
-#define LX_IO_MAX 0x45
+#define LX_IO_MAX 0x46
 
 #endif /* _D3DKMTHK_H */
