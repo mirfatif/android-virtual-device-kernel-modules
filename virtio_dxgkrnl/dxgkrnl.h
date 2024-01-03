@@ -272,6 +272,7 @@ struct dxgglobal {
 	struct dxgvmbuschannel	channel;
 	struct delayed_work	dwork;
 	struct hv_device	*hdev;
+	struct virtio_dxgkrnl	*vdxgkrnl;
 	u32			num_adapters;
 	u32			vmbus_ver;	/* Interface version */
 	atomic_t		device_state_counter;

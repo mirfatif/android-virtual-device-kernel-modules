@@ -91,11 +91,13 @@ void dxgadapter_start(struct dxgadapter *adapter)
 	}
 
 	/* Initialize vGPU vm bus channel */
-	ret = dxgadapter_set_vmbus(adapter, ch->hdev);
-	if (ret) {
-		pr_err("Failed to start adapter %p", adapter);
-		adapter->adapter_state = DXGADAPTER_STATE_STOPPED;
-		return;
+	if (ch->hdev != NULL) {
+		ret = dxgadapter_set_vmbus(adapter, ch->hdev);
+		if (ret) {
+			pr_err("Failed to start adapter %p", adapter);
+			adapter->adapter_state = DXGADAPTER_STATE_STOPPED;
+			return;
+		}
 	}
 
 	adapter->adapter_state = DXGADAPTER_STATE_ACTIVE;

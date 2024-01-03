@@ -54,6 +54,16 @@ struct winluid {
 	__u32 b;
 };
 
+struct large_integer {
+	union {
+		struct {
+			unsigned long lowpart;
+			long highpart;
+		} u;
+		int64_t quadpart;
+	};
+};
+
 #define D3DDDI_MAX_WRITTEN_PRIMARIES		16
 #define D3DDDI_MAX_MPO_PRESENT_DIRTY_RECTS	0xFFF
 

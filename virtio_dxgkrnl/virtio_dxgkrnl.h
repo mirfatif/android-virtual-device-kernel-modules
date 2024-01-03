@@ -26,4 +26,42 @@
  * SUCH DAMAGE.
  */
 
-#define VIRTIO_ID_DXGKRNL        59 /* virtio dxgkrnl (experimental id) */
+#ifndef _LINUX_VIRTIO_DXGKRNL_H
+#define _LINUX_VIRTIO_DXGKRNL_H
+
+#include <linux/types.h>
+#include <linux/virtio_types.h>
+#include <linux/virtio_ids.h>
+#include <linux/virtio_config.h>
+
+#define VIRTIO_ID_DXGKRNL 59 /* virtio dxgkrnl (experimental id) */
+
+/* Status values for a virtio_dxgkrnl request. */
+#define VIRTIO_DXGKRNL_S_OK 0
+#define VIRTIO_DXGKRNL_S_IOERR 1
+#define VIRTIO_DXGKRNL_S_UNSUPP 2
+
+struct virtio_dxgkrnl_config {
+	/* Number of dxgkrnl adapters */
+	__u64 num_adapters;
+};
+
+struct virtio_dxgkrnl_enum_adapters_req {
+	/* Number of adapters to enumerate.*/
+	__u64 num_adapters;
+	/* Offset into adapters to start enumeration. */
+	__u64 adapter_offset;
+};
+
+struct virtio_dxgkrnl_enum_adapters_resp {
+	/* Status of this request, one of VIRTIO_DXGKRNL_S_*. */
+	__u8 status;
+	__u8 padding[7];
+	/* Array of luids for device to return. */
+	__s64 vgpu_luids[0];
+};
+
+/* For the id field in virtio_pci_shm_cap */
+#define VIRTIO_DXGKRNL_SHM_ID_IOSPACE 0
+
+#endif /* _LINUX_VIRTIO_DXGKRNL_H */
