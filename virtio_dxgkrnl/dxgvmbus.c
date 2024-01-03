@@ -960,11 +960,11 @@ cleanup:
 static int
 copy_private_data(struct d3dkmt_createallocation *args,
 		  struct dxgkvmb_command_createallocation *command,
-		  struct d3dddi_allocationinfo2 *input_alloc_info,
+		  struct d3dddi_allocationinfo *input_alloc_info,
 		  struct d3dkmt_createstandardallocation *standard_alloc)
 {
 	struct dxgkvmb_command_createallocation_allocinfo *alloc_info;
-	struct d3dddi_allocationinfo2 *input_alloc;
+	struct d3dddi_allocationinfo *input_alloc;
 	int ret = 0;
 	int i;
 	u8 *private_data_dest = (u8 *) &command[1] +
@@ -1211,7 +1211,7 @@ create_local_allocations(struct dxgprocess *process,
 			 struct dxgdevice *device,
 			 struct d3dkmt_createallocation *args,
 			 struct d3dkmt_createallocation *__user input_args,
-			 struct d3dddi_allocationinfo2 *alloc_info,
+			 struct d3dddi_allocationinfo *alloc_info,
 			 struct dxgkvmb_command_createallocation_return *result,
 			 struct dxgresource *resource,
 			 struct dxgallocation **dxgalloc,
@@ -1263,7 +1263,7 @@ create_local_allocations(struct dxgprocess *process,
 
 	for (i = 0; i < alloc_count; i++) {
 		struct dxgkvmb_command_allocinfo_return *host_alloc;
-		struct d3dddi_allocationinfo2 *user_alloc;
+		struct d3dddi_allocationinfo *user_alloc;
 
 		host_alloc = &result->allocation_info[i];
 		user_alloc = &alloc_info[i];
@@ -1274,8 +1274,10 @@ create_local_allocations(struct dxgprocess *process,
 						     dxgalloc[i],
 						     args->flags.read_only != 0,
 						     user_alloc->sysmem);
-			if (ret < 0)
+			if (ret < 0) {
+				pr_err("create_existing_sysmem failed");
 				goto cleanup;
+			}
 		}
 		dxgalloc[i]->cached = host_alloc->allocation_flags.cached;
 		if (host_alloc->priv_drv_data_size) {
@@ -1365,7 +1367,7 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 				  input_args,
 				  struct dxgresource *resource,
 				  struct dxgallocation **dxgalloc,
-				  struct d3dddi_allocationinfo2 *alloc_info,
+				  struct d3dddi_allocationinfo *alloc_info,
 				  struct d3dkmt_createstandardallocation
 				  *standard_alloc)
 {
