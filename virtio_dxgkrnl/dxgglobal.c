@@ -42,7 +42,7 @@ struct dxgvmbuschannel *dxgglobal_get_dxgvmbuschannel(void)
 int dxgglobal_acquire_channel_lock(void)
 {
 	down_read(&dxgglobal->channel_lock);
-	if (dxgglobal->channel.channel == NULL) {
+	if ((dxgglobal->channel.channel == NULL) && (dxgglobal->vdxgkrnl == NULL)) {
 		pr_err("Failed to acquire global channel lock");
 		return -ENODEV;
 	} else {
@@ -203,7 +203,7 @@ void dxgglobal_release_process_adapter_lock(void)
 	mutex_unlock(&dxgglobal->process_adapter_mutex);
 }
 
-int dxgglobal_create_adapter(struct pci_dev *dev, guid_t *guid,
+int dxgglobal_create_adapter(struct pci_dev *dev, struct winluid guid,
 			     struct winluid host_vgpu_luid)
 {
 	struct dxgadapter *adapter;
@@ -226,7 +226,7 @@ int dxgglobal_create_adapter(struct pci_dev *dev, guid_t *guid,
 	INIT_LIST_HEAD(&adapter->syncobj_list_head);
 	init_rwsem(&adapter->shared_resource_list_lock);
 	adapter->pci_dev = dev;
-	guid_to_luid(guid, &adapter->luid);
+	adapter->luid = guid;
 
 	dxgglobal_acquire_adapter_list_lock(DXGLOCK_EXCL);
 
@@ -246,7 +246,7 @@ void dxgglobal_start_adapters(void)
 {
 	struct dxgadapter *adapter;
 
-	if (dxgglobal->hdev == NULL) {
+	if ((dxgglobal->hdev == NULL) && (dxgglobal->vdxgkrnl == NULL)) {
 		dev_dbg(dxgglobaldev, "Global channel is not ready");
 		return;
 	}
