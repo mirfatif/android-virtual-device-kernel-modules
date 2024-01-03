@@ -1735,6 +1735,46 @@ dxgk_create_allocation(struct dxgprocess *process, void *__user inargs)
 	ret = dxgvmb_send_create_allocation(process, device, &args, inargs,
 					    resource, dxgalloc, alloc_info,
 					    &standard_alloc);
+
+	// Temporary WA for lack of output privateData fields for shared resources
+	if (ret >= 0 && args.flags.create_shared) {
+		for (i = 0; i < args.alloc_count; i++) {
+			u32 priv_data_size;
+
+			if (args.flags.standard_allocation)
+				priv_data_size = standard_alloc_priv_data_size;
+			else
+				priv_data_size = alloc_info[i].priv_drv_data_size;
+
+			/* Remember dxgalloc[i] private data to use it during open */
+			dxgalloc[i]->priv_drv_data = vzalloc(priv_data_size +
+					offsetof(struct privdata, data) - 1);
+			if (dxgalloc[i]->priv_drv_data == NULL) {
+				ret = -ENOMEM;
+				goto cleanup;
+			}
+			if (args.flags.standard_allocation) {
+				memcpy(dxgalloc[i]->priv_drv_data->data,
+				       standard_alloc_priv_data,
+				       standard_alloc_priv_data_size);
+				dxgalloc[i]->priv_drv_data->data_size =
+				    standard_alloc_priv_data_size;
+			} else {
+				ret = copy_from_user(
+					dxgalloc[i]->priv_drv_data->data,
+					alloc_info[i].priv_drv_data,
+					priv_data_size);
+				if (ret) {
+					pr_err("%s failed to copy priv data",
+						__func__);
+					ret = -EINVAL;
+					goto cleanup;
+				}
+				dxgalloc[i]->priv_drv_data->data_size =
+				    priv_data_size;
+			}
+		}
+	}
 cleanup:
 
 	if (resource_mutex_acquired) {
