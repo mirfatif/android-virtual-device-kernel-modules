@@ -20,6 +20,7 @@
 #include "dxgkrnl.h"
 #include "dxgvmbus.h"
 #include "dxgsyncfile.h"
+#include "virtio_dxgkrnl.h"
 
 #undef pr_fmt
 #define pr_fmt(fmt)	"dxgk:err: " fmt
@@ -5256,6 +5257,129 @@ dxgk_get_shared_resource_adapter_luid(struct dxgprocess *process,
 	return -ENOTTY;
 }
 
+static int
+get_resource_host_nthandle(int guest_fd, unsigned long long *host_nthandle)
+{
+	struct dxgsharedresource *shared_resource = NULL;
+	struct file *file = NULL;
+	int ret = 0;
+
+	file = fget(guest_fd);
+	if (!file) {
+		pr_err("failed to get file from handle: %x",
+				guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+	if (file->f_op != &dxg_resource_fops) {
+		pr_err("invalid fd type: %x", guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+	shared_resource = file->private_data;
+	if (shared_resource == NULL) {
+		pr_err("invalid private data: %x",
+				guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	if (kref_get_unless_zero(&shared_resource->sresource_kref) == 0) {
+		pr_err("Invalid shared resource handle: %x",
+			   (u32)guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	*host_nthandle = (u64) shared_resource->host_shared_handle_nt.v;
+
+cleanup:
+	return ret;
+}
+
+static int
+get_syncobj_host_nthandle(int guest_fd, unsigned long long *host_nthandle)
+{
+	struct dxgsharedsyncobject *syncobj_fd = NULL;
+	struct file *file = NULL;
+	int ret = 0;
+
+	file = fget(guest_fd);
+	if (!file) {
+		pr_err("failed to get file from handle: %x",
+			   guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	if (file->f_op != &dxg_syncobj_fops) {
+		pr_err("invalid fd: %x", guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	syncobj_fd = file->private_data;
+	if (syncobj_fd == NULL) {
+		pr_err("invalid private data: %x", guest_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	*host_nthandle = (u64) syncobj_fd->host_shared_handle_nt.v;
+
+cleanup:
+	return ret;
+}
+
+static int
+dxgk_presentvirtual(struct dxgprocess *process, void *__user inargs)
+{
+	struct d3dkmt_presentvirtual args;
+	__u64 acquire_semaphore_nthandle = 0;
+	__u64 release_semaphore_nthandle = 0;
+	__u64 composition_memory_nthandle = 0;
+	int ret;
+
+	ret = copy_from_user(&args, inargs, sizeof(args));
+	if (ret) {
+		pr_err("%s failed to copy input args", __func__);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// It is ok if -1 is passed for the acquire semaphore.
+	if (args.acquire_semaphore_fd != -1) {
+		ret = get_syncobj_host_nthandle(args.acquire_semaphore_fd, &acquire_semaphore_nthandle);
+		if (ret) {
+			pr_err("%s failed to host nthandle for fd %x", __func__, args.acquire_semaphore_fd);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	ret = get_syncobj_host_nthandle(args.release_semaphore_fd, &release_semaphore_nthandle);
+	if (ret) {
+		pr_err("%s failed to host nthandle for fd %x", __func__, args.acquire_semaphore_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	ret = get_resource_host_nthandle(args.composition_memory_fd, &composition_memory_nthandle);
+	if (ret) {
+		pr_err("%s failed to host nthandle for fd %x", __func__, args.composition_memory_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	ret = dxgvmb_send_present_virtual(process, &args,
+		acquire_semaphore_nthandle, release_semaphore_nthandle, composition_memory_nthandle);
+
+cleanup:
+
+	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
+	return ret;
+}
+
 /*
  * IOCTL processing
  * The driver IOCTLs return
@@ -5450,4 +5574,6 @@ void init_ioctls(void)
 		  LX_DXSHAREOBJECTWITHHOST);
 	SET_IOCTL(/*0x45 */ dxgk_create_sync_file,
 		  LX_DXCREATESYNCFILE);
+	SET_IOCTL(/*0x46 */ dxgk_presentvirtual,
+		  LX_DXPRESENTVIRTUAL);
 }
