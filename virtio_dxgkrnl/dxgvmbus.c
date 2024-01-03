@@ -1472,6 +1472,10 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 		goto cleanup;
 	}
 
+	ret = ntstatus2int(result->status);
+	if (ret < 0)
+		goto cleanup;
+
 	ret = create_local_allocations(process, device, args, input_args,
 				       alloc_info, result, resource, dxgalloc,
 				       destroy_buffer_size);
