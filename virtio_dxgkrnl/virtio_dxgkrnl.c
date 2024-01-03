@@ -35,6 +35,7 @@ struct virtio_dxgkrnl_command {
 	void *result;
 	u32 result_size;
 	refcount_t ref_count;
+	int seqno;
 };
 
 struct virtio_dxgkrnl_event_buffer {
@@ -113,6 +114,7 @@ virtio_dxgkrnl_command_create(struct virtio_dxgkrnl *vp,
 			      u32 result_size, bool async)
 {
 	struct virtio_dxgkrnl_command *cmd;
+	static atomic_t cmd_count = ATOMIC_INIT(0);
 
 	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
 	if (!cmd) {
@@ -120,6 +122,7 @@ virtio_dxgkrnl_command_create(struct virtio_dxgkrnl *vp,
 			__func__);
 		return NULL;
 	}
+	cmd->seqno = atomic_inc_return(&cmd_count);
 	cmd->async = async;
 	cmd->cmd_size = cmd_size;
 	cmd->result_size = result_size;
@@ -240,18 +243,26 @@ static void dxgkrnl_command_result_work(struct work_struct *work)
 	struct virtio_dxgkrnl *vp;
 	unsigned int len;
 
+	dev_dbg(dxgglobaldev, "%s begins", __func__);
 	vp = container_of(work, struct virtio_dxgkrnl, command_result_work);
 
 	spin_lock(&vp->command_qlock);
 	while ((cmd = virtqueue_get_buf(vp->command_vq, &len)) != NULL) {
+		dev_dbg(dxgglobaldev, "virtqueue_get_buf for command #%d",
+			cmd->seqno);
 		spin_unlock(&vp->command_qlock);
-		if (!cmd->async && cmd->completion != NULL)
+		if (!cmd->async && cmd->completion != NULL) {
+			dev_dbg(dxgglobaldev, "mark completion for command #%d",
+				cmd->seqno);
 			complete(cmd->completion);
+		}
 
 		virtio_dxgkrnl_cmd_unref(cmd);
 		spin_lock(&vp->command_qlock);
 	};
 	spin_unlock(&vp->command_qlock);
+
+	dev_dbg(dxgglobaldev, "%s ends", __func__);
 }
 
 int dxgglobal_init_global_channel(void)
@@ -350,6 +361,7 @@ int dxgvmb_send_async_msg(struct dxgvmbuschannel *channel, void *command,
 	struct virtio_dxgkrnl *vp;
 	struct scatterlist sg;
 	int err;
+	int cur_command_seqno;
 
 	vp = dxgglobal->vdxgkrnl;
 
@@ -360,11 +372,14 @@ int dxgvmb_send_async_msg(struct dxgvmbuschannel *channel, void *command,
 			__func__);
 		return err;
 	}
+	cur_command_seqno = ctx->seqno;
 
 	memcpy(ctx->command, command, cmd_size);
 
 	sg_init_one(&sg, ctx->command, cmd_size);
 	spin_lock(&vp->command_qlock);
+	dev_dbg(dxgglobaldev, "virtqueue_add_outbuf for command #%d",
+		cur_command_seqno);
 	err = virtqueue_add_outbuf(vp->command_vq, &sg, 1, ctx, GFP_KERNEL);
 	spin_unlock(&vp->command_qlock);
 
@@ -374,6 +389,8 @@ int dxgvmb_send_async_msg(struct dxgvmbuschannel *channel, void *command,
 		return err;
 	}
 	spin_lock(&vp->command_qlock);
+	dev_dbg(dxgglobaldev, "virtqueue_kick for command #%d",
+		cur_command_seqno);
 	if (unlikely(!virtqueue_kick(vp->command_vq))) {
 		dev_err(&vp->vdev->dev,
 			"%s: virtqueue_kick failed with command virtqueue\n",
@@ -393,6 +410,7 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 	struct virtio_dxgkrnl_command *ctx;
 	struct virtio_dxgkrnl *vp;
 	int err;
+	int cur_command_seqno;
 	bool command_queue_locked = false;
 
 	vp = dxgglobal->vdxgkrnl;
@@ -412,6 +430,7 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 	 * during wait_for_completion_interruptible.
 	 */
 	virtio_dxgkrnl_cmd_ref(ctx);
+	cur_command_seqno = ctx->seqno;
 	init_completion(&completion);
 	ctx->completion = &completion;
 
@@ -423,6 +442,8 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 
 	spin_lock(&vp->command_qlock);
 	command_queue_locked = true;
+	dev_dbg(dxgglobaldev, "virtqueue_add_sgs for command #%d",
+		cur_command_seqno);
 	err = virtqueue_add_sgs(vp->command_vq, sgs, 1, 1, ctx, GFP_ATOMIC);
 	if (err) {
 		dev_err(&vp->vdev->dev, "%s: failed to add output: %d\n",
@@ -430,6 +451,8 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 		goto cleanup;
 	}
 
+	dev_dbg(dxgglobaldev, "virtqueue_kick for command #%d",
+		cur_command_seqno);
 	if (unlikely(!virtqueue_kick(vp->command_vq))) {
 		dev_err(&vp->vdev->dev,
 			"%s: virtqueue_kick failed with command virtqueue\n",
@@ -443,9 +466,13 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 	/* Spin for a response, the kick causes an ioport write, trapping
 	 * into the hypervisor, so the request should be handled immediately.
 	 */
+	dev_dbg(dxgglobaldev, "wait_for_completion_interruptible #%d start",
+		cur_command_seqno);
 	wait_for_completion_interruptible(&completion);
 	// In case we've been interrupted, set completion to NULL here on ctx.
 	ctx->completion = NULL;
+	dev_dbg(dxgglobaldev, "wait_for_completion_interruptible #%d end",
+		cur_command_seqno);
 
 	memcpy(result, ctx->result, result_size);
 
