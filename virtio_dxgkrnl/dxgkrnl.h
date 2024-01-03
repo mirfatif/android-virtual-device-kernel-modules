@@ -39,7 +39,7 @@ struct dxghwqueue;
 
 #include "misc.h"
 #include "hmgr.h"
-#include <uapi/misc/d3dkmthk.h>
+#include "include/uapi/d3dkmthk.h"
 
 struct dxgk_device_types {
 	u32 post_device:1;
@@ -87,6 +87,14 @@ struct dxgvmbuschannel {
 int dxgvmbuschannel_init(struct dxgvmbuschannel *ch, struct hv_device *hdev);
 void dxgvmbuschannel_destroy(struct dxgvmbuschannel *ch);
 void dxgvmbuschannel_receive(void *ctx);
+int dxgvmb_send_async_msg(struct dxgvmbuschannel *channel,
+			  void *command,
+			  u32 cmd_size);
+int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel,
+			 void *command,
+			 u32 cmd_size,
+			 void *result,
+			 u32 result_size);
 
 struct dxgpagingqueue {
 	struct dxgdevice	*device;
@@ -699,7 +707,7 @@ struct dxgallocation {
 	/* Set to 1 when the allocatio is mapped as cached */
 	u32				cached:1;
 	u32				handle_valid:1;
-	/* GPADL address list for existing sysmem allocations */
+    /* GPADL address list for existing sysmem allocations */
 	u32				gpadl;
 	/* Number of pages in the 'pages' array */
 	u32				num_pages;
