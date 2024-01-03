@@ -610,6 +610,60 @@ cleanup:
 	return ret;
 }
 
+int dxgvmb_send_present_virtual(struct dxgprocess *process,
+				struct d3dkmt_presentvirtual *args,
+				__u64 acquire_semaphore_nthandle,
+				__u64 release_semaphore_nthandle,
+				__u64 composition_memory_nthandle)
+{
+	struct dxgkvmb_command_presentvirtual *command;
+	int ret;
+	struct dxgvmbusmsg msg = {.hdr = NULL};
+	u32 cmd_size = 0;
+
+	cmd_size = sizeof(struct dxgkvmb_command_presentvirtual) + args->private_data_size;
+
+	ret = init_message(&msg, NULL, process, cmd_size);
+	if (ret)
+		return ret;
+	command = (void *)msg.msg;
+
+	command_vm_to_host_init2(&command->hdr,
+				 DXGK_VMBCOMMAND_PRESENTVIRTUAL,
+				 process->host_handle);
+	command->acquire_semaphore_nthandle = acquire_semaphore_nthandle;
+	command->release_semaphore_nthandle = release_semaphore_nthandle;
+	command->composition_memory_nthandle = composition_memory_nthandle;
+	command->private_data_size = args->private_data_size;
+
+
+	if (args->private_data_size) {
+		ret = copy_from_user(&command[1],
+				     args->private_data,
+				     args->private_data_size);
+		if (ret) {
+			pr_err("%s failed to copy user data", __func__);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	ret = dxgglobal_acquire_channel_lock();
+	if (ret < 0)
+		goto cleanup;
+
+	ret = dxgvmb_send_sync_msg_ntstatus(dxgglobal_get_dxgvmbuschannel(), msg.hdr,
+						    msg.size);
+
+	dxgglobal_release_channel_lock();
+
+cleanup:
+	free_message(&msg, process);
+	if (ret)
+		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
+	return ret;
+}
+
 /*
  * Virtual GPU messages to the host
  */
