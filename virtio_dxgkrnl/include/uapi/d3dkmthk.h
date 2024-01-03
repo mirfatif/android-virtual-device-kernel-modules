@@ -364,8 +364,8 @@ struct d3dkmt_createstandardallocation {
 	__u32 reserved1;
 };
 
-struct d3dddi_allocationinfo2 {
-	struct d3dkmthandle allocation;
+struct d3dddi_allocationinfo {
+	struct d3dkmthandle	allocation;
 #ifdef __KERNEL__
 	const void *sysmem;
 #else
@@ -387,12 +387,6 @@ struct d3dddi_allocationinfo2 {
 		};
 		__u32 value;
 	} flags;
-	__u64 gpu_virtual_address;
-	union {
-		__u32 priority;
-		__u64 unused;
-	};
-	__u64 reserved[5];
 };
 
 struct d3dkmt_createallocationflags {
@@ -446,7 +440,7 @@ struct d3dkmt_createallocation {
 	__u32 priv_drv_data_size;
 	__u32 alloc_count;
 #ifdef __KERNEL__
-	struct d3dddi_allocationinfo2 *allocation_info;
+	struct d3dddi_allocationinfo	*allocation_info;
 #else
 	__u64 allocation_info;
 #endif

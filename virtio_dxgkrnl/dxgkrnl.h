@@ -792,7 +792,7 @@ int dxgvmb_send_create_allocation(struct dxgprocess *pr, struct dxgdevice *dev,
 				  struct d3dkmt_createallocation *__user inargs,
 				  struct dxgresource *res,
 				  struct dxgallocation **allocs,
-				  struct d3dddi_allocationinfo2 *alloc_info,
+				  struct d3dddi_allocationinfo *alloc_info,
 				  struct d3dkmt_createstandardallocation *stda);
 int dxgvmb_send_destroy_allocation(struct dxgprocess *pr, struct dxgdevice *dev,
 				   struct d3dkmt_destroyallocation2 *args,
