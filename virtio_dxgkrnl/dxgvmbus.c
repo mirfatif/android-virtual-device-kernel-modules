@@ -416,7 +416,7 @@ int dxgvmb_send_open_sync_object_nt(struct dxgprocess *process,
 	command_vm_to_host_init2(&command->hdr, DXGK_VMBCOMMAND_OPENSYNCOBJECT,
 				 process->host_handle);
 	command->device = args->device;
-	command->global_sync_object = syncobj->shared_owner->host_shared_handle;
+	command->global_sync_object = syncobj->shared_owner->host_shared_handle_nt;
 	command->flags = args->flags;
 	if (syncobj->monitored_fence)
 		command->engine_affinity =
@@ -2317,14 +2317,8 @@ dxgvmb_send_create_sync_object(struct dxgprocess *process,
 		goto cleanup;
 	}
 	args->sync_object = result.sync_object;
-	if (syncobj->shared) {
-		if (result.global_sync_object.v == 0) {
-			pr_err("shared handle is 0");
-			ret = -EINVAL;
-			goto cleanup;
-		}
+	if (syncobj->shared)
 		args->info.shared_handle = result.global_sync_object;
-	}
 
 	if (syncobj->monitored_fence) {
 		va = dxg_map_iospace(result.fence_storage_address, PAGE_SIZE,
