@@ -34,6 +34,59 @@ struct dxgadapter;
 
 #define DXGK_BUFFER_VMBUS_ALIGNED(Buffer) (((Buffer) & 7)	== 0)
 
+
+#define RING_BUFSIZE (256 * 1024)
+
+/*
+ * The structure is used to track VM bus packets, waiting for completion.
+ */
+struct dxgvmbuspacket {
+	struct list_head packet_list_entry;
+	u64 request_id;
+	struct completion wait;
+	void *buffer;
+	u32 buffer_length;
+	int status;
+	bool completed;
+};
+
+struct dxgvmb_ext_header {
+	/* Offset from the start of the message to DXGKVMB_COMMAND_BASE */
+	u32		command_offset;
+	u32		reserved;
+	struct winluid	vgpu_luid;
+};
+
+#define VMBUSMESSAGEONSTACK	0
+
+struct dxgvmbusmsg {
+/* Points to the allocated buffer */
+	struct dxgvmb_ext_header	*hdr;
+/* Points to dxgkvmb_command_vm_to_host or dxgkvmb_command_vgpu_to_host */
+	void				*msg;
+/* The vm bus channel, used to pass the message to the host */
+	struct dxgvmbuschannel		*channel;
+/* Message size in bytes including the header and the payload */
+	u32				size;
+/* Buffer used for small messages */
+	char				msg_on_stack[VMBUSMESSAGEONSTACK];
+};
+
+struct dxgvmbusmsgres {
+/* Points to the allocated buffer */
+	struct dxgvmb_ext_header	*hdr;
+/* Points to dxgkvmb_command_vm_to_host or dxgkvmb_command_vgpu_to_host */
+	void				*msg;
+/* The vm bus channel, used to pass the message to the host */
+	struct dxgvmbuschannel		*channel;
+/* Message size in bytes including the header, the payload and the result */
+	u32				size;
+/* Result buffer size in bytes */
+	u32				res_size;
+/* Points to the result within the allocated buffer */
+	void				*res;
+};
+
 enum dxgkvmb_commandchanneltype {
 	DXGKVMB_VGPU_TO_HOST,
 	DXGKVMB_VM_TO_HOST,
