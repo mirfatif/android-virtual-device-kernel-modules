@@ -117,6 +117,7 @@ enum dxgkvmb_commandtype_global {
 	DXGK_VMBCOMMAND_SETIOSPACEREGION	= 1010,
 	DXGK_VMBCOMMAND_COMPLETETRANSACTION	= 1011,
 	DXGK_VMBCOMMAND_SHAREOBJECTWITHHOST	= 1021,
+	DXGK_VMBCOMMAND_PRESENTVIRTUAL		= 1031,
 	DXGK_VMBCOMMAND_INVALID_VM_TO_HOST
 };
 
@@ -933,6 +934,15 @@ struct dxgkvmb_command_shareobjectwithhost_return {
 	struct ntstatus	status;
 	u32		alignment;
 	u64		vail_nt_handle;
+};
+
+struct dxgkvmb_command_presentvirtual {
+	struct dxgkvmb_command_vm_to_host hdr;
+	u64 acquire_semaphore_nthandle;
+	u64 release_semaphore_nthandle;
+	u64 composition_memory_nthandle;
+	u64 private_data_size;
+	// prviate_data
 };
 
 int
