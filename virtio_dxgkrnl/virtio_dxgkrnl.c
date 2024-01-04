@@ -648,6 +648,9 @@ static int dxgglobal_create(void)
 
 	hmgrtable_init(&dxgglobal->handle_table, NULL);
 
+	// Setting this on prevents using GPADL for existing sysmem allocations.
+	dxgglobal->map_guest_pages_enabled = true;
+
 	dev_dbg(dxgglobaldev, "dxgglobal_init end\n");
 	return ret;
 }
