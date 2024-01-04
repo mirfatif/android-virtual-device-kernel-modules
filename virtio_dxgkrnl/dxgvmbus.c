@@ -2188,6 +2188,7 @@ int dxgvmb_send_reserve_gpu_va(struct dxgprocess *process,
 	ret = dxgvmb_send_sync_msg(msg.channel, msg.hdr, msg.size, &result,
 				   sizeof(result));
 	args->virtual_address = result.virtual_address;
+	ret = ntstatus2int(result.status);
 
 cleanup:
 	free_message(&msg, process);
