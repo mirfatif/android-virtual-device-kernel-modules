@@ -41,6 +41,10 @@
 #define VIRTIO_DXGKRNL_S_IOERR 1
 #define VIRTIO_DXGKRNL_S_UNSUPP 2
 
+/* The feature bitmap for virtio dxgkrnl */
+/* Async commands */
+#define VIRTIO_DXGKRNL_F_ASYNC_COMMANDS 0
+
 struct virtio_dxgkrnl_config {
 	/* Number of dxgkrnl adapters */
 	__u64 num_adapters;
