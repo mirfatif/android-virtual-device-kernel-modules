@@ -98,6 +98,13 @@ void dxgadapter_start(struct dxgadapter *adapter)
 			adapter->adapter_state = DXGADAPTER_STATE_STOPPED;
 			return;
 		}
+	} else {
+		ret = dxgvmb_send_open_adapter(adapter);
+		if (ret < 0) {
+			pr_err("dxgvmb_send_open_adapter failed: %d\n", ret);
+			adapter->adapter_state = DXGADAPTER_STATE_STOPPED;
+			return;
+		}
 	}
 
 	adapter->adapter_state = DXGADAPTER_STATE_ACTIVE;
