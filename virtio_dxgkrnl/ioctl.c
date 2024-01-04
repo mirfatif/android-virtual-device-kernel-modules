@@ -618,7 +618,7 @@ dxgk_query_adapter_info(struct dxgprocess *process, void *__user inargs)
 	dev_dbg(dxgglobaldev, "Type: %d Size: %x",
 		args.type, args.private_data_size);
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -661,7 +661,7 @@ dxgk_create_device(struct dxgprocess *process, void *__user inargs)
 	}
 
 	/* The call acquires reference on the adapter */
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -742,7 +742,7 @@ dxgk_destroy_device(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	device = hmgrtable_get_object_by_type(&process->handle_table,
 					      HMGRENTRY_TYPE_DXGDEVICE,
-					      args.device);
+					      args.device, true);
 	if (device) {
 		hmgrtable_free_handle(&process->handle_table,
 				      HMGRENTRY_TYPE_DXGDEVICE, args.device);
@@ -890,7 +890,7 @@ dxgk_destroy_context(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	context = hmgrtable_get_object_by_type(&process->handle_table,
 					       HMGRENTRY_TYPE_DXGCONTEXT,
-					       args.context);
+					       args.context, true);
 	if (context) {
 		hmgrtable_free_handle(&process->handle_table,
 				      HMGRENTRY_TYPE_DXGCONTEXT, args.context);
@@ -994,7 +994,7 @@ dxgk_create_hwqueue(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_SHARED);
 	context = hmgrtable_get_object_by_type(&process->handle_table,
 					       HMGRENTRY_TYPE_DXGCONTEXT,
-					       args.context);
+					       args.context, true);
 	hmgrtable_unlock(&process->handle_table, DXGLOCK_SHARED);
 
 	if (context == NULL) {
@@ -1059,7 +1059,7 @@ static int dxgk_destroy_hwqueue(struct dxgprocess *process,
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	hwqueue = hmgrtable_get_object_by_type(&process->handle_table,
 					       HMGRENTRY_TYPE_DXGHWQUEUE,
-					       args.queue);
+					       args.queue, true);
 	if (hwqueue) {
 		hmgrtable_free_handle(&process->handle_table,
 				      HMGRENTRY_TYPE_DXGHWQUEUE, args.queue);
@@ -1230,7 +1230,7 @@ dxgk_destroy_paging_queue(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	paging_queue = hmgrtable_get_object_by_type(&process->handle_table,
 						HMGRENTRY_TYPE_DXGPAGINGQUEUE,
-						args.paging_queue);
+						args.paging_queue, true);
 	if (paging_queue) {
 		device_handle = paging_queue->device_handle;
 		hmgrtable_free_handle(&process->handle_table,
@@ -1628,7 +1628,7 @@ dxgk_create_allocation(struct dxgprocess *process, void *__user inargs)
 			resource = hmgrtable_get_object_by_type(
 				&process->handle_table,
 				HMGRENTRY_TYPE_DXGRESOURCE,
-				args.resource);
+				args.resource, true);
 			kref_get(&resource->resource_kref);
 			dxgprocess_ht_lock_shared_up(process);
 
@@ -1908,7 +1908,7 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 			allocs[i] =
 			    hmgrtable_get_object_by_type(&process->handle_table,
 						HMGRENTRY_TYPE_DXGALLOCATION,
-						alloc_handles[i]);
+						alloc_handles[i], true);
 			ret =
 			    validate_alloc(allocs[0], allocs[i], device,
 					   alloc_handles[i]);
@@ -1926,7 +1926,7 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 		dxgprocess_ht_lock_exclusive_down(process);
 		resource = hmgrtable_get_object_by_type(&process->handle_table,
 						HMGRENTRY_TYPE_DXGRESOURCE,
-						args.resource);
+						args.resource, true);
 		if (resource == NULL) {
 			pr_err("Invalid resource handle: %x",
 				   args.resource.v);
@@ -2634,7 +2634,7 @@ dxgk_reserve_gpu_va(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, false);
 	if (adapter == NULL) {
 		device = dxgprocess_device_by_object_handle(process,
 						HMGRENTRY_TYPE_DXGPAGINGQUEUE,
@@ -2695,7 +2695,7 @@ dxgk_free_gpu_va(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -2912,7 +2912,7 @@ dxgk_destroy_sync_object(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	syncobj = hmgrtable_get_object_by_type(&process->handle_table,
 					       HMGRENTRY_TYPE_DXGSYNCOBJECT,
-					       args.sync_object);
+					       args.sync_object, true);
 	if (syncobj) {
 		dev_dbg(dxgglobaldev, "syncobj 0x%p", syncobj);
 		syncobj->handle.v = 0;
@@ -3649,7 +3649,7 @@ dxgk_wait_sync_object_gpu(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_SHARED);
 	context = hmgrtable_get_object_by_type(&process->handle_table,
 					       HMGRENTRY_TYPE_DXGCONTEXT,
-					       args.context);
+					       args.context, true);
 	if (context) {
 		device_handle = context->device_handle;
 		syncobj_type =
@@ -3666,7 +3666,7 @@ dxgk_wait_sync_object_gpu(struct dxgprocess *process, void *__user inargs)
 			syncobj =
 			    hmgrtable_get_object_by_type(&process->handle_table,
 						HMGRENTRY_TYPE_DXGSYNCOBJECT,
-						objects[0]);
+						objects[0], true);
 			if (syncobj == NULL) {
 				pr_err("Invalid syncobj: %x", objects[0].v);
 				ret = -EINVAL;
@@ -3755,7 +3755,7 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
-					     args.allocation);
+					     args.allocation, true);
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
@@ -3831,7 +3831,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
-					     args.allocation);
+					     args.allocation, true);
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
@@ -4269,7 +4269,7 @@ dxgk_change_vidmem_reservation(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -4310,7 +4310,7 @@ dxgk_query_clock_calibration(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -4358,7 +4358,7 @@ dxgk_flush_heap_transitions(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -4404,7 +4404,7 @@ dxgk_escape(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;
@@ -4451,7 +4451,7 @@ dxgk_query_vidmem_info(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	adapter = dxgprocess_adapter_by_handle(process, args.adapter);
+	adapter = dxgprocess_adapter_by_handle(process, args.adapter, true);
 	if (adapter == NULL) {
 		ret = -EINVAL;
 		goto cleanup;

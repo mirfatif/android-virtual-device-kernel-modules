@@ -88,38 +88,44 @@ u32 get_instance(struct d3dkmthandle h)
 }
 
 static bool is_handle_valid(struct hmgrtable *table, struct d3dkmthandle h,
-			    bool ignore_destroyed, enum hmgrentry_type t)
+			    bool ignore_destroyed, enum hmgrentry_type t,
+				bool error_on_invalid_index)
 {
 	u32 index = get_index(h);
 	u32 unique = get_unique(h);
 	struct hmgrentry *entry;
 
 	if (index >= table->table_size) {
-		pr_err("%s Invalid index %x %d\n", __func__, h.v, index);
+		if (error_on_invalid_index)
+			pr_err("%s Invalid index %x %d\n", __func__, h.v, index);
 		return false;
 	}
 
 	entry = &table->entry_table[index];
 	if (unique != entry->unique) {
-		pr_err("%s Invalid unique %x %d %d %d %p",
-			   __func__, h.v, unique, entry->unique,
-			   index, entry->object);
+		if (error_on_invalid_index)
+			pr_err("%s Invalid unique %x %d %d %d %p",
+				__func__, h.v, unique, entry->unique,
+				index, entry->object);
 		return false;
 	}
 
 	if (entry->destroyed && !ignore_destroyed) {
-		pr_err("%s Invalid destroyed", __func__);
+		if (error_on_invalid_index)
+			pr_err("%s Invalid destroyed", __func__);
 		return false;
 	}
 
 	if (entry->type == HMGRENTRY_TYPE_FREE) {
-		pr_err("%s Entry is freed %x %d", __func__, h.v, index);
+		if (error_on_invalid_index)
+			pr_err("%s Entry is freed %x %d", __func__, h.v, index);
 		return false;
 	}
 
 	if (t != HMGRENTRY_TYPE_FREE && t != entry->type) {
-		pr_err("%s type mismatch %x %d %d", __func__, h.v,
-			   t, entry->type);
+		if (error_on_invalid_index)
+			pr_err("%s type mismatch %x %d %d", __func__, h.v,
+				t, entry->type);
 		return false;
 	}
 
@@ -147,7 +153,7 @@ inline u32 hmgrtable_get_used_entry_count(struct hmgrtable *table)
 
 bool hmgrtable_mark_destroyed(struct hmgrtable *table, struct d3dkmthandle h)
 {
-	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE))
+	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE, true))
 		return false;
 
 	table->entry_table[get_index(h)].destroyed = true;
@@ -156,7 +162,7 @@ bool hmgrtable_mark_destroyed(struct hmgrtable *table, struct d3dkmthandle h)
 
 bool hmgrtable_unmark_destroyed(struct hmgrtable *table, struct d3dkmthandle h)
 {
-	if (!is_handle_valid(table, h, true, HMGRENTRY_TYPE_FREE))
+	if (!is_handle_valid(table, h, true, HMGRENTRY_TYPE_FREE, true))
 		return true;
 
 	DXGKRNL_ASSERT(table->entry_table[get_index(h)].destroyed);
@@ -472,7 +478,7 @@ void hmgrtable_free_handle(struct hmgrtable *table, enum hmgrentry_type t,
 	dev_dbg(dxgglobaldev, "%s: %p %x\n", __func__, table, h.v);
 
 	/* Ignore the destroyed flag when checking the handle */
-	if (is_handle_valid(table, h, true, t)) {
+	if (is_handle_valid(table, h, true, t, true)) {
 		DXGKRNL_ASSERT(table->free_count < table->table_size);
 		entry = &table->entry_table[i];
 		entry->unique = 1;
@@ -518,7 +524,7 @@ struct d3dkmthandle hmgrtable_build_entry_handle(struct hmgrtable *table,
 
 void *hmgrtable_get_object(struct hmgrtable *table, struct d3dkmthandle h)
 {
-	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE))
+	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE, true))
 		return NULL;
 
 	return table->entry_table[get_index(h)].object;
@@ -526,10 +532,13 @@ void *hmgrtable_get_object(struct hmgrtable *table, struct d3dkmthandle h)
 
 void *hmgrtable_get_object_by_type(struct hmgrtable *table,
 				   enum hmgrentry_type type,
-				   struct d3dkmthandle h)
+				   struct d3dkmthandle h,
+				   bool error_on_missing)
 {
-	if (!is_handle_valid(table, h, false, type)) {
-		pr_err("%s invalid handle %x\n", __func__, h.v);
+	if (!is_handle_valid(table, h, false, type, error_on_missing)) {
+		if (error_on_missing)
+			pr_err("%s invalid handle %x\n", __func__, h.v);
+
 		return NULL;
 	}
 	return table->entry_table[get_index(h)].object;
@@ -553,7 +562,7 @@ enum hmgrentry_type hmgrtable_get_entry_type(struct hmgrtable *table,
 enum hmgrentry_type hmgrtable_get_object_type(struct hmgrtable *table,
 					      struct d3dkmthandle h)
 {
-	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE))
+	if (!is_handle_valid(table, h, false, HMGRENTRY_TYPE_FREE, true))
 		return HMGRENTRY_TYPE_FREE;
 
 	return hmgrtable_get_entry_type(table, get_index(h));
@@ -563,7 +572,7 @@ void *hmgrtable_get_object_ignore_destroyed(struct hmgrtable *table,
 					    struct d3dkmthandle h,
 					    enum hmgrentry_type type)
 {
-	if (!is_handle_valid(table, h, true, type))
+	if (!is_handle_valid(table, h, true, type, true))
 		return NULL;
 	return table->entry_table[get_index(h)].object;
 }

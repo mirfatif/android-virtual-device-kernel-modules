@@ -237,7 +237,7 @@ struct dxgadapter *dxgprocess_get_adapter(struct dxgprocess *process,
 
 	adapter = hmgrtable_get_object_by_type(&process->local_handle_table,
 					       HMGRENTRY_TYPE_DXGADAPTER,
-					       handle);
+					       handle, true);
 	if (adapter == NULL)
 		pr_err("%s failed %x\n", __func__, handle.v);
 	return adapter;
@@ -249,17 +249,19 @@ struct dxgadapter *dxgprocess_get_adapter(struct dxgprocess *process,
  * The function acquired the handle table lock shared.
  */
 struct dxgadapter *dxgprocess_adapter_by_handle(struct dxgprocess *process,
-						struct d3dkmthandle handle)
+						struct d3dkmthandle handle,
+						bool error_on_missing)
 {
 	struct dxgadapter *adapter;
 
 	hmgrtable_lock(&process->local_handle_table, DXGLOCK_SHARED);
 	adapter = hmgrtable_get_object_by_type(&process->local_handle_table,
 					       HMGRENTRY_TYPE_DXGADAPTER,
-					       handle);
-	if (adapter == NULL)
-		pr_err("adapter_by_handle failed %x\n", handle.v);
-	else if (kref_get_unless_zero(&adapter->adapter_kref) == 0) {
+					       handle, error_on_missing);
+	if (adapter == NULL) {
+		if (error_on_missing)
+			pr_err("adapter_by_handle failed %x\n", handle.v);
+	} else if (kref_get_unless_zero(&adapter->adapter_kref) == 0) {
 		pr_err("failed to acquire adapter reference\n");
 		adapter = NULL;
 	}
@@ -275,7 +277,7 @@ struct dxgdevice *dxgprocess_device_by_object_handle(struct dxgprocess *process,
 	void *obj;
 
 	hmgrtable_lock(&process->handle_table, DXGLOCK_SHARED);
-	obj = hmgrtable_get_object_by_type(&process->handle_table, t, handle);
+	obj = hmgrtable_get_object_by_type(&process->handle_table, t, handle, true);
 	if (obj) {
 		struct d3dkmthandle device_handle = {};
 
@@ -303,7 +305,7 @@ struct dxgdevice *dxgprocess_device_by_object_handle(struct dxgprocess *process,
 			device = hmgrtable_get_object_by_type(
 					&process->handle_table,
 					 HMGRENTRY_TYPE_DXGDEVICE,
-					 device_handle);
+					 device_handle, true);
 		if (device)
 			if (kref_get_unless_zero(&device->device_kref) == 0)
 				device = NULL;
