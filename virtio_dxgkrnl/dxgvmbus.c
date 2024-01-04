@@ -2599,7 +2599,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
-					     args->allocation);
+					     args->allocation, true);
 	if (alloc == NULL) {
 		pr_err("%s invalid alloc", __func__);
 		ret = -EINVAL;
