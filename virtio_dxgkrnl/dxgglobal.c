@@ -16,6 +16,7 @@
 
 #include "dxgkrnl.h"
 #include "dxgsyncfile.h"
+#include "dxgvmbus.h"
 
 struct dxgglobal *dxgglobal;
 struct device *dxgglobaldev;
@@ -140,6 +141,39 @@ void signal_dma_fence(struct dxghostevent *eventhdr)
 	event->fence_value++;
 	list_del(&eventhdr->host_event_list_entry);
 	dma_fence_signal(&event->base);
+}
+
+void set_guest_data(struct dxgkvmb_command_host_to_vm *packet,
+		    u32 packet_length)
+{
+	struct dxgkvmb_command_setguestdata *command = (void *)packet;
+
+	dev_dbg(dxgglobaldev, "%s: %d %d %p %p", __func__,
+		command->data_type,
+		command->data32,
+		command->guest_pointer,
+		&dxgglobal->device_state_counter);
+	if (command->data_type == SETGUESTDATA_DATATYPE_DWORD &&
+	    command->guest_pointer == &dxgglobal->device_state_counter &&
+	    command->data32 != 0) {
+		atomic_inc(&dxgglobal->device_state_counter);
+	}
+}
+
+void signal_guest_event(struct dxgkvmb_command_host_to_vm *packet,
+			u32 packet_length)
+{
+	struct dxgkvmb_command_signalguestevent *command = (void *)packet;
+
+	if (packet_length < sizeof(struct dxgkvmb_command_signalguestevent)) {
+		pr_err("invalid packet size");
+		return;
+	}
+	if (command->event == 0) {
+		pr_err("invalid event pointer");
+		return;
+	}
+	dxgglobal_signal_host_event(command->event);
 }
 
 void dxgglobal_signal_host_event(u64 event_id)

@@ -180,39 +180,6 @@ static void command_vm_to_host_init1(struct dxgkvmb_command_vm_to_host *command,
 	command->channel_type = DXGKVMB_VM_TO_HOST;
 }
 
-void set_guest_data(struct dxgkvmb_command_host_to_vm *packet,
-		    u32 packet_length)
-{
-	struct dxgkvmb_command_setguestdata *command = (void *)packet;
-
-	dev_dbg(dxgglobaldev, "%s: %d %d %p %p", __func__,
-		command->data_type,
-		command->data32,
-		command->guest_pointer,
-		&dxgglobal->device_state_counter);
-	if (command->data_type == SETGUESTDATA_DATATYPE_DWORD &&
-	    command->guest_pointer == &dxgglobal->device_state_counter &&
-	    command->data32 != 0) {
-		atomic_inc(&dxgglobal->device_state_counter);
-	}
-}
-
-void signal_guest_event(struct dxgkvmb_command_host_to_vm *packet,
-			u32 packet_length)
-{
-	struct dxgkvmb_command_signalguestevent *command = (void *)packet;
-
-	if (packet_length < sizeof(struct dxgkvmb_command_signalguestevent)) {
-		pr_err("invalid packet size");
-		return;
-	}
-	if (command->event == 0) {
-		pr_err("invalid event pointer");
-		return;
-	}
-	dxgglobal_signal_host_event(command->event);
-}
-
 static int
 dxgvmb_send_sync_msg_ntstatus(struct dxgvmbuschannel *channel,
 			      void *command, u32 cmd_size)
