@@ -409,7 +409,8 @@ int dxgprocess_close_adapter(struct dxgprocess *process,
 struct dxgadapter *dxgprocess_get_adapter(struct dxgprocess *process,
 					  struct d3dkmthandle handle);
 struct dxgadapter *dxgprocess_adapter_by_handle(struct dxgprocess *process,
-						struct d3dkmthandle handle);
+						struct d3dkmthandle handle,
+						bool error_on_missing);
 struct dxgdevice *dxgprocess_device_by_handle(struct dxgprocess *process,
 					      struct d3dkmthandle handle);
 struct dxgdevice *dxgprocess_device_by_object_handle(struct dxgprocess *process,
