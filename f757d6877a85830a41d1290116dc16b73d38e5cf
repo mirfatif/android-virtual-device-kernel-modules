@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad071a84_17f9936e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2024-01-05T14:08:03Z",
+      "side": 1,
+      "message": "http://go/abtd-run/L41900030001134214 tested this revert and the `No files \u0027\u0027 match the requested pattern \u0027.*/tests.zip\u0027` problem did not occur.\n\nhttp://go/abtd-run/L71900030001150012, a vanilla re-run with fresh builds, again saw the tests.zip problem.",
+      "revId": "f757d6877a85830a41d1290116dc16b73d38e5cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
