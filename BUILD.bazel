@@ -196,6 +196,7 @@ _VIRT_COMMON_MODULES = [
     "goldfish_battery.ko",
     "gs_usb.ko",
     "hci_vhci.ko",
+    "kunit.ko",
     "mac80211.ko",
     "mac80211_hwsim.ko",
     "mt76.ko",
