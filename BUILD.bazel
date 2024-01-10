@@ -23,6 +23,7 @@ load(
     "ddk_headers",
     "ddk_module",
     "initramfs_modules_lists_test",
+    "kernel_abi",
     "kernel_build",
     "kernel_compile_commands",
     "kernel_dtstree",
@@ -443,12 +444,20 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
+    collect_unstripped_modules = True,
+    kmi_symbol_list = "//common:android/abi_gki_aarch64_virtual_device",
     make_goals = [
         "modules",
         "arm/fvp-base-revc.dtb",
     ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     strip_modules = True,
+)
+
+kernel_abi(
+    name = "virtual_device_aarch64_abi",
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [":virtual_device_aarch64_external_modules"],
 )
 
 kernel_compile_commands(
