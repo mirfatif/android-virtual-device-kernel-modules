@@ -221,7 +221,6 @@ _VIRT_COMMON_MODULES = [
     "virtio_pci_legacy_dev.ko",
     "virtio_pci_modern_dev.ko",
     "virtio_snd.ko",
-    "virtiofs.ko",
     "vkms.ko",
     "vmw_vsock_virtio_transport.ko",
 ]
