@@ -4,6 +4,7 @@
  * Copyright (C) 2013 Intel, Inc.
  * Copyright (C) 2014 Linaro Limited
  * Copyright (C) 2011-2016 Google, Inc.
+ * Copyright (C) 2024 Google, Inc.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -47,31 +48,37 @@
  * exchange is properly mapped during a transfer.
  */
 
+#include "defconfig_test.h"
+
+#include <linux/acpi.h>
+#include <linux/bitops.h>
+#include <linux/bug.h>
+#include <linux/dma-mapping.h>
 #include <linux/interrupt.h>
+#include <linux/io.h>
 #include <linux/kernel.h>
-#include <linux/spinlock.h>
 #include <linux/miscdevice.h>
+#include <linux/mm.h>
+#include <linux/module.h>
+#include <linux/mod_devicetable.h>
+
 #include <linux/platform_device.h>
 #include <linux/poll.h>
+#include <linux/spinlock.h>
 #include <linux/sched.h>
-#include <linux/bitops.h>
 #include <linux/slab.h>
-#include <linux/io.h>
-#include <linux/dma-mapping.h>
-#include <linux/mm.h>
-#include <linux/bug.h>
 
 #include <goldfish/goldfish_dma.h>
-#include "goldfish_pipe_qemu.h"
-#include "goldfish_pipe.h"
+
+static const char DEVICE_NAME[] = "goldfish_pipe_dprctd";
 
 /*
  * Update this when something changes in the driver's behavior so the host
  * can benefit from knowing it
  * Notes:
  *	version 2 was an intermediate release and isn't supported anymore.
- *	version 3 is goldfish_pipe_v2 without DMA support.
- *	version 4 (current) is goldfish_pipe_v2 with DMA support.
+ *	version 3 is goldfish_pipe v2 without DMA support.
+ *	version 4 (current) is goldfish_pipe v2 with DMA support.
  */
 enum {
 	PIPE_DRIVER_VERSION = 4,
@@ -86,10 +93,106 @@ enum {
 	DMA_REGION_MAX_SIZE = 256 << 20
 };
 
-struct goldfish_pipe_dev;
+/* List of bitflags returned in status of CMD_POLL command */
+enum PipePollFlags {
+	PIPE_POLL_IN	= 1 << 0,
+	PIPE_POLL_OUT	= 1 << 1,
+	PIPE_POLL_HUP	= 1 << 2
+};
 
-static int goldfish_pipe_device_deinit(void *raw_dev,
-				       struct platform_device *pdev);
+/* Possible status values used to signal errors */
+enum PipeErrors {
+	PIPE_ERROR_INVAL	= -1,
+	PIPE_ERROR_AGAIN	= -2,
+	PIPE_ERROR_NOMEM	= -3,
+	PIPE_ERROR_IO		= -4
+};
+
+/* Bit-flags used to signal events from the emulator */
+enum PipeWakeFlags {
+	/* emulator closed pipe */
+	PIPE_WAKE_CLOSED		= 1 << 0,
+	/* pipe can now be read from */
+	PIPE_WAKE_READ			= 1 << 1,
+	/* pipe can now be written to */
+	PIPE_WAKE_WRITE			= 1 << 2,
+	/* unlock this pipe's DMA buffer */
+	PIPE_WAKE_UNLOCK_DMA		= 1 << 3,
+	/* unlock DMA buffer of the pipe shared to this pipe */
+	PIPE_WAKE_UNLOCK_DMA_SHARED	= 1 << 4,
+};
+
+/* Bit flags for the 'flags' field */
+enum PipeFlagsBits {
+	BIT_CLOSED_ON_HOST = 0,  /* pipe closed by host */
+	BIT_WAKE_ON_WRITE  = 1,  /* want to be woken on writes */
+	BIT_WAKE_ON_READ   = 2,  /* want to be woken on reads */
+};
+
+enum PipeV1Regs {
+	/* write: value = command */
+	PIPE_V1_REG_COMMAND		= 0x00,
+	/* read */
+	PIPE_V1_REG_STATUS		= 0x04,
+	/* read/write: channel id */
+	PIPE_V1_REG_CHANNEL		= 0x08,
+	/* read/write: channel id */
+	PIPE_V1_REG_CHANNEL_HIGH	= 0x30,
+	/* read/write: buffer size */
+	PIPE_V1_REG_SIZE		= 0x0C,
+	/* write: physical address */
+	PIPE_V1_REG_ADDRESS		= 0x10,
+	/* write: physical address */
+	PIPE_V1_REG_ADDRESS_HIGH	= 0x34,
+	/* read: wake flags */
+	PIPE_V1_REG_WAKES		= 0x14,
+	/* read/write: batch data address */
+	PIPE_V1_REG_PARAMS_ADDR_LOW	= 0x18,
+	/* read/write: batch data address */
+	PIPE_V1_REG_PARAMS_ADDR_HIGH	= 0x1C,
+	/* write: batch access */
+	PIPE_V1_REG_ACCESS_PARAMS	= 0x20,
+	/* read: device version */
+	PIPE_V1_REG_VERSION		= 0x24,
+};
+
+enum PipeV2Regs {
+	PIPE_V2_REG_CMD = 0,
+
+	PIPE_V2_REG_SIGNAL_BUFFER_HIGH = 4,
+	PIPE_V2_REG_SIGNAL_BUFFER = 8,
+	PIPE_V2_REG_SIGNAL_BUFFER_COUNT = 12,
+
+	PIPE_V2_REG_OPEN_BUFFER_HIGH = 20,
+	PIPE_V2_REG_OPEN_BUFFER = 24,
+
+	PIPE_V2_REG_VERSION = 36,
+
+	PIPE_V2_REG_GET_SIGNALLED = 48,
+};
+
+enum PipeCmdCode {
+	/* to be used by the pipe device itself */
+	PIPE_CMD_OPEN		= 1,
+
+	PIPE_CMD_CLOSE,
+	PIPE_CMD_POLL,
+	PIPE_CMD_WRITE,
+	PIPE_CMD_WAKE_ON_WRITE,
+	PIPE_CMD_READ,
+	PIPE_CMD_WAKE_ON_READ,
+
+	/*
+	 * TODO(zyy): implement a deferred read/write execution to allow
+	 * parallel processing of pipe operations on the host.
+	 */
+	PIPE_CMD_WAKE_ON_DONE_IO,
+	PIPE_CMD_DMA_HOST_MAP,
+	PIPE_CMD_DMA_HOST_UNMAP,
+};
+
+
+struct goldfish_pipe_dev;
 
 /* A per-pipe command structure, shared with the host */
 struct goldfish_pipe_command {
@@ -204,9 +307,6 @@ struct goldfish_pipe {
  * waiting to be awoken.
  */
 struct goldfish_pipe_dev {
-	/* Needed for 'remove' */
-	struct goldfish_pipe_dev_base super;
-
 	/*
 	 * Global device spinlock. Protects the following members:
 	 *  - pipes, pipes_capacity
@@ -656,9 +756,6 @@ static irqreturn_t goldfish_pipe_interrupt(int irq, void *dev_id)
 	u32 i;
 	unsigned long flags;
 	struct goldfish_pipe_dev *dev = dev_id;
-
-	if (dev->super.deinit != &goldfish_pipe_device_deinit)
-		return IRQ_NONE;
 
 	/* Request the signalled pipes from the device */
 	spin_lock_irqsave(&dev->lock, flags);
@@ -1114,18 +1211,48 @@ static void write_pa_addr(void *addr, void __iomem *portl, void __iomem *porth)
 	writel(lower_32_bits(paddr), portl);
 }
 
-int goldfish_pipe_device_v2_init(struct platform_device *pdev,
-				 char __iomem *base,
-				 int irq)
+static int goldfish_pipe_probe(struct platform_device *pdev)
 {
 	struct goldfish_pipe_dev *dev;
+	struct resource *r;
+	char __iomem *base;
+	int irq;
+	int hw_version;
 	int err;
+
+	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+	if (!r || resource_size(r) < PAGE_SIZE) {
+		dev_err(&pdev->dev, "can't allocate i/o page\n");
+		return -EINVAL;
+	}
+	base = devm_ioremap(&pdev->dev, r->start, PAGE_SIZE);
+	if (!base) {
+		dev_err(&pdev->dev, "ioremap failed\n");
+		return -EINVAL;
+	}
+
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return irq;
+
+	/*
+	 * Exchange the versions with the host device
+	 *
+	 * Note: v1 driver used to not report its version, so we write it before
+	 *  reading device version back: this allows the host implementation to
+	 *  detect the old driver (if there was no version write before read).
+	 */
+	writel(PIPE_DRIVER_VERSION, base + PIPE_V2_REG_VERSION);
+	hw_version = readl(base + PIPE_V2_REG_VERSION);
+	if (hw_version != PIPE_CURRENT_DEVICE_VERSION) {
+		dev_err(&pdev->dev, "unexpected HW version (%d)\n", hw_version);
+		return -EINVAL;
+	}
 
 	dev = devm_kzalloc(&pdev->dev, sizeof(*dev), GFP_KERNEL);
 	if (!dev)
 		return -ENOMEM;
 
-	dev->super.deinit = &goldfish_pipe_device_deinit;
 	spin_lock_init(&dev->lock);
 
 	err = devm_request_threaded_irq(&pdev->dev, irq,
@@ -1133,14 +1260,14 @@ int goldfish_pipe_device_v2_init(struct platform_device *pdev,
 					goldfish_interrupt_task,
 					IRQF_SHARED, DEVICE_NAME, dev);
 	if (err) {
-		dev_err(&pdev->dev, "unable to allocate IRQ for v2\n");
+		dev_err(&pdev->dev, "unable to allocate IRQ\n");
 		return err;
 	}
 
 	init_miscdevice(&dev->miscdev);
 	err = misc_register(&dev->miscdev);
 	if (err) {
-		dev_err(&pdev->dev, "unable to register v2 device\n");
+		dev_err(&pdev->dev, "unable to register device\n");
 		return err;
 	}
 
@@ -1186,10 +1313,9 @@ int goldfish_pipe_device_v2_init(struct platform_device *pdev,
 	return 0;
 }
 
-static int goldfish_pipe_device_deinit(void *raw_dev,
-				       struct platform_device *pdev)
+static int goldfish_pipe_remove(struct platform_device *pdev)
 {
-	struct goldfish_pipe_dev *dev = raw_dev;
+	struct goldfish_pipe_dev *dev = platform_get_drvdata(pdev);
 
 	misc_deregister(&dev->miscdev);
 	kfree(dev->pipes);
@@ -1197,3 +1323,29 @@ static int goldfish_pipe_device_deinit(void *raw_dev,
 
 	return 0;
 }
+
+static const struct acpi_device_id goldfish_pipe_acpi_match[] = {
+	{ "GFSH0003", 0 },
+	{ },
+};
+MODULE_DEVICE_TABLE(acpi, goldfish_pipe_acpi_match);
+
+static const struct of_device_id goldfish_pipe_of_match[] = {
+	{ .compatible = "google,android-pipe", },
+	{},
+};
+MODULE_DEVICE_TABLE(of, goldfish_pipe_of_match);
+
+static struct platform_driver goldfish_pipe_driver = {
+	.probe = goldfish_pipe_probe,
+	.remove = goldfish_pipe_remove,
+	.driver = {
+		.name = "goldfish_pipe",
+		.of_match_table = goldfish_pipe_of_match,
+		.acpi_match_table = ACPI_PTR(goldfish_pipe_acpi_match),
+	}
+};
+
+module_platform_driver(goldfish_pipe_driver);
+MODULE_AUTHOR("David Turner <digit@google.com>");
+MODULE_LICENSE("GPL v2");
