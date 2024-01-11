@@ -54,21 +54,6 @@ enum PipeWakeFlags {
 	PIPE_WAKE_UNLOCK_DMA_SHARED	= 1 << 4,
 };
 
-/* Possible pipe closing reasons */
-enum PipeCloseReason {
-	/* guest sent a close command */
-	PIPE_CLOSE_GRACEFUL		= 0,
-
-	/* guest rebooted, we're closing the pipes */
-	PIPE_CLOSE_REBOOT		= 1,
-
-	/* close old pipes on snapshot load */
-	PIPE_CLOSE_LOAD_SNAPSHOT	= 2,
-
-	/* some unrecoverable error on the pipe */
-	PIPE_CLOSE_ERROR		= 3,
-};
-
 /* Bit flags for the 'flags' field */
 enum PipeFlagsBits {
 	BIT_CLOSED_ON_HOST = 0,  /* pipe closed by host */
