@@ -61,11 +61,7 @@ filegroup(
     name = "goldfish_pipe_sources",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
-        "goldfish_drivers/goldfish_pipe.h",
-        "goldfish_drivers/goldfish_pipe_base.c",
-        "goldfish_drivers/goldfish_pipe_qemu.h",
-        "goldfish_drivers/goldfish_pipe_v1.c",
-        "goldfish_drivers/goldfish_pipe_v2.c",
+        "goldfish_drivers/goldfish_pipe.c",
     ],
 )
 
