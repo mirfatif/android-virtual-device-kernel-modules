@@ -777,7 +777,8 @@ static int goldfish_sync_probe(struct platform_device *pdev)
 		return -ENODEV;
 
 	sync_state->reg_base =
-		devm_ioremap(&pdev->dev, ioresource->start, PAGE_SIZE);
+		devm_ioremap(&pdev->dev, ioresource->start,
+			     resource_size(ioresource));
 	if (!sync_state->reg_base)
 		return -ENOMEM;
 
