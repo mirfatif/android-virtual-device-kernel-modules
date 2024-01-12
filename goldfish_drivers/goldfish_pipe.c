@@ -123,33 +123,6 @@ enum PipeFlagsBits {
 	BIT_WAKE_ON_READ   = 2,  /* want to be woken on reads */
 };
 
-enum PipeV1Regs {
-	/* write: value = command */
-	PIPE_V1_REG_COMMAND		= 0x00,
-	/* read */
-	PIPE_V1_REG_STATUS		= 0x04,
-	/* read/write: channel id */
-	PIPE_V1_REG_CHANNEL		= 0x08,
-	/* read/write: channel id */
-	PIPE_V1_REG_CHANNEL_HIGH	= 0x30,
-	/* read/write: buffer size */
-	PIPE_V1_REG_SIZE		= 0x0C,
-	/* write: physical address */
-	PIPE_V1_REG_ADDRESS		= 0x10,
-	/* write: physical address */
-	PIPE_V1_REG_ADDRESS_HIGH	= 0x34,
-	/* read: wake flags */
-	PIPE_V1_REG_WAKES		= 0x14,
-	/* read/write: batch data address */
-	PIPE_V1_REG_PARAMS_ADDR_LOW	= 0x18,
-	/* read/write: batch data address */
-	PIPE_V1_REG_PARAMS_ADDR_HIGH	= 0x1C,
-	/* write: batch access */
-	PIPE_V1_REG_ACCESS_PARAMS	= 0x20,
-	/* read: device version */
-	PIPE_V1_REG_VERSION		= 0x24,
-};
-
 enum PipeV2Regs {
 	PIPE_V2_REG_CMD = 0,
 
