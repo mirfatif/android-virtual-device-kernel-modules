@@ -53,7 +53,6 @@
 #include <linux/acpi.h>
 #include <linux/bitops.h>
 #include <linux/bug.h>
-#include <linux/dma-mapping.h>
 #include <linux/interrupt.h>
 #include <linux/io.h>
 #include <linux/kernel.h>
@@ -68,8 +67,6 @@
 #include <linux/sched.h>
 #include <linux/slab.h>
 
-#include <goldfish/goldfish_dma.h>
-
 static const char DEVICE_NAME[] = "goldfish_pipe_dprctd";
 
 /*
@@ -77,8 +74,11 @@ static const char DEVICE_NAME[] = "goldfish_pipe_dprctd";
  * can benefit from knowing it
  * Notes:
  *	version 2 was an intermediate release and isn't supported anymore.
- *	version 3 is goldfish_pipe v2 without DMA support.
- *	version 4 (current) is goldfish_pipe v2 with DMA support.
+ *	version 3 is goldfish_pipe_v2 without DMA support.
+ *	version 4 (current) is goldfish_pipe_v2 with DMA support.
+ *
+ *	goldfish_address_space replaces DMA in goldfish_pipe,
+ *	DMA is retired in goldfish_pipe.
  */
 enum {
 	PIPE_DRIVER_VERSION = 4,
@@ -89,8 +89,6 @@ enum {
 	MAX_BUFFERS_PER_COMMAND = 336,
 	MAX_SIGNALLED_PIPES = 64,
 	INITIAL_PIPES_CAPACITY = 64,
-	DMA_REGION_MIN_SIZE = PAGE_SIZE,
-	DMA_REGION_MAX_SIZE = 256 << 20
 };
 
 /* List of bitflags returned in status of CMD_POLL command */
@@ -116,10 +114,6 @@ enum PipeWakeFlags {
 	PIPE_WAKE_READ			= 1 << 1,
 	/* pipe can now be written to */
 	PIPE_WAKE_WRITE			= 1 << 2,
-	/* unlock this pipe's DMA buffer */
-	PIPE_WAKE_UNLOCK_DMA		= 1 << 3,
-	/* unlock DMA buffer of the pipe shared to this pipe */
-	PIPE_WAKE_UNLOCK_DMA_SHARED	= 1 << 4,
 };
 
 /* Bit flags for the 'flags' field */
@@ -181,14 +175,6 @@ enum PipeCmdCode {
 	PIPE_CMD_WAKE_ON_WRITE,
 	PIPE_CMD_READ,
 	PIPE_CMD_WAKE_ON_READ,
-
-	/*
-	 * TODO(zyy): implement a deferred read/write execution to allow
-	 * parallel processing of pipe operations on the host.
-	 */
-	PIPE_CMD_WAKE_ON_DONE_IO,
-	PIPE_CMD_DMA_HOST_MAP,
-	PIPE_CMD_DMA_HOST_UNMAP,
 };
 
 
@@ -200,24 +186,17 @@ struct goldfish_pipe_command {
 	s32 id;		/* pipe id, guest -> host */
 	s32 status;	/* command execution status, host -> guest */
 	s32 reserved;	/* to pad to 64-bit boundary */
-	union {
-		/* Parameters for PIPE_CMD_{READ,WRITE} */
-		struct {
-			/* number of buffers, guest -> host */
-			u32 buffers_count;
-			/* number of consumed bytes, host -> guest */
-			s32 consumed_size;
-			/* buffer pointers, guest -> host */
-			u64 ptrs[MAX_BUFFERS_PER_COMMAND];
-			/* buffer sizes, guest -> host */
-			u32 sizes[MAX_BUFFERS_PER_COMMAND];
-		} rw_params;
-		/* Parameters for PIPE_CMD_DMA_HOST_(UN)MAP */
-		struct {
-			u64 dma_paddr;
-			u64 sz;
-		} dma_maphost_params;
-	};
+	/* Parameters for PIPE_CMD_{READ,WRITE} */
+	struct {
+		/* number of buffers, guest -> host */
+		u32 buffers_count;
+		/* number of consumed bytes, host -> guest */
+		s32 consumed_size;
+		/* buffer pointers, guest -> host */
+		u64 ptrs[MAX_BUFFERS_PER_COMMAND];
+		/* buffer sizes, guest -> host */
+		u32 sizes[MAX_BUFFERS_PER_COMMAND];
+	} rw_params;
 };
 
 /* A single signalled pipe information */
@@ -237,24 +216,6 @@ struct goldfish_pipe_dev_buffers {
 	struct open_command_param open_command_params;
 	struct signalled_pipe_buffer
 		signalled_pipe_buffers[MAX_SIGNALLED_PIPES];
-};
-
-/*
- * The main data structure tracking state is
- * struct goldfish_dma_context, which is included
- * as an extra pointer field in struct goldfish_pipe.
- * Each such context is associated with possibly
- * one physical address and size describing the
- * allocated DMA region, and only one allocation
- * is allowed for each pipe fd. Further allocations
- * require more open()'s of pipe fd's.
- */
-struct goldfish_dma_context {
-	struct device *pdev_dev;	/* pointer to feed to dma_*_coherent */
-	void *dma_vaddr;		/* kernel vaddr of dma region */
-	size_t dma_size;		/* size of dma region */
-	dma_addr_t phys_begin;		/* paddr of dma region */
-	dma_addr_t phys_end;		/* paddr of dma region + dma_size */
 };
 
 /* This data type models a given pipe instance */
@@ -297,9 +258,6 @@ struct goldfish_pipe {
 
 	/* A buffer of pages, too large to fit into a stack frame */
 	struct page *pages[MAX_BUFFERS_PER_COMMAND];
-
-	/* Holds information about reserved DMA region for this pipe */
-	struct goldfish_dma_context *dma;
 };
 
 /* The global driver data. Holds a reference to the i/o page used to
@@ -346,9 +304,6 @@ struct goldfish_pipe_dev {
 	unsigned char __iomem *base;
 
 	struct miscdevice miscdev;
-
-	/* DMA info */
-	size_t dma_alloc_total;
 };
 
 static int goldfish_pipe_cmd_locked(struct goldfish_pipe *pipe,
@@ -874,7 +829,6 @@ static int goldfish_pipe_open(struct inode *inode, struct file *file)
 	spin_unlock_irqrestore(&dev->lock, flags);
 	if (status < 0)
 		goto err_cmd;
-	pipe->dma = NULL;
 
 	/* All is done, save the pipe into the file's private data field */
 	file->private_data = pipe;
@@ -891,40 +845,6 @@ err_pipe:
 	return status;
 }
 
-static void goldfish_pipe_dma_release_host(struct goldfish_pipe *pipe)
-{
-	struct goldfish_dma_context *dma = pipe->dma;
-	struct device *pdev_dev;
-
-	if (!dma)
-		return;
-
-	pdev_dev = pipe->dev->pdev_dev;
-
-	if (dma->dma_vaddr) {
-		pipe->command_buffer->dma_maphost_params.dma_paddr =
-			dma->phys_begin;
-		pipe->command_buffer->dma_maphost_params.sz = dma->dma_size;
-		goldfish_pipe_cmd(pipe, PIPE_CMD_DMA_HOST_UNMAP);
-	}
-}
-
-static void goldfish_pipe_dma_release_guest(struct goldfish_pipe *pipe)
-{
-	struct goldfish_dma_context *dma = pipe->dma;
-
-	if (!dma)
-		return;
-
-	if (dma->dma_vaddr) {
-		dma_free_coherent(dma->pdev_dev,
-				  dma->dma_size,
-				  dma->dma_vaddr,
-				  dma->phys_begin);
-		pipe->dev->dma_alloc_total -= dma->dma_size;
-	}
-}
-
 static int goldfish_pipe_release(struct inode *inode, struct file *filp)
 {
 	unsigned long flags;
@@ -932,7 +852,6 @@ static int goldfish_pipe_release(struct inode *inode, struct file *filp)
 	struct goldfish_pipe_dev *dev = pipe->dev;
 
 	/* The guest is closing the channel, so tell the emulator right now */
-	goldfish_pipe_dma_release_host(pipe);
 	goldfish_pipe_cmd(pipe, PIPE_CMD_CLOSE);
 
 	spin_lock_irqsave(&dev->lock, flags);
@@ -942,14 +861,6 @@ static int goldfish_pipe_release(struct inode *inode, struct file *filp)
 
 	filp->private_data = NULL;
 
-	/* Even if a fd is duped or involved in a forked process,
-	 * open/release methods are called only once, ever.
-	 * This makes goldfish_pipe_release a safe point
-	 * to delete the DMA region.
-	 */
-	goldfish_pipe_dma_release_guest(pipe);
-
-	kfree(pipe->dma);
 	free_page((unsigned long)pipe->command_buffer);
 	kfree(pipe);
 
@@ -987,200 +898,6 @@ static const struct vm_operations_struct goldfish_dma_vm_ops = {
 	.close = goldfish_dma_vma_close,
 };
 
-static bool is_page_size_multiple(unsigned long sz)
-{
-	return !(sz & (PAGE_SIZE - 1));
-}
-
-static bool check_region_size_valid(size_t size)
-{
-	if (size < DMA_REGION_MIN_SIZE)
-		return false;
-
-	if (size > DMA_REGION_MAX_SIZE)
-		return false;
-
-	return is_page_size_multiple(size);
-}
-
-static int goldfish_pipe_dma_alloc_locked(struct goldfish_pipe *pipe)
-{
-	struct goldfish_dma_context *dma = pipe->dma;
-
-	if (dma->dma_vaddr)
-		return 0;
-
-	dma->phys_begin = 0;
-	dma->dma_vaddr = dma_alloc_coherent(dma->pdev_dev,
-					    dma->dma_size,
-					    &dma->phys_begin,
-					    GFP_KERNEL);
-	if (!dma->dma_vaddr)
-		return -ENOMEM;
-
-	dma->phys_end = dma->phys_begin + dma->dma_size;
-	pipe->dev->dma_alloc_total += dma->dma_size;
-	pipe->command_buffer->dma_maphost_params.dma_paddr = dma->phys_begin;
-	pipe->command_buffer->dma_maphost_params.sz = dma->dma_size;
-
-	goldfish_pipe_cmd_locked(pipe, PIPE_CMD_DMA_HOST_MAP);
-	/* A workaround for b/110152998 */
-	return 0;
-}
-
-static int goldfish_dma_mmap_locked(struct goldfish_pipe *pipe,
-				    struct vm_area_struct *vma)
-{
-	struct goldfish_dma_context *dma = pipe->dma;
-	struct device *pdev_dev = pipe->dev->pdev_dev;
-	size_t sz_requested = vma->vm_end - vma->vm_start;
-	int status;
-
-	if (!check_region_size_valid(sz_requested)) {
-		dev_err(pdev_dev, "%s: bad size (%zu) requested\n", __func__,
-			sz_requested);
-		return -EINVAL;
-	}
-
-	/* Alloc phys region if not allocated already. */
-	status = goldfish_pipe_dma_alloc_locked(pipe);
-	if (status)
-		return status;
-
-	status = remap_pfn_range(vma,
-				 vma->vm_start,
-				 dma->phys_begin >> PAGE_SHIFT,
-				 sz_requested,
-				 vma->vm_page_prot);
-	if (status < 0) {
-		dev_err(pdev_dev, "Cannot remap pfn range....\n");
-		return -EAGAIN;
-	}
-	vma->vm_ops = &goldfish_dma_vm_ops;
-	return 0;
-}
-
-/* When we call mmap() on a pipe fd, we obtain a pointer into
- * the physically contiguous DMA region of the pipe device
- * (Goldfish DMA).
- */
-static int goldfish_dma_mmap(struct file *filp, struct vm_area_struct *vma)
-{
-	struct goldfish_pipe *pipe =
-		(struct goldfish_pipe *)(filp->private_data);
-	int status;
-
-	if (mutex_lock_interruptible(&pipe->lock))
-		return -ERESTARTSYS;
-
-	status = goldfish_dma_mmap_locked(pipe, vma);
-	mutex_unlock(&pipe->lock);
-	return status;
-}
-
-static int goldfish_pipe_dma_create_region(struct goldfish_pipe *pipe,
-					   size_t size)
-{
-	struct goldfish_dma_context *dma =
-		kzalloc(sizeof(struct goldfish_dma_context), GFP_KERNEL);
-	struct device *pdev_dev = pipe->dev->pdev_dev;
-
-	if (dma) {
-		if (mutex_lock_interruptible(&pipe->lock)) {
-			kfree(dma);
-			return -ERESTARTSYS;
-		}
-
-		if (pipe->dma) {
-			mutex_unlock(&pipe->lock);
-			kfree(dma);
-			dev_err(pdev_dev, "The DMA region already allocated\n");
-			return -EBUSY;
-		}
-
-		dma->dma_size = size;
-		dma->pdev_dev = pipe->dev->pdev_dev;
-		pipe->dma = dma;
-		mutex_unlock(&pipe->lock);
-		return 0;
-	}
-
-	dev_err(pdev_dev, "Could not allocate DMA context info!\n");
-	return -ENOMEM;
-}
-
-static long goldfish_dma_ioctl_getoff(struct goldfish_pipe *pipe,
-				      unsigned long arg)
-{
-	struct device *pdev_dev = pipe->dev->pdev_dev;
-	struct goldfish_dma_ioctl_info ioctl_data;
-	struct goldfish_dma_context *dma;
-
-	BUILD_BUG_ON(sizeof_field(struct goldfish_dma_ioctl_info, phys_begin) <
-		sizeof_field(struct goldfish_dma_context, phys_begin));
-
-	if (mutex_lock_interruptible(&pipe->lock)) {
-		dev_err(pdev_dev, "DMA_GETOFF: the pipe is not locked\n");
-		return -EACCES;
-	}
-
-	dma = pipe->dma;
-	if (dma) {
-		ioctl_data.phys_begin = dma->phys_begin;
-		ioctl_data.size = dma->dma_size;
-	} else {
-		ioctl_data.phys_begin = 0;
-		ioctl_data.size = 0;
-	}
-
-	if (copy_to_user((void __user *)arg, &ioctl_data,
-			 sizeof(ioctl_data))) {
-		mutex_unlock(&pipe->lock);
-		return -EFAULT;
-	}
-
-	mutex_unlock(&pipe->lock);
-	return 0;
-}
-
-static long goldfish_dma_ioctl_create_region(struct goldfish_pipe *pipe,
-					     unsigned long arg)
-{
-	struct goldfish_dma_ioctl_info ioctl_data;
-
-	if (copy_from_user(&ioctl_data, (void __user *)arg, sizeof(ioctl_data)))
-		return -EFAULT;
-
-	if (!check_region_size_valid(ioctl_data.size)) {
-		dev_err(pipe->dev->pdev_dev,
-			"DMA_CREATE_REGION: bad size (%lld) requested\n",
-			ioctl_data.size);
-		return -EINVAL;
-	}
-
-	return goldfish_pipe_dma_create_region(pipe, ioctl_data.size);
-}
-
-static long goldfish_dma_ioctl(struct file *file, unsigned int cmd,
-			       unsigned long arg)
-{
-	struct goldfish_pipe *pipe =
-		(struct goldfish_pipe *)(file->private_data);
-
-	switch (cmd) {
-	case GOLDFISH_DMA_IOC_LOCK:
-		return 0;
-	case GOLDFISH_DMA_IOC_UNLOCK:
-		wake_up_interruptible(&pipe->wake_queue);
-		return 0;
-	case GOLDFISH_DMA_IOC_GETOFF:
-		return goldfish_dma_ioctl_getoff(pipe, arg);
-	case GOLDFISH_DMA_IOC_CREATE_REGION:
-		return goldfish_dma_ioctl_create_region(pipe, arg);
-	}
-	return -ENOTTY;
-}
-
 static const struct file_operations goldfish_pipe_fops = {
 	.owner = THIS_MODULE,
 	.read = goldfish_pipe_read,
@@ -1188,10 +905,6 @@ static const struct file_operations goldfish_pipe_fops = {
 	.poll = goldfish_pipe_poll,
 	.open = goldfish_pipe_open,
 	.release = goldfish_pipe_release,
-	/* DMA-related operations */
-	.mmap = goldfish_dma_mmap,
-	.unlocked_ioctl = goldfish_dma_ioctl,
-	.compat_ioctl = goldfish_dma_ioctl,
 };
 
 static void init_miscdevice(struct miscdevice *miscdev)
