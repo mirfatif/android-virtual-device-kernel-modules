@@ -934,11 +934,11 @@ static int goldfish_pipe_probe(struct platform_device *pdev)
 	int err;
 
 	r = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-	if (!r || resource_size(r) < PAGE_SIZE) {
+	if (!r) {
 		dev_err(&pdev->dev, "can't allocate i/o page\n");
 		return -EINVAL;
 	}
-	base = devm_ioremap(&pdev->dev, r->start, PAGE_SIZE);
+	base = devm_ioremap(&pdev->dev, r->start, resource_size(r));
 	if (!base) {
 		dev_err(&pdev->dev, "ioremap failed\n");
 		return -EINVAL;
