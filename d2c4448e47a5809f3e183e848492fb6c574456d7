@@ -16,6 +16,24 @@
       "message": "We are still using android12-5.10 the kernel with ToT crosvm, but the mismatch in the virtio-gpu feature definition prevents us from booting Android after upgrading to U(we will be still using the android12-5.10 kernel for our Android U).\n\nIf the reverts are to be avoided, the alternatives are:\n* modify the header of this kernel module to match the ToT crosvm, i.e. https://android-review.git.corp.google.com/c/kernel/common-modules/virtual-device/+/2913495\n* change crosvm\u0027s definition for `VIRTIO_GPU_F_CREATE_GUEST_HANDLE` to `5` which matches this kernel module\u0027s definition\n* create a separate kernel branch for us and make the modification there",
       "revId": "d2c4448e47a5809f3e183e848492fb6c574456d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b446dfcf_df3636f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-01-17T18:57:10Z",
+      "side": 1,
+      "message": "As discussed offline, this problem doesn\u0027t exist in 6.1 branches or higher version, as we are using the in-tree kernel driver there. The influenced branches are all 5.10 and 5.15 branches, while we only use the android12-5.10 branch, so I am only upgrading this branch.",
+      "parentUuid": "5198f5a8_a16a5359",
+      "revId": "d2c4448e47a5809f3e183e848492fb6c574456d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
