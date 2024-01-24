@@ -527,24 +527,28 @@ static int as_mmap(struct file *filp, struct vm_area_struct *vma)
 	struct as_allocated_blocks *shared_allocated_blocks =
 		&file_state->shared_allocated_blocks;
 	size_t size = PAGE_ALIGN(vma->vm_end - vma->vm_start);
-	int res_check_nonshared, res_check_shared;
+	int r;
 
 	WARN_ON(!allocated_blocks);
+	r = as_blocks_check_if_mine(allocated_blocks,
+				    vma->vm_pgoff << PAGE_SHIFT,
+				    size);
+	if (!r) {
+		goto ok;
+	} else if (r != -EPERM) {
+		return r;
+	}
 
-	res_check_nonshared =
-		as_blocks_check_if_mine(allocated_blocks,
-			vma->vm_pgoff << PAGE_SHIFT,
-			size);
+	WARN_ON(!shared_allocated_blocks);
+	r = as_blocks_check_if_mine(shared_allocated_blocks,
+				    vma->vm_pgoff << PAGE_SHIFT,
+				    size);
+	if (r) {
+		return r;
+	}
 
-	res_check_shared =
-		as_blocks_check_if_mine(shared_allocated_blocks,
-			vma->vm_pgoff << PAGE_SHIFT,
-			size);
-
-	if (res_check_nonshared && res_check_shared)
-		return res_check_nonshared;
-	else
-		return as_mmap_impl(file_state->device_state, size, vma);
+ok:
+	return as_mmap_impl(file_state->device_state, size, vma);
 }
 
 static long as_ioctl_allocate_block_impl(
