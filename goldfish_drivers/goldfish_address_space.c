@@ -15,6 +15,7 @@
 #include <linux/pci_regs.h>
 #include <linux/pci_ids.h>
 #include <linux/pci.h>
+#include <linux/page16.h>
 
 #include <goldfish/goldfish_address_space.h>
 
@@ -24,11 +25,11 @@ MODULE_DESCRIPTION("A Goldfish driver that allocates address space ranges in "
 MODULE_AUTHOR("Roman Kiryanov <rkir@google.com>");
 MODULE_LICENSE("GPL v2");
 
-#define AS_DEBUG 0
+#define AS_DEBUG 1
 
 #if AS_DEBUG
 	#define AS_DPRINT(fmt, ...) \
-		printk(KERN_ERR "%s:%d " fmt "\n", \
+		printk(KERN_ERR "%s:%d rkir555: " fmt "\n", \
 		       __func__, __LINE__, ##__VA_ARGS__);
 #else
 	#define AS_DPRINT(fmt, ...)
@@ -295,8 +296,8 @@ as_blocks_remove(struct as_allocated_blocks *allocated_blocks, u64 offset)
 
 static int
 as_blocks_check_if_mine(struct as_allocated_blocks *allocated_blocks,
-			u64 offset,
-			u64 size)
+			const u64 offset,
+			const u64 size)
 {
 	const u64 end = offset + size;
 	int res = -EPERM;
@@ -312,17 +313,29 @@ as_blocks_check_if_mine(struct as_allocated_blocks *allocated_blocks,
 	blocks_size = allocated_blocks->blocks_size;
 	WARN_ON(blocks_size < 0);
 
+	AS_DPRINT("checking offset=0x%llx size=0x%llx",
+		  (unsigned long long)offset,
+		  (unsigned long long)size);
+
 	for (; blocks_size > 0; --blocks_size, ++block) {
 		u64 block_offset = block->offset;
 		u64 block_end = block_offset + block->size;
+
+		AS_DPRINT("block_offset=0x%llx block_end=0x%llx",
+			  (unsigned long long)block_offset,
+			  (unsigned long long)block_end);
 
 		if (offset >= block_offset && end <= block_end) {
 			res = 0;
 			break;
 		}
 	}
+	AS_DPRINT("res=%d", res);
 
 	mutex_unlock(&allocated_blocks->blocks_lock);
+	if (res) {
+		AS_DPRINT("ERROR: res=%d", res);
+	}
 	return res;
 }
 
@@ -511,12 +524,19 @@ static int as_mmap_impl(struct as_device_state *state,
 {
 	unsigned long pfn = (state->address_area_phys_address >> PAGE_SHIFT) +
 		vma->vm_pgoff;
+	int r;
 
-	return remap_pfn_range(vma,
-			       vma->vm_start,
-			       pfn,
-			       size,
-			       vma->vm_page_prot);
+	r = remap_pfn_range(vma,
+			    vma->vm_start,
+			    pfn,
+			    size,
+			    vma->vm_page_prot);
+	if (r) {
+		AS_DPRINT("vma=%px addr=0x%lx pfn=0x%lx size=0x%lx pgprot=0x%lx",
+			  vma, vma->vm_start, pfn, (unsigned long)size,
+			  vma->vm_page_prot.pgprot);
+	}
+	return r;
 }
 
 static int as_mmap(struct file *filp, struct vm_area_struct *vma)
@@ -526,25 +546,31 @@ static int as_mmap(struct file *filp, struct vm_area_struct *vma)
 		&file_state->allocated_blocks;
 	struct as_allocated_blocks *shared_allocated_blocks =
 		&file_state->shared_allocated_blocks;
-	size_t size = PAGE_ALIGN(vma->vm_end - vma->vm_start);
-	int res_check_nonshared, res_check_shared;
+	const size_t size0 = vma->vm_end - vma->vm_start;
+	const size_t size = __PAGE_ALIGN(size0);
+	int r;
+
+	AS_DPRINT("size0=0x%lx size=0x%lx", (unsigned long)size0, (unsigned long)size);
 
 	WARN_ON(!allocated_blocks);
 
-	res_check_nonshared =
-		as_blocks_check_if_mine(allocated_blocks,
-			vma->vm_pgoff << PAGE_SHIFT,
-			size);
-
-	res_check_shared =
-		as_blocks_check_if_mine(shared_allocated_blocks,
-			vma->vm_pgoff << PAGE_SHIFT,
-			size);
-
-	if (res_check_nonshared && res_check_shared)
-		return res_check_nonshared;
-	else
+	r = as_blocks_check_if_mine(allocated_blocks,
+				    vma->vm_pgoff << PAGE_SHIFT,
+				    size);
+	if (!r) {
 		return as_mmap_impl(file_state->device_state, size, vma);
+	} else if (r == -ERESTARTSYS) {
+		return r;
+	}
+
+	r = as_blocks_check_if_mine(shared_allocated_blocks,
+				    vma->vm_pgoff << PAGE_SHIFT,
+				    size);
+	if (!r) {
+		return as_mmap_impl(file_state->device_state, size, vma);
+	}
+
+	return r;
 }
 
 static long as_ioctl_allocate_block_impl(
@@ -702,7 +728,7 @@ as_ioctl_ping_with_data_impl(struct as_ping_info_internal *ping_info,
 	if (copy_from_user(&user_copy, ptr, sizeof(user_copy)))
 		return -EFAULT;
 
-	if (user_copy.data_size > PAGE_SIZE - offsetof(struct goldfish_address_space_ping_with_data, data_ptr))
+	if (user_copy.data_size > __PAGE_SIZE - offsetof(struct goldfish_address_space_ping_with_data, data_ptr))
 		return -EFAULT;
 
 	ping_info->offset = user_copy.offset;
@@ -916,7 +942,7 @@ create_as_device(struct pci_dev *dev, const struct pci_device_id *id)
 
 	as_write_register(state->io_registers,
 			  AS_REGISTER_GUEST_PAGE_SIZE,
-			  PAGE_SIZE);
+			  __PAGE_SIZE);
 	as_write_register(state->io_registers,
 			  AS_REGISTER_PHYS_START_LOW,
 			  lower_32_bits(state->address_area_phys_address));
