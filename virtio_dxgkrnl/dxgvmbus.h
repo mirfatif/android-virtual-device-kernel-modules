@@ -396,8 +396,7 @@ struct dxgkvmb_command_destroydevice {
 	struct d3dkmthandle		device;
 };
 
-struct dxgkvmb_command_flushdevice
-{
+struct dxgkvmb_command_flushdevice {
 	struct dxgkvmb_command_vgpu_to_host	hdr;
 	struct d3dkmthandle			device;
 	enum dxgdevice_flushschedulerreason	reason;
