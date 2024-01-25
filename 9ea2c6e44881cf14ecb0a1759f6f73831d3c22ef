@@ -34,6 +34,23 @@
       "parentUuid": "e1861216_5c506fc3",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e330136e_6a2680bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-01-25T18:02:00Z",
+      "side": 1,
+      "message": "Can this be enabled for x86_64 as well? The majority of the virtual device (goldfish AND cutttlefish) testing occurs on x86_64 CI.",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
