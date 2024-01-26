@@ -51,6 +51,24 @@
       "message": "Can this be enabled for x86_64 as well? The majority of the virtual device (goldfish AND cutttlefish) testing occurs on x86_64 CI.",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ebda5d2_042d8300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3273674
+      },
+      "writtenOn": "2024-01-26T09:35:36Z",
+      "side": 1,
+      "message": "Ah sorry I didn\u0027t make it clear, this patch is needed for the Arm FVP only, not goldfish or cuttlefish. I\u0027ve updated the commit message.\n\nIf we want to enable it for x86_64, which .fragment should it be?\n\n(The lunch product for the FVP is https://android.googlesource.com/device/generic/goldfish/+/refs/heads/main/fvpbase/)",
+      "parentUuid": "e330136e_6a2680bb",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
