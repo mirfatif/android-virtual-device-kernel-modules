@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f10f3a8_df2d841a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-01-26T21:38:44Z",
+      "side": 1,
+      "message": "* Tested with `launch_cvd --gpu_mode\u003dguest_swiftshader`, successfully boot to the launcher.\n* Tested with `launch_cvd --gpu_mode\u003dgfxstream`, successfully boot to the launcher, but crash on Vulkan workload that calls `vkAllocateMemory`. However, this also happens without this change.\n\n\nThe test is conducted in the following way:\n\n* The kernel module binary is downloaded from http://ab/P68473610/ and is placed under the `kernel/prebuilts/common-modules/virtual-device/5.10/x86-64` folder.\n* Verified in the kernel debugfs log under `/sys/kernel/debug/dri/0/virtio-gpu-features` that the \"create guest handle\" line is removed.\n* Use the `sc-gsi-with-phones-release` branch defined here: https://source.corp.google.com/piper///depot/google3/configs/wireless/android/busytown/platform/git_sc/git_sc-gsi-with-phones-release.gcl;l\u003d1;rcl\u003d504599932\n* `lunch cf_x86_64_phone-userdebug`\n* Run the correspondent `launch_cvd` command.",
+      "revId": "f4885d4b5a302d30d7f40c6eb2872fcdc3c9c6f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
