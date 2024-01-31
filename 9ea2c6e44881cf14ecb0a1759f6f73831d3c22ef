@@ -141,6 +141,24 @@
       "parentUuid": "2e59a40b_d20a9859",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc18d74_4a921645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3273674
+      },
+      "writtenOn": "2024-01-31T18:02:06Z",
+      "side": 1,
+      "message": "Thanks for clarifying. I\u0027ve made the change, please have a look.",
+      "parentUuid": "b98a8b02_1c629fda",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
