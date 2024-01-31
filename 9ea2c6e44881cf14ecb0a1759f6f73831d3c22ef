@@ -87,6 +87,24 @@
       "parentUuid": "2ebda5d2_042d8300",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e19f0b_566f4967",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3273674
+      },
+      "writtenOn": "2024-01-31T15:43:07Z",
+      "side": 1,
+      "message": "The latter is less maintenance and indeed how it currently works for the FVP.\n\nIt seems that the x86_64 virtual device target (build.config.virtual_device.x86_64) uses virtual_device_core.fragment and virtual_device.fragment which are also used by the aarch64 target. Which fragment shall I add CONFIG_DRM_PANEL_SIMPLE\u003dm to?",
+      "parentUuid": "0b9d7420_28820084",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
