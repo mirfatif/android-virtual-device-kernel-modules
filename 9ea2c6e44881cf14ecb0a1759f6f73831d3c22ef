@@ -105,6 +105,42 @@
       "parentUuid": "0b9d7420_28820084",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98a8b02_1c629fda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-01-31T16:55:55Z",
+      "side": 1,
+      "message": "virtual_device_core\n\nvirtual_device_core is all modules required to support any Linux based OS.\nvirtual_device is all supplemental modules required for Android use cases.",
+      "parentUuid": "a1e19f0b_566f4967",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f18091f_b400ceea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-01-31T16:55:55Z",
+      "side": 1,
+      "message": "Right, we do.",
+      "parentUuid": "2e59a40b_d20a9859",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
