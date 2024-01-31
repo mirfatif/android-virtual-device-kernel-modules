@@ -69,6 +69,24 @@
       "parentUuid": "e330136e_6a2680bb",
       "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9d7420_28820084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-01-31T14:43:03Z",
+      "side": 1,
+      "message": "We currently use the virtual device target to generate the kernel modules for goldfish, cuttlefish, and I presume FVP until this change came alone.\n\nRoman, should we split off a new target for the FVP device OR have it use the virtual device kernel target? I\u0027m voting for the latter since its less maintenance all round.",
+      "parentUuid": "2ebda5d2_042d8300",
+      "revId": "9ea2c6e44881cf14ecb0a1759f6f73831d3c22ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
