@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57fdad88_5e8d1186",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3273674
+      },
+      "writtenOn": "2024-02-01T13:20:28Z",
+      "side": 1,
+      "message": "I clicked on \"rebase\" and the +2s are gone. Could you please approve again?",
+      "revId": "8af647240404e9d1bbbd08064588c1497bec4b59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
