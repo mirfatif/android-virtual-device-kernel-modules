@@ -103,6 +103,7 @@ _virt_common_ext_modules = [
     "drivers/media/virtio/virtio-video.ko",
     "drivers/staging/dev-sw-sync/sw_sync.ko",
     "drivers/virtio/virtio_wl.ko",
+    "fs/fuse/fuse_vendor.ko",
     "goldfish_drivers/goldfish_address_space.ko",
     "goldfish_drivers/goldfish_pipe.ko",
     "goldfish_drivers/goldfish_sync.ko",
