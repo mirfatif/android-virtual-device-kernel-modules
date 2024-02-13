@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e115e39_4ff36a46",
+        "filename": "virtual_device.fragment",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2024-02-13T17:39:04Z",
+      "side": 1,
+      "message": "I don\u0027t think this is referenced anywhere is it? In the Kbuild you\u0027re always building as a module regardless of any flag",
+      "revId": "b4075b1881f29150588c2de8bf13e1b123450609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
