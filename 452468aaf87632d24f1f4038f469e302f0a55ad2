@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf12aee_5270db2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "nit: Remove either one.",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7acb0076_fa417488",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "Could you add references to ARCVM kernel patches like:\n* http://crrev.com/c/2581186\n* http://crrev.com/c/2581136\n* http://crrev.com/c/2601035\n* http://crrev.com/c/2604783\n\n?",
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11479828_bfbbd07e",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "nit: style: Apparently indentations within this file are not totally consistent; for example, it contains both:\n```\n\u003ctab\u003e   if (...)\n\u003cspaces\u003e        return;\n```\nin L16-17 and\n```\n\u003cspaces\u003eif \n\u003ctabs\u003e          return;\n```\nin L39-40.\n\nI guess each 8-space is usually represented by a tab in the kernel code.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f550f70_5fa378f1",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "qq: Do we prefer a ternary conditional operator over a `if` conditional in this case?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd790069_8f131ce4",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "nit: Redundant empty line.",
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7188d544_dcdc66a9",
+        "filename": "include/uapi/linux/fuse_vendor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "nit: style: Add a space.",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 3
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928c9517_089b1a2e",
+        "filename": "include/uapi/linux/fuse_vendor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-16T05:58:26Z",
+      "side": 1,
+      "message": "Note for self:\nISO C restricts enumerator constants to the values representable as `int` until C23, where fixed underlying types are introduced (for example, `-pedantic` emits a warning). However, compilers like gcc can treat this value and properly derive its appropriate type without implicit casting.",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 39
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
