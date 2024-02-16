@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2262c1a_c4dcfd9d",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-16T23:21:53Z",
+      "side": 1,
+      "message": "Just want to confirm that the pointer stored here does not need to be freed.",
+      "range": {
+        "startLine": 348,
+        "startChar": 2,
+        "endLine": 348,
+        "endChar": 16
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da7a9aa_acc1e442",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-16T23:21:53Z",
+      "side": 1,
+      "message": "use tabs\n```suggestion\n\t/* GPADL address list for existing sysmem allocations */\n\tu32\t\t\t\tgpadl;\n```",
+      "range": {
+        "startLine": 711,
+        "startChar": 4,
+        "endLine": 711,
+        "endChar": 33
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c4d300f_f592ed5b",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-16T23:21:53Z",
+      "side": 1,
+      "message": "You can simplify the code by returning `-ENOMEM` immediately and removing the `out:` label.",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 11
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee49842_f0a695da",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-16T23:21:53Z",
+      "side": 1,
+      "message": "Can simplify by putting the `kfree` and `return` here instead, and removing the `out_free_vp:` label.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 19
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
