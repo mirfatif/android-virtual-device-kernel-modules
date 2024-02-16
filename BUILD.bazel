@@ -562,6 +562,50 @@ kernel_images(
     modules_options = "modules.options",
 )
 
+_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = [paths.basename(m) for m in get_gki_modules_list("arm64")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES
+
+write_file(
+    name = "fake_virtual_device_aarch64_modules_list",
+    out = "modules_list.fake_virtual_device_aarch64",
+    content = _FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST,
+)
+
+write_file(
+    name = "fake_virtual_device_aarch64_modules_recovery_list",
+    out = "modules_recovery_list.fake_virtual_device_aarch64",
+    content = _FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST + [
+        "goldfish_sync.ko",
+    ],
+)
+
+write_file(
+    name = "fake_virtual_device_aarch64_modules_charger_list",
+    out = "modules_charger_list.fake_virtual_device_aarch64",
+    content = _FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST + [
+        "goldfish_pipe.ko",
+    ],
+)
+
+kernel_images(
+    name = "fake_virtual_device_aarch64_images",
+    build_initramfs = True,
+    build_vendor_kernel_boot = True,
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules_install = ":virtual_device_aarch64_modules_install",
+    modules_charger_list = "modules_charger_list.fake_virtual_device_aarch64",
+    modules_list = "modules_list.fake_virtual_device_aarch64",
+    modules_recovery_list = "modules_recovery_list.fake_virtual_device_aarch64",
+)
+
+initramfs_modules_lists_test(
+    name = "fake_virtual_device_aarch64_vendor_kernel_boot_modules_lists_test",
+    build_vendor_kernel_boot = True,
+    expected_modules_charger_list = "modules_charger_list.fake_virtual_device_aarch64",
+    expected_modules_list = "modules_list.fake_virtual_device_aarch64",
+    expected_modules_recovery_list = "modules_recovery_list.fake_virtual_device_aarch64",
+    kernel_images = ":fake_virtual_device_aarch64_images",
+)
+
 # Workaround for b/201687176.
 # TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
 test_mappings_dist(
@@ -596,6 +640,16 @@ exec(
         $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
         $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
     """,
+)
+
+# artifact tests for aarch64
+
+test_suite(
+    name = "virtual_device_aarch64_tests",
+    tests = [
+        # modules lists tests
+        ":fake_virtual_device_aarch64_vendor_kernel_boot_modules_lists_test",
+    ],
 )
 
 kernel_build(
