@@ -353,7 +353,14 @@ test_suite(
     ],
 )
 
+<<<<<<< HEAD   (0f39ea Add tests to exercise module recovery/charger lists feature)
 _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = COMMON_GKI_MODULES_LIST + _VIRT_COMMON_MODULES + [
+=======
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = [
+    paths.basename(m)
+    for m in get_gki_modules_list("x86_64")
+] + _VIRT_COMMON_MODULES + [
+>>>>>>> CHANGE (c3aece Fix the fake x86-64 device module lists generation)
     "goldfish_address_space.ko",
     "nd_virtio.ko",
     "test_meminit.ko",
