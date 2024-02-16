@@ -380,7 +380,9 @@ test_suite(
     ],
 )
 
-_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = get_gki_modules_list("x86_64") + _VIRT_COMMON_MODULES + [
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = [paths.basename(m) for m in get_gki_modules_list("x86_64")]
+
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST += _VIRT_COMMON_MODULES + [
     "goldfish_address_space.ko",
     "nd_virtio.ko",
     "test_meminit.ko",
