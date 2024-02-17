@@ -130,6 +130,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13ba28b3_0041ecb8",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-17T05:30:52Z",
+      "side": 1,
+      "message": "Thanks! Now all indentations look OK 🙂",
+      "parentUuid": "2c5072e9_b83ba65d",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f550f70_5fa378f1",
@@ -167,6 +191,30 @@
       "side": 1,
       "message": "I think an `if` statement is actually clearer here, especially since we leave the value of `err` unchanged when the case is not true. Thanks for pointing this out!",
       "parentUuid": "1f550f70_5fa378f1",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ff6e3f_5d46a613",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-17T05:30:52Z",
+      "side": 1,
+      "message": "Got it. That matches my impression. Thank you for updating the patch!",
+      "parentUuid": "0035a100_6ec2b0cc",
       "range": {
         "startLine": 30,
         "startChar": 0,

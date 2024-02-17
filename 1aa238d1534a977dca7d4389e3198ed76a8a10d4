@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0696bc03_ac1992aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-17T05:30:52Z",
+      "side": 1,
+      "message": "This one looks unrelated. Maybe a typo of crrev/c/2581186?",
+      "range": {
+        "startLine": 16,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "1aa238d1534a977dca7d4389e3198ed76a8a10d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
