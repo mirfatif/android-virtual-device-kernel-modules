@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ad365d_b6216ff3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bf12aee_5270db2c",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7acb0076_fa417488",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "465d2a6c_669a4c98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7acb0076_fa417488",
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11479828_bfbbd07e",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-02-16T05:58:26Z",
       "side": 1,
       "message": "nit: style: Apparently indentations within this file are not totally consistent; for example, it contains both:\n```\n\u003ctab\u003e   if (...)\n\u003cspaces\u003e        return;\n```\nin L16-17 and\n```\n\u003cspaces\u003eif \n\u003ctabs\u003e          return;\n```\nin L39-40.\n\nI guess each 8-space is usually represented by a tab in the kernel code.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c5072e9_b83ba65d",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "Thank you for catching these! I thought I had found all of them, but I was mistaken!",
+      "parentUuid": "11479828_bfbbd07e",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0035a100_6ec2b0cc",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "I think an `if` statement is actually clearer here, especially since we leave the value of `err` unchanged when the case is not true. Thanks for pointing this out!",
+      "parentUuid": "1f550f70_5fa378f1",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd790069_8f131ce4",
         "filename": "fs/fuse/fuse_vendor.c",
         "patchSetId": 9
@@ -100,6 +190,24 @@
       "writtenOn": "2024-02-16T05:58:26Z",
       "side": 1,
       "message": "nit: Redundant empty line.",
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d1cac6_9c5913bb",
+        "filename": "fs/fuse/fuse_vendor.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd790069_8f131ce4",
       "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -117,6 +225,30 @@
       "writtenOn": "2024-02-16T05:58:26Z",
       "side": 1,
       "message": "nit: style: Add a space.",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 10,
+        "endChar": 3
+      },
+      "revId": "452468aaf87632d24f1f4038f469e302f0a55ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4fe713_8cdd6e44",
+        "filename": "include/uapi/linux/fuse_vendor.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2024-02-17T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7188d544_dcdc66a9",
       "range": {
         "startLine": 10,
         "startChar": 1,
