@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ce4b4f_cddf1571",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-02-19T10:06:12Z",
+      "side": 1,
+      "message": "can you clarify (in the commit message) why that is the case?",
+      "range": {
+        "startLine": 9,
+        "startChar": 31,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "53c894033643bcf3e28a7434a0c78492f07ddff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
