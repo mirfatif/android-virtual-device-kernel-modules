@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2530145f_b17ec48d",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e8bda9_2f0015a0",
+      "range": {
+        "startLine": 275,
+        "startChar": 22,
+        "endLine": 275,
+        "endChar": 23
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "826f1226_a69f483c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-16T19:33:07Z",
       "side": 1,
       "message": "Curious, why this change? Do we require contiguous pages? I believe kmalloc has some size limitations on its allocation size.",
+      "range": {
+        "startLine": 41,
+        "startChar": 13,
+        "endLine": 41,
+        "endChar": 20
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34944463_cca9e4bc",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "Any memory that needs to be accessed on the host side of virtio needs to be kzalloc-ed instead of kmalloc-ed, otherwise virtio will not send the right address to the host. Also, if the command is multiple pages it needs to be contiguous in physical memory so it can be contiguous for the host.\n\nIn terms of size, in practice we don\u0027t have any vmbus messages that are \u003e 1 page right now, and it\u0027s unlikely to get much larger than that in the future.",
+      "parentUuid": "826f1226_a69f483c",
       "range": {
         "startLine": 41,
         "startChar": 13,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d21d0d64_1a287423",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "That was a mistaken clang-format application, but I\u0027ve reverted the formatting back to it\u0027s original.",
+      "parentUuid": "9bc22638_942c7e97",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 28
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a288fab_6b524ec3",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-16T19:33:07Z",
       "side": 1,
       "message": "why not directly return `ret` here and for the other `goto`s below?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 13
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b02c26d_f3042aee",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a288fab_6b524ec3",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab75e6fb_e32806f6",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc22c943_b5dad6dc",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 16
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d3b951_76bd999d",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-02-16T19:33:07Z",
       "side": 1,
       "message": "What is the purpose of guid here? It appears unused.",
+      "range": {
+        "startLine": 307,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 16
+      },
+      "revId": "c90f357caffbb1f64b1d98dd413f53ec8f5eb75c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1cc99e_18650633",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:37:20Z",
+      "side": 1,
+      "message": "That seems to be leftover from an in-progress implementation. Removed!",
+      "parentUuid": "73d3b951_76bd999d",
       "range": {
         "startLine": 307,
         "startChar": 0,
