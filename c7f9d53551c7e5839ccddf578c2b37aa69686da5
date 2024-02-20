@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de611ed7_f6766434",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T21:56:29Z",
+      "side": 1,
+      "message": "I realize this is a pre-existing condition, but it seems strange that in some places (like a few lines above this) we interpret anything nonzero as an error, and in others we look for negative values. \n\nFWIW, there\u0027s a [different patch](https://lore.kernel.org/lkml/8bf27b82-bdd9-6486-fbc9-aa6f7a3312e0@linux.microsoft.com/T/) that uses the macro\n\n```\n#define ISERROR(ret)\t\t\t\t\t(ret \u003c 0)\n```\n\nto improve consistency, but it\u0027s out of scope for this CL. So this is more of an FYI than a request to change anything.",
+      "range": {
+        "startLine": 103,
+        "startChar": 6,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "c7f9d53551c7e5839ccddf578c2b37aa69686da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
