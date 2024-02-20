@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abdf2cc_e186559e",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T22:01:05Z",
+      "side": 1,
+      "message": "You can move this to line 215 above to be more concise.",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 45
+      },
+      "revId": "8440fc1a3b5cabd42fb41df54764f0308f3cb6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
