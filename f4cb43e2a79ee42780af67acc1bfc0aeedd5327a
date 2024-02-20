@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d99f09_84ad2bed",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-02-20T19:02:37Z",
+      "side": 1,
+      "message": "See comment in the other change.\n\n```suggestion\n_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST \u003d [paths.basename(m) for m in get_gki_modules_list(\"arm64\")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES\n```",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 524,
+        "endChar": 86
+      },
+      "revId": "f4cb43e2a79ee42780af67acc1bfc0aeedd5327a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
