@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4e48a0_ead214eb",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:36:48Z",
+      "side": 1,
+      "message": "`dxgprocess_release` frees the dxgprocess object when it\u0027s no longer referenced (aka process_kref reaches 0), so yeah we do not want to free it here.",
+      "parentUuid": "f2262c1a_c4dcfd9d",
+      "range": {
+        "startLine": 348,
+        "startChar": 2,
+        "endLine": 348,
+        "endChar": 16
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3da7a9aa_acc1e442",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-16T23:21:53Z",
       "side": 1,
       "message": "use tabs\n```suggestion\n\t/* GPADL address list for existing sysmem allocations */\n\tu32\t\t\t\tgpadl;\n```",
+      "range": {
+        "startLine": 711,
+        "startChar": 4,
+        "endLine": 711,
+        "endChar": 33
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39e9698_20db00a9",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3da7a9aa_acc1e442",
       "range": {
         "startLine": 711,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc620be_65f95061",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:36:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c4d300f_f592ed5b",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 11
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee49842_f0a695da",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-02-16T23:21:53Z",
       "side": 1,
       "message": "Can simplify by putting the `kfree` and `return` here instead, and removing the `out_free_vp:` label.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 19
+      },
+      "revId": "9e356962e5440dc386b1c07acdd4f1ea13bf524d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ad7719_5d3e8359",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-20T19:36:48Z",
+      "side": 1,
+      "message": "The out_free_vp label will be used in multiple places in further CLs so I\u0027m going to keep this one as-is.",
+      "parentUuid": "5ee49842_f0a695da",
       "range": {
         "startLine": 109,
         "startChar": 0,
