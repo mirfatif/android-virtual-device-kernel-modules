@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc873a2f_3e4c2e28",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-02-20T19:01:40Z",
+      "side": 1,
+      "message": "Please avoid using `+\u003d` in BUILD files, because it might not play well with tools like buildifier. IMO it is good practice to treat globals as constants.\n\nJust:\n\n```suggestion\n_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST \u003d [\n    paths.basename(m)\n    for m in get_gki_modules_list(\"x86_64\")\n] + _VIRT_COMMON_MODULES + [\n    \"goldfish_address_space.ko\",\n    \"nd_virtio.ko\",\n    \"test_meminit.ko\",\n    \"v4l2loopback.ko\",\n    \"virtio_pmem.ko\",\n]\n```",
+      "range": {
+        "startLine": 383,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 1
+      },
+      "revId": "83da2943ee4d60ea0243a7bd404e569963fac261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
