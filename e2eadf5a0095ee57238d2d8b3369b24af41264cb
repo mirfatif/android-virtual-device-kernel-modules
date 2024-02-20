@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0817d327_dd888e9e",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T22:06:34Z",
+      "side": 1,
+      "message": "Just confirming that this does not need modification (`d3dddi_openallocationinfo2` vs `d3dddi_allocationinfo2`).",
+      "range": {
+        "startLine": 1594,
+        "startChar": 7,
+        "endLine": 1594,
+        "endChar": 33
+      },
+      "revId": "e2eadf5a0095ee57238d2d8b3369b24af41264cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
