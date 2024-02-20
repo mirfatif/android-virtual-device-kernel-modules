@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6cfe66c_b9f07151",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T23:09:49Z",
+      "side": 1,
+      "message": "Can this condition be removed? Looks to me like `cmd-\u003eresult` will either be `NULL` or a pointer returned by `kzalloc` (never a pointer to local storage). If so, it is simplest to always call `kfree(cmd-\u003eresult)`.",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 18
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c957a143_5be812c9",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T23:09:49Z",
+      "side": 1,
+      "message": "Can this be moved inside the loop, e.g. to line 197? i.e.\n\n```\nstruct dxgkvmb_command_host_to_vm *hdr \u003d (struct dxgkvmb_command_host_to_vm *)eb;\n```",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bcffff_41925539",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T23:09:49Z",
+      "side": 1,
+      "message": "Is this meant to be a no-op? Maybe worth adding a comment?",
+      "range": {
+        "startLine": 210,
+        "startChar": 7,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2828c5a_d9f3c4bf",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T23:09:49Z",
+      "side": 1,
+      "message": "Curious why this is needed. Also, would it suffice to zero only `len` bytes instead?",
+      "range": {
+        "startLine": 217,
+        "startChar": 16,
+        "endLine": 217,
+        "endChar": 58
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b499a446_f2749a13",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-02-20T23:09:49Z",
+      "side": 1,
+      "message": "Why do we set the error code to `result_size`? Do we not expect to return zero on success?",
+      "range": {
+        "startLine": 449,
+        "startChar": 1,
+        "endLine": 449,
+        "endChar": 18
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
