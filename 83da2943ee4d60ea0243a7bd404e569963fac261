@@ -22,6 +22,30 @@
       },
       "revId": "83da2943ee4d60ea0243a7bd404e569963fac261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f23b927_bbcbff1d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-02-21T01:31:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "cc873a2f_3e4c2e28",
+      "range": {
+        "startLine": 383,
+        "startChar": 0,
+        "endLine": 391,
+        "endChar": 1
+      },
+      "revId": "83da2943ee4d60ea0243a7bd404e569963fac261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
