@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae22320_5c39df42",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-02-21T11:43:49Z",
+      "side": 1,
+      "message": "should this be `fake_virtual_device_aarch64_vendor_kernel_boot_modules_lists_test` from L558?",
+      "range": {
+        "startLine": 606,
+        "startChar": 10,
+        "endLine": 606,
+        "endChar": 68
+      },
+      "revId": "8721342d2a4d37d89c37ffd75abea3dd89f44cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
