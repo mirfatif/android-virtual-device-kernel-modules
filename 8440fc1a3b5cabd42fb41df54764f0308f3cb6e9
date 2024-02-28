@@ -22,6 +22,30 @@
       },
       "revId": "8440fc1a3b5cabd42fb41df54764f0308f3cb6e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb807a2_87126f2f",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:24:04Z",
+      "side": 1,
+      "message": "This may also count as mixing code and declarations, which the kernel does not allow. I can\u0027t find a definitive way to check this so I\u0027m going to keep as-is for now and we can re-evaluate this later (perhaps an auto-formatter can fix these all for me).",
+      "parentUuid": "3abdf2cc_e186559e",
+      "range": {
+        "startLine": 218,
+        "startChar": 11,
+        "endLine": 218,
+        "endChar": 45
+      },
+      "revId": "8440fc1a3b5cabd42fb41df54764f0308f3cb6e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
