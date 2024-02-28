@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20eadea8_6c716499",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6cfe66c_b9f07151",
+      "range": {
+        "startLine": 167,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 18
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c957a143_5be812c9",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-20T23:09:49Z",
       "side": 1,
       "message": "Can this be moved inside the loop, e.g. to line 197? i.e.\n\n```\nstruct dxgkvmb_command_host_to_vm *hdr \u003d (struct dxgkvmb_command_host_to_vm *)eb;\n```",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 40
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb362207_53af81cb",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:23:42Z",
+      "side": 1,
+      "message": "Kernel code doesn\u0027t like mixed declarations with code. I think it enforces this by giving compiler warnings, though I don\u0027t know if that is enabled in our build? But I\u0027m going to skip doing this for now.",
+      "parentUuid": "c957a143_5be812c9",
       "range": {
         "startLine": 186,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4941f2_e972c502",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43bcffff_41925539",
+      "range": {
+        "startLine": 210,
+        "startChar": 7,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2828c5a_d9f3c4bf",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f39a5165_4759cc28",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:23:42Z",
+      "side": 1,
+      "message": "We can\u0027t be sure that the host that writes to this buffer will always write all fields of the event, so zeroing it out will ensure that we don\u0027t read back bogus data.\n\nZeroing out just len bytes could be an optimization but I don\u0027t know if it\u0027s worth it in case there\u0027s a bug on the device side where it returns an incorrect \"len\" value (we don\u0027t rely on it as-is).\n\nKeeping this as-is for now.",
+      "parentUuid": "b2828c5a_d9f3c4bf",
+      "range": {
+        "startLine": 217,
+        "startChar": 16,
+        "endLine": 217,
+        "endChar": 58
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b499a446_f2749a13",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-02-20T23:09:49Z",
       "side": 1,
       "message": "Why do we set the error code to `result_size`? Do we not expect to return zero on success?",
+      "range": {
+        "startLine": 449,
+        "startChar": 1,
+        "endLine": 449,
+        "endChar": 18
+      },
+      "revId": "9c5a935899c11fe93f5d6f4da48729a2d021ad92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced15aa4_1565c03e",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T22:23:42Z",
+      "side": 1,
+      "message": "There are parts of the code that seem to expect a value \u003e0 *if* something was written to the result buffer. We could set this to an enum if a write happened, but also setting it to the result size works. We don\u0027t actually know if result_size was written, however, so this isn\u0027t 100% accurate. But it is giving a value that the rest of the code expects, so I\u0027m going to keep this as-is for now (though I\u0027ve added a comment). I think the usage of this function and it\u0027s return value could be improved though.",
+      "parentUuid": "b499a446_f2749a13",
       "range": {
         "startLine": 449,
         "startChar": 1,
