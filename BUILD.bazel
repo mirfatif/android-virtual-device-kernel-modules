@@ -357,7 +357,6 @@ _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = _GKI_MODULES_BASENAMES + _VIRT_COMMON_MO
     "goldfish_address_space.ko",
     "nd_virtio.ko",
     "test_meminit.ko",
-    "v4l2loopback.ko",
     "virtio_pmem.ko",
 ]
 
