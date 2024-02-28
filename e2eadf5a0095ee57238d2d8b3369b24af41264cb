@@ -22,6 +22,30 @@
       },
       "revId": "e2eadf5a0095ee57238d2d8b3369b24af41264cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05c0b475_974a9636",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T21:34:59Z",
+      "side": 1,
+      "message": "`d3dddi_openallocationinfo2` is used by `D3DKMT_OPENRESOURCEFROMNTHANDLE`, and the documentation seems to suggest it always uses `d3dddi_openallocationinfo2` (where the documentation for the use of `d3dddi_allocatinfo` by `D3DKMT_CREATEALLOCATION` has a union for either using `d3dddi_allocationinfo` or `d3dddi_allocationinfo2`). And we haven\u0027t had any issues with `D3DKMTOpenResourceFromNtHandle` so I think this is fine.",
+      "parentUuid": "0817d327_dd888e9e",
+      "range": {
+        "startLine": 1594,
+        "startChar": 7,
+        "endLine": 1594,
+        "endChar": 33
+      },
+      "revId": "e2eadf5a0095ee57238d2d8b3369b24af41264cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
