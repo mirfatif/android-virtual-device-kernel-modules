@@ -22,6 +22,30 @@
       },
       "revId": "c7f9d53551c7e5839ccddf578c2b37aa69686da5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a7d677_9a9afb38",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-02-28T21:36:00Z",
+      "side": 1,
+      "message": "Yes, this seems like it would be a good improvement. Acknowledging for now.",
+      "parentUuid": "de611ed7_f6766434",
+      "range": {
+        "startLine": 103,
+        "startChar": 6,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "c7f9d53551c7e5839ccddf578c2b37aa69686da5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
