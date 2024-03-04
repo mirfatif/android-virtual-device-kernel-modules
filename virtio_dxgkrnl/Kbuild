@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0
+
+virtio-dxgkrnl-objs := virtio_dxgkrnl.o dxgglobal.o hmgr.o misc.o \
+	dxgadapter.o ioctl.o dxgvmbus.o dxgprocess.o dxgsyncfile.o
+
+obj-m += virtio-dxgkrnl.o
+LINUXINCLUDE := -I$(srctree)/../common-modules/virtual-device/uapi ${LINUXINCLUDE}
