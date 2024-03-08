@@ -35,3 +35,5 @@ CONFIG_MT76x2U=m
 
 # TV-specific drivers
 CONFIG_USB_PULSE8_CEC=m
+
+CONFIG_IIO_SCMI=m
