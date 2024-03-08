@@ -28,10 +28,9 @@ load(
     "kernel_unstripped_modules_archive",
     "merged_kernel_uapi_headers",
 )
-load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
-load("//build/kernel/kleaf:constants.bzl", "X86_64_OUTS")
+load("//build/kernel/kleaf:hermetic_tools.bzl", "hermetic_exec")
 load("//common:modules.bzl", "COMMON_GKI_MODULES_LIST")
 
 filegroup(
@@ -182,6 +181,7 @@ _VIRT_COMMON_MODULES = [
     "goldfish_battery.ko",
     "gs_usb.ko",
     "hci_vhci.ko",
+    "kfifo_buf.ko",
     "mac80211.ko",
     "mac80211_hwsim.ko",
     "mt76.ko",
@@ -195,6 +195,7 @@ _VIRT_COMMON_MODULES = [
     "net_failover.ko",
     "pulse8-cec.ko",
     "rtc-test.ko",
+    "scmi_iio.ko",
     "system_heap.ko",
     "usbip-core.ko",
     "vhci-hcd.ko",
