@@ -1,0 +1,82 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070772162",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d1",
+      "key": {
+        "uuid": "1e8b07d5_e13f0798",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-08T21:44:19Z",
+      "side": 1,
+      "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 64
+      },
+      "tag": "",
+      "revId": "db130759dec4d0c4f6e7afabd862ef41ae895048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070772162",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d1",
+      "key": {
+        "uuid": "c9203ccb_0c3e0fd6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-08T21:44:19Z",
+      "side": 1,
+      "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 68
+      },
+      "tag": "",
+      "revId": "db130759dec4d0c4f6e7afabd862ef41ae895048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070772162",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d1",
+      "key": {
+        "uuid": "0c1ef164_9b744fb2",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-08T21:44:19Z",
+      "side": 1,
+      "message": "Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 34,
+        "startChar": 44,
+        "endLine": 34,
+        "endChar": 55
+      },
+      "tag": "",
+      "revId": "db130759dec4d0c4f6e7afabd862ef41ae895048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
