@@ -31,6 +31,32 @@
       "robotRunId": "AR00000000000070775519",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d2",
       "key": {
+        "uuid": "95a354ee_6f7fbcf3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-08T22:12:18Z",
+      "side": 1,
+      "message": "Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "tag": "",
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070775519",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d2",
+      "key": {
         "uuid": "6c4b5987_53333bfc",
         "filename": "BUILD.bazel",
         "patchSetId": 2
@@ -40,6 +66,32 @@
         "id": 1757831
       },
       "writtenOn": "2024-03-08T22:12:10Z",
+      "side": 1,
+      "message": "Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 33,
+        "startChar": 44,
+        "endLine": 33,
+        "endChar": 55
+      },
+      "tag": "",
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000070775519",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2996658?revision\u003d2",
+      "key": {
+        "uuid": "46b1c0be_c55d0212",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-08T22:12:18Z",
       "side": 1,
       "message": "Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
       "range": {
