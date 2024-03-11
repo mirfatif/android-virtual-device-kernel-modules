@@ -1,0 +1,100 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02962d7d_8fce452f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-11T14:25:50Z",
+      "side": 1,
+      "message": "\u003e Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load\n\nPlease fix.",
+      "parentUuid": "95a354ee_6f7fbcf3",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8715cd2e_e4b2dc57",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-11T14:25:50Z",
+      "side": 1,
+      "message": "\u003e Load statement is out of its lexicographical order. http://go/buildifier-warnings#out-of-order-load\n\nPlease fix.",
+      "parentUuid": "53d2ea3c_36dd5bf3",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 68
+      },
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2951cf1_828b0a9c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-11T14:25:50Z",
+      "side": 1,
+      "message": "\u003e Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\n\u003e To disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load\n\nPlease fix.",
+      "parentUuid": "6c4b5987_53333bfc",
+      "range": {
+        "startLine": 33,
+        "startChar": 44,
+        "endLine": 33,
+        "endChar": 55
+      },
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "913d3370_5e3a2110",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-11T14:25:50Z",
+      "side": 1,
+      "message": "\u003e Loaded symbol \"X86_64_OUTS\" is unused. Please remove it.\n\u003e To disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load\n\nPlease fix.",
+      "parentUuid": "46b1c0be_c55d0212",
+      "range": {
+        "startLine": 33,
+        "startChar": 44,
+        "endLine": 33,
+        "endChar": 55
+      },
+      "revId": "1273bd5e136981941dd614941df0566be64c5277",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
