@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d9e0b1_5a1d1988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-11T14:33:05Z",
+      "side": 1,
+      "message": "Lint issues are resolved, ready for a re-review, thanks!",
+      "revId": "b107d3a3e3199b6fd4fcd3e9e49147cfcafcddb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
