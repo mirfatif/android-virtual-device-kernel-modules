@@ -218,9 +218,15 @@ _VIRT_AARCH64_MODULES = [
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
+<<<<<<< HEAD   (832773 Add tests for a fake aarch64 virtual device)
+=======
+    "dummy-cpufreq.ko",
+    "kfifo_buf.ko",
+>>>>>>> CHANGE (31c83b Enable IIO_SCMI module on aarch64)
     "nd_virtio.ko",
     "pl111_drm.ko",
     "psmouse.ko",
+    "scmi_iio.ko",
     "vexpress-config.ko",
     "vexpress-sysreg.ko",
     "virtio_mmio.ko",
