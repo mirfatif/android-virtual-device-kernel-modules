@@ -16,6 +16,23 @@
       "message": "Please do this on the android15 kernels, and mainline as well. Thanks.",
       "revId": "31c83b25ad228eb399a8a5aa180b0742e0619dfe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c321df54_db0a574f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-03-19T13:22:50Z",
+      "side": 1,
+      "message": "You\u0027ll need to extend the symbol list for this change. Follow https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists#update-list and include the resulting change in a topic with this one.\n\nExample would be this topic https://r.android.com/q/topic:%22remove-vd-modules-from-gki%22",
+      "revId": "31c83b25ad228eb399a8a5aa180b0742e0619dfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
