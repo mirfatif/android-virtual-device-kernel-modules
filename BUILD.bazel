@@ -233,7 +233,6 @@ _VIRT_AARCH64_MODULES = [
     "drm_dma_helper.ko",
     "dummy-cpufreq.ko",
     "nd_virtio.ko",
-    "open-dice.ko",
     "pl111_drm.ko",
     "psmouse.ko",
     "vexpress-config.ko",
