@@ -16,6 +16,24 @@
       "message": "Should we also add this for kernel 6.6?",
       "revId": "0aaf5788c5a859e7d45e5874172c858f98ffef07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6250e977_7c9f4b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986685
+      },
+      "writtenOn": "2024-03-19T16:38:14Z",
+      "side": 1,
+      "message": "I think so. Do you know if there\u0027s a preference for adding it here and cherry-picking it to 6.6, or the other way around?",
+      "parentUuid": "7f7aabcd_49673a68",
+      "revId": "0aaf5788c5a859e7d45e5874172c858f98ffef07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
