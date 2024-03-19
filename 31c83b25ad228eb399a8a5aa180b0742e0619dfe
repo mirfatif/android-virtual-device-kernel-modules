@@ -33,6 +33,24 @@
       "message": "You\u0027ll need to extend the symbol list for this change. Follow https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists#update-list and include the resulting change in a topic with this one.\n\nExample would be this topic https://r.android.com/q/topic:%22remove-vd-modules-from-gki%22",
       "revId": "31c83b25ad228eb399a8a5aa180b0742e0619dfe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9876f9a0_77eafb2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2036855
+      },
+      "writtenOn": "2024-03-19T15:21:27Z",
+      "side": 1,
+      "message": "Thanks for sending those instructions, I\u0027ve attempted to follow them! Please see the following topic with all the changes for this branch as well as the branches that Alistair mentioned: https://android-review.git.corp.google.com/q/topic:%22add_scmi_iio%22",
+      "parentUuid": "c321df54_db0a574f",
+      "revId": "31c83b25ad228eb399a8a5aa180b0742e0619dfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
