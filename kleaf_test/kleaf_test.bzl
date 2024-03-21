@@ -90,6 +90,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_core_headers_test(
+        name = name + "_ddk_core_headers_test",
+        kernel_build = "//common:kernel_x86_64",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -101,6 +107,7 @@ def kleaf_test(
             name + "_ddk_cflags_test",
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
+            name + "_ddk_core_headers_test",
         ],
         **kwargs
     )
@@ -583,6 +590,23 @@ def _ddk_submodule_config_conditional_srcs_test(name, kernel_build, **private_kw
                 True: ["must_be_set.c"],
             },
         },
+        deps = ["//common:all_headers_x86_64"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+        ],
+    )
+
+def _ddk_core_headers_test(name, kernel_build, **private_kwargs):
+    ddk_module(
+        name = name + "_module",
+        out = name + "_min.ko",
+        kernel_build = kernel_build,
+        srcs = ["min.c"],
         deps = ["//common:all_headers_x86_64"],
         **private_kwargs
     )
