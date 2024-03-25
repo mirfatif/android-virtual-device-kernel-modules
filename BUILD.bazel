@@ -234,6 +234,7 @@ _VIRT_AARCH64_MODULES = [
     "dummy-cpufreq.ko",
     "kfifo_buf.ko",
     "nd_virtio.ko",
+    "open-dice.ko",
     "pl111_drm.ko",
     "psmouse.ko",
     "scmi_iio.ko",
