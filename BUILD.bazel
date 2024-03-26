@@ -16,8 +16,6 @@ load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
-load("//build/bazel_common_rules/exec:exec.bzl", "exec")
-load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mappings_dist")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
@@ -342,15 +340,8 @@ kernel_images(
     modules_options = "modules.options",
 )
 
-# Workaround for b/201687176.
-# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
-test_mappings_dist(
-    name = "virtual_device_x86_64_test_mappings_dist",
-    dist_dir = "out/virtual_device_x86_64/dist",
-)
-
 copy_to_dist_dir(
-    name = "virtual_device_x86_64_copy_to_dist_dir",
+    name = "virtual_device_x86_64_dist",
     data = [
         ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
@@ -359,22 +350,11 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
         "//common:tests_zip_x86_64",
+        "//kernel/tests/test_mappings:test_mappings_zip",
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
     log = "info",
-)
-
-exec(
-    name = "virtual_device_x86_64_dist",
-    data = [
-        ":virtual_device_x86_64_copy_to_dist_dir",
-        ":virtual_device_x86_64_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_x86_64_test_mappings_dist) $@
-        $(rootpath :virtual_device_x86_64_copy_to_dist_dir) $@
-    """,
 )
 
 # artifact tests for x86_64
@@ -608,15 +588,8 @@ initramfs_modules_lists_test(
     kernel_images = ":fake_virtual_device_aarch64_images",
 )
 
-# Workaround for b/201687176.
-# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
-test_mappings_dist(
-    name = "virtual_device_aarch64_test_mappings_dist",
-    dist_dir = "out/virtual_device_aarch64/dist",
-)
-
 copy_to_dist_dir(
-    name = "virtual_device_aarch64_copy_to_dist_dir",
+    name = "virtual_device_aarch64_dist",
     data = [
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
@@ -626,22 +599,11 @@ copy_to_dist_dir(
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
         "//common:tests_zip_arm64",
+        "//kernel/tests/test_mappings:test_mappings_zip",
     ],
     dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
     log = "info",
-)
-
-exec(
-    name = "virtual_device_aarch64_dist",
-    data = [
-        ":virtual_device_aarch64_copy_to_dist_dir",
-        ":virtual_device_aarch64_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_aarch64_test_mappings_dist) $@
-        $(rootpath :virtual_device_aarch64_copy_to_dist_dir) $@
-    """,
 )
 
 # artifact tests for aarch64
@@ -739,37 +701,19 @@ kernel_images(
     modules_options = "modules.options",
 )
 
-# Workaround for b/201687176.
-# TODO(b/201687176): Clean up when we have a better solution for TEST_MAPPING.
-test_mappings_dist(
-    name = "virtual_device_aarch64_16k_test_mappings_dist",
-    dist_dir = "out/virtual_device_aarch64_16k/dist",
-)
-
 copy_to_dist_dir(
-    name = "virtual_device_aarch64_16k_copy_to_dist_dir",
+    name = "virtual_device_aarch64_16k_dist",
     data = [
         ":virtual_device_aarch64_16k",
         ":virtual_device_aarch64_16k_images",
         ":virtual_device_aarch64_16k_modules_install",
         "//common:kernel_aarch64_16k",
         "//common:kernel_aarch64_16k_images",
+        "//kernel/tests/test_mappings:test_mappings_zip",
     ],
     dist_dir = "out/virtual_device_aarch64_16k/dist",
     flat = True,
     log = "info",
-)
-
-exec(
-    name = "virtual_device_aarch64_16k_dist",
-    data = [
-        ":virtual_device_aarch64_16k_copy_to_dist_dir",
-        ":virtual_device_aarch64_16k_test_mappings_dist",
-    ],
-    script = """
-        $(rootpath :virtual_device_aarch64_16k_test_mappings_dist) $@
-        $(rootpath :virtual_device_aarch64_16k_copy_to_dist_dir) $@
-    """,
 )
 
 kernel_build(
