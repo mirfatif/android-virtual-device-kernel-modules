@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "136830bd_35eb4948",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-04-10T17:32:31Z",
+      "side": 1,
+      "message": "Can we find a more minimal version of this change? Enabling all those device drivers and other components no other GKI kernel ships will eventually be burdensome, we don\u0027t need it for our servers. There are many very old drivers being enabled here for no reason.",
+      "revId": "84bee3478b28e08549dfa3c89e76e7378ca83a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
