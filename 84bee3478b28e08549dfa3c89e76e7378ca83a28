@@ -16,6 +16,24 @@
       "message": "Can we find a more minimal version of this change? Enabling all those device drivers and other components no other GKI kernel ships will eventually be burdensome, we don\u0027t need it for our servers. There are many very old drivers being enabled here for no reason.",
       "revId": "84bee3478b28e08549dfa3c89e76e7378ca83a28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdfdb8ec_13aa0bad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3003954
+      },
+      "writtenOn": "2024-04-12T10:15:53Z",
+      "side": 1,
+      "message": "Turning on those drivers make the kernel more generic I think? I got some comments from Yuchen and Weichung that they tried to install our image to other non-gigabyte servers or something else. And they said it also works great. And would like me to remove \"Gigabyte\" from the project name because we don\u0027t need to be that specific. I think this is also the benefit of turning those drivers on?",
+      "parentUuid": "136830bd_35eb4948",
+      "revId": "84bee3478b28e08549dfa3c89e76e7378ca83a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
