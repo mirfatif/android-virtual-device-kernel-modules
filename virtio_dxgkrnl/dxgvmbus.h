@@ -195,6 +195,8 @@ enum dxgkvmb_commandtype {
 	DXGK_VMBCOMMAND_QUERYRESOURCEINFO	= 64,
 	DXGK_VMBCOMMAND_LOGEVENT		= 65,
 	DXGK_VMBCOMMAND_SETEXISTINGSYSMEMPAGES	= 66,
+	// Custom commands
+	DXGK_VMBCOMMAND_GETALLOCATIONSIZE	= 2000,
 	DXGK_VMBCOMMAND_INVALID
 };
 
@@ -555,6 +557,7 @@ struct dxgkvmb_command_createallocation_allocinfo {
 	u32				flags;
 	u32				priv_drv_data_size;
 	u32				vidpn_source_id;
+	u32				sysmem_pages_rle_size;
 };
 
 struct dxgkvmb_command_createallocation {
@@ -570,6 +573,21 @@ struct dxgkvmb_command_createallocation {
 /* dxgkvmb_command_createallocation_allocinfo alloc_info[alloc_count]; */
 /* u8 private_rutime_data[private_runtime_data_size] */
 /* u8 priv_drv_data[] for each alloc_info */
+/* u64 sysmem_rle_pages[] for each alloc_info */
+};
+
+struct dxgkvmb_command_getallocationsize {
+	struct dxgkvmb_command_vgpu_to_host hdr;
+	struct d3dkmthandle		device;
+	u32				priv_drv_data_list_size;
+/* u32 priv_drv_data_size for each priv_drv_data_list_size */
+/* u8 priv_drv_data[] for each priv_drv_data_list_size */
+};
+
+struct dxgkvmb_command_getallocationsize_return {
+	struct ntstatus			status;
+	u32						size_list_size;
+/* u64 size for each size_list_size */
 };
 
 struct dxgkvmb_command_openresource {
