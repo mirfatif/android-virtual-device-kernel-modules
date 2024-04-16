@@ -1065,6 +1065,8 @@ copy_private_data(struct d3dkmt_createallocation *args,
 		alloc_info->vidpn_source_id = input_alloc->vidpn_source_id;
 		alloc_info->priv_drv_data_size =
 		    input_alloc->priv_drv_data_size;
+		// Init to zero in case it is not sysmem.
+		alloc_info->sysmem_pages_rle_size = 0;
 		if (input_alloc->priv_drv_data_size) {
 			ret = copy_from_user(private_data_dest,
 					     input_alloc->priv_drv_data,
@@ -1079,6 +1081,123 @@ copy_private_data(struct d3dkmt_createallocation *args,
 		}
 		alloc_info++;
 		input_alloc++;
+	}
+
+cleanup:
+	if (ret)
+		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
+	return ret;
+}
+
+static int
+copy_sysmem_pages_rle_data(struct d3dkmt_createallocation *args,
+		  struct dxgkvmb_command_createallocation *command,
+		  struct d3dddi_allocationinfo *input_alloc_info,
+		  struct dxgkvmb_command_getallocationsize_return *allocation_size_result,
+		  struct dxgallocation **dxgalloc,
+		  u32 sysmem_pages_rle_limit,
+		  u32 sysmem_pages_rle_start_offset)
+{
+	struct dxgkvmb_command_createallocation_allocinfo *alloc_info;
+	struct d3dddi_allocationinfo *input_alloc;
+	int ret = 0;
+	int ret1 = 0;
+	int i;
+	u64 *sysmem_pages_rle_dest = (u64 *)((u8 *) &command[1] +
+	    (args->alloc_count *
+	     sizeof(struct dxgkvmb_command_createallocation_allocinfo)) +
+		 sysmem_pages_rle_start_offset);
+	u64 *allocation_sizes = (u64 *) &allocation_size_result[1];
+	// Counts how many RLE entries we've used total (command space limitations).
+	u32 sysmem_pages_rle_used = 0;
+	u64 curr_alloc_size = 0;
+	u32 npages = 0;
+	u32 pages_processed = 0;
+	u64 curr_page = 0;
+	u64 base_page = 0;
+	u32 pages_seen = 0;
+	struct page **page_in;
+
+	alloc_info = (void *)&command[1];
+	input_alloc = input_alloc_info;
+	for (i = 0; i < args->alloc_count; i++) {
+		// Construct RLE encoded sysmem pages.
+		// See host-side driver usage for more in-depth comments.
+		alloc_info->sysmem_pages_rle_size = 0;
+
+		// Only do it if in sysmem mode.
+		if (input_alloc->sysmem) {
+			// Grab next size and increment allocation_sizes forward.
+			curr_alloc_size = *allocation_sizes++;
+			// Ignore empty sizes.
+			if (input_alloc->priv_drv_data_size && curr_alloc_size > 0) {
+				npages = curr_alloc_size >> PAGE_SHIFT;
+				dxgalloc[i]->cpu_address = (void *)input_alloc->sysmem;
+
+				// Grab the pages from user.
+				dxgalloc[i]->pages = vzalloc(npages * sizeof(void *));
+				if (dxgalloc[i]->pages == NULL) {
+					ret = -ENOMEM;
+					goto cleanup;
+				}
+				ret1 = get_user_pages_fast((unsigned long)input_alloc->sysmem, npages,
+					args->flags.read_only == 0, dxgalloc[i]->pages);
+				if (ret1 != npages) {
+					pr_err("get_user_pages_fast failed: %d", ret1);
+					if (ret1 > 0 && ret1 < npages)
+						release_pages(dxgalloc[i]->pages, ret1);
+					vfree(dxgalloc[i]->pages);
+					dxgalloc[i]->pages = NULL;
+					ret = -ENOMEM;
+					goto cleanup;
+				}
+
+				page_in = dxgalloc[i]->pages;
+				curr_page = 0;
+				base_page = 0;
+				pages_seen = 0;
+				for (pages_processed = 0; pages_processed <= npages; ++pages_processed) {
+					curr_page = (u64)page_to_phys(*page_in);
+					// In the first loop there is no base page, set it by hand.
+					if (base_page == 0) {
+						base_page = curr_page;
+					}
+
+					// We hit a new page or we hit the maximum chunk size, or is last page.
+					if ((pages_processed != 0 && curr_page != base_page + pages_seen * PAGE_SIZE) ||
+							pages_seen == PAGE_SIZE ||
+							pages_processed == npages) {
+						if (sysmem_pages_rle_used >= sysmem_pages_rle_limit) {
+							pr_err("Hit RLE limit for sysmem, aborting");
+							ret = -EOVERFLOW;
+							goto cleanup;
+						}
+
+						// Write resulting RLE encoded page range.
+						*sysmem_pages_rle_dest++ = base_page | (pages_seen - 1);
+						// Move base to current.
+						base_page = curr_page;
+						// Reset count
+						pages_seen = 1;
+
+						// Keep track of total used and the list length.
+						++sysmem_pages_rle_used;
+						++alloc_info->sysmem_pages_rle_size;
+					} else {
+						// If this is a continuation, keep counting.
+						++pages_seen;
+					}
+
+					// Move to the next page (unless at last step)
+					if (pages_processed < npages - 1) {
+						++page_in;
+					}
+				}
+			}
+		}
+
+		++alloc_info;
+		++input_alloc;
 	}
 
 cleanup:
@@ -1322,16 +1441,7 @@ create_local_allocations(struct dxgprocess *process,
 		user_alloc = &alloc_info[i];
 		dxgalloc[i]->num_pages =
 		    host_alloc->allocation_size >> PAGE_SHIFT;
-		if (user_alloc->sysmem) {
-			ret = create_existing_sysmem(device, host_alloc,
-						     dxgalloc[i],
-						     args->flags.read_only != 0,
-						     user_alloc->sysmem);
-			if (ret < 0) {
-				pr_err("create_existing_sysmem failed");
-				goto cleanup;
-			}
-		}
+		// Here we used to call create_existing_sysmem, but now it's handled in CreateAllocation.
 		dxgalloc[i]->cached = host_alloc->allocation_flags.cached;
 		if (host_alloc->priv_drv_data_size) {
 			ret = copy_to_user(user_alloc->priv_drv_data,
@@ -1413,6 +1523,129 @@ cleanup:
 	return ret;
 }
 
+static int
+get_allocation_size_private_data_copy(struct d3dkmt_createallocation *args,
+		  struct dxgkvmb_command_getallocationsize *command,
+		  struct d3dddi_allocationinfo *input_alloc_info)
+{
+	struct d3dddi_allocationinfo *input_alloc;
+	int ret = 0;
+	int i;
+	// The list of data sizes.
+	u32 *private_data_size_dest = (u32 *) &command[1];
+	// Write the private driver data after the list of data sizes.
+	u8 *private_data_dest = (u8 *) &command[1] + (args->alloc_count * sizeof(u32));
+
+	input_alloc = input_alloc_info;
+	for (i = 0; i < args->alloc_count; i++) {
+		// Copy the size and move the size pointer forward.
+		*private_data_size_dest++ = input_alloc->priv_drv_data_size;
+		if (input_alloc->priv_drv_data_size) {
+			ret = copy_from_user(private_data_dest,
+					     input_alloc->priv_drv_data,
+					     input_alloc->priv_drv_data_size);
+			if (ret) {
+				pr_err("%s failed to copy alloc data",
+					__func__);
+				ret = -EINVAL;
+				goto cleanup;
+			}
+			private_data_dest += input_alloc->priv_drv_data_size;
+		}
+		input_alloc++;
+	}
+
+cleanup:
+	if (ret)
+		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
+	return ret;
+}
+
+int dxgvmb_send_get_allocation_size(struct dxgprocess *process,
+				  struct dxgdevice *device,
+				  struct d3dkmt_createallocation *args,
+				  struct d3dddi_allocationinfo *alloc_info,
+				  struct dxgkvmb_command_getallocationsize_return *result,
+				  u32 result_size)
+{
+	struct dxgkvmb_command_getallocationsize *command = NULL;
+	int ret = -EINVAL;
+	int i;
+	u32 cmd_size = 0;
+	u32 priv_drv_data_size = 0;
+	struct dxgvmbusmsg msg = {.hdr = NULL};
+
+	// Compute the total private driver size.
+	for (i = 0; i < args->alloc_count; i++) {
+		if (alloc_info[i].priv_drv_data_size >=
+		    DXG_MAX_VM_BUS_PACKET_SIZE) {
+			ret = -EOVERFLOW;
+			goto cleanup;
+		} else {
+			priv_drv_data_size += alloc_info[i].priv_drv_data_size;
+		}
+		if (priv_drv_data_size >= DXG_MAX_VM_BUS_PACKET_SIZE) {
+			ret = -EOVERFLOW;
+			goto cleanup;
+		}
+	}
+
+	cmd_size = sizeof(struct dxgkvmb_command_getallocationsize) +
+		// Each private data size.
+	    args->alloc_count * sizeof(u32) +
+		// The actual private data.
+	    priv_drv_data_size;
+	if (cmd_size > DXG_MAX_VM_BUS_PACKET_SIZE) {
+		ret = -EOVERFLOW;
+		goto cleanup;
+	}
+
+	dev_dbg(dxgglobaldev, "command size, driver_data_size %d %d %ld",
+		    cmd_size, priv_drv_data_size,
+		    sizeof(struct dxgkvmb_command_getallocationsize));
+
+	ret = init_message(&msg, device->adapter, process, cmd_size);
+	if (ret)
+		goto cleanup;
+	command = (void *)msg.msg;
+
+	command_vgpu_to_host_init2(&command->hdr,
+				   DXGK_VMBCOMMAND_GETALLOCATIONSIZE,
+				   process->host_handle);
+	command->device = args->device;
+	command->priv_drv_data_list_size = args->alloc_count;
+
+	ret = get_allocation_size_private_data_copy(args, command, alloc_info);
+	if (ret < 0)
+		goto cleanup;
+
+	ret = dxgvmb_send_sync_msg(msg.channel, msg.hdr, msg.size,
+				   result, result_size);
+	if (ret < 0) {
+		pr_err("send_get_allocation_size failed %x", ret);
+		goto cleanup;
+	}
+
+	// Shouldn't happen, implies host driver issue (not giving number of results we asked for).
+	if (result->size_list_size != args->alloc_count) {
+		pr_err("send_get_allocation_size mismatch, expected: %d, found %d", args->alloc_count,
+			result->size_list_size);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	ret = ntstatus2int(result->status);
+	if (ret < 0)
+		goto cleanup;
+cleanup:
+
+	free_message(&msg, process);
+
+	if (ret)
+		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
+	return ret;
+}
+
 int dxgvmb_send_create_allocation(struct dxgprocess *process,
 				  struct dxgdevice *device,
 				  struct d3dkmt_createallocation *args,
@@ -1426,12 +1659,16 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 {
 	struct dxgkvmb_command_createallocation *command = NULL;
 	struct dxgkvmb_command_createallocation_return *result = NULL;
+	struct dxgkvmb_command_getallocationsize_return *allocation_size_result = NULL;
 	int ret = -EINVAL;
 	int i;
 	u32 result_size = 0;
+	u32 allocation_size_result_size = 0;
 	u32 cmd_size = 0;
 	u32 destroy_buffer_size = 0;
-	u32 priv_drv_data_size;
+	u32 priv_drv_data_size = 0;
+	u32 sysmem_pages_rle_limit = 0;
+	bool sysmem = false;
 	struct dxgvmbusmsg msg = {.hdr = NULL};
 
 	if (args->private_runtime_data_size >= DXG_MAX_VM_BUS_PACKET_SIZE ||
@@ -1448,8 +1685,6 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 	    args->alloc_count * sizeof(struct d3dkmthandle);
 
 	/* Compute the total private driver size */
-
-	priv_drv_data_size = 0;
 
 	for (i = 0; i < args->alloc_count; i++) {
 		if (alloc_info[i].priv_drv_data_size >=
@@ -1482,13 +1717,42 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 	/* Private drv data for the command includes the global private data */
 	priv_drv_data_size += args->priv_drv_data_size;
 
+	allocation_size_result_size = sizeof(struct dxgkvmb_command_getallocationsize_return) +
+		// Each returned size.
+	    args->alloc_count * sizeof(u64);
+	allocation_size_result = vzalloc(allocation_size_result_size);
+	if (allocation_size_result == NULL) {
+		ret = -ENOMEM;
+		goto cleanup;
+	}
+
+	// Seems this is how they check for sysmem.
+	sysmem = alloc_info[0].sysmem;
+
+	// Get the allocation sizes ahead of time, only if using sysmem.
+	if (sysmem) {
+		ret = dxgvmb_send_get_allocation_size(
+			process,device, args, alloc_info, allocation_size_result, allocation_size_result_size);
+		if (ret < 0)
+			goto cleanup;
+	}
+
 	cmd_size = sizeof(struct dxgkvmb_command_createallocation) +
 	    args->alloc_count *
 	    sizeof(struct dxgkvmb_command_createallocation_allocinfo) +
 	    args->private_runtime_data_size + priv_drv_data_size;
+
 	if (cmd_size > DXG_MAX_VM_BUS_PACKET_SIZE) {
 		ret = -EOVERFLOW;
 		goto cleanup;
+	}
+
+	// Since RLE size is hard to predict, we max out the cmd size and store a limit.
+	// The alternative is calculating RLE here and storing it (or calculating it twice).
+	if (sysmem) {
+		// How many bytes are left, and each sysmem RLE entry is a u64.
+		sysmem_pages_rle_limit = (DXG_MAX_VM_BUS_PACKET_SIZE - cmd_size) / sizeof(u64);
+		cmd_size = DXG_MAX_VM_BUS_PACKET_SIZE;
 	}
 
 	dev_dbg(dxgglobaldev, "command size, driver_data_size %d %d %ld %ld",
@@ -1518,6 +1782,15 @@ int dxgvmb_send_create_allocation(struct dxgprocess *process,
 	if (ret < 0)
 		goto cleanup;
 
+	if (sysmem) {
+		ret = copy_sysmem_pages_rle_data(args, command, alloc_info, allocation_size_result,
+			dxgalloc, sysmem_pages_rle_limit,
+			// When the RLE data starts (after all the private data)
+			args->private_runtime_data_size + priv_drv_data_size);
+		if (ret < 0)
+			goto cleanup;
+	}
+
 	ret = dxgvmb_send_sync_msg(msg.channel, msg.hdr, msg.size,
 				   result, result_size);
 	if (ret < 0) {
@@ -1536,6 +1809,10 @@ cleanup:
 
 	if (result)
 		vfree(result);
+
+	if (allocation_size_result)
+		vfree(allocation_size_result);
+
 	free_message(&msg, process);
 
 	if (ret)
