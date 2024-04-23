@@ -118,7 +118,6 @@ kernel_build(
     module_outs = _virt_common_modules + [
         # keep sorted
         "fs/9p/9p.ko",
-        "fs/squashfs/squashfs.ko",
         "net/9p/9pnet.ko",
         "net/9p/9pnet_virtio.ko",
         "test_meminit.ko",
