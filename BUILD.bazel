@@ -19,6 +19,7 @@ load("//build/bazel_common_rules/test_mappings:test_mappings.bzl", "test_mapping
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "kernel_build",
+    "kernel_build_abi",
     "kernel_images",
     "kernel_module",
     "kernel_modules_install",
@@ -50,38 +51,12 @@ filegroup(
 
 _virt_common_modules = [
     # keep sorted
-    "btintel.ko",
-    "btrtl.ko",
-    "btusb.ko",
-    "cfg80211.ko",
-    "dummy-cpufreq.ko",
-    "dummy_hcd.ko",
-    "e1000.ko",
     "failover.ko",
+    "fs/9p/9p.ko",
     "goldfish_battery.ko",
-    "gs_usb.ko",
-    "hci_vhci.ko",
-    "mac80211.ko",
-    "mac80211_hwsim.ko",
-    "mt76.ko",
-    "mt76-usb.ko",
-    "mt76x0-common.ko",
-    "mt76x02-lib.ko",
-    "mt76x02-usb.ko",
-    "mt76x0u.ko",
-    "mt76x2-common.ko",
-    "mt76x2u.ko",
     "nd_virtio.ko",
+    "net/9p/9pnet_virtio.ko",
     "net_failover.ko",
-    "pulse8-cec.ko",
-    "rtc-test.ko",
-    "slcan.ko",
-    "system_heap.ko",
-    "usbip-core.ko",
-    "vcan.ko",
-    "vhci-hcd.ko",
-    "virt_wifi.ko",
-    "virtio-rng.ko",
     "virtio_balloon.ko",
     "virtio_blk.ko",
     "virtio_console.ko",
@@ -92,10 +67,8 @@ _virt_common_modules = [
     "virtio_pci_modern_dev.ko",
     "virtio_pmem.ko",
     "virtio_snd.ko",
-    "vkms.ko",
+    "virtio-rng.ko",
     "vmw_vsock_virtio_transport.ko",
-    "zram.ko",
-    "zsmalloc.ko",
 ]
 
 _virt_common_ext_modules = [
@@ -104,9 +77,6 @@ _virt_common_ext_modules = [
     "drivers/staging/dev-sw-sync/sw_sync.ko",
     "drivers/virtio/virtio_wl.ko",
     "fs/fuse/fuse_vendor.ko",
-    "goldfish_drivers/goldfish_address_space.ko",
-    "goldfish_drivers/goldfish_pipe.ko",
-    "goldfish_drivers/goldfish_sync.ko",
 ]
 
 kernel_build(
@@ -117,9 +87,6 @@ kernel_build(
     build_config = "build.config.virtual_device.x86_64",
     module_outs = _virt_common_modules + [
         # keep sorted
-        "fs/9p/9p.ko",
-        "net/9p/9pnet.ko",
-        "net/9p/9pnet_virtio.ko",
         "test_meminit.ko",
         "test_stackinit.ko",
     ],
@@ -196,25 +163,20 @@ filegroup(
     ],
 )
 
-kernel_build(
+kernel_build_abi(
     name = "virtual_device_aarch64",
     srcs = [":virtual_device_aarch64_common_sources"],
     outs = [
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64",
+    kmi_symbol_list = "//common:android/abi_gki_aarch64_arcvm",
     build_config = "build.config.virtual_device.aarch64",
+    kernel_modules = [
+        ":virtual_device_aarch64_external_modules",
+    ],
     module_outs = _virt_common_modules + [
         # keep sorted
-        "ambakmi.ko",
-        "armmmci.ko",
-        "clk-vexpress-osc.ko",
-        "open-dice.ko",
-        "pl111_drm.ko",
-        "psmouse.ko",
-        "vexpress-config.ko",
-        "vexpress-sysreg.ko",
-        "virtio_mmio.ko",
     ],
 )
 
