@@ -29,6 +29,8 @@ def kleaf_test(
         arch = "x86_64",
         srcs = [
             "//common:kernel_x86_64_sources",
+        ],
+        defconfig_fragments = [
             "kleaf_test.fragment",
         ],
         kconfig_ext = "Kconfig.ext",

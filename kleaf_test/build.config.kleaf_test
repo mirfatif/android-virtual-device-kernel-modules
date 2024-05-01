@@ -3,9 +3,3 @@ KERNEL_DIR=common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
-
-DEFCONFIG=kleaf_tests_gki_defconfig
-PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && KCONFIG_CONFIG=\${OUT_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/kleaf_test/kleaf_test.fragment"
-POST_DEFCONFIG_CMDS=""
-
-FILES=""
