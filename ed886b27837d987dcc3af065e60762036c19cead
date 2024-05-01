@@ -34,6 +34,24 @@
       "parentUuid": "62ee1a9f_0d42117c",
       "revId": "ed886b27837d987dcc3af065e60762036c19cead",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb0342e_0988a453",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1123518
+      },
+      "writtenOn": "2024-05-01T22:29:12Z",
+      "side": 1,
+      "message": "This issue is only showing up on andnroid-mainline. Seems the conflict only exists on android-mainline. In the local environment it even failed to build without --debug. I remove kfence kunit test to get it going.",
+      "parentUuid": "bdad089d_9c352cd4",
+      "revId": "ed886b27837d987dcc3af065e60762036c19cead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
