@@ -16,6 +16,24 @@
       "message": "Error was:\n\n```\n    CONFIG_KFENCE_KUNIT_TEST: actual \u0027\u0027, expected \u0027CONFIG_KFENCE_KUNIT_TEST\u003dm\u0027 from common/tools/testing/kunit/configs/android/kunit_defconfig.\n```\n\nDoes it conflict with --debug?",
       "revId": "ed886b27837d987dcc3af065e60762036c19cead",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdad089d_9c352cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-01T22:14:45Z",
+      "side": 1,
+      "message": "You can optionally take it out if `--debug` is set with a `select()` statement, if that helps with the build error",
+      "parentUuid": "62ee1a9f_0d42117c",
+      "revId": "ed886b27837d987dcc3af065e60762036c19cead",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
