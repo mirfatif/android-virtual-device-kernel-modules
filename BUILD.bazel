@@ -313,7 +313,11 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
         "//common:test_mappings_zip",
+<<<<<<< HEAD   (4dfe29 ANDROID: Remove ACK's support for riscv64)
         "//common:tests_zip_x86_64",
+=======
+        "//common:test_zip_x86_64",
+>>>>>>> CHANGE (912dcf ANDROID: build tests.zip with kernel_virt_x86_64 & kernel_vi)
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
@@ -544,7 +548,11 @@ copy_to_dist_dir(
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
         "//common:test_mappings_zip",
+<<<<<<< HEAD   (4dfe29 ANDROID: Remove ACK's support for riscv64)
         "//common:tests_zip_arm64",
+=======
+        "//common:test_zip_arm64",
+>>>>>>> CHANGE (912dcf ANDROID: build tests.zip with kernel_virt_x86_64 & kernel_vi)
     ],
     dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
