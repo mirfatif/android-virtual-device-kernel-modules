@@ -105,14 +105,6 @@ filegroup(
 )
 
 filegroup(
-    name = "virtual_device_riscv64_common_sources",
-    srcs = [
-        ":common_sources",
-        "//common:kernel_riscv64_sources",
-    ],
-)
-
-filegroup(
     name = "virtual_device_x86_64_common_sources",
     srcs = [
         ":common_sources",
@@ -144,16 +136,6 @@ ddk_headers(
         # do not sort
         ":common_headers",
         "//common:all_headers_arm",
-    ],
-)
-
-ddk_headers(
-    name = "common_headers_riscv64",
-    hdrs = [
-        # uapi/ has highest priority
-        # do not sort
-        ":common_headers",
-        "//common:all_headers_riscv64",
     ],
 )
 
@@ -226,12 +208,6 @@ _VIRT_AARCH64_MODULES = [
     "vexpress-config.ko",
     "vexpress-sysreg.ko",
     "virtio_mmio.ko",
-    "virtio_pmem.ko",
-]
-
-_VIRT_RISCV64_MODULES = [
-    # keep sorted
-    "nd_virtio.ko",
     "virtio_pmem.ko",
 ]
 
@@ -336,6 +312,7 @@ copy_to_dist_dir(
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
         "//common:test_mappings_zip",
+        "//common:tests_zip_x86_64",
     ],
     dist_dir = "out/virtual_device_x86_64/dist",
     flat = True,
@@ -558,6 +535,7 @@ copy_to_dist_dir(
         "//common:kernel_aarch64",
         "//common:kernel_aarch64_additional_artifacts",
         "//common:test_mappings_zip",
+        "//common:tests_zip_arm64",
     ],
     dist_dir = "out/virtual_device_aarch64/dist",
     flat = True,
@@ -659,88 +637,6 @@ copy_to_dist_dir(
         "//common:test_mappings_zip",
     ],
     dist_dir = "out/virtual_device_aarch64_16k/dist",
-    flat = True,
-)
-
-kernel_build(
-    name = "virtual_device_riscv64",
-    srcs = [":virtual_device_riscv64_common_sources"],
-    outs = [],
-    arch = "riscv64",
-    base_kernel = "//common:kernel_riscv64",
-    build_config = "build.config.virtual_device.riscv64",
-    make_goals = [
-        "modules",
-    ],
-    module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
-    strip_modules = True,
-)
-
-kernel_compile_commands(
-    name = "virtual_device_riscv64_compile_commands",
-    kernel_build = ":virtual_device_riscv64",
-)
-
-ddk_module(
-    name = "riscv64/goldfish_drivers/goldfish_address_space",
-    srcs = [":goldfish_address_space_sources"],
-    out = "goldfish_drivers/goldfish_address_space.ko",
-    kernel_build = ":virtual_device_riscv64",
-    deps = [":common_headers_riscv64"],
-)
-
-ddk_module(
-    name = "riscv64/goldfish_drivers/goldfish_pipe",
-    srcs = [":goldfish_pipe_sources"],
-    out = "goldfish_drivers/goldfish_pipe.ko",
-    kernel_build = ":virtual_device_riscv64",
-    deps = [":common_headers_riscv64"],
-)
-
-ddk_module(
-    name = "riscv64/goldfish_drivers/goldfish_sync",
-    srcs = [":goldfish_sync_sources"],
-    out = "goldfish_drivers/goldfish_sync.ko",
-    kernel_build = ":virtual_device_riscv64",
-    deps = [":common_headers_riscv64"],
-)
-
-kernel_module_group(
-    name = "virtual_device_riscv64_external_modules",
-    srcs = [
-        ":riscv64/goldfish_drivers/goldfish_address_space",
-        ":riscv64/goldfish_drivers/goldfish_pipe",
-        ":riscv64/goldfish_drivers/goldfish_sync",
-    ],
-)
-
-kernel_modules_install(
-    name = "virtual_device_riscv64_modules_install",
-    kernel_build = ":virtual_device_riscv64",
-    kernel_modules = [
-        ":virtual_device_riscv64_external_modules",
-    ],
-)
-
-kernel_images(
-    name = "virtual_device_riscv64_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_riscv64",
-    kernel_modules_install = ":virtual_device_riscv64_modules_install",
-    modules_blocklist = "modules.blocklist",
-    modules_options = "modules.options",
-)
-
-copy_to_dist_dir(
-    name = "virtual_device_riscv64_dist",
-    data = [
-        ":virtual_device_riscv64",
-        ":virtual_device_riscv64_images",
-        ":virtual_device_riscv64_modules_install",
-        "//common:kernel_riscv64",
-        "//common:kernel_riscv64_images",
-    ],
-    dist_dir = "out/virtual_device_riscv64/dist",
     flat = True,
 )
 
