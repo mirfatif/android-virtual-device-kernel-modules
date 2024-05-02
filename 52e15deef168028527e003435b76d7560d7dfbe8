@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e2a91c_998326c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-02T09:55:11Z",
+      "side": 1,
+      "message": "I amended the automerger configuration. I don\u0027t think you need this still once it rolls out.",
+      "revId": "52e15deef168028527e003435b76d7560d7dfbe8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
