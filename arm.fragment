@@ -20,3 +20,9 @@ CONFIG_VFPv3=y
 # b/271887158
 # CONFIG_MACH_SUN8I is not set
 # CONFIG_MACH_SUN9I is not set
+
+# Following options are inherited from the gki_deconfig, however we don't
+# really need them for the arm32 virtual device.
+CONFIG_OPEN_DICE=n
+CONFIG_VCPU_STALL_DETECTOR=n
+CONFIG_HW_RANDOM_CCTRNG=n
