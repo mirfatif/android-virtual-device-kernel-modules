@@ -177,6 +177,7 @@ _VIRT_COMMON_MODULES = [
     "rtc-test.ko",
     "system_heap.ko",
     "usbip-core.ko",
+    "vcpu_stall_detector.ko",
     "vhci-hcd.ko",
     "virt_wifi.ko",
     "virtio-gpu.ko",
