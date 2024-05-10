@@ -87,6 +87,8 @@ int dxgk_create_sync_file(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 	spin_lock_init(&pt->lock);
+	pt->device = args.device;
+	INIT_LIST_HEAD(&pt->sync_object_list);
 	pt->fence_value = args.fence_value;
 	pt->context = dma_fence_context_alloc(1);
 	pt->hdr.event_id = dxgglobal_new_host_event_id();

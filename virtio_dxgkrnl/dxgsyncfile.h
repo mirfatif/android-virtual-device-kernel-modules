@@ -18,9 +18,22 @@
 
 int dxgk_create_sync_file(struct dxgprocess *process, void *__user inargs);
 
+struct dxgsyncobject {
+#ifdef __KERNEL__
+	struct d3dkmthandle	object;
+	__u64			    fence_value;
+#else
+	__u64			object;
+	__u64			fence_value;
+#endif
+};
+
 struct dxgsyncpoint {
+	struct d3dkmthandle device;
 	struct dxghostevent	hdr;
 	struct dma_fence	base;
+	/* List of dxgsyncobject */
+    struct list_head sync_object_list;
 	u64			fence_value;
 	u64			context;
 	spinlock_t		lock;
