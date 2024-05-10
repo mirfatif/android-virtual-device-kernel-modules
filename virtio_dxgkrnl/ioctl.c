@@ -3285,6 +3285,66 @@ cleanup:
 	return ret;
 }
 
+static void dxg_sync_cb(struct dma_fence *fence, struct dma_fence_cb *cb)
+{
+	// struct dxg_sync_cb_t *dcb = (struct dxg_sync_cb_t *)cb;
+	// loop over objects & call SignalSynchronizationObjectFromCPU
+}
+
+static int
+dxgk_signal_sync_object_from_sync_file(struct dxgprocess *process, void *__user inargs)
+{
+	struct d3dkmt_waitforsynchronizationobjectfromsyncfile args;
+
+	struct dma_fence *fence;
+    struct dxgsyncpoint *sync_point;
+    struct dxg_sync_cb_t *sync_cb;
+	int ret;
+
+	ret = copy_from_user(&args, inargs, sizeof(args));
+	if (ret) {
+		pr_err("%s failed to copy input args", __func__);
+		return -EINVAL;
+	}
+	if (args.object_count == 0 ||
+	    args.object_count > D3DDDI_MAX_OBJECT_SIGNALED) {
+		dev_dbg(dxgglobaldev, "Too many objects: %d",
+			args.object_count);
+		return -EINVAL;
+	}
+
+	if (args.fd == -1) {
+		dev_dbg(dxgglobaldev, "Invalid fd");
+		return -EINVAL;
+	}
+
+	// get sync file from fd
+	fence = sync_file_get_fence(args.fd);
+	sync_point = container_of(fence, struct dxgsyncpoint, base);
+    sync_cb = kzalloc(sizeof(*sync_cb), GFP_KERNEL);
+	if (!sync_cb) {
+		return -ENOMEM;
+	}
+
+	// set sync objects and fence values.
+	sync_cb->device = args.device;
+	sync_cb->objects = args.objects;
+	sync_cb->fence_values = args.fence_values;
+
+	// add to list of callbacks.
+	mutex_lock(&sync_point->sync_cb_mutex);
+	list_add_tail(&sync_cb->list, &sync_point->sync_cb_list);
+	mutex_unlock(&sync_point->sync_cb_mutex);
+	// add dma fence callback
+	ret = dma_fence_add_callback(&sync_point->base, &sync_cb->cb, dxg_sync_cb);
+	if (ret == -ENOENT) {
+		// fence already signaled
+		dxg_sync_cb(fence, (struct dma_fence_cb*)sync_cb);
+		ret = 0;
+	}
+	return ret;
+}
+
 static int
 dxgk_signal_sync_object_gpu(struct dxgprocess *process, void *__user inargs)
 {
@@ -5616,4 +5676,6 @@ void init_ioctls(void)
 		  LX_DXCREATESYNCFILE);
 	SET_IOCTL(/*0x46 */ dxgk_presentvirtual,
 		  LX_DXPRESENTVIRTUAL);
+    SET_IOCTL(/*0x47 */ dxgk_signal_sync_object_from_sync_file,
+		  LX_DXSIGNALSYNCHRONIZATIONOBJECTFROMSYNCFILE);
 }
