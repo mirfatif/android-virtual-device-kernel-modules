@@ -832,7 +832,8 @@ int dxgvmb_send_signal_sync_object(struct dxgprocess *process,
 				   struct d3dkmthandle *contexts,
 				   u32 fence_count, u64 *fences,
 				   struct eventfd_ctx *cpu_event,
-				   struct d3dkmthandle device);
+				   struct d3dkmthandle device,
+				   bool user_address);
 int dxgvmb_send_wait_sync_object_gpu(struct dxgprocess *process,
 				     struct dxgadapter *adapter,
 				     struct d3dkmthandle context,
