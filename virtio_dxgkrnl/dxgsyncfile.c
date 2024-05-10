@@ -125,7 +125,6 @@ int dxgk_create_sync_file(struct dxgprocess *process, void *__user inargs)
 	}
 
 	fd_install(fd, sync_file->file);
-
 cleanup:
 	if (adapter)
 		dxgadapter_release_lock_shared(adapter);
