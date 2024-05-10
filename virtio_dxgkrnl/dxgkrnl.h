@@ -339,7 +339,7 @@ void dxgglobal_signal_host_event(u64 event_id);
 struct dxghostevent *dxgglobal_get_host_event(u64 event_id);
 int dxgglobal_acquire_channel_lock(void);
 void dxgglobal_release_channel_lock(void);
-
+struct dxgprocess *dxgglobal_get_process_with_tgid(int tgid);
 /*
  * Describes adapter information for each process
  */
@@ -832,7 +832,8 @@ int dxgvmb_send_signal_sync_object(struct dxgprocess *process,
 				   struct d3dkmthandle *contexts,
 				   u32 fence_count, u64 *fences,
 				   struct eventfd_ctx *cpu_event,
-				   struct d3dkmthandle device);
+				   struct d3dkmthandle device,
+				   bool user_address);
 int dxgvmb_send_wait_sync_object_gpu(struct dxgprocess *process,
 				     struct dxgadapter *adapter,
 				     struct d3dkmthandle context,
