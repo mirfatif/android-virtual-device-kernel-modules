@@ -2429,7 +2429,8 @@ int dxgvmb_send_signal_sync_object(struct dxgprocess *process,
 				   u32 fence_count,
 				   u64 __user *fences,
 				   struct eventfd_ctx *cpu_event_handle,
-				   struct d3dkmthandle device)
+				   struct d3dkmthandle device,
+				   bool user_address)
 {
 	int ret;
 	struct dxgkvmb_command_signalsyncobject *command;
@@ -2462,12 +2463,16 @@ int dxgvmb_send_signal_sync_object(struct dxgprocess *process,
 	command->object_count = object_count;
 	command->context_count = context_count;
 	current_pos = (u8 *) &command[1];
-	ret = copy_from_user(current_pos, objects, object_size);
-	if (ret) {
-		pr_err("Failed to read objects %p %d",
-			objects, object_size);
-		ret = -EINVAL;
-		goto cleanup;
+	if (user_address) {
+		ret = copy_from_user(current_pos, objects, object_size);
+		if (ret) {
+			pr_err("Failed to read objects %p %d",
+				objects, object_size);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	} else {
+		memcpy(current_pos, objects, object_size);
 	}
 	current_pos += object_size;
 	if (context.v) {
@@ -2476,22 +2481,30 @@ int dxgvmb_send_signal_sync_object(struct dxgprocess *process,
 		current_pos += sizeof(struct d3dkmthandle);
 	}
 	if (context_size) {
-		ret = copy_from_user(current_pos, contexts, context_size);
-		if (ret) {
-			pr_err("Failed to read contexts %p %d",
-				contexts, context_size);
-			ret = -EINVAL;
-			goto cleanup;
+		if (user_address) {
+			ret = copy_from_user(current_pos, contexts, context_size);
+			if (ret) {
+				pr_err("Failed to read contexts %p %d",
+					contexts, context_size);
+				ret = -EINVAL;
+				goto cleanup;
+		    }
+		} else {
+			memcpy(current_pos, contexts, context_size);
 		}
 		current_pos += context_size;
 	}
 	if (fence_size) {
-		ret = copy_from_user(current_pos, fences, fence_size);
-		if (ret) {
-			pr_err("Failed to read fences %p %d",
-				fences, fence_size);
-			ret = -EINVAL;
-			goto cleanup;
+		if (user_address) {
+			ret = copy_from_user(current_pos, fences, fence_size);
+			if (ret) {
+				pr_err("Failed to read fences %p %d",
+					fences, fence_size);
+				ret = -EINVAL;
+				goto cleanup;
+			}
+		} else {
+			memcpy(current_pos, fences, fence_size);
 		}
 	}
 
