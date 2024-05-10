@@ -1181,6 +1181,19 @@ struct d3dkmt_signalsynchronizationobjectfromgpu2 {
 	};
 };
 
+struct d3dkmt_waitforsynchronizationobjectfromsyncfile {
+	struct d3dkmthandle	device;
+	__u64			fd;
+	__u32			object_count;
+#ifdef __KERNEL__
+	struct d3dkmthandle	*objects;
+	__u64			*fence_values;
+#else
+	__u64			objects;
+	__u64			fence_values;
+#endif
+};
+
 struct d3dkmt_destroysynchronizationobject {
 	struct d3dkmthandle	sync_object;
 };
@@ -1966,6 +1979,8 @@ struct d3dkmt_presentvirtual {
 	_IOWR(0x47, 0x45, struct d3dkmt_createsyncfile)
 #define LX_DXPRESENTVIRTUAL \
 	_IOWR(0x47, 0x46, struct d3dkmt_presentvirtual)
+#define LX_DXSIGNALSYNCHRONIZATIONOBJECTFROMSYNCFILE \
+	_IOWR(0x47, 0x47, struct d3dkmt_waitforsynchronizationobjectfromsyncfile)
 
 #define LX_IO_MAX 0x46
 
