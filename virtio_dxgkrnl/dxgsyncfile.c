@@ -91,6 +91,8 @@ int dxgk_create_sync_file(struct dxgprocess *process, void *__user inargs)
 	pt->context = dma_fence_context_alloc(1);
 	pt->hdr.event_id = dxgglobal_new_host_event_id();
 	pt->hdr.event_type = dxghostevent_dma_fence;
+	// initialize the list of sync callbacks.
+	INIT_LIST_HEAD(&pt->sync_cb_list);
 	dxgglobal_add_host_event(&pt->hdr);
 
 	dma_fence_init(&pt->base, &dxgdmafence_ops, &pt->lock,
@@ -125,7 +127,6 @@ int dxgk_create_sync_file(struct dxgprocess *process, void *__user inargs)
 	}
 
 	fd_install(fd, sync_file->file);
-
 cleanup:
 	if (adapter)
 		dxgadapter_release_lock_shared(adapter);
@@ -165,6 +166,7 @@ static void dxgdmafence_release(struct dma_fence *fence)
 		if (syncpoint->hdr.event_id)
 			dxgglobal_get_host_event(syncpoint->hdr.event_id);
 		kfree(syncpoint);
+		// TODO: free callback list
 	}
 }
 
