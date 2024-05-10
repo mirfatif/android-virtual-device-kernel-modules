@@ -2491,7 +2491,7 @@ dxgk_submit_signal_to_hwqueue(struct dxgprocess *process, void *__user inargs)
 					     args.hwqueue_count, args.hwqueues,
 					     args.object_count,
 					     args.fence_values, NULL,
-					     zerohandle);
+					     zerohandle, true);
 
 cleanup:
 
@@ -3197,7 +3197,7 @@ dxgk_signal_sync_object(struct dxgprocess *process, void *__user inargs)
 					     args.context_count,
 					     in_args->contexts, fence_count,
 					     NULL, (void *)host_event_id,
-					     zerohandle);
+					     zerohandle, true);
 
 	/*
 	 * When the send operation succeeds, the host event will be destroyed
@@ -3272,7 +3272,7 @@ dxgk_signal_sync_object_cpu(struct dxgprocess *process, void *__user inargs)
 					     args.object_count, args.objects, 0,
 					     NULL, args.object_count,
 					     args.fence_values, NULL,
-					     args.device);
+					     args.device, true);
 
 cleanup:
 
@@ -3282,6 +3282,188 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
+	return ret;
+}
+
+static void dxg_sync_cb(struct dma_fence *fence, struct dma_fence_cb *cb)
+{
+	// Even if the process dies, sync fd is guaranteed to be signaled
+	// we can safely assume this callback will be called.
+
+	struct dxg_sync_cb_t *sync_cb = (struct dxg_sync_cb_t *)cb;
+	struct dxgadapter *adapter = NULL;
+	struct dxgdevice *device = NULL;
+	struct dxgprocess *process = NULL;
+	struct d3dddicb_signalflags flags = { };
+	int ret;
+
+	if (sync_cb == NULL) {
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// get process from tgid
+	process = dxgglobal_get_process_with_tgid(sync_cb->process_tgid);
+	if (process == NULL) {
+		ret = -EINVAL;
+		goto cleanup;
+	}
+	// get dxgdevice
+	device = dxgprocess_device_by_handle(process, sync_cb->device_handle);
+	if (device == NULL) {
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// get adapter
+	adapter = device->adapter;
+	ret = dxgadapter_acquire_lock_shared(adapter);
+	if (ret < 0) {
+		adapter = NULL;
+		goto cleanup;
+	}
+
+	if (sync_cb->object_count > 0) {
+		ret = dxgvmb_send_signal_sync_object(process, adapter,
+						     flags, 0, zerohandle,
+						     sync_cb->object_count, sync_cb->objects, 0,
+						     NULL, sync_cb->object_count,
+						     sync_cb->fence_values, NULL,
+						     sync_cb->device_handle, false);
+	}
+cleanup:
+
+	if (adapter)
+		dxgadapter_release_lock_shared(adapter);
+	if (device)
+		kref_put(&device->device_kref, dxgdevice_release);
+
+	if (sync_cb) {
+		if (sync_cb->objects)
+			kfree(sync_cb->objects);
+		if (sync_cb->fence_values) {
+			kfree(sync_cb->fence_values);
+		}
+		kfree(sync_cb);
+	}
+	dev_dbg(dxgglobaldev, "dxg_sync_cb:%s %s %d", errorstr(ret), __func__, ret);
+}
+
+static int
+dxgk_signal_sync_object_from_sync_file(struct dxgprocess *process, void *__user inargs)
+{
+	struct d3dkmt_waitforsynchronizationobjectfromsyncfile args;
+
+	struct dma_fence *fence;
+	struct dxg_sync_cb_t *sync_cb = NULL;
+	struct dxgdevice *device = NULL;
+	struct dxgadapter *adapter = NULL;
+	struct d3dddicb_signalflags flags = { };
+	int ret;
+
+	ret = copy_from_user(&args, inargs, sizeof(args));
+	if (ret) {
+		pr_err("%s failed to copy input args", __func__);
+		return -EINVAL;
+	}
+	if (args.object_count == 0 ||
+	    args.object_count > D3DDDI_MAX_OBJECT_SIGNALED) {
+		dev_dbg(dxgglobaldev, "Too few/many objects: %d",
+			args.object_count);
+		return -EINVAL;
+	}
+
+	if (args.fd == -1) {
+		dev_dbg(dxgglobaldev, "Invalid fd");
+		return -EINVAL;
+	}
+
+        device = dxgprocess_device_by_handle(process, args.device);
+        if (device == NULL) {
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	adapter = device->adapter;
+	ret = dxgadapter_acquire_lock_shared(adapter);
+	if (ret < 0) {
+		adapter = NULL;
+		goto cleanup;
+	}
+
+	// get fence
+	fence = sync_file_get_fence(args.fd);
+
+	sync_cb = kzalloc(sizeof(struct dxg_sync_cb_t), GFP_KERNEL);
+	if (!sync_cb) {
+		ret = -ENOMEM;
+		goto cleanup;
+	}
+
+	// set device, process pid
+	sync_cb->device_handle = args.device;
+	sync_cb->process_tgid = process->tgid;
+
+	// copy sync objects and fence values.
+	sync_cb->object_count = args.object_count;
+	sync_cb->objects = kzalloc(sizeof(struct d3dkmthandle) * args.object_count, GFP_KERNEL);
+	sync_cb->fence_values = kzalloc(sizeof(u64) * args.object_count, GFP_KERNEL);
+
+	if (!sync_cb->objects || !sync_cb->fence_values) {
+		pr_err("%s failed to allocate objects/fence_values", __func__);
+		// set object count to 0.
+		sync_cb->object_count = 0;
+		ret = -ENOMEM;
+		goto cleanup;
+	}
+
+	// copy objects/fence_values
+	ret = copy_from_user(sync_cb->objects, args.objects, args.object_count * sizeof(struct d3dkmthandle));
+	if (ret) {
+		pr_err("%s failed to copy objects", __func__);
+		// set object count to 0.
+		sync_cb->object_count = 0;
+		goto cleanup;
+	}
+	ret = copy_from_user(sync_cb->fence_values, args.fence_values, args.object_count * sizeof(u64));
+	if (ret) {
+		pr_err("%s failed to copy fence values", __func__);
+		// set object count to 0.
+		sync_cb->object_count = 0;
+		goto cleanup;
+	}
+
+	// add callback
+	ret = dma_fence_add_callback(fence, &sync_cb->cb, dxg_sync_cb);
+	// check if fence already signaled.
+	if (ret == -ENOENT) {
+		ret = dxgvmb_send_signal_sync_object(process, adapter,
+					     flags, 0, zerohandle,
+					     args.object_count, args.objects, 0,
+					     NULL, args.object_count,
+					     args.fence_values, NULL,
+					     args.device, true);
+		// set object count to 0 to free up resources in cleanup.
+		sync_cb->object_count = 0;
+	}
+
+cleanup:
+	if (adapter)
+		dxgadapter_release_lock_shared(adapter);
+	if (device)
+		kref_put(&device->device_kref, dxgdevice_release);
+	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
+	// cleanup sync_cb if necessary.
+	// object_count 0 indicates sync_cb is not needed
+	if (sync_cb && sync_cb->object_count == 0) {
+		if (sync_cb->objects)
+			kfree(sync_cb->objects);
+		if (sync_cb->fence_values) {
+			kfree(sync_cb->fence_values);
+		}
+		kfree(sync_cb);
+	}
+
 	return ret;
 }
 
@@ -3331,7 +3513,7 @@ dxgk_signal_sync_object_gpu(struct dxgprocess *process, void *__user inargs)
 					     &user_args->context,
 					     args.object_count,
 					     args.monitored_fence_values, NULL,
-					     zerohandle);
+					     zerohandle, true);
 
 cleanup:
 
@@ -3439,7 +3621,7 @@ dxgk_signal_sync_object_gpu2(struct dxgprocess *process, void *__user inargs)
 					     args.object_count, args.objects,
 					     args.context_count, args.contexts,
 					     fence_count, fences,
-					     (void *)host_event_id, zerohandle);
+					     (void *)host_event_id, zerohandle, true);
 
 cleanup:
 
@@ -5616,4 +5798,6 @@ void init_ioctls(void)
 		  LX_DXCREATESYNCFILE);
 	SET_IOCTL(/*0x46 */ dxgk_presentvirtual,
 		  LX_DXPRESENTVIRTUAL);
+	SET_IOCTL(/*0x47 */ dxgk_signal_sync_object_from_sync_file,
+		  LX_DXSIGNALSYNCHRONIZATIONOBJECTFROMSYNCFILE);
 }
