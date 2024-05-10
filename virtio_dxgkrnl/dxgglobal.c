@@ -344,6 +344,31 @@ static struct dxgprocess *dxgglobal_get_current_process(void)
 	return process;
 }
 
+struct dxgprocess *dxgglobal_get_process_with_tgid(int tgid)
+{
+	/*
+	 * Find the DXG process for the given tgid.
+	 */
+	struct dxgprocess *process = NULL;
+	struct dxgprocess *entry = NULL;
+
+	mutex_lock(&dxgglobal->plistmutex);
+	list_for_each_entry(entry, &dxgglobal->plisthead, plistentry) {
+		if (entry->process->tgid == tgid) {
+			if (kref_get_unless_zero(&entry->process_kref)) {
+				process = entry;
+				dev_dbg(dxgglobaldev, "found dxgprocess");
+			} else {
+				dev_dbg(dxgglobaldev, "process is destroyed");
+			}
+			break;
+		}
+	}
+	mutex_unlock(&dxgglobal->plistmutex);
+
+	return process;
+}
+
 static int dxgk_open(struct inode *n, struct file *f)
 {
 	int ret = 0;
