@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08dc637d_c8425e02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T18:56:42Z",
+      "side": 1,
+      "message": "Can you include the subject as well, please? i.e. something like:\n\n`63539e200d42 (\"subject here\")`",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "e33891a6612c0fa6826cf1880622c43915e81105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3204b85_0d2aa29c",
+        "filename": "arm.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-05-14T18:56:42Z",
+      "side": 1,
+      "message": "gki_defconfig",
+      "range": {
+        "startLine": 26,
+        "startChar": 43,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "e33891a6612c0fa6826cf1880622c43915e81105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
