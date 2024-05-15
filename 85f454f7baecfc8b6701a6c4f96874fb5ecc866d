@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4ba6f8_b1f6107f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-15T08:17:58Z",
+      "side": 1,
+      "message": "Can you duplicate these into the x86_64 fragment? We don\u0027t want the virtual devices types to diverge.",
+      "revId": "85f454f7baecfc8b6701a6c4f96874fb5ecc866d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
