@@ -16,6 +16,24 @@
       "message": "Can you duplicate these into the x86_64 fragment? We don\u0027t want the virtual devices types to diverge.",
       "revId": "85f454f7baecfc8b6701a6c4f96874fb5ecc866d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d53c50_0ac85eec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-15T08:21:57Z",
+      "side": 1,
+      "message": "sorry the core fragment*",
+      "parentUuid": "bc4ba6f8_b1f6107f",
+      "revId": "85f454f7baecfc8b6701a6c4f96874fb5ecc866d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
