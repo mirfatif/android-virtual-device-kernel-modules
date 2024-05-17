@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "341651c6_b16be21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-05-17T00:34:06Z",
+      "side": 1,
+      "message": "Overall LGTM. See minor comments.",
+      "revId": "d6f92cce92b13418e510eb00fb85caae35fb356a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80737a40_571477e1",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2487,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-05-17T00:34:06Z",
+      "side": 1,
+      "message": "Nit: spaces or tabs?",
+      "revId": "d6f92cce92b13418e510eb00fb85caae35fb356a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b17c929_276cdd49",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3363,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-05-17T00:34:06Z",
+      "side": 1,
+      "message": "Optional: to_syncpoint seems to be defined to do exactly that operation.",
+      "revId": "d6f92cce92b13418e510eb00fb85caae35fb356a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
