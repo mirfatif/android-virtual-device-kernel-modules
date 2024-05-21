@@ -210,6 +210,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7969be4a_2bb7cdd8",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3376,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-05-21T23:09:04Z",
+      "side": 1,
+      "message": "I requested this mutex, because I think is required for the case where we are requesting dxgk_signal_sync_object_from_sync_file while fd is being signaled (and callbacks are actually being processed).",
+      "parentUuid": "e10218f0_b30ae596",
+      "range": {
+        "startLine": 3376,
+        "startChar": 25,
+        "endLine": 3376,
+        "endChar": 38
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d69dbe2_b5d2f108",
         "filename": "virtio_dxgkrnl/ioctl.c",
         "patchSetId": 17
