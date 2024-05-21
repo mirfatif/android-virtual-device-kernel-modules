@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cb9822b_a28725ac",
+        "filename": "virtio_dxgkrnl/dxgsyncfile.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-21T23:09:36Z",
+      "side": 1,
+      "message": "what do I need to use to get dxgprocess from pid?",
+      "parentUuid": "59059312_179335f7",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92b90961_41500e72",
         "filename": "virtio_dxgkrnl/dxgsyncfile.h",
         "patchSetId": 17
@@ -175,6 +199,30 @@
       "writtenOn": "2024-05-21T22:47:08Z",
       "side": 1,
       "message": "So one thing I\u0027m also realizing is that we don\u0027t necessarily want to require that the input sync file is a virtio-dxgkrnl sync file. In which case there may not be an associated dxgsyncpoint. \n\nI think we can still handle this by storing the list of dxg_sync_cb_t objects somewhere else, on the dxgprocess or something.",
+      "range": {
+        "startLine": 3363,
+        "startChar": 1,
+        "endLine": 3363,
+        "endChar": 61
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf129ea3_8b459ece",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3363,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-21T23:09:36Z",
+      "side": 1,
+      "message": "But this is specifically for virtio-dxgkrnl? Why would this not be a virtio-dxgkrnl sync file?",
+      "parentUuid": "6136ffc9_f22ed68d",
       "range": {
         "startLine": 3363,
         "startChar": 1,
