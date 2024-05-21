@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59059312_179335f7",
+        "filename": "virtio_dxgkrnl/dxgsyncfile.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "Because we\u0027re going to be accessing these in a callback that is independent of the process or adapter, we need to be careful that these pointers are still valid. I think the dxgprocess pointer is the one that we most have to worry about because I don\u0027t know if the dxgadapters are ever freed? We could instead store the pid/tid and try to find the appropriate dxgprocess from those?",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9dfc2594_5731304b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virtio_dxgkrnl/dxgsyncfile.h",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "\tstruct dxgprocess    process;\n\tstruct dxgadapter    adapter;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b90961_41500e72",
+        "filename": "virtio_dxgkrnl/dxgsyncfile.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "Do we need this ifdef __KERNEL__ here? This struct isn\u0027t exposed outside the kernel I think?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab537d28_afcec30d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virtio_dxgkrnl/dxgsyncfile.h",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "virtio_dxgkrnl/dxgsyncfile.h",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "489ec3eb_199d88f7",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "nit: You could write a small helper function that handles this if/else logic in the three following locations.",
+      "range": {
+        "startLine": 2467,
+        "startChar": 8,
+        "endLine": 2467,
+        "endChar": 22
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e66bae_07ae2b30",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "nit: technically this is either too many or too few",
+      "range": {
+        "startLine": 3338,
+        "startChar": 25,
+        "endLine": 3338,
+        "endChar": 33
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21c4779_c4746d0e",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3348,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "nit: this should be a tab I think?",
+      "range": {
+        "startLine": 3348,
+        "startChar": 0,
+        "endLine": 3348,
+        "endChar": 4
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6136ffc9_f22ed68d",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3363,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "So one thing I\u0027m also realizing is that we don\u0027t necessarily want to require that the input sync file is a virtio-dxgkrnl sync file. In which case there may not be an associated dxgsyncpoint. \n\nI think we can still handle this by storing the list of dxg_sync_cb_t objects somewhere else, on the dxgprocess or something.",
+      "range": {
+        "startLine": 3363,
+        "startChar": 1,
+        "endLine": 3363,
+        "endChar": 61
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10218f0_b30ae596",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3376,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we need this mutex. I expect dma_fence_add_callback doesn\u0027t require a mutex, and I think also list_add_tail doesn\u0027t require a mutex either.",
+      "range": {
+        "startLine": 3376,
+        "startChar": 25,
+        "endLine": 3376,
+        "endChar": 38
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d69dbe2_b5d2f108",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5763,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-21T22:47:08Z",
+      "side": 1,
+      "message": "nit: This should be a tab I think?",
+      "range": {
+        "startLine": 5763,
+        "startChar": 0,
+        "endLine": 5763,
+        "endChar": 4
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
