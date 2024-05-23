@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef94877_ea9f2f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-23T04:05:20Z",
+      "side": 1,
+      "message": "LGTM. Also, it\u0027s good to run checkpatch.pl on the changed files to make sure we\u0027re still obeying all of its rules.",
+      "revId": "6b63801304ed01a4a08fda28bd3d04856892e60f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182f60b6_08688ccc",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3381,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-05-23T04:05:20Z",
+      "side": 1,
+      "message": "nit: tab.  I wonder if you can run clang-format to fix these?",
+      "range": {
+        "startLine": 3381,
+        "startChar": 0,
+        "endLine": 3381,
+        "endChar": 4
+      },
+      "revId": "6b63801304ed01a4a08fda28bd3d04856892e60f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
