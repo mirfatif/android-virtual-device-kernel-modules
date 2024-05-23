@@ -181,18 +181,11 @@ _VIRT_COMMON_MODULES = [
     "virt_wifi.ko",
     "virtio-gpu.ko",
     "virtio-rng.ko",
-    "virtio_balloon.ko",
-    "virtio_blk.ko",
-    "virtio_console.ko",
     "virtio_dma_buf.ko",
     "virtio_input.ko",
     "virtio_net.ko",
-    "virtio_pci.ko",
-    "virtio_pci_legacy_dev.ko",
-    "virtio_pci_modern_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
-    "vmw_vsock_virtio_transport.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
