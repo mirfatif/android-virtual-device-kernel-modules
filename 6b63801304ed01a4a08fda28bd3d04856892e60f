@@ -39,6 +39,30 @@
       },
       "revId": "6b63801304ed01a4a08fda28bd3d04856892e60f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b285e3c_dac2d185",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 3381,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T18:39:51Z",
+      "side": 1,
+      "message": "I am doing it manyally because clang-format is updating the entire file unfortunately",
+      "parentUuid": "182f60b6_08688ccc",
+      "range": {
+        "startLine": 3381,
+        "startChar": 0,
+        "endLine": 3381,
+        "endChar": 4
+      },
+      "revId": "6b63801304ed01a4a08fda28bd3d04856892e60f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
