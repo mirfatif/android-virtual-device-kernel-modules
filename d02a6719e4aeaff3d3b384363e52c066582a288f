@@ -90,6 +90,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "784d4576_03cadc02",
+        "filename": "virtio_dxgkrnl/dxgsyncfile.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff71cb3f_96ec8af7",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92b90961_41500e72",
@@ -141,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92400adf_666d5d01",
+        "filename": "virtio_dxgkrnl/dxgsyncfile.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92b90961_41500e72",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "489ec3eb_199d88f7",
@@ -154,6 +202,30 @@
       "writtenOn": "2024-05-21T22:47:08Z",
       "side": 1,
       "message": "nit: You could write a small helper function that handles this if/else logic in the three following locations.",
+      "range": {
+        "startLine": 2467,
+        "startChar": 8,
+        "endLine": 2467,
+        "endChar": 22
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adacf627_548a7cdd",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 2467,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "489ec3eb_199d88f7",
       "range": {
         "startLine": 2467,
         "startChar": 8,
@@ -187,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb08cee_2bb569b9",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3338,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9e66bae_07ae2b30",
+      "range": {
+        "startLine": 3338,
+        "startChar": 25,
+        "endLine": 3338,
+        "endChar": 33
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a21c4779_c4746d0e",
@@ -200,6 +296,30 @@
       "writtenOn": "2024-05-21T22:47:08Z",
       "side": 1,
       "message": "nit: this should be a tab I think?",
+      "range": {
+        "startLine": 3348,
+        "startChar": 0,
+        "endLine": 3348,
+        "endChar": 4
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "509ed195_ecedf2a9",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3348,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a21c4779_c4746d0e",
       "range": {
         "startLine": 3348,
         "startChar": 0,
@@ -281,6 +401,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52fa1f2a_650756ce",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3363,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84c17978_24c4eb47",
+      "range": {
+        "startLine": 3363,
+        "startChar": 1,
+        "endLine": 3363,
+        "endChar": 61
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e10218f0_b30ae596",
@@ -352,6 +496,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20fe15d_311bf0f2",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 3376,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c02c383a_7a361724",
+      "range": {
+        "startLine": 3376,
+        "startChar": 25,
+        "endLine": 3376,
+        "endChar": 38
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d69dbe2_b5d2f108",
@@ -365,6 +533,30 @@
       "writtenOn": "2024-05-21T22:47:08Z",
       "side": 1,
       "message": "nit: This should be a tab I think?",
+      "range": {
+        "startLine": 5763,
+        "startChar": 0,
+        "endLine": 5763,
+        "endChar": 4
+      },
+      "revId": "d02a6719e4aeaff3d3b384363e52c066582a288f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45564260_3d9235e1",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5763,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-05-23T00:21:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d69dbe2_b5d2f108",
       "range": {
         "startLine": 5763,
         "startChar": 0,
