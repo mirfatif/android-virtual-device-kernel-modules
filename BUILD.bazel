@@ -342,7 +342,7 @@ test_suite(
     ],
 )
 
-_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = [
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = sets.to_list(sets.make([
     paths.basename(m)
     for m in get_gki_modules_list("x86_64")
 ] + _VIRT_COMMON_MODULES + [
@@ -351,7 +351,7 @@ _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = [
     "test_meminit.ko",
     "v4l2loopback.ko",
     "virtio_pmem.ko",
-]
+]))
 
 write_file(
     name = "fake_virtual_device_x86_64_modules_list",
@@ -490,7 +490,9 @@ kernel_images(
     modules_options = "modules.options",
 )
 
-_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = [paths.basename(m) for m in get_gki_modules_list("arm64")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES
+_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = sets.to_list(sets.make(
+    [paths.basename(m) for m in get_gki_modules_list("arm64")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+))
 
 write_file(
     name = "fake_virtual_device_aarch64_modules_list",
