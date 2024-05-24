@@ -666,6 +666,11 @@ kernel_build(
     arch = "arm",
     base_kernel = None,  # We don't have arm GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.arm",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "virtual_device.fragment",
+        "arm.fragment",
+    ],
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + [
             paths.basename(module)

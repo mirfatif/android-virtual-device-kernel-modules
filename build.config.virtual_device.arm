@@ -4,16 +4,11 @@
 
 DEFCONFIG=vd_arm_gki_defconfig
 
-# HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
-#   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
-#   this hack in until bash becomes hermetic (unlikely).
-#   See b/275468906#comment8
-PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/arm/configs/ && \
-    KCONFIG_CONFIG=\${OUT_DIR}/arch/arm/configs/${DEFCONFIG} \
-        ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
-        ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig \
-        ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
-        ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment \
-        ${ROOT_DIR}/common-modules/virtual-device/arm.fragment && \
-    true"
+# Copy arm64 gki_defconfig to arch/arm. Because SRCARCH=arm, Kbuild looks
+# up arch/$(SRCARCH)/configs/${DEFCONFIG}.
+# Note: defconfig_fragment will handle the fragments.
+PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/arm/configs/ &&
+    cp ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig \${OUT_DIR}/arch/arm/configs/${DEFCONFIG}"
+
+# Disable check_defconfig that won't match because we are building 32-bit
 POST_DEFCONFIG_CMDS=""
