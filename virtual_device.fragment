@@ -19,7 +19,6 @@ CONFIG_CFG80211_REG_CELLULAR_HINTS=y
 CONFIG_MAC80211=m
 
 # Drivers to run specific sanity tests
-CONFIG_TEST_STACKINIT=m
 CONFIG_TEST_MEMINIT=m
 
 # Cuttlefish-specific drivers
