@@ -859,6 +859,10 @@ kernel_build(
     ],
     base_kernel = None,
     build_config = "build.config.server.aarch64",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "linux_distro.fragment",
+    ],
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)
@@ -921,6 +925,10 @@ kernel_build(
     arch = "x86_64",
     base_kernel = None,
     build_config = "build.config.server.x86_64",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "linux_distro.fragment",
+    ],
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)
