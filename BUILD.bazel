@@ -425,6 +425,11 @@ kernel_build(
     ],
     base_kernel = "//common:kernel_aarch64",
     build_config = "build.config.virtual_device.aarch64",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "virtual_device.fragment",
+        "aarch64.fragment",
+    ],
     make_goals = [
         "modules",
         "arm/fvp-base-revc.dtb",
