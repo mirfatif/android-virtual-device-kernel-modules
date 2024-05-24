@@ -567,12 +567,19 @@ kernel_build(
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64_16k",
-    build_config = "build.config.virtual_device.aarch64.16k",
+    build_config = "build.config.virtual_device.aarch64",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "virtual_device.fragment",
+        "aarch64.fragment",
+        "aarch64_16k.fragment",
+    ],
     make_goals = [
         "modules",
         "arm/fvp-base-revc.dtb",
     ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
+    page_size = "16k",
     strip_modules = True,
 )
 
