@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c91cc2_f593ee76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-24T23:31:43Z",
+      "side": 1,
+      "message": "@umendez@google.com I am moving the PRE_DEFCONFIG_CMDS to defconfig fragments:\n\nhttps://android-review.git.corp.google.com/q/hashtag:%22vd_defconfig_fragment%22+(status:open%20OR%20status:merged)\n\nThis will ensure that the CONFIG\u0027s are checked when they are present in fragments. When you re-apply this change, please check if module_outs changes for all targets (and whether it is intentional).",
+      "revId": "47bb187168a56619a4f218038029868b343c61b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
