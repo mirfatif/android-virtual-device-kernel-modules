@@ -4,3 +4,7 @@ CONFIG_X86_PAE=y
 # b/154934534
 # CONFIG_TEST_STACKINIT is not set
 # CONFIG_BPF_JIT_ALWAYS_ON is not set
+
+# Following option is inherited from the gki_defconfig, however we don't
+# really need it for the x86 virtual device.
+CONFIG_OPEN_DICE=n
