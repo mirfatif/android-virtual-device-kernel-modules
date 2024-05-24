@@ -16,6 +16,24 @@
       "message": "https://android-build.corp.google.com/abtd/run/L96000030003995087/",
       "revId": "2adc4508b3601c8c7d7e41c628041ac09ff20683",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f727e2f8_ad3159ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-24T23:28:37Z",
+      "side": 1,
+      "message": "The ABTD run verifies that this change does not break the build.",
+      "parentUuid": "a09ce645_d73140f6",
+      "revId": "2adc4508b3601c8c7d7e41c628041ac09ff20683",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
