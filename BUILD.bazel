@@ -751,6 +751,11 @@ kernel_build(
     arch = "i386",
     base_kernel = None,  # We don't have i686 GKI builds, so not using mixed build
     build_config = "build.config.virtual_device.i686",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "virtual_device.fragment",
+        "i686.fragment",
+    ],
     module_outs = sets.to_list(sets.make(
         _VIRT_COMMON_MODULES + [
             paths.basename(module)
