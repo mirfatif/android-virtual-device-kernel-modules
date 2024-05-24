@@ -1,0 +1,5 @@
+# b/345544754: This is explicitly set because
+# CONFIG_ARM64_16K_PAGES is applied after `make defconfig`,
+# causing it to take an old value of ARCH_MMAP_RND_COMPAT_BITS_MIN as
+# the default.
+CONFIG_ARCH_MMAP_RND_COMPAT_BITS=9
