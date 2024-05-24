@@ -17,4 +17,3 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/arm/configs/ && \
         ${ROOT_DIR}/common-modules/virtual-device/arm.fragment && \
     true"
 POST_DEFCONFIG_CMDS=""
-EXT_MODULES="common-modules/virtual-device"
