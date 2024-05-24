@@ -63,10 +63,6 @@
 #error CONFIG_SND_HDA_INTEL is a module in virtual_device.fragment
 #endif
 
-#ifdef CONFIG_TEST_STACKINIT
-#error CONFIG_TEST_STACKINIT is a module in virtual_device.fragment
-#endif
-
 #ifdef CONFIG_TEST_MEMINIT
 #error CONFIG_TEST_MEMINIT is a module in virtual_device.fragment
 #endif
