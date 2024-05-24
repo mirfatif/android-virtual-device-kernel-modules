@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96ef5ff_f86d8a95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-05-24T22:15:28Z",
+      "side": 1,
+      "message": "Hi @adelva@google.com @rammuthiah@google.com, I don\u0027t see a kernel_build for these build configs. Do you know if they are used anywhere?",
+      "revId": "5dc221964550c02d366fa4c3a25a14c766b28037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
