@@ -184,6 +184,7 @@ _VIRT_COMMON_MODULES = [
     "virtio_dma_buf.ko",
     "virtio_input.ko",
     "virtio_net.ko",
+    "virtio_pci_legacy_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
 ]
@@ -202,7 +203,6 @@ _VIRT_AARCH64_MODULES = [
     "vexpress-config.ko",
     "vexpress-sysreg.ko",
     "virtio_mmio.ko",
-    "virtio_pci_legacy_dev.ko",
     "virtio_pmem.ko",
 ]
 
