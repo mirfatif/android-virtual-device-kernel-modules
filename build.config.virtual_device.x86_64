@@ -2,20 +2,6 @@
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
 
-DEFCONFIG=vd_x86_64_gki_defconfig
-
-# HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
-#   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
-#   this hack in until bash becomes hermetic (unlikely).
-#   See b/275468906#comment8
-PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && \
-    KCONFIG_CONFIG=\${OUT_DIR}/arch/x86/configs/${DEFCONFIG} \
-        ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
-        ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig \
-        ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
-        ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment && \
-    true"
-POST_DEFCONFIG_CMDS=""
 EXT_MODULES="common-modules/virtual-device"
 
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
