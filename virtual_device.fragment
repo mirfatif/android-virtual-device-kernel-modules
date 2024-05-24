@@ -19,7 +19,7 @@ CONFIG_CFG80211_REG_CELLULAR_HINTS=y
 CONFIG_MAC80211=m
 
 # Drivers to run specific sanity tests
-CONFIG_TEST_MEMINIT=m
+CONFIG_TEST_MEMINIT=m # nocheck: RUNTIME_TESTING_MENU not enabled in aarch64
 
 # Cuttlefish-specific drivers
 CONFIG_VIRT_WIFI=m
