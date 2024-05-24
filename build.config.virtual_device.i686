@@ -19,4 +19,3 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ &&\
         ${ROOT_DIR}/common-modules/virtual-device/i686.fragment && \
     true"
 POST_DEFCONFIG_CMDS=""
-EXT_MODULES="common-modules/virtual-device"
