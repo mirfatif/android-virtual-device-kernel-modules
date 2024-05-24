@@ -1,8 +1,3 @@
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.virtual_device
 
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
-
-EXT_MODULES="common-modules/virtual-device"
-
-# Not building/saving any kernel images. This build step is meant purely to generate the .kos.
-FILES="arch/arm64/boot/dts/arm/fvp-base-revc.dtb"
