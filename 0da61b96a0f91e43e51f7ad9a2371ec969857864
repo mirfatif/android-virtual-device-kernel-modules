@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d504ab7_6c38b6dc",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1986685
+      },
+      "writtenOn": "2024-05-27T17:37:29Z",
+      "side": 1,
+      "message": "@adelva@google.com do you know what version should I use here? See aosp/2727874 and aosp/2686088 for reference.",
+      "revId": "0da61b96a0f91e43e51f7ad9a2371ec969857864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
