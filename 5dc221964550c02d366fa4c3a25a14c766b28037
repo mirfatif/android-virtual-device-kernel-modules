@@ -16,6 +16,24 @@
       "message": "Hi @adelva@google.com @rammuthiah@google.com, I don\u0027t see a kernel_build for these build configs. Do you know if they are used anywhere?",
       "revId": "5dc221964550c02d366fa4c3a25a14c766b28037",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f149150_b1cd4577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-28T12:53:44Z",
+      "side": 1,
+      "message": "Two are definitely used kasan in CI on older branches, kgdb\u0027s successor is used as the --kgdb flag so the config can go, and the final (kprobes) is unknown and the last owner has been cc\u0027d here to provide context.",
+      "parentUuid": "c96ef5ff_f86d8a95",
+      "revId": "5dc221964550c02d366fa4c3a25a14c766b28037",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
