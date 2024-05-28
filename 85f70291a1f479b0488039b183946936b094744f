@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e62787_78c2b02a",
+        "filename": "build.config.virtual_device_kasan.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-28T12:51:39Z",
+      "side": 0,
+      "message": "kasan kernels are built in CI on older branches - i.e. https://ci.android.com/builds/branches/aosp_kernel-common-android15-6.6/grid?legacy\u003d1\n\nWe\u0027ll need to keep supporting these. Maybe its worth creating mainline virt_kasan targets to maintain them on mainline as well?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 8
+      },
+      "revId": "85f70291a1f479b0488039b183946936b094744f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1cc326f_2f2cd9a0",
+        "filename": "build.config.virtual_device_kgdb.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-28T12:51:39Z",
+      "side": 0,
+      "message": "kgdb kernels are built on demand to enable users to debug the kernel via gdb - `tools/bazel run  --notrim --nokmi_symbol_list_strict_mode --nokmi_symbol_list_violations_check --kgdb //common-modules/virtual-device:virtual_device_x86_64_dist`\n\nand that --kgdb flag seems to trigger the logic in this file - https://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kgdb.bzl?q\u003dkgdb\n\nIf that is correct - happy to delete all the kgdb configs.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 38
+      },
+      "revId": "85f70291a1f479b0488039b183946936b094744f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60dc568e_43121949",
+        "filename": "build.config.virtual_device_kprobes.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-05-28T12:51:39Z",
+      "side": 0,
+      "message": "The security team added these to enable some research ~3 years ago - b/181054145#comment2. @mikespecter@google.com, can you comment if your team still needs these kprobes configs?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "85f70291a1f479b0488039b183946936b094744f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
