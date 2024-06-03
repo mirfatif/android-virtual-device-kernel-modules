@@ -3373,11 +3373,6 @@ dxgk_signal_sync_object_from_sync_file(struct dxgprocess *process, void *__user 
 		return -EINVAL;
 	}
 
-	if (args.fd == -1) {
-		dev_dbg(dxgglobaldev, "Invalid fd");
-		return -EINVAL;
-	}
-
 	device = dxgprocess_device_by_handle(process, args.device);
 	if (device == NULL) {
 		ret = -EINVAL;
@@ -3388,6 +3383,14 @@ dxgk_signal_sync_object_from_sync_file(struct dxgprocess *process, void *__user 
 	ret = dxgadapter_acquire_lock_shared(adapter);
 	if (ret < 0) {
 		adapter = NULL;
+		goto cleanup;
+	}
+
+	if (args.fd == -1) {
+		ret = dxgvmb_send_signal_sync_object (
+			process, adapter, flags, 0, zerohandle, args.object_count,
+			args.objects, 0, NULL, args.object_count, args.fence_values,
+			NULL, args.device, true);
 		goto cleanup;
 	}
 
