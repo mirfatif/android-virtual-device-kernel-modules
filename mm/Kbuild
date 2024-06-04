@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0
+
+obj-m += mglru_sysfs.o
+
+LINUXINCLUDE := -I$(srctree)/../common-modules/virtual-device/include/uapi ${LINUXINCLUDE}
