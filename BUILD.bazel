@@ -78,6 +78,7 @@ _virt_common_ext_modules = [
     "drivers/staging/dev-sw-sync/sw_sync.ko",
     "drivers/virtio/virtio_wl.ko",
     "fs/fuse/fuse_vendor.ko",
+    "mm/mglru_sysfs.ko",
 ]
 
 kernel_build(
