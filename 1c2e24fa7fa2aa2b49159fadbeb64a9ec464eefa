@@ -51,6 +51,24 @@
       "message": "Can we verify the kernel build is unchanged from these or similar?",
       "revId": "1c2e24fa7fa2aa2b49159fadbeb64a9ec464eefa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fb8033_4ad2e953",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-06-06T20:59:48Z",
+      "side": 1,
+      "message": "Hi Steven,\n\nI\u0027ve checked that the only change from this change is that CONFIG_ARCH_MMAP_RND_COMPAT_BITS changes from 9 to 11. Not sure where does that come from; are you familiar with this config?",
+      "parentUuid": "92c3426a_5e31389a",
+      "revId": "1c2e24fa7fa2aa2b49159fadbeb64a9ec464eefa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
