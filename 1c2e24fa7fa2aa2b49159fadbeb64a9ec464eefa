@@ -69,6 +69,24 @@
       "parentUuid": "92c3426a_5e31389a",
       "revId": "1c2e24fa7fa2aa2b49159fadbeb64a9ec464eefa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "300e0302_8abaf58b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-06-06T21:44:29Z",
+      "side": 1,
+      "message": "The issue was b/345544754. For now, I\u0027ll use a workaround to ensure CONFIG_ARCH_MMAP_RND_COMPAT_BITS stays at 9.",
+      "parentUuid": "28fb8033_4ad2e953",
+      "revId": "1c2e24fa7fa2aa2b49159fadbeb64a9ec464eefa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
