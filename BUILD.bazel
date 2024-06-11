@@ -20,6 +20,7 @@ load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
     "ddk_module",
+    "dependency_graph",
     "initramfs_modules_lists_test",
     "kernel_build",
     "kernel_compile_commands",
@@ -330,6 +331,15 @@ kernel_images(
     modules_options = "modules.options",
 )
 
+dependency_graph(
+    name = "virtual_device_x86_64_dependency_graph",
+    colorful = True,
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [
+        ":virtual_device_x86_64_external_modules",
+    ],
+)
+
 copy_to_dist_dir(
     name = "virtual_device_x86_64_dist",
     data = [
@@ -556,6 +566,15 @@ initramfs_modules_lists_test(
     expected_modules_list = "modules_list.fake_virtual_device_aarch64",
     expected_modules_recovery_list = "modules_recovery_list.fake_virtual_device_aarch64",
     kernel_images = ":fake_virtual_device_aarch64_images",
+)
+
+dependency_graph(
+    name = "virtual_device_aarch64_dependency_graph",
+    colorful = True,
+    kernel_build = ":virtual_device_aarch64",
+    kernel_modules = [
+        ":virtual_device_aarch64_external_modules",
+    ],
 )
 
 copy_to_dist_dir(
