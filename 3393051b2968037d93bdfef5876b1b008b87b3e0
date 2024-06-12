@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28a93a7_9db51850",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1961885
+      },
+      "writtenOn": "2024-06-12T01:02:01Z",
+      "side": 1,
+      "message": "-1 is a bit scary for unsigned inner, maybe we can do it via:\n(allocation_sizes[i] + PAGE_SIZE - 1) / PAGE_SIZE",
+      "revId": "3393051b2968037d93bdfef5876b1b008b87b3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a33006_3c48b774",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1961885
+      },
+      "writtenOn": "2024-06-12T01:02:01Z",
+      "side": 1,
+      "message": "nit: I guess I had an extra space here?",
+      "fixSuggestions": [
+        {
+          "fixId": "8187c50d_f2198134",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virtio_dxgkrnl/dxgvmbus.h",
+              "range": {
+                "startLine": 589,
+                "startChar": 0,
+                "endLine": 590,
+                "endChar": 0
+              },
+              "replacement": "\tu32\t\t\t\talloc_count;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3393051b2968037d93bdfef5876b1b008b87b3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
