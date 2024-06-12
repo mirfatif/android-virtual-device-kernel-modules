@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e18edb_64b19682",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-06-12T20:12:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d28a93a7_9db51850",
+      "revId": "3393051b2968037d93bdfef5876b1b008b87b3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5a33006_3c48b774",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "3393051b2968037d93bdfef5876b1b008b87b3e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e56e9a8_749a6bc3",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-06-12T20:12:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5a33006_3c48b774",
       "revId": "3393051b2968037d93bdfef5876b1b008b87b3e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
