@@ -615,7 +615,6 @@ kernel_build(
         "virtual_device_core.fragment",
         "virtual_device.fragment",
         "aarch64.fragment",
-        "aarch64_16k.fragment",
     ],
     make_goals = [
         "modules",
