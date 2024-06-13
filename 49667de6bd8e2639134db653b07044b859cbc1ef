@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89106cc_1a27d2a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-06-13T21:28:28Z",
+      "side": 1,
+      "message": "Confirmed that https://android-build.corp.google.com/abtd/run/L63200030004582930/ doesn\u0027t have the -4k in vermagic any more.",
+      "revId": "49667de6bd8e2639134db653b07044b859cbc1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
