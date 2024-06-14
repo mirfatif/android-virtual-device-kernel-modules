@@ -22,6 +22,30 @@
       },
       "revId": "6282281e9858f54e69552d9658bf25c1b9e1e3b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbb40b0_5efaa053",
+        "filename": "aarch64_16k.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-06-14T01:47:47Z",
+      "side": 1,
+      "message": "After running \n\n```\nbazel build //common-modules/virtual-device:virtual_device_aarch64_16k_config\n```\n\nbefore and after the changes, I didn\u0027t find any difference in this generated file:\n\n`bazel-bin/common-modules/virtual-device:virtual_device_aarch64_16k_config/out_dir/.config`",
+      "parentUuid": "d5ed18e0_e8567124",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "6282281e9858f54e69552d9658bf25c1b9e1e3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
