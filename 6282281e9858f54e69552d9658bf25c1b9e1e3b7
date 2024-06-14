@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5ed18e0_e8567124",
+        "filename": "aarch64_16k.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-06-14T01:21:50Z",
+      "side": 1,
+      "message": "could you please double check that:\n\n- run `bazel build //common-modules/virtual-device:virtual_device_aarch64_16k_config`\n- Examine the content of bazel-bin/common-modules/virtual-device:virtual_device_aarch64_16k_config/out_dir/.config\n\ndiff the file before and after the change?\n\nNote that the content of this file differs on mainline and on android15-6.6 because of some upstream Kconfig change. Also, there might be different things that sneaks in. So please double check on this branch and make sure the only change is the CONFIG_LOCALVERSION.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "6282281e9858f54e69552d9658bf25c1b9e1e3b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
