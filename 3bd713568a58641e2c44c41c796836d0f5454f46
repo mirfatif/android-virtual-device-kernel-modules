@@ -16,6 +16,24 @@
       "message": "see comment in https://android-review.git.corp.google.com/c/kernel/common-modules/virtual-device/+/3131304/comment/d5ed18e0_e8567124/, please redo the check in this branch",
       "revId": "3bd713568a58641e2c44c41c796836d0f5454f46",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339c319f_1741f139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2024-06-14T01:58:29Z",
+      "side": 1,
+      "message": "After running the commands with and without the changes, I didn\u0027t find any difference in the .config files.\n\nLet me know if there is anything else to check.",
+      "parentUuid": "d87e9387_c5a7e322",
+      "revId": "3bd713568a58641e2c44c41c796836d0f5454f46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
