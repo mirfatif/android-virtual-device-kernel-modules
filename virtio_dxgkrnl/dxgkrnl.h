@@ -334,6 +334,7 @@ void dxgglobal_acquire_process_adapter_lock(void);
 void dxgglobal_release_process_adapter_lock(void);
 void dxgglobal_add_host_event(struct dxghostevent *hostevent);
 void dxgglobal_remove_host_event(struct dxghostevent *hostevent);
+void signal_host_cpu_event(struct dxghostevent *eventhdr);
 u64 dxgglobal_new_host_event_id(void);
 void dxgglobal_signal_host_event(u64 event_id);
 struct dxghostevent *dxgglobal_get_host_event(u64 event_id);

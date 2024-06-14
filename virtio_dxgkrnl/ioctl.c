@@ -3705,6 +3705,77 @@ cleanup:
 	return ret;
 }
 
+static int sync_objects_already_signaled(
+	struct dxgprocess *process,
+	struct d3dkmt_waitforsynchronizationobjectfromcpu *args)
+{
+	u32 objects_size = args->object_count * sizeof(struct d3dkmthandle);
+	u32 values_size = args->object_count * sizeof(u64);
+	enum hmgrentry_type syncobj_type = HMGRENTRY_TYPE_FREE;
+	struct dxgsyncobject *syncobj;
+	struct d3dkmthandle *objects;
+	bool need_wait = false;
+	u64 *values;
+	u64 value;
+	int ret;
+	int i;
+
+	if (args->object_count == 0)
+		return 1;
+
+	objects = vzalloc(objects_size);
+	ret = copy_from_user(objects, args->objects, objects_size);
+	if (ret) {
+		pr_err("%s failed to copy wait objects", __func__);
+		return 0;
+	}
+
+	values = vzalloc(values_size);
+	ret = copy_from_user(values, args->fence_values, values_size);
+	if (ret) {
+		pr_err("%s failed to copy wait fence values", __func__);
+		return 0;
+	}
+
+	for (i = 0; i < args->object_count; i++) {
+		dev_dbg(dxgglobaldev, "handle 0x%x", objects[i]);
+		hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
+		syncobj_type = hmgrtable_get_object_type(&process->handle_table, objects[i]);
+
+		if (syncobj_type == HMGRENTRY_TYPE_MONITOREDFENCE) {
+			/* We don't currently track the cpu pa for these monitored fence objects
+			 * associated with paging queues and hw queues
+			 */
+			need_wait = true;
+		} else {
+			syncobj = hmgrtable_get_object_by_type(
+				&process->handle_table, HMGRENTRY_TYPE_DXGSYNCOBJECT,
+				objects[i], true);
+			if (syncobj) {
+				if (!syncobj->mapped_address) {
+					need_wait = true;
+				} else {
+					ret = copy_from_user(&value, syncobj->mapped_address, sizeof(u64));
+
+					if (ret) {
+						pr_err("%s: failed to read fence", __func__);
+						need_wait = true;
+					} else  if (value < values[i]) {
+						need_wait = true;
+					}
+				}
+			}
+		}
+
+		hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
+
+		if (need_wait)
+			return 0;
+	}
+
+	return 1;
+}
+
 static int
 dxgk_wait_sync_object_cpu(struct dxgprocess *process, void *__user inargs)
 {
@@ -3775,8 +3846,17 @@ dxgk_wait_sync_object_cpu(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	ret = dxgvmb_send_wait_sync_object_cpu(process, adapter,
-					       &args, true, event_id);
+	if (sync_objects_already_signaled(process, &args)) {
+		if (args.async_event)
+			signal_host_cpu_event(&async_host_event->hdr);
+		else
+			signal_host_cpu_event(&host_event.hdr);
+
+	} else {
+		ret = dxgvmb_send_wait_sync_object_cpu(process, adapter, &args,
+						       true, event_id);
+	}
+
 	if (ret < 0)
 		goto cleanup;
 
