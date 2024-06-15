@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f025eec_3ef62555",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-15T19:21:31Z",
+      "side": 1,
+      "message": "Should be \"Bug: 305059072\"",
+      "revId": "3bc26f916d74a7cda6069d7cfe3dc2794566ad5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f360da7_2271d839",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-15T19:21:31Z",
+      "side": 1,
+      "message": "Use C comment for kernel code: `/* Custom commands */`\n\nFix this for all changes in this patch",
+      "fixSuggestions": [
+        {
+          "fixId": "5581f03d_559d89ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virtio_dxgkrnl/dxgvmbus.h",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "\t/* Custom commands */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3bc26f916d74a7cda6069d7cfe3dc2794566ad5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
