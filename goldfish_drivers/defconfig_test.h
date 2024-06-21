@@ -75,9 +75,6 @@
 #error CONFIG_USB_DUMMY_HCD is a module in virtual_device.fragment
 #endif
 
-#ifdef CONFIG_VIRTIO_BLK
-#error CONFIG_VIRTIO_BLK is a module in virtual_device.fragment
-#endif
 
 #ifdef CONFIG_VIRTIO_CONSOLE
 #error CONFIG_VIRTIO_CONSOLE is a module in virtual_device.fragment
@@ -93,10 +90,6 @@
 
 #ifdef CONFIG_VIRTIO_NET
 #error CONFIG_VIRTIO_NET is a module in virtual_device.fragment
-#endif
-
-#ifdef CONFIG_VIRTIO_PCI
-#error CONFIG_VIRTIO_PCI is a module in virtual_device.fragment
 #endif
 
 #ifdef CONFIG_VIRTIO_PMEM
