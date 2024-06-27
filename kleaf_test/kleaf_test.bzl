@@ -96,6 +96,7 @@ def kleaf_test(
         **private_kwargs
     )
 
+<<<<<<< HEAD   (a4f70b virtual-device: aarch64: fix typo in blocklist)
     _ddk_submodule_duplicate_linux_include_test(
         name = name + "_ddk_submodule_duplicate_linux_include_test",
         kernel_build = name + "_kernel_build",
@@ -110,6 +111,11 @@ def kleaf_test(
 
     _kernel_boot_images_outs_contains_ramdisk_test(
         name = name + "_kernel_boot_images_outs_contains_ramdisk_test",
+||||||| BASE
+=======
+    _ddk_genfiles_test(
+        name = name + "_ddk_genfiles_test",
+>>>>>>> CHANGE (dc0304 kleaf: Add tests for generated DDK sources.)
         kernel_build = name + "_kernel_build",
         **private_kwargs
     )
@@ -125,9 +131,14 @@ def kleaf_test(
             name + "_ddk_cflags_test",
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
+<<<<<<< HEAD   (a4f70b virtual-device: aarch64: fix typo in blocklist)
             name + "_ddk_submodule_duplicate_linux_include_test",
             name + "_ddk_submodule_linux_include_in_top_level_test",
             name + "_kernel_boot_images_outs_contains_ramdisk_test",
+||||||| BASE
+=======
+            name + "_ddk_genfiles_test",
+>>>>>>> CHANGE (dc0304 kleaf: Add tests for generated DDK sources.)
         ],
         **kwargs
     )
@@ -798,4 +809,84 @@ def _kernel_boot_images_outs_contains_ramdisk_test(name, kernel_build, **private
             name + "_images_unset_ramdisk_compression",
         ],
         **private_kwargs
+    )
+
+def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
+    write_file(
+        name = name + "_generated_source",
+        out = name + "/generated.c",
+        content = [
+            "void some_generated_func(void) {}",
+            "void some_exported_func(void) {}",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_generated_header",
+        out = name + "/includes/generated.h",
+        content = [
+            "extern void some_generated_func(void);",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_exported_header",
+        out = name + "/includes/exported.h",
+        content = [
+            "extern void some_exported_func(void);",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module",
+        kernel_build = kernel_build,
+        out = "mod.ko",
+        srcs = [
+            "genfiles_test/mod.c",
+            name + "_generated_source",
+            name + "_generated_header",
+        ],
+        hdrs = [
+            name + "_exported_header",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [name],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = name + "_submodule",
+        out = "mod.ko",
+        srcs = [
+            "genfiles_test/mod.c",
+            name + "_generated_source",
+            name + "_generated_header",
+        ],
+        hdrs = [
+            name + "_exported_header",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [name],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_submodule_module",
+        kernel_build = kernel_build,
+        deps = [name + "_submodule"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+            name + "_submodule_module",
+        ],
     )
