@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32629761_c2cbd3ee",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3754,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-06-27T17:37:52Z",
+      "side": 1,
+      "message": "what about `else` here? I guess we should at least log the error, and probably pass the wait to the host, even if we don\u0027t recognize the handle.",
+      "revId": "f19418855f5dcfdc4fd41496b33a4a23a58861e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c0fdd7_b0df301a",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3758,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-06-27T17:37:52Z",
+      "side": 1,
+      "message": "I was quite sure that mapped_address in already in the kernel space... as it gets assigned from dxg_map_iospace. What am I missing? :)",
+      "range": {
+        "startLine": 3758,
+        "startChar": 0,
+        "endLine": 3758,
+        "endChar": 72
+      },
+      "revId": "f19418855f5dcfdc4fd41496b33a4a23a58861e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
