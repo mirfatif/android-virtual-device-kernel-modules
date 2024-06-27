@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "277d931b_8dd34285",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3754,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-06-27T19:33:28Z",
+      "side": 1,
+      "message": "That\u0027s a good point, I can add an error log and need_wait \u003d true.",
+      "parentUuid": "32629761_c2cbd3ee",
+      "revId": "f19418855f5dcfdc4fd41496b33a4a23a58861e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90c0fdd7_b0df301a",
         "filename": "virtio_dxgkrnl/ioctl.c",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-27T17:37:52Z",
       "side": 1,
       "message": "I was quite sure that mapped_address in already in the kernel space... as it gets assigned from dxg_map_iospace. What am I missing? :)",
+      "range": {
+        "startLine": 3758,
+        "startChar": 0,
+        "endLine": 3758,
+        "endChar": 72
+      },
+      "revId": "f19418855f5dcfdc4fd41496b33a4a23a58861e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26e4b52_03b40c19",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3758,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-06-27T19:33:28Z",
+      "side": 1,
+      "message": "dxg_map_iospace maps to userspace, not kernel virtual address space. The pointer returned from dxg_map_iospace is returned directly to userspace in various APIs (like in the fence_value_cpu_va attr in createsyncobject).\n\nIt would probably be good if dxg_map_iospace returned a `u8 __user *` instead of a `u8 *`, and dxgsyncobject::mapped_address should be a `void __user *`. I\u0027ll see if making that change is easy enough.",
+      "parentUuid": "90c0fdd7_b0df301a",
       "range": {
         "startLine": 3758,
         "startChar": 0,
