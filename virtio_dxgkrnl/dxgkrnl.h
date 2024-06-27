@@ -373,7 +373,6 @@ struct dxgprocess {
 	 * Protected by the dxgglobal->plistmutex.
 	 */
 	struct list_head	plistentry;
-	struct task_struct	*process;
 	pid_t			pid;
 	pid_t			tgid;
 	/* how many time the process was opened */
