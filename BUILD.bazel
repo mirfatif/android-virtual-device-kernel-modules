@@ -51,6 +51,7 @@ filegroup(
 
 _virt_common_modules = [
     # keep sorted
+    "drivers/dma-buf/heaps/system_heap.ko",
     "failover.ko",
     "fs/9p/9p.ko",
     "goldfish_battery.ko",
