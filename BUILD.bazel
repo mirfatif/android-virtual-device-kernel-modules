@@ -237,7 +237,10 @@ kernel_build(
 
 kernel_compile_commands(
     name = "virtual_device_x86_64_compile_commands",
-    kernel_build = ":virtual_device_x86_64",
+    deps = [
+        ":virtual_device_x86_64",
+        ":virtual_device_x86_64_external_modules",
+    ],
 )
 
 ddk_module(
@@ -430,7 +433,10 @@ kernel_build(
 
 kernel_compile_commands(
     name = "virtual_device_aarch64_compile_commands",
-    kernel_build = ":virtual_device_aarch64",
+    deps = [
+        ":virtual_device_aarch64",
+        ":virtual_device_aarch64_external_modules",
+    ],
 )
 
 ddk_module(
