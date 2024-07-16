@@ -652,6 +652,18 @@ def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
         **private_kwargs
     )
 
+    ddk_module(
+        name = name + "_module_child",
+        kernel_build = kernel_build,
+        out = "child.ko",
+        srcs = ["genfiles_test/child.c"],
+        deps = [
+            name + "_module",
+            "//common:all_headers_x86_64",
+        ],
+        **private_kwargs
+    )
+
     ddk_submodule(
         name = name + "_submodule",
         out = "mod.ko",
@@ -675,10 +687,24 @@ def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
         **private_kwargs
     )
 
+    ddk_module(
+        name = name + "_submodule_module_child",
+        kernel_build = kernel_build,
+        out = "child.ko",
+        srcs = ["genfiles_test/child.c"],
+        deps = [
+            name + "_submodule_module",
+            "//common:all_headers_x86_64",
+        ],
+        **private_kwargs
+    )
+
     build_test(
         name = name,
         targets = [
             name + "_module",
+            name + "_module_child",
             name + "_submodule_module",
+            name + "_submodule_module_child",
         ],
     )
