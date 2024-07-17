@@ -25,6 +25,7 @@ load(
     "initramfs_modules_lists_test",
     "kernel_abi",
     "kernel_build",
+    "kernel_compile_commands",
     "kernel_dtstree",
     "kernel_images",
     "kernel_module_group",
@@ -1272,4 +1273,19 @@ alias(
     name = "crashdump_x86_64_config",
     actual = "//common:kernel_x86_64_crashdump_config",
     deprecation = "Use //common:kernel_x86_64_crashdump_config",
+)
+
+kernel_compile_commands(
+    name = "virtual_device_aarch64_compile_commands",
+    kernel_build = ":virtual_device_aarch64",
+)
+
+kernel_compile_commands(
+    name = "virtual_device_i686_compile_commands",
+    kernel_build = ":virtual_device_i686",
+)
+
+kernel_compile_commands(
+    name = "virtual_device_x86_64_compile_commands",
+    kernel_build = ":virtual_device_x86_64",
 )
