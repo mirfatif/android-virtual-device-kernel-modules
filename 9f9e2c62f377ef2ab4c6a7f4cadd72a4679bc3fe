@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b7628d_a895a458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-07-18T00:29:00Z",
+      "side": 1,
+      "message": "Please cp to other applicable branches (e.g. android15-6.6)",
+      "revId": "9f9e2c62f377ef2ab4c6a7f4cadd72a4679bc3fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
