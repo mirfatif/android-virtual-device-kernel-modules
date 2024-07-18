@@ -1012,6 +1012,11 @@ kernel_build(
     strip_modules = False,
 )
 
+kernel_compile_commands(
+    name = "virtual_device_i686_compile_commands",
+    kernel_build = ":virtual_device_i686",
+)
+
 ddk_module(
     name = "i686/goldfish_drivers/goldfish_address_space",
     srcs = [":goldfish_address_space_sources"],
