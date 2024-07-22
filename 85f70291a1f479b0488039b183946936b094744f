@@ -140,6 +140,30 @@
       },
       "revId": "85f70291a1f479b0488039b183946936b094744f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a865dd_b4178efe",
+        "filename": "build.config.virtual_device_kprobes.aarch64",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-07-22T15:32:59Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "60dc568e_43121949",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "85f70291a1f479b0488039b183946936b094744f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
