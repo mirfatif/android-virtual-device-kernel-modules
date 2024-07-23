@@ -156,7 +156,6 @@ _VIRT_COMMON_MODULES = [
     "btrtl.ko",
     "btusb.ko",
     "cfg80211.ko",
-    "dummy-cpufreq.ko",
     "dummy_hcd.ko",
     "failover.ko",
     "goldfish_battery.ko",
@@ -198,6 +197,7 @@ _VIRT_COMMON_MODULES = [
 _VIRT_AARCH64_MODULES = [
     # keep sorted
     "ambakmi.ko",
+    "android-v-virt-cpufreq.ko",
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
@@ -346,6 +346,7 @@ _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = sets.to_list(sets.make([
     paths.basename(m)
     for m in get_gki_modules_list("x86_64")
 ] + _VIRT_COMMON_MODULES + [
+    "dummy-cpufreq.ko",
     "goldfish_address_space.ko",
     "nd_virtio.ko",
     "test_meminit.ko",
@@ -671,6 +672,7 @@ kernel_build(
             paths.basename(module)
             for module in get_gki_modules_list("arm")
         ] + [
+            "dummy-cpufreq.ko",
             "test_meminit.ko",
         ],
     )),
@@ -763,6 +765,7 @@ kernel_build(
             for module in get_gki_modules_list("i386")
         ] + [
             # keep sorted
+            "dummy-cpufreq.ko",
             "nd_virtio.ko",
             "test_meminit.ko",
             "virtio_pmem.ko",
