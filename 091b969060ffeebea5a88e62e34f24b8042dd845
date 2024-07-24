@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b0e5c48_05df606f",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-07-24T09:12:51Z",
+      "side": 1,
+      "message": "\u003e File is not formatted. Run `buildifier kleaf_test/kleaf_test.bzl` to format the file, or apply the suggested fix.\n\nPlease fix.",
+      "parentUuid": "5b39f7dd_0b503b3f",
+      "revId": "091b969060ffeebea5a88e62e34f24b8042dd845",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
