@@ -215,6 +215,24 @@ def _ddk_module_include_test(name, kernel_build, **private_kwargs):
         **private_kwargs
     )
 
+    ddk_module(
+        name = name + "_textual_hdrs_includes_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test.c",
+            "include_test_lib.c",
+            "include/include_test_lib.h",
+        ],
+        deps = [
+            "//common:all_headers_x86_64",
+        ],
+        textual_hdrs = [
+            name + "_local_includes_headers",
+        ],
+        **private_kwargs
+    )
+
     build_test(
         name = name,
         targets = [
@@ -222,6 +240,7 @@ def _ddk_module_include_test(name, kernel_build, **private_kwargs):
             name + "_linux_includes_test_module",
             name + "_local_includes_test_module",
             name + "_include_file_test_module",
+            name + "_textual_hdrs_includes_test_module",
         ],
         **private_kwargs
     )
