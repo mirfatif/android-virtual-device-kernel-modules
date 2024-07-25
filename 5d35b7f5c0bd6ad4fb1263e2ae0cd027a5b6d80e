@@ -46,6 +46,30 @@
       },
       "revId": "5d35b7f5c0bd6ad4fb1263e2ae0cd027a5b6d80e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c4ca21_b96c7aef",
+        "filename": "aarch64.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-07-25T19:30:43Z",
+      "side": 1,
+      "message": "Can the module.blocklist be aarch64 specific? We\u0027d still want to keep the dummy cpufreq driver enabled on non-aarch64 targets.",
+      "parentUuid": "aba8b846_802b72a9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "5d35b7f5c0bd6ad4fb1263e2ae0cd027a5b6d80e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
