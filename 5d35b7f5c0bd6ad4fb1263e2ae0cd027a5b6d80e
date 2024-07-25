@@ -22,6 +22,30 @@
       },
       "revId": "5d35b7f5c0bd6ad4fb1263e2ae0cd027a5b6d80e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba8b846_802b72a9",
+        "filename": "aarch64.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-07-25T19:15:45Z",
+      "side": 1,
+      "message": "disable the kernel module via the module.blocklist?*",
+      "parentUuid": "5a9b2070_0c667fab",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "5d35b7f5c0bd6ad4fb1263e2ae0cd027a5b6d80e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
