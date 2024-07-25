@@ -28,6 +28,7 @@ struct dxgprocess *dxgprocess_create(void)
 	process = vzalloc(sizeof(struct dxgprocess));
 	if (process != NULL) {
 		dev_dbg(dxgglobaldev, "new dxgprocess created\n");
+		process->process = current;
 		process->pid = current->pid;
 		process->tgid = current->tgid;
 		mutex_init(&process->process_mutex);

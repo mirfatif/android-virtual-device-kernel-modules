@@ -338,10 +338,10 @@ int dxgvmb_send_create_process(struct dxgprocess *process)
 
 	command_vm_to_host_init1(&command->hdr, DXGK_VMBCOMMAND_CREATEPROCESS);
 	command->process = process;
-	command->process_id = process->pid;
+	command->process_id = process->process->pid;
 	command->linux_process = 1;
 	s[0] = 0;
-	__get_task_comm(s, WIN_MAX_PATH, current);
+	__get_task_comm(s, WIN_MAX_PATH, process->process);
 	for (i = 0; i < WIN_MAX_PATH; i++) {
 		command->process_name[i] = s[i];
 		if (s[i] == 0)
