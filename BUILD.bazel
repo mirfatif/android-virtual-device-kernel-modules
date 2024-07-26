@@ -31,7 +31,7 @@ load(
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
 )
-load("//common:modules.bzl", "get_gki_modules_list")
+load("//common:modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
 
 filegroup(
     name = "common_sources",
@@ -671,6 +671,9 @@ kernel_build(
             paths.basename(module)
             for module in get_gki_modules_list("arm")
         ] + [
+            paths.basename(module)
+            for module in get_kunit_modules_list("arm")
+        ] + [
             "test_meminit.ko",
         ],
     )),
@@ -761,6 +764,9 @@ kernel_build(
         _VIRT_COMMON_MODULES + [
             paths.basename(module)
             for module in get_gki_modules_list("i386")
+        ] + [
+            paths.basename(module)
+            for module in get_kunit_modules_list("i386")
         ] + [
             # keep sorted
             "nd_virtio.ko",
@@ -856,6 +862,9 @@ kernel_build(
             paths.basename(module)
             for module in get_gki_modules_list("arm64")
         ] + [
+            paths.basename(module)
+            for module in get_kunit_modules_list("arm64")
+        ] + [
             # keep sorted
             "failover.ko",
             "net_failover.ko",
@@ -917,6 +926,9 @@ kernel_build(
         [
             paths.basename(module)
             for module in get_gki_modules_list("x86_64")
+        ] + [
+            paths.basename(module)
+            for module in get_kunit_modules_list("x86_64")
         ] + [
             # keep sorted
             "failover.ko",
