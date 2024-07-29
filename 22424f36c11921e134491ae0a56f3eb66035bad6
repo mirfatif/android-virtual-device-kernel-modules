@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ccb8d4d_38f0d2e3",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-07-29T17:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "552cc32d_1c9ca520",
+      "range": {
+        "startLine": 636,
+        "startChar": 0,
+        "endLine": 643,
+        "endChar": 1
+      },
+      "revId": "22424f36c11921e134491ae0a56f3eb66035bad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b2176ca_d7edce3c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-27T00:49:06Z",
       "side": 1,
       "message": "Can you update the blocklist here?",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 1
+      },
+      "revId": "22424f36c11921e134491ae0a56f3eb66035bad6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9778f355_df5ae49a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-07-29T17:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b2176ca_d7edce3c",
       "range": {
         "startLine": 727,
         "startChar": 0,
