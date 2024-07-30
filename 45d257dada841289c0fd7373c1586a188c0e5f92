@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60fff43b_459706cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-07-30T14:05:13Z",
+      "side": 1,
+      "message": "Are you planning to CP this to android-mainline as well?",
+      "revId": "45d257dada841289c0fd7373c1586a188c0e5f92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
