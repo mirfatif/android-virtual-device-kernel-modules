@@ -16,6 +16,24 @@
       "message": "Are you planning to CP this to android-mainline as well?",
       "revId": "45d257dada841289c0fd7373c1586a188c0e5f92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755191a9_77ec528b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-07-31T18:08:17Z",
+      "side": 1,
+      "message": "The vcpufreq driver isn\u0027t upstreamed yet, will CP to android-mainline once the patches get accepted.",
+      "parentUuid": "60fff43b_459706cf",
+      "revId": "45d257dada841289c0fd7373c1586a188c0e5f92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
