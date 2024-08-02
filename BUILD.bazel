@@ -416,6 +416,7 @@ kernel_abi(
     name = "virtual_device_aarch64_abi",
     kernel_build = ":virtual_device_aarch64",
     kernel_modules = [":virtual_device_aarch64_external_modules"],
+    kmi_symbol_list_add_only = True,
 )
 
 kernel_compile_commands(
