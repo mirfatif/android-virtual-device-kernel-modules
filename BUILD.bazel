@@ -198,6 +198,7 @@ _VIRT_COMMON_MODULES = [
 _VIRT_AARCH64_MODULES = [
     # keep sorted
     "ambakmi.ko",
+    "android-v-virt-cpufreq.ko",
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
@@ -487,7 +488,7 @@ kernel_images(
     build_initramfs = True,
     kernel_build = ":virtual_device_aarch64",
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
-    modules_blocklist = "modules.blocklist",
+    modules_blocklist = "modules_aarch64.blocklist",
     modules_options = "modules.options",
 )
 
@@ -638,7 +639,7 @@ kernel_images(
     build_initramfs = True,
     kernel_build = ":virtual_device_aarch64_16k",
     kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
-    modules_blocklist = "modules.blocklist",
+    modules_blocklist = "modules_aarch64.blocklist",
     modules_options = "modules.options",
 )
 
@@ -733,7 +734,7 @@ kernel_images(
     build_initramfs = True,
     kernel_build = "//common-modules/virtual-device:virtual_device_arm",
     kernel_modules_install = "//common-modules/virtual-device:virtual_device_arm_modules_install",
-    modules_blocklist = "modules.blocklist",
+    modules_blocklist = "modules_aarch64.blocklist",
     modules_options = "modules.options",
 )
 
