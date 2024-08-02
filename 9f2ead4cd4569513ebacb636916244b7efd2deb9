@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ab2bcd_850d583a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-02T03:16:39Z",
+      "side": 1,
+      "message": "I believe the problem is that the change to kernel/common-modules/virtual-device  also ends up in other repo branches (ie: common-android15-6.6-lts) where the kernel tree there is missing the driver changes that maybe landed earlier?",
+      "revId": "9f2ead4cd4569513ebacb636916244b7efd2deb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
