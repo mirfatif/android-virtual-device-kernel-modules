@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e8e11a_f3297963",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-08-05T18:04:53Z",
+      "side": 1,
+      "message": "nit: I\u0027d suggest \"Reapply\" rather then Revert^2 as its easier to read/reason about.",
+      "revId": "0e82145410c153521ee69542e55b9c96c75a47f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
