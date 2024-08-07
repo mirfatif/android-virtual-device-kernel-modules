@@ -664,6 +664,17 @@ cleanup:
 	return ret;
 }
 
+int dxgvmb_send_present_virtual2(struct dxgprocess * process,
+				struct d3dkmt_presentvirtual2 *args,
+				__u64 acquire_semaphore_nthandle,
+				__u64 release_layers_semaphore_nthandle,
+				__u64 release_target_semaphore_nthandle,
+				__u64 target_memory_nthandle,
+				u64 *layer_memory_nthandle)
+{
+	return 0;
+}
+
 /*
  * Virtual GPU messages to the host
  */
