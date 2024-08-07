@@ -664,6 +664,77 @@ cleanup:
 	return ret;
 }
 
+int dxgvmb_send_present_virtual2(struct dxgprocess * process,
+				struct d3dkmt_presentvirtual2 *args,
+				__u64 acquire_semaphore_nthandle,
+				__u64 release_layers_semaphore_nthandle,
+				__u64 release_target_semaphore_nthandle,
+				__u64 target_memory_nthandle,
+				u64 *layer_memory_nthandle)
+{
+	struct dxgkvmb_command_presentvirtual2 *command;
+	int ret;
+	struct dxgvmbusmsg msg = {.hdr = NULL};
+	u32 layer_fd_size  = args-?layer_memory_fd_count * sizeof(u64);
+	// size to allocate includes size of struct, size of flexible array member for layer fds
+	// and flexible array member for private data.
+	u32 cmd_size = sizeof(struct dxgkvmb_command_presentvirtual) + layer_fd_size + args->private_data_size;
+
+	ret = init_message(&msg, NULL, process, cmd_size);
+	if (ret)
+		return ret;
+	command = (void *)msg.msg;
+
+	command_vm_to_host_init2(&command->hdr,
+				 DXGK_VMBCOMMAND_PRESENTVIRTUAL2,
+				 process->host_handle);
+	command->acquire_semaphore_nthandle = acquire_semaphore_nthandle;
+	command->release_layers_semaphore_nthandle = release_layers_semaphore_nthandle;
+	command->release_target_semaphore_nthandle = release_target_semaphore_nthandle;
+	command->target_memory_nthandle = target_memory_nthandle;
+	command->layer_fd_count = args->layer_memory_fd_count;
+	command->private_data_size = args->private_data_size;
+
+	// copy layer fds
+    if (layer_fd_size) {
+		ret = copy_from_user(command->layer_fds,
+				     layer_memory_nthandle,
+				     layer_fd_size);
+		if (ret) {
+			pr_err("%s failed to copy user data", __func__);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	// copy private data
+	if (args->private_data_size) {
+		ret = copy_from_user(command->private_data,
+				     args->private_data,
+				     args->private_data_size);
+		if (ret) {
+			pr_err("%s failed to copy user data", __func__);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	ret = dxgglobal_acquire_channel_lock();
+	if (ret < 0)
+		goto cleanup;
+
+	ret = dxgvmb_send_sync_msg_ntstatus(dxgglobal_get_dxgvmbuschannel(), msg.hdr,
+						    msg.size);
+
+	dxgglobal_release_channel_lock();
+
+cleanup:
+	free_message(&msg, process);
+	if (ret)
+		dev_dbg(dxgglobaldev, "err: %s %d", __func__, ret);
+	return ret;
+}
+
 /*
  * Virtual GPU messages to the host
  */
