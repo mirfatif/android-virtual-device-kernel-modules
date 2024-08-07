@@ -1834,6 +1834,23 @@ struct d3dkmt_presentvirtual {
 #endif
 };
 
+struct d3dkmt_presentvirtual2 {
+	__s32	acquire_semaphore_fd;
+	__s32	release_layers_semaphore_fd;
+	__s32	release_target_semaphore_fd;
+	__s32	target_memory_fd;
+	__u32	layer_memory_fd_count;
+	__u64	private_data_size;
+#ifdef __KERNEL__
+	__u32			*layer_memory_fd;
+	void			*private_data;
+#else
+	__u64			layer_memory_fd;
+	__u64			private_data;
+#endif
+};
+
+
 /*
  * Dxgkrnl Graphics Port Driver ioctl definitions
  *
