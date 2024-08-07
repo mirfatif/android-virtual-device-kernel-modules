@@ -973,5 +973,13 @@ int dxgvmb_send_present_virtual(struct dxgprocess *process,
 				__u64 acquire_semaphore_nthandle,
 				__u64 release_semaphore_nthandle,
 				__u64 composition_memory_nthandle);
+int dxgvmb_send_present_virtual2(struct dxgprocess * process,
+				struct d3dkmt_presentvirtual2 *args,
+				__u64 acquire_semaphore_layers_nthandle,
+				__u64 acquire_semaphore_target_nthandle,
+				__u64 release_layers_semaphore_nthandle,
+				__u64 release_target_semaphore_nthandle,
+				__u64 target_memory_nthandle,
+				u64 *layer_memory_nthandle);
 
 #endif

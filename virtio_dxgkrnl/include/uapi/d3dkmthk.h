@@ -1834,6 +1834,24 @@ struct d3dkmt_presentvirtual {
 #endif
 };
 
+struct d3dkmt_presentvirtual2 {
+	__s32	acquire_semaphore_layers_fd;
+	__s32	acquire_semaphore_target_fd;
+	__s32	release_layers_semaphore_fd;
+	__s32	release_target_semaphore_fd;
+	__s32	target_memory_fd;
+	__u32	layer_memory_fd_count;
+	__u64	private_data_size;
+#ifdef __KERNEL__
+	__s32			*layer_memory_fd;
+	void			*private_data;
+#else
+	__s32			layer_memory_fd;
+	__u64			private_data;
+#endif
+};
+
+
 /*
  * Dxgkrnl Graphics Port Driver ioctl definitions
  *
@@ -1981,7 +1999,8 @@ struct d3dkmt_presentvirtual {
 	_IOWR(0x47, 0x46, struct d3dkmt_presentvirtual)
 #define LX_DXSIGNALSYNCHRONIZATIONOBJECTFROMSYNCFILE \
 	_IOWR(0x47, 0x47, struct d3dkmt_waitforsynchronizationobjectfromsyncfile)
-
-#define LX_IO_MAX 0x47
+#define LX_DXPRESENTVIRTUAL2 \
+	_IOWR(0x47, 0x48, struct d3dkmt_presentvirtual2)
+#define LX_IO_MAX 0x48
 
 #endif /* _D3DKMTHK_H */
