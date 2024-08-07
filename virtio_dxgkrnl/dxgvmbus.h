@@ -103,22 +103,23 @@ enum dxgkvmb_commandchanneltype {
 #define DXG_VM_PROCESS_NAME_LENGTH 260
 
 enum dxgkvmb_commandtype_global {
-	DXGK_VMBCOMMAND_VM_TO_HOST_FIRST	= 1000,
-	DXGK_VMBCOMMAND_CREATEPROCESS	= DXGK_VMBCOMMAND_VM_TO_HOST_FIRST,
-	DXGK_VMBCOMMAND_DESTROYPROCESS		= 1001,
-	DXGK_VMBCOMMAND_OPENSYNCOBJECT		= 1002,
-	DXGK_VMBCOMMAND_DESTROYSYNCOBJECT	= 1003,
-	DXGK_VMBCOMMAND_CREATENTSHAREDOBJECT	= 1004,
-	DXGK_VMBCOMMAND_DESTROYNTSHAREDOBJECT	= 1005,
-	DXGK_VMBCOMMAND_SIGNALFENCE		= 1006,
-	DXGK_VMBCOMMAND_NOTIFYPROCESSFREEZE	= 1007,
-	DXGK_VMBCOMMAND_NOTIFYPROCESSTHAW	= 1008,
-	DXGK_VMBCOMMAND_QUERYETWSESSION		= 1009,
-	DXGK_VMBCOMMAND_SETIOSPACEREGION	= 1010,
-	DXGK_VMBCOMMAND_COMPLETETRANSACTION	= 1011,
-	DXGK_VMBCOMMAND_SHAREOBJECTWITHHOST	= 1021,
-	DXGK_VMBCOMMAND_PRESENTVIRTUAL		= 1031,
-	DXGK_VMBCOMMAND_INVALID_VM_TO_HOST
+  DXGK_VMBCOMMAND_VM_TO_HOST_FIRST = 1000,
+  DXGK_VMBCOMMAND_CREATEPROCESS = DXGK_VMBCOMMAND_VM_TO_HOST_FIRST,
+  DXGK_VMBCOMMAND_DESTROYPROCESS = 1001,
+  DXGK_VMBCOMMAND_OPENSYNCOBJECT = 1002,
+  DXGK_VMBCOMMAND_DESTROYSYNCOBJECT = 1003,
+  DXGK_VMBCOMMAND_CREATENTSHAREDOBJECT = 1004,
+  DXGK_VMBCOMMAND_DESTROYNTSHAREDOBJECT = 1005,
+  DXGK_VMBCOMMAND_SIGNALFENCE = 1006,
+  DXGK_VMBCOMMAND_NOTIFYPROCESSFREEZE = 1007,
+  DXGK_VMBCOMMAND_NOTIFYPROCESSTHAW = 1008,
+  DXGK_VMBCOMMAND_QUERYETWSESSION = 1009,
+  DXGK_VMBCOMMAND_SETIOSPACEREGION = 1010,
+  DXGK_VMBCOMMAND_COMPLETETRANSACTION = 1011,
+  DXGK_VMBCOMMAND_SHAREOBJECTWITHHOST = 1021,
+  DXGK_VMBCOMMAND_PRESENTVIRTUAL = 1031,
+  DXGK_VMBCOMMAND_PRESENTVIRTUAL2 = 3000,
+  DXGK_VMBCOMMAND_INVALID_VM_TO_HOST
 };
 
 /*
@@ -962,6 +963,21 @@ struct dxgkvmb_command_presentvirtual {
 	u64 composition_memory_nthandle;
 	u64 private_data_size;
 	// prviate_data
+};
+
+struct dxgkvmb_command_presentvirtual2 {
+  struct dxgkvmb_command_vm_to_host hdr;
+  u64 acquire_semaphore_layers_nthandle;  // wait semaphore for acquisition of
+                                          // layers
+  u64 acquire_target_semaphore_nthandle;  // wait semaphore for acquisition of
+                                          // target
+  u64 release_layers_semaphore_nthandle;  // signal semaphore after composition
+  u64 release_target_semaphore_nthandle;  // signal semaphore after presentation
+  u64 target_memory_nthandle;             // Target to composite into
+  u32 layer_fd_count;                     // Layers fd count
+  u64 private_data_size;                  // Nexus private data size
+                                          // u64 layer_fds
+                                          // u8 private_data
 };
 
 int
