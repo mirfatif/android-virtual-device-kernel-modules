@@ -5603,6 +5603,155 @@ cleanup:
 	return ret;
 }
 
+static int dxgk_presentvirtual2(struct dxgprocess *process, void *__user inargs)
+{
+	struct d3dkmt_presentvirtual2 args;
+	__u64 acquire_layers_semaphore_nthandle = 0;
+	__u64 acquire_target_semaphore_nthandle = 0;
+	__u64 release_layers_semaphore_nthandle = 0;
+	__u64 release_target_semaphore_nthandle = 0;
+	__u64 target_memory_nthandle = 0;
+	u64 *layer_memory_nthandles = NULL;
+	int *layer_fds = NULL;
+	__u32 layer_idx = 0;
+	int ret = 0;
+
+	// copy args from user space to kernel space
+	ret = copy_from_user(&args, inargs, sizeof(args));
+
+	if (ret) {
+		pr_err("%s failed to copy input args", __func__);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	if (args.layer_memory_fd_count == 0) {
+		dev_dbg(dxgglobaldev, "Too few layer memory fd: %d",
+			args.layer_memory_fd_count);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// allocate space to copy the guest layer fds from user to kernel space.
+	layer_fds = vzalloc(sizeof(__s32) * args.layer_memory_fd_count);
+	if (layer_fds == NULL) {
+		ret = -ENOMEM;
+		goto cleanup;
+	}
+
+	// copy guest fds to kernel space.
+	ret = copy_from_user(layer_fds, args.layer_memory_fd,
+			     sizeof(__s32) * args.layer_memory_fd_count);
+
+	if (ret) {
+		pr_err("%s failed to copy layer memory fds", __func__);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// allocate space for host memory handles for layers.
+	layer_memory_nthandles =
+		vzalloc(args.layer_memory_fd_count * sizeof(u64));
+
+	if (!layer_memory_nthandles) {
+		pr_err("%s failed to allocate layer memory nthandles",
+		       __func__);
+		ret = -ENOMEM;
+		goto cleanup;
+	}
+
+	// It is ok if -1 is passed for the acquire semaphore for layers.
+	if (args.acquire_layers_semaphore_fd != -1) {
+		ret = get_syncobj_host_nthandle(
+			args.acquire_layers_semaphore_fd,
+			&acquire_layers_semaphore_nthandle);
+		if (ret) {
+			pr_err("%s failed to host nthandle for fd %x", __func__,
+			       args.acquire_layers_semaphore_fd);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	// It is ok if -1 is passed for the acquire semaphore.
+	if (args.acquire_target_semaphore_fd != -1) {
+		ret = get_syncobj_host_nthandle(
+			args.acquire_target_semaphore_fd,
+			&acquire_target_semaphore_nthandle);
+		if (ret) {
+			pr_err("%s failed to host nthandle for fd %x", __func__,
+			       args.acquire_target_semaphore_fd);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	// get handle from release layers semaphore file descriptor.
+	ret = get_syncobj_host_nthandle(args.release_layers_semaphore_fd,
+					&release_layers_semaphore_nthandle);
+	if (ret) {
+		pr_err("%s failed to host nthandle for fd %x", __func__,
+		       args.release_layers_semaphore_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// get handle from release target semaphore file descriptor.
+	ret = get_syncobj_host_nthandle(args.release_target_semaphore_fd,
+					&release_target_semaphore_nthandle);
+	if (ret) {
+		pr_err("%s failed to host nthandle for fd %x", __func__,
+		       args.release_target_semaphore_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// get handle from composition target memory file descriptor.
+	ret = get_resource_host_nthandle(args.target_memory_fd,
+					 &target_memory_nthandle);
+	if (ret) {
+		pr_err("%s failed to host nthandle for fd %x", __func__,
+		       args.target_memory_fd);
+		ret = -EINVAL;
+		goto cleanup;
+	}
+
+	// get handles for layer memory file desccriptor.
+	for (layer_idx = 0; layer_idx < args.layer_memory_fd_count;
+	     layer_idx++) {
+		ret = get_resource_host_nthandle(
+			layer_fds[layer_idx],
+			&layer_memory_nthandles[layer_idx]);
+		if (ret) {
+			pr_err("%s failed to host nthandle for fd %x", __func__,
+			       layer_fds[layer_idx]);
+			ret = -EINVAL;
+			goto cleanup;
+		}
+	}
+
+	ret = dxgvmb_send_present_virtual2(process, &args,
+					   acquire_layers_semaphore_nthandle,
+					   acquire_layers_semaphore_nthandle,
+					   release_layers_semaphore_nthandle,
+					   release_target_semaphore_nthandle,
+					   target_memory_nthandle,
+					   layer_memory_nthandles);
+
+cleanup:
+	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
+	// free memory allocated for layer host handles.
+	if (layer_memory_nthandles) {
+		vfree(layer_memory_nthandles);
+	}
+
+	// free memory allocated for the layer guest fds.
+	if (layer_fds) {
+		vfree(layer_fds);
+	}
+
+	return ret;
+}
 /*
  * IOCTL processing
  * The driver IOCTLs return
@@ -5801,4 +5950,5 @@ void init_ioctls(void)
 		  LX_DXPRESENTVIRTUAL);
 	SET_IOCTL(/*0x47 */ dxgk_signal_sync_object_from_sync_file,
 		  LX_DXSIGNALSYNCHRONIZATIONOBJECTFROMSYNCFILE);
+	SET_IOCTL(/*0x48 */ dxgk_presentvirtual2, LX_DXPRESENTVIRTUAL2);
 }
