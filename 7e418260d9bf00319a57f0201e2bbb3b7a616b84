@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088210088",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3216814?revision\u003d2",
+      "key": {
+        "uuid": "5b773478_a8ce5a6d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-14T19:26:00Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "ddc46635_f5eb6630",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 664,
+                "startChar": 0,
+                "endLine": 664,
+                "endChar": 0
+              },
+              "replacement": "    ddk_module_headers \u003d [\"//common:all_headers_arm\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 680,
+                "startChar": 0,
+                "endLine": 681,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 764,
+                "startChar": 0,
+                "endLine": 764,
+                "endChar": 0
+              },
+              "replacement": "    # For x86, 32-bit/64-bit GKI DDK headers are the same target.\n    ddk_module_headers \u003d [\"//common:all_headers_x86_64\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 782,
+                "startChar": 0,
+                "endLine": 784,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "7e418260d9bf00319a57f0201e2bbb3b7a616b84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
