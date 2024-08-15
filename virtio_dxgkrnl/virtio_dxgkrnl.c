@@ -211,6 +211,9 @@ static void dxgkrnl_event_work(struct work_struct *work)
 		case DXGK_VMBCOMMAND_SENDWNFNOTIFICATION:
 			/* This message is not used by the driver currently. */
 			break;
+		case DXGK_VMBCOMMAND_SIGNALDISPLAYCHANGE:
+			/* Stateless command, no need to read the state. */
+			signal_display_change();
 		default:
 			pr_err("unexpected host message %d", hdr->command_type);
 		}

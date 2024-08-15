@@ -12,6 +12,7 @@
  */
 
 #include <linux/eventfd.h>
+#include <linux/poll.h>
 #include <linux/sync_file.h>
 
 #include "dxgkrnl.h"
@@ -25,6 +26,8 @@ struct device *dxgglobaldev;
 #define pr_fmt(fmt)	"dxgk:err: " fmt
 #undef dev_fmt
 #define dev_fmt(fmt)	"dxgk: " fmt
+
+DECLARE_WAIT_QUEUE_HEAD(wait_queue_etx_data);
 
 //
 // Interface from dxgglobal
@@ -174,6 +177,12 @@ void signal_guest_event(struct dxgkvmb_command_host_to_vm *packet,
 		return;
 	}
 	dxgglobal_signal_host_event(command->event);
+}
+
+void signal_display_change(void)
+{
+	dxgglobal->display_change_signaled = true;
+	wake_up(&wait_queue_etx_data);
 }
 
 void dxgglobal_signal_host_event(u64 event_id)
@@ -422,6 +431,21 @@ static ssize_t dxgk_write(struct file *f, const char __user *s, size_t len,
 	return len;
 }
 
+static unsigned int dxgk_poll(struct file *f, struct poll_table_struct *wait)
+{
+	__poll_t mask = 0;
+
+	poll_wait(f, &wait_queue_etx_data, wait);
+	pr_info("Poll function\n");
+	if (dxgglobal->display_change_signaled)
+	{
+		dxgglobal->display_change_signaled = false;
+		mask |= ( POLLIN | POLLRDNORM );
+	}
+
+	return mask;
+}
+
 const struct file_operations dxgk_fops = {
 	.owner = THIS_MODULE,
 	.open = dxgk_open,
@@ -430,4 +454,5 @@ const struct file_operations dxgk_fops = {
 	.unlocked_ioctl = dxgk_unlocked_ioctl,
 	.write = dxgk_write,
 	.read = dxgk_read,
+	.poll = dxgk_poll,
 };
