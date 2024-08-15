@@ -311,6 +311,8 @@ struct dxgglobal {
 	spinlock_t		host_event_list_mutex;
 	atomic64_t		host_event_id;
 
+	u64 		last_display_change_id;
+
 	/* Handle table for shared objects */
 	struct hmgrtable	handle_table;
 
@@ -336,6 +338,7 @@ void dxgglobal_add_host_event(struct dxghostevent *hostevent);
 void dxgglobal_remove_host_event(struct dxghostevent *hostevent);
 u64 dxgglobal_new_host_event_id(void);
 void dxgglobal_signal_host_event(u64 event_id);
+void dxgglobal_signal_display_change(u64 display_change_id);
 struct dxghostevent *dxgglobal_get_host_event(u64 event_id);
 int dxgglobal_acquire_channel_lock(void);
 void dxgglobal_release_channel_lock(void);
@@ -395,6 +398,8 @@ struct dxgprocess {
 
 	struct hmgrtable	*test_handle_table[2];
 	struct mutex		process_mutex;
+
+	u64				last_display_change_id;
 };
 
 struct dxgprocess *dxgprocess_create(void);
