@@ -12,6 +12,7 @@
  */
 
 #include <linux/eventfd.h>
+#include <linux/poll.h>
 #include <linux/sync_file.h>
 
 #include "dxgkrnl.h"
@@ -25,6 +26,8 @@ struct device *dxgglobaldev;
 #define pr_fmt(fmt)	"dxgk:err: " fmt
 #undef dev_fmt
 #define dev_fmt(fmt)	"dxgk: " fmt
+
+DECLARE_WAIT_QUEUE_HEAD(display_changed_wait_queue_head);
 
 //
 // Interface from dxgglobal
@@ -174,6 +177,26 @@ void signal_guest_event(struct dxgkvmb_command_host_to_vm *packet,
 		return;
 	}
 	dxgglobal_signal_host_event(command->event);
+}
+
+void signal_display_change(struct dxgkvmb_command_host_to_vm *packet,
+			u32 packet_length)
+{
+	// display_change uses the same struct as guest_event.
+	struct dxgkvmb_command_signalguestevent *command = (void *)packet;
+
+	if (packet_length < sizeof(struct dxgkvmb_command_signalguestevent)) {
+		pr_err("invalid packet size");
+		return;
+	}
+
+	dxgglobal_signal_display_change(command->event);
+}
+
+void dxgglobal_signal_display_change(u64 display_change_id)
+{
+	dxgglobal->last_display_change_id = display_change_id;
+	wake_up(&display_changed_wait_queue_head);
 }
 
 void dxgglobal_signal_host_event(u64 event_id)
@@ -422,6 +445,24 @@ static ssize_t dxgk_write(struct file *f, const char __user *s, size_t len,
 	return len;
 }
 
+static unsigned int dxgk_poll(struct file *f, struct poll_table_struct *wait)
+{
+	struct dxgprocess* process;
+
+	__poll_t mask = 0;
+
+	poll_wait(f, &display_changed_wait_queue_head, wait);
+	process = (struct dxgprocess *)f->private_data;
+	dev_dbg(dxgglobaldev, "poll wake for display change, change id transition %d -> %d.\n",
+			(int)process->last_display_change_id, (int)->dxglobal->last_display_change_id);
+	if (dxgglobal->last_display_change_id != process->last_display_change_id)
+	{
+		process->last_display_change_id = dxgglobal->last_display_change_id;
+		mask |= ( POLLIN | POLLRDNORM );
+	}
+	return mask;
+}
+
 const struct file_operations dxgk_fops = {
 	.owner = THIS_MODULE,
 	.open = dxgk_open,
@@ -430,4 +471,5 @@ const struct file_operations dxgk_fops = {
 	.unlocked_ioctl = dxgk_unlocked_ioctl,
 	.write = dxgk_write,
 	.read = dxgk_read,
+	.poll = dxgk_poll,
 };
