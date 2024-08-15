@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61fed8d9_6c898b93",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-08-15T16:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7b1554e_4d60e4ed",
+      "range": {
+        "startLine": 698,
+        "startChar": 0,
+        "endLine": 698,
+        "endChar": 4
+      },
+      "revId": "aa479d463607558dde2617f9da15e9c68868ff36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e224546_e5c27d10",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0ec592_3edbd224",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-08-15T16:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e224546_e5c27d10",
+      "range": {
+        "startLine": 699,
+        "startChar": 8,
+        "endLine": 699,
+        "endChar": 22
+      },
+      "revId": "aa479d463607558dde2617f9da15e9c68868ff36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e53973b_ffff67b0",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-12T20:19:42Z",
       "side": 1,
       "message": "args.layer_memory_fd is a pointer to userspace memory, so you need to do a copy_from_user here I think.",
+      "range": {
+        "startLine": 5674,
+        "startChar": 35,
+        "endLine": 5674,
+        "endChar": 55
+      },
+      "revId": "aa479d463607558dde2617f9da15e9c68868ff36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730bd646_2cf3012f",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-08-15T16:22:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e53973b_ffff67b0",
       "range": {
         "startLine": 5674,
         "startChar": 35,
