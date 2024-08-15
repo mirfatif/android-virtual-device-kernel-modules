@@ -23,3 +23,5 @@ void set_guest_data(struct dxgkvmb_command_host_to_vm *packet,
 		    u32 packet_length);
 void signal_guest_event(struct dxgkvmb_command_host_to_vm *packet,
 			u32 packet_length);
+void signal_display_change(struct dxgkvmb_command_host_to_vm *packet,
+			u32 packet_length);
