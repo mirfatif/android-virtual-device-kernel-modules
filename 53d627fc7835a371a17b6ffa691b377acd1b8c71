@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ce6d01_1f2a6c96",
+        "filename": "mm/mglru_sysfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2024-08-16T01:09:46Z",
+      "side": 1,
+      "message": "This is searching for the old admin file location, I think we just want a single `\tlru_gen_admin_node \u003d kernfs_find_and_get(mm_kobj-\u003esd, \"lru_gen_admin\");` now.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 56
+      },
+      "revId": "53d627fc7835a371a17b6ffa691b377acd1b8c71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
