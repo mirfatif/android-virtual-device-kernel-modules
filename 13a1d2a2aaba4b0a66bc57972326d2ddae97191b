@@ -231,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecc49503_4e654ef2",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T22:44:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b37ad7d_8b000416",
+      "range": {
+        "startLine": 440,
+        "startChar": 16,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55e93852_dcec079b",
