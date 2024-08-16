@@ -185,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2414dbe0_d88edda8",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-08-16T20:19:47Z",
+      "side": 1,
+      "message": "Though I\u0027m also not 100% sure it\u0027s possible for multiple threads/processes to call poll_wait on the same wait_queue_head. If not, then it becomes more complicated, and I\u0027d be fine deferring this to a future CL.",
+      "parentUuid": "cc88721d_71801a09",
+      "range": {
+        "startLine": 440,
+        "startChar": 16,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e93852_dcec079b",
         "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
         "patchSetId": 1
