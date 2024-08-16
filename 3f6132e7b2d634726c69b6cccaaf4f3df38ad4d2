@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7201db97_96dae08d",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T23:31:54Z",
+      "side": 1,
+      "message": "Plural, so it\u0027s visible that it\u0027s already taking care of all the layers?",
+      "range": {
+        "startLine": 678,
+        "startChar": 5,
+        "endLine": 678,
+        "endChar": 20
+      },
+      "revId": "3f6132e7b2d634726c69b6cccaaf4f3df38ad4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c810bdb8_af9cd880",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T23:31:54Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be u64? I think that\u0027s how we send those nthandles, and how they are set in dxgvmbus.c",
+      "range": {
+        "startLine": 972,
+        "startChar": 1,
+        "endLine": 972,
+        "endChar": 5
+      },
+      "revId": "3f6132e7b2d634726c69b6cccaaf4f3df38ad4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
