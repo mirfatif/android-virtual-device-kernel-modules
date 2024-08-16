@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e3e1902_6c51eb68",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-08-16T17:55:47Z",
+      "side": 1,
+      "message": "If this is specific to display change, I wonder if we could name it like display_changed_wait_queue_head?",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 43
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a20889_abde31eb",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-08-16T17:55:47Z",
+      "side": 1,
+      "message": "This might be better as a pr_debug.",
+      "range": {
+        "startLine": 439,
+        "startChar": 1,
+        "endLine": 439,
+        "endChar": 28
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02688f52_e5e28566",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-08-16T17:55:47Z",
+      "side": 1,
+      "message": "What happens if multiple processes poll at the same time? Ideally they would all be signaled in the same way, but I think in this case they may get different return values.",
+      "range": {
+        "startLine": 440,
+        "startChar": 16,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e93852_dcec079b",
         "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
         "patchSetId": 1
