@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8c48d8_69cc7fca",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T20:06:31Z",
+      "side": 1,
+      "message": "Thanks for suggestion, changed.",
+      "parentUuid": "6e3e1902_6c51eb68",
+      "range": {
+        "startLine": 30,
+        "startChar": 24,
+        "endLine": 30,
+        "endChar": 43
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80a20889_abde31eb",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-08-16T17:55:47Z",
       "side": 1,
       "message": "This might be better as a pr_debug.",
+      "range": {
+        "startLine": 439,
+        "startChar": 1,
+        "endLine": 439,
+        "endChar": 28
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d84bb6_35bcfa9e",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T20:06:31Z",
+      "side": 1,
+      "message": "Good point, switched to `dev_dbg` for the consistency with other log entries in the similar functions.",
+      "parentUuid": "80a20889_abde31eb",
       "range": {
         "startLine": 439,
         "startChar": 1,
@@ -124,6 +172,30 @@
       "writtenOn": "2024-08-16T12:00:51Z",
       "side": 1,
       "message": "I think you forgot a `break;` here (otherwise, add a comment).",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 27
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "914dc786_ca237f66",
+        "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T20:06:31Z",
+      "side": 1,
+      "message": "Of course, thanks for catching!",
+      "parentUuid": "55e93852_dcec079b",
       "range": {
         "startLine": 216,
         "startChar": 0,
