@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc88721d_71801a09",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1798295
+      },
+      "writtenOn": "2024-08-16T20:15:41Z",
+      "side": 1,
+      "message": "It would be nice to support polling by multiple processes though, and I don\u0027t think it would be too hard.  What if we did this:\n\n1. We change dxgglobal-\u003edisplay_change_signaled to be dxgglobal-\u003elast_display_change_id, which stores the change id sent from the host. \n2. We add a new field on dxgprocess, that stores the last polled display change id.\n3. When a dxgproces is created, we set dxgprocess-\u003elast_polled_display_change_id \u003d dxgglobal-\u003elast_display_change_id.\n4. When a display changed event comes from the host, we set dxgglobal-\u003elast_display_change_id to the new change id rather than setting display_changed_signaled to true. Otherwise do the same thing we\u0027re doing now.\n5. I this function, the dxgprocess can be accessed via f-\u003eprivate_data. If dxgprocess-\u003elast_polled_display_change_id is less than dxgglobal-\u003elast_display_change_id, then you return pollin|pollrdnorm, and you update dxgprocess-\u003elast_polled_display_change_id.",
+      "parentUuid": "a7764d11_1f3bcec1",
+      "range": {
+        "startLine": 440,
+        "startChar": 16,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e93852_dcec079b",
         "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
         "patchSetId": 1
