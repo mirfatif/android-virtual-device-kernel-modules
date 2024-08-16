@@ -209,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b37ad7d_8b000416",
+        "filename": "virtio_dxgkrnl/dxgglobal.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-08-16T20:38:22Z",
+      "side": 1,
+      "message": "From my reading it seems possible for mutliple processes to do poll_wait, because it\u0027s just adding the processess to the notification list. \n\nI will follow suggested change.",
+      "parentUuid": "2414dbe0_d88edda8",
+      "range": {
+        "startLine": 440,
+        "startChar": 16,
+        "endLine": 440,
+        "endChar": 39
+      },
+      "revId": "13a1d2a2aaba4b0a66bc57972326d2ddae97191b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e93852_dcec079b",
         "filename": "virtio_dxgkrnl/virtio_dxgkrnl.c",
         "patchSetId": 1
