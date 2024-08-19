@@ -48,14 +48,6 @@ filegroup(
 )
 
 filegroup(
-    name = "arm_fragment",
-    srcs = [
-        "arm.fragment",
-    ],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
     name = "goldfish_address_space_sources",
     srcs = [
         "goldfish_drivers/defconfig_test.h",
@@ -97,6 +89,7 @@ filegroup(
 )
 
 filegroup(
+<<<<<<< HEAD   (422039 ANDROID: Update virtual-device build rule for KUnit as modul)
     name = "virtual_device_arm_common_sources",
     srcs = [
         ":common_sources",
@@ -114,6 +107,8 @@ filegroup(
 )
 
 filegroup(
+=======
+>>>>>>> BRANCH (33f115 Drop 32 bit virtual device targets)
     name = "virtual_device_x86_64_common_sources",
     srcs = [
         ":common_sources",
@@ -139,6 +134,7 @@ ddk_headers(
 )
 
 ddk_headers(
+<<<<<<< HEAD   (422039 ANDROID: Update virtual-device build rule for KUnit as modul)
     name = "common_headers_arm",
     hdrs = [
         # uapi/ has highest priority
@@ -159,6 +155,8 @@ ddk_headers(
 )
 
 ddk_headers(
+=======
+>>>>>>> BRANCH (33f115 Drop 32 bit virtual device targets)
     name = "common_headers_x86_64",
     hdrs = [
         # uapi/ has highest priority
@@ -705,6 +703,7 @@ copy_to_dist_dir(
 )
 
 kernel_build(
+<<<<<<< HEAD   (422039 ANDROID: Update virtual-device build rule for KUnit as modul)
     name = "virtual_device_riscv64",
     srcs = [":virtual_device_riscv64_common_sources"],
     outs = [],
@@ -984,6 +983,8 @@ copy_to_dist_dir(
 )
 
 kernel_build(
+=======
+>>>>>>> BRANCH (33f115 Drop 32 bit virtual device targets)
     name = "server_aarch64",
     srcs = [":virtual_device_aarch64_common_sources"],
     outs = [
