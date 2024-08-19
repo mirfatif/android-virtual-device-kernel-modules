@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b1bc6f_a57e355e",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-08-19T17:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7201db97_96dae08d",
+      "range": {
+        "startLine": 678,
+        "startChar": 5,
+        "endLine": 678,
+        "endChar": 20
+      },
+      "revId": "3f6132e7b2d634726c69b6cccaaf4f3df38ad4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c810bdb8_af9cd880",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-16T23:31:54Z",
       "side": 1,
       "message": "Shouldn\u0027t it be u64? I think that\u0027s how we send those nthandles, and how they are set in dxgvmbus.c",
+      "range": {
+        "startLine": 972,
+        "startChar": 1,
+        "endLine": 972,
+        "endChar": 5
+      },
+      "revId": "3f6132e7b2d634726c69b6cccaaf4f3df38ad4d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9163c992_c1e308df",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-08-19T17:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c810bdb8_af9cd880",
       "range": {
         "startLine": 972,
         "startChar": 1,
