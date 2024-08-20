@@ -111,6 +111,7 @@ ddk_headers(
     linux_includes = ["uapi"],
 )
 
+<<<<<<< TARGET BRANCH (0b6440 [conflict] Drop 32 bit virtual device targets am: 33f115fd46)
 ddk_headers(
     name = "common_headers_aarch64",
     hdrs = [
@@ -141,6 +142,8 @@ ddk_headers(
     ],
 )
 
+=======
+>>>>>>> SOURCE BRANCH (c485d8 kleaf: Drop explicit dependency on //common:all_headers_*.)
 _VIRT_COMMON_MODULES = [
     # keep sorted
     "btintel.ko",
@@ -245,7 +248,7 @@ ddk_module(
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -253,7 +256,7 @@ ddk_module(
     srcs = [":goldfish_pipe_sources"],
     out = "goldfish_drivers/goldfish_pipe.ko",
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -261,7 +264,7 @@ ddk_module(
     srcs = [":goldfish_sync_sources"],
     out = "goldfish_drivers/goldfish_sync.ko",
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -269,7 +272,7 @@ ddk_module(
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_x86_64",
-    deps = [":common_headers_x86_64"],
+    deps = [":common_headers"],
 )
 
 kernel_module_group(
@@ -441,7 +444,7 @@ ddk_module(
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -449,7 +452,7 @@ ddk_module(
     srcs = [":goldfish_pipe_sources"],
     out = "goldfish_drivers/goldfish_pipe.ko",
     kernel_build = ":virtual_device_aarch64",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -457,7 +460,7 @@ ddk_module(
     srcs = [":goldfish_sync_sources"],
     out = "goldfish_drivers/goldfish_sync.ko",
     kernel_build = ":virtual_device_aarch64",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -465,7 +468,7 @@ ddk_module(
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_aarch64",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 kernel_module_group(
@@ -609,7 +612,7 @@ ddk_module(
     srcs = [":goldfish_address_space_sources"],
     out = "goldfish_drivers/goldfish_address_space.ko",
     kernel_build = ":virtual_device_aarch64_16k",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -617,7 +620,7 @@ ddk_module(
     srcs = [":goldfish_pipe_sources"],
     out = "goldfish_drivers/goldfish_pipe.ko",
     kernel_build = ":virtual_device_aarch64_16k",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -625,7 +628,7 @@ ddk_module(
     srcs = [":goldfish_sync_sources"],
     out = "goldfish_drivers/goldfish_sync.ko",
     kernel_build = ":virtual_device_aarch64_16k",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 ddk_module(
@@ -633,7 +636,7 @@ ddk_module(
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_aarch64_16k",
-    deps = [":common_headers_aarch64"],
+    deps = [":common_headers"],
 )
 
 kernel_module_group(
