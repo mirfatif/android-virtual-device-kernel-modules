@@ -122,6 +122,7 @@ ddk_headers(
 )
 
 ddk_headers(
+<<<<<<< HEAD   (abe6a6 [automerger skipped] kleaf: Drop explicit dependency on //co)
     name = "common_headers_riscv64",
     hdrs = [
         # uapi/ has highest priority
@@ -132,6 +133,8 @@ ddk_headers(
 )
 
 ddk_headers(
+=======
+>>>>>>> BRANCH (c0b98b Revert "kleaf: Drop explicit dependency on //common:all_head)
     name = "common_headers_x86_64",
     hdrs = [
         # uapi/ has highest priority
