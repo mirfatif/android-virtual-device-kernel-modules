@@ -1826,6 +1826,7 @@ struct d3dkmt_presentvirtual {
 	__s32	acquire_semaphore_fd;
 	__s32	release_semaphore_fd;
 	__s32	composition_memory_fd;
+	__u32   display_id;
 	__u64	private_data_size;
 #ifdef __KERNEL__
 	void			*private_data;

@@ -960,6 +960,7 @@ struct dxgkvmb_command_presentvirtual {
 	u64 acquire_semaphore_nthandle;
 	u64 release_semaphore_nthandle;
 	u64 composition_memory_nthandle;
+	u32 display_id;
 	u64 private_data_size;
 	// prviate_data
 };
