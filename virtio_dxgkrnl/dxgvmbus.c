@@ -634,6 +634,7 @@ int dxgvmb_send_present_virtual(struct dxgprocess *process,
 	command->acquire_semaphore_nthandle = acquire_semaphore_nthandle;
 	command->release_semaphore_nthandle = release_semaphore_nthandle;
 	command->composition_memory_nthandle = composition_memory_nthandle;
+	command->display_id = args->display_id;
 	command->private_data_size = args->private_data_size;
 
 
