@@ -454,7 +454,7 @@ static unsigned int dxgk_poll(struct file *f, struct poll_table_struct *wait)
 	poll_wait(f, &display_changed_wait_queue_head, wait);
 	process = (struct dxgprocess *)f->private_data;
 	dev_dbg(dxgglobaldev, "poll wake for display change, change id transition %d -> %d.\n",
-			(int)process->last_display_change_id, (int)->dxglobal->last_display_change_id);
+			(int)process->last_display_change_id, (int)dxgglobal->last_display_change_id);
 	if (dxgglobal->last_display_change_id != process->last_display_change_id)
 	{
 		process->last_display_change_id = dxgglobal->last_display_change_id;
