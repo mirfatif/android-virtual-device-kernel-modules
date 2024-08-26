@@ -1,4 +1,34 @@
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "kernel_build",
+)
 load(":kleaf_test.bzl", "kleaf_test")
 
+kernel_build(
+    name = "test_kernel",
+    srcs = [
+        "//common:kernel_x86_64_sources",
+    ],
+    outs = [],
+    arch = "x86_64",
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.kleaf_test",
+    defconfig_fragments = [
+        "kleaf_test.fragment",
+    ],
+    kconfig_ext = "Kconfig.ext",
+    make_goals = [
+        "modules",
+    ],
+    module_outs = [],
+    visibility = [":__subpackages__"],
+)
+
 # Tests on Kleaf functionality using virtual device as a baseline.
-kleaf_test(name = "kleaf_test")
+kleaf_test(
+    name = "kleaf_test",
+    extras = [
+        "//common-modules/virtual-device/kleaf_test/mixed_dep_test",
+    ],
+    kernel_build = ":test_kernel",
+)
