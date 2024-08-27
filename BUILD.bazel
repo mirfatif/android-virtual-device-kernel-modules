@@ -1273,3 +1273,49 @@ alias(
     actual = "//common:kernel_x86_64_crashdump_config",
     deprecation = "Use //common:kernel_x86_64_crashdump_config",
 )
+
+#KIWI
+kernel_build(
+    name = "kiwi_x86_64",
+    srcs = [":virtual_device_x86_64_common_sources"],
+    outs = [],
+    arch = "x86_64",
+    base_kernel = "//common:kernel_x86_64",
+    build_config = "build.config.kiwi.x86_64",
+    make_goals = [
+        "modules",
+    ],
+    module_outs = _VIRT_COMMON_MODULES + [
+        # keep sorted
+        "drivers/char/tpm/tpm.ko",
+        "drivers/char/tpm/tpm_vtpm_proxy.ko",
+        "drivers/input/mouse/psmouse.ko",
+        "drivers/leds/trigger/ledtrig-audio.ko",
+        "drivers/md/md-mod.ko",
+        "drivers/virtio/virtio_mmio.ko",
+        "dummy-cpufreq.ko",
+        "nd_virtio.ko",
+        "sound/ac97_bus.ko",
+        "sound/core/snd-ctl-led.ko",
+        "sound/hda/snd-hda-core.ko",
+        "sound/pci/ac97/snd-ac97-codec.ko",
+        "sound/pci/hda/snd-hda-codec.ko",
+        "sound/pci/hda/snd-hda-codec-generic.ko",
+        "sound/pci/hda/snd-hda-codec-realtek.ko",
+        "sound/pci/hda/snd-hda-intel.ko",
+        "sound/pci/snd-intel8x0.ko",
+        "test_meminit.ko",
+        "virtio_pmem.ko",
+    ],
+)
+
+copy_to_dist_dir(
+    name = "kiwi_x86_64_dist",
+    data = [
+        ":kiwi_x86_64",
+        "//common:kernel_x86_64",
+        "//common:kernel_x86_64_additional_artifacts",
+    ],
+    dist_dir = "out/kiwi_x86_64/dist",
+    flat = True,
+)
