@@ -753,4 +753,5 @@ def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
             name + "_submodule_module",
             name + "_submodule_module_child",
         ],
+        **private_kwargs
     )
