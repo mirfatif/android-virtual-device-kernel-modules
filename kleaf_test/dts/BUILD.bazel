@@ -1,0 +1,9 @@
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "kernel_dtstree",
+)
+
+kernel_dtstree(
+    name = "dts",
+    visibility = ["//common-modules/virtual-device/kleaf_test:__subpackages__"],
+)

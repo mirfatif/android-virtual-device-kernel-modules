@@ -8,6 +8,8 @@ load(
     "ddk_module",
     "ddk_submodule",
     "kernel_build",
+    "kernel_images",
+    "kernel_modules_install",
 )
 
 def kleaf_test(
@@ -33,13 +35,15 @@ def kleaf_test(
         defconfig_fragments = [
             "kleaf_test.fragment",
         ],
+        dtstree = Label("//common-modules/virtual-device/kleaf_test/dts"),
         kconfig_ext = "Kconfig.ext",
-        outs = [],
+        outs = ["fake.dtb"],
         base_kernel = "//common:kernel_x86_64",
         build_config = "build.config.kleaf_test",
         module_outs = [],
         make_goals = [
             "modules",
+            "dtbs",
         ],
         **private_kwargs
     )
@@ -98,6 +102,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _kernel_boot_images_outs_contains_ramdisk_test(
+        name = name + "_kernel_boot_images_outs_contains_ramdisk_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -110,6 +120,7 @@ def kleaf_test(
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
             name + "_ddk_genfiles_test",
+            name + "_kernel_boot_images_outs_contains_ramdisk_test",
         ],
         **kwargs
     )
@@ -753,4 +764,46 @@ def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
             name + "_submodule_module",
             name + "_submodule_module_child",
         ],
+    )
+
+def _kernel_boot_images_outs_contains_ramdisk_test(name, kernel_build, **private_kwargs):
+    """Test the following.
+
+    If:
+    - build_initramfs = True
+    - build_boot_images from build_utils.sh is called
+
+    Then build_boot_images can generate $DIST_DIR/ramdisk.{ramdisk_ext} properly.
+
+    See b/361733833.
+    """
+    kernel_modules_install(
+        name = name + "_modules_install",
+        kernel_build = kernel_build,
+        **private_kwargs
+    )
+    kernel_images(
+        name = name + "_images_set_ramdisk_compression",
+        kernel_build = kernel_build,
+        kernel_modules_install = name + "_modules_install",
+        build_initramfs = True,
+        ramdisk_compression = "lz4",
+        build_vendor_boot = True,
+        **private_kwargs
+    )
+    kernel_images(
+        name = name + "_images_unset_ramdisk_compression",
+        kernel_build = kernel_build,
+        kernel_modules_install = name + "_modules_install",
+        build_initramfs = True,
+        build_vendor_boot = True,
+        **private_kwargs
+    )
+    build_test(
+        name = name,
+        targets = [
+            name + "_images_set_ramdisk_compression",
+            name + "_images_unset_ramdisk_compression",
+        ],
+        **private_kwargs
     )
