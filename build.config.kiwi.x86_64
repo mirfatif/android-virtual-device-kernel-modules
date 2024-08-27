@@ -4,10 +4,6 @@
 
 DEFCONFIG=kiwi_x86_64_gki_defconfig
 
-# HACK: bug in bash 5.2 that if the last command of the eval in a subshell is not a built-in
-#   command, the subshell exits prematurely. This is fixed in 5.2.15 but we leave
-#   this hack in until bash becomes hermetic (unlikely).
-#   See b/275468906#comment8
 PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && \
     KCONFIG_CONFIG=\${OUT_DIR}/arch/x86/configs/${DEFCONFIG} \
         ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r \
@@ -17,7 +13,6 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs/ && \
         ${ROOT_DIR}/common-modules/virtual-device/kiwi.fragment && \
     true"
 POST_DEFCONFIG_CMDS=""
-EXT_MODULES="common-modules/virtual-device"
 BUILD_VIRTIO_DXGKRNL=m
 
 MAKE_GOALS="
@@ -26,7 +21,3 @@ modules
 
 # Not building/saving any kernel images. This build step is meant purely to generate the .kos.
 FILES=""
-
-
-KMI_SYMBOL_LIST=android/abi_gki_x86_6464_db845c
-GKI_MODULES_LIST=android/gki_x86_64_modules
