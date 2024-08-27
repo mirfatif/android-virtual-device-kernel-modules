@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289b4c75_462d1ec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1975655
+      },
+      "writtenOn": "2024-08-27T12:28:43Z",
+      "side": 1,
+      "message": "Please update the commit message to clearly explain the reason for these config changes. For instance, mention something like \"Config changes to support kernel upgrade to version ###\". Additionally, if applicable, please include information about any bugs fixed or testing performed related to these changes (refer ag/25406709).",
+      "revId": "f2a50f8c98773eab42f7e60782049548dfe87edc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
