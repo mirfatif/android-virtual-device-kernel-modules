@@ -10,15 +10,18 @@ kernel_build(
         "//common:kernel_x86_64_sources",
     ],
     outs = [],
+    outs = ["fake.dtb"],
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.kleaf_test",
     defconfig_fragments = [
         "kleaf_test.fragment",
     ],
+    dtstree = "//common-modules/virtual-device/kleaf_test/dts",
     kconfig_ext = "Kconfig.ext",
     make_goals = [
         "modules",
+        "dtbs",
     ],
     module_outs = [],
     visibility = [":__subpackages__"],
