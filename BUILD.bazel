@@ -746,6 +746,7 @@ kernel_build(
         "virtual_device_core.fragment",
         "linux_distro.fragment",
     ],
+    kmi_symbol_list_strict_mode = False,
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)
@@ -772,6 +773,7 @@ kernel_build(
         ],
     )),
     strip_modules = False,
+    trim_nonlisted_kmi = False,
 )
 
 kernel_images(
@@ -815,6 +817,7 @@ kernel_build(
         "virtual_device_core.fragment",
         "linux_distro.fragment",
     ],
+    kmi_symbol_list_strict_mode = False,
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)
@@ -841,6 +844,7 @@ kernel_build(
         ],
     )),
     strip_modules = False,
+    trim_nonlisted_kmi = False,
 )
 
 kernel_images(
