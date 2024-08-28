@@ -645,6 +645,7 @@ def _ddk_submodule_config_conditional_srcs_test(name, kernel_build, **private_kw
         targets = [
             name + "_module",
         ],
+        **private_kwargs
     )
 
 def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
