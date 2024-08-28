@@ -261,6 +261,7 @@ kernel_images(
     kernel_modules_install = ":virtual_device_x86_64_modules_install",
     modules_blocklist = "modules.blocklist",
     modules_options = "modules.options",
+    ramdisk_compression = "lz4",
 )
 
 dependency_graph(
@@ -457,6 +458,7 @@ kernel_images(
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
     modules_blocklist = "modules.blocklist",
     modules_options = "modules.options",
+    ramdisk_compression = "lz4",
 )
 
 _FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = [paths.basename(m) for m in get_gki_modules_list("arm64")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES
@@ -617,6 +619,7 @@ kernel_images(
     kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
     modules_blocklist = "modules.blocklist",
     modules_options = "modules.options",
+    ramdisk_compression = "lz4",
 )
 
 copy_to_dist_dir(
