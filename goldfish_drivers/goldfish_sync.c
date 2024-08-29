@@ -821,12 +821,11 @@ static int goldfish_sync_probe(struct platform_device *pdev)
 	return 0;
 }
 
-static int goldfish_sync_remove(struct platform_device *pdev)
+static void goldfish_sync_remove(struct platform_device *pdev)
 {
 	struct goldfish_sync_state *sync_state = platform_get_drvdata(pdev);
 
 	misc_deregister(&sync_state->miscdev);
-	return 0;
 }
 
 static const struct of_device_id goldfish_sync_of_match[] = {
