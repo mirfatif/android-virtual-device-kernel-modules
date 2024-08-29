@@ -34,6 +34,24 @@
       "parentUuid": "8f80005e_9d3ecf0f",
       "revId": "4ae4dc4ca4d549fbc983bfe6b1fc73a3515fc992",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77dd105_97f7bfc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3562669
+      },
+      "writtenOn": "2024-08-29T10:49:09Z",
+      "side": 1,
+      "message": "Hey Shashi, I have added bazel file changes here itself",
+      "parentUuid": "82edcdba_3f918897",
+      "revId": "4ae4dc4ca4d549fbc983bfe6b1fc73a3515fc992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
