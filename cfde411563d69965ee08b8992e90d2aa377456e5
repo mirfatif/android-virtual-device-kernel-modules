@@ -16,6 +16,24 @@
       "message": "This needs to be .remove_new now.",
       "revId": "cfde411563d69965ee08b8992e90d2aa377456e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f1c911_c1bd7346",
+        "filename": "goldfish_drivers/goldfish_sync.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1968111
+      },
+      "writtenOn": "2024-08-29T07:49:14Z",
+      "side": 1,
+      "message": "We should use remove for v6.11-rc1 as remove_new was a intermediate step",
+      "parentUuid": "d82ee943_87d6c6c2",
+      "revId": "cfde411563d69965ee08b8992e90d2aa377456e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
