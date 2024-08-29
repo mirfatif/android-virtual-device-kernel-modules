@@ -16,6 +16,24 @@
       "message": "Kriti, how do I test this build are there any instructions?",
       "revId": "4ae4dc4ca4d549fbc983bfe6b1fc73a3515fc992",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82edcdba_3f918897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3562669
+      },
+      "writtenOn": "2024-08-29T05:05:51Z",
+      "side": 1,
+      "message": "I will raise another change with the BUILD.bazel file changes which can be used to run the build command. This change just adds the kiwi config files to this branch.",
+      "parentUuid": "8f80005e_9d3ecf0f",
+      "revId": "4ae4dc4ca4d549fbc983bfe6b1fc73a3515fc992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
