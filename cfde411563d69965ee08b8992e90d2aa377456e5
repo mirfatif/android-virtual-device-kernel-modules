@@ -52,6 +52,24 @@
       "parentUuid": "d82ee943_87d6c6c2",
       "revId": "cfde411563d69965ee08b8992e90d2aa377456e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ea948f_6855f7df",
+        "filename": "goldfish_drivers/goldfish_sync.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2024-08-29T08:46:18Z",
+      "side": 1,
+      "message": "There\u0027s no rush to stop using remove_new - there are still 3k instances in Mainline.",
+      "parentUuid": "695e651f_3c564ad2",
+      "revId": "cfde411563d69965ee08b8992e90d2aa377456e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
