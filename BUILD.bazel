@@ -109,6 +109,7 @@ _VIRT_COMMON_MODULES = [
     "btrtl.ko",
     "btusb.ko",
     "cfg80211.ko",
+    "cma_heap.ko",
     "dummy-cpufreq.ko",
     "dummy_hcd.ko",
     "failover.ko",
