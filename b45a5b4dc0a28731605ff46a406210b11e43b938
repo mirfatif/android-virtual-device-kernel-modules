@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6ef634_690bd35d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-09-02T03:04:40Z",
+      "side": 1,
+      "message": "Please add bug to the description.\n\nAlso don\u0027t seem to have +2 on this repo:\nhttps://screenshot.googleplex.com/5WFi5jbdaQpMCSg\n\nDoes anyone has +2 on this repo, we should probably set ACLs to allow someone to +2 this change.",
+      "revId": "b45a5b4dc0a28731605ff46a406210b11e43b938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
