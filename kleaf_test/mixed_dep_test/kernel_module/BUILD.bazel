@@ -1,0 +1,29 @@
+"""Demonstrates how a kernel_module may depend on ddk_module.
+
+Note: You should only use this during a transient migration phase. Support for this may be
+discontinued without notice. It is recommended that all kernel_module's are converted to ddk_module.
+You may use this as a reference if you want to convert any kernel_module in your dependency tree
+to ddk_module, without converting the child modules first.
+"""
+
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "kernel_module",
+)
+
+kernel_module(
+    name = "my_kernel_module",
+    srcs = [
+        "Makefile",
+        "Kbuild",
+        "kernel_mod.c",
+        # Add exported header files from parent ddk_module to the inputs.
+        "//common-modules/virtual-device/kleaf_test/mixed_dep_test/ddk_module:my_ddk_module_exported_headers",
+    ],
+    outs = ["my_kernel_module.ko"],
+    kernel_build = "//common-modules/virtual-device/kleaf_test:test_kernel",
+    visibility = ["//common-modules/virtual-device/kleaf_test:__subpackages__"],
+    deps = [
+        "//common-modules/virtual-device/kleaf_test/mixed_dep_test/ddk_module:my_ddk_module",
+    ],
+)
