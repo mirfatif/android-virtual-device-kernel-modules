@@ -12,11 +12,15 @@ load(
 
 def kleaf_test(
         name,
+        kernel_build,
+        extras,
         **kwargs):
     """Define tests on Kleaf using virtual device as a baseline.
 
     Args:
         name: Name of the test
+        kernel_build: the test kernel_build
+        extras: extra tests
         **kwargs: additional kwargs common to all rules.
     """
 
@@ -24,77 +28,57 @@ def kleaf_test(
         visibility = ["//visibility:private"],
     )
 
-    kernel_build(
-        name = name + "_kernel_build",
-        arch = "x86_64",
-        srcs = [
-            "//common:kernel_x86_64_sources",
-        ],
-        defconfig_fragments = [
-            "kleaf_test.fragment",
-        ],
-        kconfig_ext = "Kconfig.ext",
-        outs = [],
-        base_kernel = "//common:kernel_x86_64",
-        build_config = "build.config.kleaf_test",
-        module_outs = [],
-        make_goals = [
-            "modules",
-        ],
-        **private_kwargs
-    )
-
     _ddk_module_dep_test(
         name = name + "_ddk_module_dep_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_module_include_test(
         name = name + "_ddk_module_include_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_module_conditional_srcs_test(
         name = name + "_ddk_module_conditional_srcs_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_module_config_test(
         name = name + "_ddk_module_config_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_submodule_config_test(
         name = name + "_ddk_submodule_config_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_cflags_test(
         name = name + "_ddk_cflags_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_long_arg_list_test(
         name = name + "_ddk_long_arg_list_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_submodule_config_conditional_srcs_test(
         name = name + "_ddk_submodule_config_conditional_srcs_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
     _ddk_genfiles_test(
         name = name + "_ddk_genfiles_test",
-        kernel_build = name + "_kernel_build",
+        kernel_build = kernel_build,
         **private_kwargs
     )
 
@@ -110,7 +94,7 @@ def kleaf_test(
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
             name + "_ddk_genfiles_test",
-        ],
+        ] + extras,
         **kwargs
     )
 

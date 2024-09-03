@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-2.0
+my_kernel_module-y += kernel_mod.o
+obj-m += my_kernel_module.o
+
+# This allows depending on headers exported by the parent ddk_module.
+CFLAGS_kernel_mod.o += -I$(ROOT_DIR)/common-modules/virtual-device/kleaf_test/mixed_dep_test/ddk_module
