@@ -1,0 +1,24 @@
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "ddk_module",
+)
+
+filegroup(
+    name = "my_ddk_module_exported_headers",
+    srcs = ["ddk_mod.h"],
+    visibility = ["//common-modules/virtual-device/kleaf_test:__subpackages__"],
+)
+
+ddk_module(
+    name = "my_ddk_module",
+    srcs = ["ddk_mod.c"],
+    out = "my_ddk_module.ko",
+    # Usually, headers are exported via this method. However, because our only
+    # dependency is a kernel_module, it is exported via :my_ddk_module_exported_headers
+    # instead. The hdrs adds the header to the local build; and the includes are not useful
+    # in this test.
+    hdrs = ["ddk_mod.h"],
+    includes = ["."],
+    kernel_build = "//common-modules/virtual-device/kleaf_test:test_kernel",
+    visibility = ["//common-modules/virtual-device/kleaf_test:__subpackages__"],
+)
