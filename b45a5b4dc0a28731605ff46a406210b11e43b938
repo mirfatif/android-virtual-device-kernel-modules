@@ -34,6 +34,24 @@
       "parentUuid": "5e6ef634_690bd35d",
       "revId": "b45a5b4dc0a28731605ff46a406210b11e43b938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2877ed_ff084069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2024-09-03T16:47:16Z",
+      "side": 1,
+      "message": "You\u0027ll need to request the build team to add +2 permissions for this project/branch combination. \n\nkernel/common has +2 for play-store-sfo@ for branches that match `^refs/heads/android.*-kiwi-.*`. A similar rule needs to be added to this project [2].\n\nLikely both should be updated to battlestar-eng@ since play-store-sfo@ is too specific and a relic of the previous team structure. We\u0027ve been moving most permissions away from play-store-sfo@.\n\n1: https://android-review.git.corp.google.com/admin/repos/kernel/common,access\n2: https://android-review.git.corp.google.com/admin/repos/kernel/common-modules/virtual-device,access",
+      "parentUuid": "527fe61a_726d09af",
+      "revId": "b45a5b4dc0a28731605ff46a406210b11e43b938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
