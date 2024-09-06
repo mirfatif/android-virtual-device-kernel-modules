@@ -82,6 +82,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_submodule_duplicate_linux_include_test(
+        name = name + "_ddk_submodule_duplicate_linux_include_test",
+        kernel_build = kernel_build,
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -94,6 +100,7 @@ def kleaf_test(
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
             name + "_ddk_genfiles_test",
+            name + "_ddk_submodule_duplicate_linux_include_test",
         ] + extras,
         **kwargs
     )
@@ -737,6 +744,67 @@ def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
             name + "_module_child",
             name + "_submodule_module",
             name + "_submodule_module_child",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_submodule_duplicate_linux_include_test(name, kernel_build, **private_kwargs):
+    """Tests that linux_inlcudes from deps of individual submodules are not duplicated"""
+
+    # With the fix, this should add 100 tokens to LINUXINCLUDE. Without the fix,
+    # this adds 10000 tokens and will surely trigger "Argument list too long".
+    num_submodules = 100
+    num_includes = 100
+
+    ddk_headers(
+        name = "{}_headers".format(name),
+        hdrs = ["include/include_test_lib.h"],
+        linux_includes = ["include"] + [
+            "include_{}".format(i)
+            for i in range(num_includes)
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = "{}_module".format(name),
+        kernel_build = kernel_build,
+        deps = [
+            "{}_submodule_{}".format(name, i)
+            for i in range(num_submodules)
+        ],
+        **private_kwargs
+    )
+
+    for i in range(num_submodules):
+        write_file(
+            name = "{}_generated_source_{}".format(name, i),
+            out = "{}_generated_source_{}.c".format(name, i),
+            content = [
+                "#include <include_test_lib.h>",
+                "void func_{}(void) {{}}".format(i),
+                "",
+            ],
+            **private_kwargs
+        )
+
+        ddk_submodule(
+            name = "{}_submodule_{}".format(name, i),
+            out = "submodule_{}.ko".format(i),
+            srcs = [
+                Label("nothing.c"),
+                ":{}_generated_source_{}".format(name, i),
+            ],
+            deps = [
+                ":{}_headers".format(name),
+            ],
+            **private_kwargs
+        )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
         ],
         **private_kwargs
     )
