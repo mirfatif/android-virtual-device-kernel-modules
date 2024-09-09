@@ -1306,6 +1306,7 @@ kernel_build(
         "sound/pci/snd-intel8x0.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
+        "drivers/virtio/virtio_pvclock.ko",
     ],
 )
 
