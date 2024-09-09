@@ -1293,6 +1293,7 @@ kernel_build(
         "drivers/leds/trigger/ledtrig-audio.ko",
         "drivers/md/md-mod.ko",
         "drivers/virtio/virtio_mmio.ko",
+        "drivers/virtio/virtio_pvclock.ko",
         "dummy-cpufreq.ko",
         "nd_virtio.ko",
         "sound/ac97_bus.ko",
