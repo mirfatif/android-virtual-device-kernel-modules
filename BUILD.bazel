@@ -657,6 +657,10 @@ kernel_build(
     arch = "riscv64",
     base_kernel = "//common:kernel_riscv64",
     build_config = "build.config.virtual_device.riscv64",
+    defconfig_fragments = [
+        "virtual_device_core.fragment",
+        "virtual_device.fragment",
+    ],
     make_goals = [
         "modules",
     ],
@@ -717,6 +721,7 @@ kernel_images(
     kernel_modules_install = ":virtual_device_riscv64_modules_install",
     modules_blocklist = "modules.blocklist",
     modules_options = "modules.options",
+    ramdisk_compression = "lz4",
 )
 
 copy_to_dist_dir(
