@@ -179,6 +179,7 @@ kernel_build(
     make_goals = [
         "modules",
     ],
+    makefile = "//common:Makefile",
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "nd_virtio.ko",
@@ -381,6 +382,7 @@ kernel_build(
         "modules",
         "arm/fvp-base-revc.dtb",
     ],
+    makefile = "//common:Makefile",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     strip_modules = True,
 )
@@ -557,6 +559,7 @@ kernel_build(
         "modules",
         "arm/fvp-base-revc.dtb",
     ],
+    makefile = "//common:Makefile",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     page_size = "16k",
     strip_modules = True,
@@ -654,6 +657,7 @@ kernel_build(
         "linux_distro.fragment",
     ],
     kmi_symbol_list_strict_mode = False,
+    makefile = "//common:Makefile",
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)
@@ -725,6 +729,7 @@ kernel_build(
         "linux_distro.fragment",
     ],
     kmi_symbol_list_strict_mode = False,
+    makefile = "//common:Makefile",
     module_outs = sets.to_list(sets.make(
         [
             paths.basename(module)

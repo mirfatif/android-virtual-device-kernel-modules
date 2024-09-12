@@ -1,4 +1,2 @@
-KERNEL_DIR=common
-
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
