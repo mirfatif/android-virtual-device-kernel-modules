@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca602c01_52ff35b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876910
+      },
+      "writtenOn": "2024-09-12T11:47:22Z",
+      "side": 1,
+      "message": "The v2/android-gki/main_cf_arm64_kernel_local_test failure was b/352286227, which is unrelated to this change. Feel free to bypass or re-run the test; that failure is not consistent so a re-run may work.",
+      "revId": "1a0372b4e5bcdf6068b4d8c740d6f663d8414d28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
