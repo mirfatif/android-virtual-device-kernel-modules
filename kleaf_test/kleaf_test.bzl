@@ -90,6 +90,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_submodule_linux_include_in_top_level_test(
+        name = name + "_ddk_submodule_linux_include_in_top_level_test",
+        kernel_build = kernel_build,
+        **private_kwargs
+    )
+
     _kernel_boot_images_outs_contains_ramdisk_test(
         name = name + "_kernel_boot_images_outs_contains_ramdisk_test",
         kernel_build = kernel_build,
@@ -109,6 +115,7 @@ def kleaf_test(
             name + "_ddk_submodule_config_conditional_srcs_test",
             name + "_ddk_genfiles_test",
             name + "_ddk_submodule_duplicate_linux_include_test",
+            name + "_ddk_submodule_linux_include_in_top_level_test",
             name + "_kernel_boot_images_outs_contains_ramdisk_test",
         ] + extras,
         **kwargs
@@ -814,6 +821,54 @@ def _ddk_submodule_duplicate_linux_include_test(name, kernel_build, **private_kw
         name = name,
         targets = [
             name + "_module",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_submodule_linux_include_in_top_level_test(name, kernel_build, **private_kwargs):
+    """Tests that linux_inlcudes in top-level ddk_module are applied to individual submodules"""
+    ddk_headers(
+        name = "{}_headers".format(name),
+        hdrs = ["include/include_test_lib.h"],
+        linux_includes = ["include"],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = "{}_module".format(name),
+        kernel_build = kernel_build,
+        deps = [
+            ":{}_submodule".format(name),
+            ":{}_headers".format(name),
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = "{}_generated_source".format(name),
+        out = "{}_generated_source.c".format(name),
+        content = [
+            "#include <include_test_lib.h>",
+            "void func(void) {}",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = "{}_submodule".format(name),
+        out = "submodule.ko",
+        srcs = [
+            Label("nothing.c"),
+            ":{}_generated_source".format(name),
+        ],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            "{}_module".format(name),
         ],
         **private_kwargs
     )
