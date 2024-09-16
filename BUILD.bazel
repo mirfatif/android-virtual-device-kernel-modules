@@ -667,6 +667,7 @@ kernel_build(
     make_goals = [
         "modules",
     ],
+    makefile = "//common:Makefile",
     module_outs = _VIRT_COMMON_MODULES + _VIRT_RISCV64_MODULES,
     strip_modules = True,
 )
