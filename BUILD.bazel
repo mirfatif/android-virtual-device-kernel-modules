@@ -1315,6 +1315,7 @@ copy_to_dist_dir(
     data = [
         ":kiwi_x86_64",
         "//common:kernel_x86_64",
+        "//common:kernel_x86_64_modules",
         "//common:kernel_x86_64_additional_artifacts",
     ],
     dist_dir = "out/kiwi_x86_64/dist",
