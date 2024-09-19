@@ -15,7 +15,8 @@
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//lib:sets.bzl", "sets")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
-load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("@rules_pkg//pkg:install.bzl", "pkg_install")
+load("@rules_pkg//pkg:mappings.bzl", "pkg_files", "strip_prefix")
 load(
     "//build/kernel/kleaf:kernel.bzl",
     "ddk_headers",
@@ -274,9 +275,9 @@ dependency_graph(
     ],
 )
 
-copy_to_dist_dir(
-    name = "virtual_device_x86_64_dist",
-    data = [
+pkg_files(
+    name = "virtual_device_x86_64_dist_files",
+    srcs = [
         ":virtual_device_x86_64",
         ":virtual_device_x86_64_images",
         ":virtual_device_x86_64_merged_kernel_uapi_headers",
@@ -286,8 +287,14 @@ copy_to_dist_dir(
         "//common:test_mappings_zip",
         "//common:tests_zip_x86_64",
     ],
-    dist_dir = "out/virtual_device_x86_64/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "virtual_device_x86_64_dist",
+    srcs = [":virtual_device_x86_64_dist_files"],
+    destdir = "out/virtual_device_x86_64/dist",
 )
 
 # artifact tests for x86_64
@@ -516,9 +523,9 @@ dependency_graph(
     ],
 )
 
-copy_to_dist_dir(
-    name = "virtual_device_aarch64_dist",
-    data = [
+pkg_files(
+    name = "virtual_device_aarch64_dist_files",
+    srcs = [
         ":virtual_device_aarch64",
         ":virtual_device_aarch64_images",
         ":virtual_device_aarch64_merged_kernel_uapi_headers",
@@ -528,8 +535,14 @@ copy_to_dist_dir(
         "//common:test_mappings_zip",
         "//common:tests_zip_arm64",
     ],
-    dist_dir = "out/virtual_device_aarch64/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "virtual_device_aarch64_dist",
+    srcs = [":virtual_device_aarch64_dist_files"],
+    destdir = "out/virtual_device_aarch64/dist",
 )
 
 # artifact tests for aarch64
@@ -625,9 +638,9 @@ kernel_images(
     ramdisk_compression = "lz4",
 )
 
-copy_to_dist_dir(
-    name = "virtual_device_aarch64_16k_dist",
-    data = [
+pkg_files(
+    name = "virtual_device_aarch64_16k_dist_files",
+    srcs = [
         ":virtual_device_aarch64_16k",
         ":virtual_device_aarch64_16k_images",
         ":virtual_device_aarch64_16k_modules_install",
@@ -635,8 +648,14 @@ copy_to_dist_dir(
         "//common:kernel_aarch64_16k_images",
         "//common:test_mappings_zip",
     ],
-    dist_dir = "out/virtual_device_aarch64_16k/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "virtual_device_aarch64_16k_dist",
+    srcs = [":virtual_device_aarch64_16k_dist_files"],
+    destdir = "out/virtual_device_aarch64_16k/dist",
 )
 
 kernel_build(
@@ -699,15 +718,21 @@ kernel_modules_install(
     kernel_build = "//common-modules/virtual-device:server_aarch64",
 )
 
-copy_to_dist_dir(
-    name = "server_aarch64_dist",
-    data = [
+pkg_files(
+    name = "server_aarch64_dist_files",
+    srcs = [
         ":server_aarch64",
         ":server_aarch64_images",
         ":server_aarch64_modules_install",
     ],
-    dist_dir = "out/server_aarch64/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "server_aarch64_dist",
+    srcs = [":server_aarch64_dist_files"],
+    destdir = "out/server_aarch64/dist",
 )
 
 kernel_build(
@@ -771,15 +796,21 @@ kernel_modules_install(
     kernel_build = "//common-modules/virtual-device:server_x86_64",
 )
 
-copy_to_dist_dir(
-    name = "server_x86_64_dist",
-    data = [
+pkg_files(
+    name = "server_x86_64_dist_files",
+    srcs = [
         ":server_x86_64",
         ":server_x86_64_images",
         ":server_x86_64_modules_install",
     ],
-    dist_dir = "out/server_x86_64/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "server_x86_64_dist",
+    srcs = [":server_x86_64_dist_files"],
+    destdir = "out/server_x86_64/dist",
 )
 
 kernel_dtstree(
