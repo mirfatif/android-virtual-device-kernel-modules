@@ -963,5 +963,10 @@ int dxgvmb_send_query_statistics(struct dxgprocess *process,
 				 struct d3dkmt_querystatistics *args);
 int dxgvmb_send_share_object_with_host(struct dxgprocess *process,
 				struct d3dkmt_shareobjectwithhost *args);
+int dxgvmb_send_present_virtual(struct dxgprocess *process,
+				struct d3dkmt_presentvirtual *args,
+				__u64 acquire_semaphore_nthandle,
+				__u64 release_semaphore_nthandle,
+				__u64 composition_memory_nthandle);
 
 #endif
