@@ -96,7 +96,7 @@ enum hmgrentry_type hmgrtable_get_object_type(struct hmgrtable *tbl,
 					      struct d3dkmthandle h);
 void *hmgrtable_get_object(struct hmgrtable *tbl, struct d3dkmthandle h);
 void *hmgrtable_get_object_by_type(struct hmgrtable *tbl, enum hmgrentry_type t,
-				   struct d3dkmthandle h);
+				   struct d3dkmthandle h, bool error_on_missing);
 void *hmgrtable_get_object_ignore_destroyed(struct hmgrtable *tbl,
 					    struct d3dkmthandle h,
 					    enum hmgrentry_type t);
