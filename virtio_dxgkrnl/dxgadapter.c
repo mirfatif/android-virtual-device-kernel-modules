@@ -929,12 +929,7 @@ void dxgallocation_destroy(struct dxgallocation *alloc)
 					       alloc->owner.device,
 					       &args, &alloc->alloc_handle);
 	}
-	if (alloc->gpadl) {
-		dev_dbg(dxgglobaldev, "Teardown gpadl %d", alloc->gpadl);
-		vmbus_teardown_gpadl(dxgglobal_get_vmbus(), alloc->gpadl);
-		dev_dbg(dxgglobaldev, "Teardown gpadl end");
-		alloc->gpadl = 0;
-	}
+
 	if (alloc->priv_drv_data)
 		vfree(alloc->priv_drv_data);
 	if (alloc->cpu_address_mapped)
