@@ -4551,8 +4551,8 @@ dxgk_get_device_state(struct dxgprocess *process, void *__user inargs)
 	if (args.state_type == _D3DKMT_DEVICESTATE_EXECUTION) {
 		global_device_state_counter =
 			atomic_read(&dxgglobal->device_state_counter);
-		if (device->execution_state_counter ==
-		    global_device_state_counter) {
+		// TODO: re-enable caching
+		if (false) {
 			args.execution_state = device->execution_state;
 			ret = copy_to_user(inargs, &args, sizeof(args));
 			if (ret) {
