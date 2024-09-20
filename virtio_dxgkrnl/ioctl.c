@@ -2843,11 +2843,6 @@ dxgk_create_sync_object(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 
 	if (args.info.flags.shared) {
-		if (args.info.shared_handle.v == 0) {
-			pr_err("shared handle should not be 0");
-			ret = -EINVAL;
-			goto cleanup;
-		}
 		syncobjgbl = dxgsharedsyncobj_create(device->adapter, syncobj);
 		if (syncobjgbl == NULL) {
 			ret = -ENOMEM;
