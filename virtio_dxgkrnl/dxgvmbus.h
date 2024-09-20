@@ -673,6 +673,7 @@ struct dxgkvmb_command_allocinfo_return {
 };
 
 struct dxgkvmb_command_createallocation_return {
+	struct ntstatus status;
 	struct d3dkmt_createallocationflags flags;
 	struct d3dkmthandle		resource;
 	struct d3dkmthandle		global_share;
