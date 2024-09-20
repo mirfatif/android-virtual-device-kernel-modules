@@ -63,8 +63,7 @@ struct dxgk_device_types {
 	u32 virtual_monitor_device:1;
 };
 
-enum dxgdevice_flushschedulerreason
-{
+enum dxgdevice_flushschedulerreason {
 	DXGDEVICE_FLUSHSCHEDULER_DEVICE_TERMINATE = 4,
 };
 
