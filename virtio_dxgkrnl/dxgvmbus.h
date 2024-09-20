@@ -526,6 +526,7 @@ struct dxgkvmb_command_reservegpuvirtualaddress {
 struct dxgkvmb_command_reservegpuvirtualaddress_return {
 	u64	virtual_address;
 	u64	paging_fence_value;
+	struct ntstatus status;
 };
 
 struct dxgkvmb_command_updategpuvirtualaddress {
