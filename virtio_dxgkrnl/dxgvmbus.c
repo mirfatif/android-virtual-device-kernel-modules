@@ -25,58 +25,6 @@
 #undef pr_fmt
 #define pr_fmt(fmt)	"dxgk:err: " fmt
 
-#define RING_BUFSIZE (256 * 1024)
-
-/*
- * The structure is used to track VM bus packets, waiting for completion.
- */
-struct dxgvmbuspacket {
-	struct list_head packet_list_entry;
-	u64 request_id;
-	struct completion wait;
-	void *buffer;
-	u32 buffer_length;
-	int status;
-	bool completed;
-};
-
-struct dxgvmb_ext_header {
-	/* Offset from the start of the message to DXGKVMB_COMMAND_BASE */
-	u32		command_offset;
-	u32		reserved;
-	struct winluid	vgpu_luid;
-};
-
-#define VMBUSMESSAGEONSTACK	64
-
-struct dxgvmbusmsg {
-/* Points to the allocated buffer */
-	struct dxgvmb_ext_header	*hdr;
-/* Points to dxgkvmb_command_vm_to_host or dxgkvmb_command_vgpu_to_host */
-	void				*msg;
-/* The vm bus channel, used to pass the message to the host */
-	struct dxgvmbuschannel		*channel;
-/* Message size in bytes including the header and the payload */
-	u32				size;
-/* Buffer used for small messages */
-	char				msg_on_stack[VMBUSMESSAGEONSTACK];
-};
-
-struct dxgvmbusmsgres {
-/* Points to the allocated buffer */
-	struct dxgvmb_ext_header	*hdr;
-/* Points to dxgkvmb_command_vm_to_host or dxgkvmb_command_vgpu_to_host */
-	void				*msg;
-/* The vm bus channel, used to pass the message to the host */
-	struct dxgvmbuschannel		*channel;
-/* Message size in bytes including the header, the payload and the result */
-	u32				size;
-/* Result buffer size in bytes */
-	u32				res_size;
-/* Points to the result within the allocated buffer */
-	void				*res;
-};
-
 static int init_message(struct dxgvmbusmsg *msg, struct dxgadapter *adapter,
 			struct dxgprocess *process, u32 size)
 {
@@ -90,7 +38,7 @@ static int init_message(struct dxgvmbusmsg *msg, struct dxgadapter *adapter,
 		msg->hdr = (void *)msg->msg_on_stack;
 		memset(msg->hdr, 0, size);
 	} else {
-		msg->hdr = vzalloc(size);
+		msg->hdr = kzalloc(size, GFP_ATOMIC);
 		if (msg->hdr == NULL)
 			return -ENOMEM;
 	}
@@ -123,7 +71,7 @@ static int init_message_res(struct dxgvmbusmsgres *msg,
 	msg->size = size;
 	msg->res_size += (result_size + 7) & ~7;
 	size += msg->res_size;
-	msg->hdr = vzalloc(size);
+	msg->hdr = kzalloc(size, GFP_ATOMIC);
 	if (msg->hdr == NULL) {
 		pr_err("Failed to allocate VM bus message: %d", size);
 		return -ENOMEM;
@@ -146,7 +94,7 @@ static int init_message_res(struct dxgvmbusmsgres *msg,
 static void free_message(struct dxgvmbusmsg *msg, struct dxgprocess *process)
 {
 	if (msg->hdr && (char *)msg->hdr != msg->msg_on_stack)
-		vfree(msg->hdr);
+		kfree(msg->hdr);
 }
 
 int ntstatus2int(struct ntstatus status)
@@ -269,13 +217,17 @@ static int
 dxgvmb_send_sync_msg_ntstatus(struct dxgvmbuschannel *channel,
 			      void *command, u32 cmd_size)
 {
-	struct ntstatus status;
+	struct ntstatus *status;
 	int ret;
 
+	status = kzalloc(sizeof(struct ntstatus), GFP_ATOMIC);
+
 	ret = dxgvmb_send_sync_msg(channel, command, cmd_size,
-				   &status, sizeof(status));
+				   status, sizeof(struct ntstatus));
 	if (ret >= 0)
-		ret = ntstatus2int(status);
+		ret = ntstatus2int(*status);
+
+	kfree(status);
 	return ret;
 }
 
