@@ -93,6 +93,29 @@ filegroup(
 )
 
 filegroup(
+    name = "virtio_dxgkrnl_sources",
+    srcs = [
+        "virtio_dxgkrnl/dxgadapter.c",
+        "virtio_dxgkrnl/dxgglobal.c",
+        "virtio_dxgkrnl/dxgglobal.h",
+        "virtio_dxgkrnl/dxgkrnl.h",
+        "virtio_dxgkrnl/dxgprocess.c",
+        "virtio_dxgkrnl/dxgsyncfile.c",
+        "virtio_dxgkrnl/dxgsyncfile.h",
+        "virtio_dxgkrnl/dxgvmbus.c",
+        "virtio_dxgkrnl/dxgvmbus.h",
+        "virtio_dxgkrnl/hmgr.c",
+        "virtio_dxgkrnl/hmgr.h",
+        "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "virtio_dxgkrnl/ioctl.c",
+        "virtio_dxgkrnl/misc.c",
+        "virtio_dxgkrnl/misc.h",
+        "virtio_dxgkrnl/virtio_dxgkrnl.c",
+        "virtio_dxgkrnl/virtio_dxgkrnl.h",
+    ],
+)
+
+filegroup(
     name = "v4l2loopback_sources",
     srcs = [
         "v4l2loopback/v4l2loopback.c",
@@ -308,12 +331,28 @@ ddk_module(
 )
 
 ddk_module(
+    name = "virtio_dxgkrnl",
+    srcs = [":virtio_dxgkrnl_sources"],
+    out = "virtio_dxgkrnl.ko",
+    kernel_build = ":kiwi_x86_64",
+    local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
+    deps = [":common_headers_x86_64"],
+)
+
+ddk_module(
     name = "x86_64/v4l2loopback",
     srcs = [":v4l2loopback_sources"],
     out = "v4l2loopback.ko",
     kernel_build = ":virtual_device_x86_64",
     local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
     deps = [":common_headers_x86_64"],
+)
+
+kernel_module_group(
+    name = "kiwi_x86_64_external_modules",
+    srcs = [
+        ":virtio_dxgkrnl",
+    ],
 )
 
 kernel_module_group(
@@ -1310,10 +1349,37 @@ kernel_build(
     ],
 )
 
+kernel_modules_install(
+    name = "kiwi_x86_64_modules_install",
+    kernel_build = ":kiwi_x86_64",
+    kernel_modules = [
+        "kiwi_x86_64_external_modules",
+    ],
+)
+merged_kernel_uapi_headers(
+    name = "kiwi_x86_64_merged_kernel_uapi_headers",
+    kernel_build = ":kiwi_x86_64",
+    kernel_modules = [
+        "kiwi_x86_64_external_modules",
+    ],
+)
+
+kernel_images(
+    name = "kiwi_x86_64_images",
+    build_initramfs = True,
+    kernel_build = ":kiwi_x86_64",
+    kernel_modules_install = ":kiwi_x86_64_modules_install",
+    modules_blocklist = "modules.blocklist",
+    modules_options = "modules.options",
+)
+
 copy_to_dist_dir(
     name = "kiwi_x86_64_dist",
     data = [
         ":kiwi_x86_64",
+        ":kiwi_x86_64_images",
+        ":kiwi_x86_64_merged_kernel_uapi_headers",
+        ":kiwi_x86_64_modules_install",
         "//common:kernel_x86_64",
         "//common:kernel_x86_64_additional_artifacts",
         "//common:kernel_x86_64_modules",
