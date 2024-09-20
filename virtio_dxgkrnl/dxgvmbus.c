@@ -1393,7 +1393,6 @@ int create_existing_sysmem(struct dxgdevice *device,
 
 	dxgalloc->pages = vzalloc(npages * sizeof(void *));
 	if (dxgalloc->pages == NULL) {
-		pr_err("failed to allocate pages");
 		ret = -ENOMEM;
 		goto cleanup;
 	}
