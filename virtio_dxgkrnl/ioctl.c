@@ -1371,7 +1371,7 @@ dxgk_create_allocation(struct dxgprocess *process, void *__user inargs)
 	int ret;
 	struct dxgadapter *adapter = NULL;
 	struct dxgdevice *device = NULL;
-	struct d3dddi_allocationinfo2 *alloc_info = NULL;
+	struct d3dddi_allocationinfo *alloc_info = NULL;
 	struct d3dkmt_createstandardallocation standard_alloc;
 	u32 alloc_info_size = 0;
 	struct dxgresource *resource = NULL;
@@ -1400,7 +1400,7 @@ dxgk_create_allocation(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
-	alloc_info_size = sizeof(struct d3dddi_allocationinfo2) *
+	alloc_info_size = sizeof(struct d3dddi_allocationinfo) *
 	    args.alloc_count;
 	alloc_info = vzalloc(alloc_info_size);
 	if (alloc_info == NULL) {
