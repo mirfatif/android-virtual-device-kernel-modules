@@ -217,7 +217,7 @@ int dxg_unmap_iospace(void *va, u32 size)
 
 	page_addr = ((unsigned long)va) & PAGE_MASK;
 
-	dev_dbg(dxgglobaldev, "%s %p %x %x", __func__, va, page_addr, size);
+	dev_dbg(dxgglobaldev, "%s %p %x %x", __func__, va, (unsigned int) page_addr, size);
 
 	/*
 	 * When an app calls exit(), dxgkrnl is called to close the device

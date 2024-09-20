@@ -557,7 +557,7 @@ static int initialize_adapters(struct virtio_dxgkrnl *vp)
 	if (resp->status) {
 		dev_err(&vp->vdev->dev,
 			"%s: enum_adapters failed with response status %llu\n",
-			__func__, resp->status);
+			__func__, (unsigned long long) resp->status);
 		err = resp->status;
 		goto cleanup;
 	}
