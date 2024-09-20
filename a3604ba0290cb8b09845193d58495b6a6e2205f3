@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42885d9b_d8dc11b8",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1975655
+      },
+      "writtenOn": "2024-09-20T10:46:59Z",
+      "side": 1,
+      "message": "Why do we need to cast \"unsinged long\" to \"unsinged int\"?",
+      "revId": "a3604ba0290cb8b09845193d58495b6a6e2205f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
