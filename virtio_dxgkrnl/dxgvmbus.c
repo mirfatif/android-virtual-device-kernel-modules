@@ -212,16 +212,19 @@ static int check_iospace_address(unsigned long address, u32 size)
 
 int dxg_unmap_iospace(void *va, u32 size)
 {
+	unsigned long page_addr;
 	int ret = 0;
 
-	dev_dbg(dxgglobaldev, "%s %p %x", __func__, va, size);
+	page_addr = ((unsigned long)va) & PAGE_MASK;
+
+	dev_dbg(dxgglobaldev, "%s %p %x %x", __func__, va, page_addr, size);
 
 	/*
 	 * When an app calls exit(), dxgkrnl is called to close the device
 	 * with current->mm equal to NULL.
 	 */
 	if (current->mm) {
-		ret = vm_munmap((unsigned long)va, size);
+		ret = vm_munmap(page_addr, size);
 		if (ret) {
 			pr_err("vm_munmap failed %d", ret);
 			return -ENOTRECOVERABLE;
@@ -275,7 +278,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		return NULL;
 	}
 	dev_dbg(dxgglobaldev, "%s end: %lx", __func__, va);
-	return (u8 *) va;
+	return (u8 *) (va + iospace_address % PAGE_SIZE);
 }
 
 /*
