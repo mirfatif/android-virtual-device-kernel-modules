@@ -747,17 +747,23 @@ kernel_images(
     ramdisk_compression = "lz4",
 )
 
-copy_to_dist_dir(
-    name = "virtual_device_riscv64_dist",
-    data = [
+pkg_files(
+    name = "virtual_device_riscv64_dist_files",
+    srcs = [
         ":virtual_device_riscv64",
         ":virtual_device_riscv64_images",
         ":virtual_device_riscv64_modules_install",
         "//common:kernel_riscv64",
         "//common:kernel_riscv64_images",
     ],
-    dist_dir = "out/virtual_device_riscv64/dist",
-    flat = True,
+    strip_prefix = strip_prefix.files_only(),
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "virtual_device_riscv64_dist",
+    srcs = [":virtual_device_riscv64_dist_files"],
+    destdir = "out/virtual_device_riscv64/dist",
 )
 
 kernel_build(
