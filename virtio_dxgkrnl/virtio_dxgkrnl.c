@@ -10,6 +10,7 @@
 #include <linux/virtio_types.h>
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
+#include <linux/atomic.h>
 
 #include "dxgkrnl.h"
 #include "dxgvmbus.h"
@@ -23,13 +24,48 @@ enum virtio_dxgkrnl_vq {
 	VIRTIO_DXGKRNL_VQ_MAX
 };
 
+struct virtio_dxgkrnl_command {
+	struct list_head command_list_entry;
+	enum dxgkvmb_commandtype command_type;
+	struct d3dkmthandle process;
+	bool async;
+	struct completion *completion;
+	void *command;
+	u32 cmd_size;
+	void *result;
+	u32 result_size;
+	refcount_t ref_count;
+};
+
+struct virtio_dxgkrnl_event_buffer {
+	union {
+		struct dxgkvmb_command_signalguestevent signalguestevent;
+		struct dxgkvmb_command_setguestdata setguestdata;
+	};
+};
+
+#define VIRTIO_DXGKRNL_NUM_EVENT_BUFFERS 64
+
 struct virtio_dxgkrnl {
 	struct virtio_device *vdev;
 	struct virtqueue *setup_vq;
 	struct virtqueue *command_vq;
+	spinlock_t command_qlock;
 	struct virtqueue *event_vq;
 
 	struct virtio_shm_region iospace_region;
+
+	/* list of commands that are being processed on the host */
+	struct list_head command_list_head;
+	spinlock_t command_list_mutex;
+
+	/* work queues */
+	struct work_struct event_work;
+	struct work_struct command_result_work;
+
+	/* event buffers, there's a fixed number */
+	struct virtio_dxgkrnl_event_buffer
+		event_buffers[VIRTIO_DXGKRNL_NUM_EVENT_BUFFERS];
 };
 
 static struct virtio_device_id id_table[] = {
@@ -37,7 +73,185 @@ static struct virtio_device_id id_table[] = {
 	{ 0 },
 };
 
-static void dxgkrnl_event_callback(struct virtqueue *vq) {};
+void set_cmd_type(struct dxgvmbuschannel *channel,
+		  struct virtio_dxgkrnl_command *ctx)
+{
+	struct dxgkvmb_command_vgpu_to_host *cmd2;
+	struct dxgkvmb_command_vm_to_host *cmd1;
+	struct dxgvmb_ext_header *hdr;
+	char *adapter_or_global;
+	char *sync_mode;
+
+	hdr = ctx->command;
+
+	if (ctx->async)
+		sync_mode = "async";
+	else
+		sync_mode = "sync";
+
+	if (channel->adapter == NULL) {
+		cmd1 = (struct dxgkvmb_command_vm_to_host *)&hdr[1];
+		ctx->command_type =
+			(enum dxgkvmb_commandtype)cmd1->command_type;
+		ctx->process = cmd1->process;
+		adapter_or_global = "global";
+	} else {
+		cmd2 = (struct dxgkvmb_command_vgpu_to_host *)&hdr[1];
+		ctx->command_type = cmd2->command_type;
+		ctx->process = cmd2->process;
+		adapter_or_global = "adapter";
+	}
+
+	dev_dbg(dxgglobaldev, "send_%s_msg %s: %d %p %d", sync_mode,
+		adapter_or_global, cmd1->command_type, ctx->command,
+		ctx->cmd_size);
+}
+
+static struct virtio_dxgkrnl_command *
+virtio_dxgkrnl_command_create(struct virtio_dxgkrnl *vp,
+			      struct dxgvmbuschannel *channel, u32 cmd_size,
+			      u32 result_size, bool async)
+{
+	struct virtio_dxgkrnl_command *cmd;
+
+	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
+	if (!cmd) {
+		dev_err(&vp->vdev->dev, "%s: failed allocate command context\n",
+			__func__);
+		return NULL;
+	}
+	cmd->async = async;
+	cmd->cmd_size = cmd_size;
+	cmd->result_size = result_size;
+
+	cmd->command = kzalloc(cmd_size, GFP_KERNEL);
+	if (!cmd->command) {
+		dev_err(&vp->vdev->dev, "%s: failed allocate command buffer\n",
+			__func__);
+		kfree(cmd);
+		return NULL;
+	}
+
+	if (result_size != 0) {
+		cmd->result = kzalloc(result_size, GFP_KERNEL);
+		if (!cmd->result) {
+			dev_err(&vp->vdev->dev,
+				"%s: failed allocate result buffer\n",
+				__func__);
+			kfree(cmd);
+			return NULL;
+		}
+	} else {
+		cmd->result = NULL;
+	}
+
+	INIT_LIST_HEAD(&cmd->command_list_entry);
+
+	/* This reference is dropped in dxgkrnl_command_result_work(). */
+	refcount_set(&cmd->ref_count, 1);
+
+	set_cmd_type(channel, cmd);
+
+	return cmd;
+}
+
+void virtio_dxgkrnl_cmd_ref(struct virtio_dxgkrnl_command *cmd)
+{
+	refcount_inc(&cmd->ref_count);
+}
+
+void virtio_dxgkrnl_cmd_unref(struct virtio_dxgkrnl_command *cmd)
+{
+	if (refcount_dec_and_test(&cmd->ref_count)) {
+		kfree(cmd->command);
+		kfree(cmd->result);
+		kfree(cmd);
+	}
+}
+
+static void dxgkrnl_event_callback(struct virtqueue *vq)
+{
+	struct virtio_dxgkrnl *vp;
+
+	vp = vq->vdev->priv;
+
+	queue_work(system_freezable_wq, &vp->event_work);
+};
+
+static void dxgkrnl_event_work(struct work_struct *work)
+{
+	struct virtio_dxgkrnl_event_buffer *eb;
+	struct dxgkvmb_command_host_to_vm *hdr;
+	struct virtio_dxgkrnl *vp;
+	struct scatterlist sg;
+	unsigned int len;
+	bool should_kick;
+
+	vp = container_of(work, struct virtio_dxgkrnl, event_work);
+
+	should_kick = false;
+
+	while ((eb = virtqueue_get_buf(vp->event_vq, &len)) != NULL) {
+		hdr = (struct dxgkvmb_command_host_to_vm *)eb;
+		switch (hdr->command_type) {
+		case DXGK_VMBCOMMAND_SETGUESTDATA:
+			set_guest_data(
+				hdr,
+				sizeof(struct dxgkvmb_command_setguestdata));
+			break;
+		case DXGK_VMBCOMMAND_SIGNALGUESTEVENT:
+		case DXGK_VMBCOMMAND_SIGNALGUESTEVENTPASSIVE:
+			signal_guest_event(
+				hdr,
+				sizeof(struct dxgkvmb_command_signalguestevent));
+			break;
+		case DXGK_VMBCOMMAND_SENDWNFNOTIFICATION:
+			/* This message is not used by the driver currently. */
+			break;
+		default:
+			pr_err("unexpected host message %d", hdr->command_type);
+		}
+
+		/* We clear out the event buffer and re-add for use by the host */
+		memset(eb, 0, sizeof(struct virtio_dxgkrnl_event_buffer));
+		sg_init_one(&sg, eb,
+			    sizeof(struct virtio_dxgkrnl_event_buffer));
+		virtqueue_add_inbuf(vp->event_vq, &sg, 1, eb, GFP_KERNEL);
+		should_kick = true;
+	};
+
+	if (should_kick)
+		virtqueue_kick(vp->event_vq);
+}
+
+static void dxgkrnl_command_callback(struct virtqueue *vq)
+{
+	struct virtio_dxgkrnl *vp;
+
+	vp = vq->vdev->priv;
+
+	queue_work(system_freezable_wq, &vp->command_result_work);
+};
+
+static void dxgkrnl_command_result_work(struct work_struct *work)
+{
+	struct virtio_dxgkrnl_command *cmd;
+	struct virtio_dxgkrnl *vp;
+	unsigned int len;
+
+	vp = container_of(work, struct virtio_dxgkrnl, command_result_work);
+
+	spin_lock(&vp->command_qlock);
+	while ((cmd = virtqueue_get_buf(vp->command_vq, &len)) != NULL) {
+		spin_unlock(&vp->command_qlock);
+		if (!cmd->async && cmd->completion != NULL)
+			complete(cmd->completion);
+
+		virtio_dxgkrnl_cmd_unref(cmd);
+		spin_lock(&vp->command_qlock);
+	};
+	spin_unlock(&vp->command_qlock);
+}
 
 int dxgglobal_init_global_channel(void)
 {
@@ -128,61 +342,87 @@ int dxgvmbuschannel_init(struct dxgvmbuschannel *ch, struct hv_device *hdev)
 int dxgvmb_send_async_msg(struct dxgvmbuschannel *channel, void *command,
 			  u32 cmd_size)
 {
+	struct virtio_dxgkrnl_command *ctx;
 	struct virtio_dxgkrnl *vp;
 	struct scatterlist sg;
 	int err;
 
 	vp = dxgglobal->vdxgkrnl;
 
-	sg_init_one(&sg, command, cmd_size);
-	err = virtqueue_add_outbuf(vp->command_vq, &sg, 1, vp, GFP_KERNEL);
-
-	if (err) {
-		dev_err(&vp->vdev->dev, "%s: failed to add output\n", __func__);
+	ctx = virtio_dxgkrnl_command_create(vp, channel, cmd_size, 0, true);
+	if (!ctx) {
+		err = -ENOMEM;
+		dev_err(&vp->vdev->dev, "%s: failed allocate command\n",
+			__func__);
 		return err;
 	}
-	virtqueue_kick(vp->command_vq);
 
-	return 0;
-};
+	memcpy(ctx->command, command, cmd_size);
+
+	sg_init_one(&sg, ctx->command, cmd_size);
+	spin_lock(&vp->command_qlock);
+	err = virtqueue_add_outbuf(vp->command_vq, &sg, 1, ctx, GFP_KERNEL);
+	spin_unlock(&vp->command_qlock);
+
+	if (err) {
+		dev_err(&vp->vdev->dev, "%s: failed to add output: %d\n",
+			__func__, err);
+		return err;
+	}
+	spin_lock(&vp->command_qlock);
+	if (unlikely(!virtqueue_kick(vp->command_vq))) {
+		dev_err(&vp->vdev->dev,
+			"%s: virtqueue_kick failed with command virtqueue\n",
+			__func__);
+		err = -1;
+	}
+	spin_unlock(&vp->command_qlock);
+
+	return err;
+}
 
 int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 			 u32 cmd_size, void *result, u32 result_size)
 {
 	struct scatterlist *sgs[2], command_sg, result_sg;
-	struct dxgkvmb_command_vgpu_to_host *cmd2;
-	struct dxgkvmb_command_vm_to_host *cmd1;
+	struct completion completion = {};
+	struct virtio_dxgkrnl_command *ctx;
 	struct virtio_dxgkrnl *vp;
-	void *actual_result;
-	unsigned int tmp;
 	int err;
-
-	actual_result = kzalloc(result_size, GFP_ATOMIC);
-
-	dev_dbg(dxgglobaldev, "using kzalloced result buffer at %p",
-		actual_result);
+	bool command_queue_locked = false;
 
 	vp = dxgglobal->vdxgkrnl;
 
-	if (channel->adapter == NULL) {
-		cmd1 = command;
-		dev_dbg(dxgglobaldev, "send_sync_msg global: %d %p %d %d",
-			cmd1->command_type, command, cmd_size, result_size);
-	} else {
-		cmd2 = command;
-		dev_dbg(dxgglobaldev, "send_sync_msg adapter: %d %p %d %d",
-			cmd2->command_type, command, cmd_size, result_size);
+	ctx = virtio_dxgkrnl_command_create(vp, channel, cmd_size, result_size,
+					    false);
+	if (!ctx) {
+		err = -ENOMEM;
+		dev_err(&vp->vdev->dev, "%s: failed allocate command\n",
+			__func__);
+		return err;
 	}
+	memcpy(ctx->command, command, cmd_size);
 
-	sg_init_one(&command_sg, command, cmd_size);
+	/* Take a ref to this command because `completion` is on the stack here and
+	 * we need to remove the pointer to completion in case we're interrupted
+	 * during wait_for_completion_interruptible.
+	 */
+	virtio_dxgkrnl_cmd_ref(ctx);
+	init_completion(&completion);
+	ctx->completion = &completion;
+
+	sg_init_one(&command_sg, ctx->command, cmd_size);
 	sgs[0] = &command_sg;
 
-	sg_init_one(&result_sg, actual_result, result_size);
+	sg_init_one(&result_sg, ctx->result, result_size);
 	sgs[1] = &result_sg;
 
-	err = virtqueue_add_sgs(vp->command_vq, sgs, 1, 1, vp, GFP_ATOMIC);
+	spin_lock(&vp->command_qlock);
+	command_queue_locked = true;
+	err = virtqueue_add_sgs(vp->command_vq, sgs, 1, 1, ctx, GFP_ATOMIC);
 	if (err) {
-		dev_err(&vp->vdev->dev, "%s: failed to add output\n", __func__);
+		dev_err(&vp->vdev->dev, "%s: failed to add output: %d\n",
+			__func__, err);
 		goto cleanup;
 	}
 
@@ -193,18 +433,30 @@ int dxgvmb_send_sync_msg(struct dxgvmbuschannel *channel, void *command,
 		err = -1;
 		goto cleanup;
 	}
+	spin_unlock(&vp->command_qlock);
+	command_queue_locked = false;
 
 	/* Spin for a response, the kick causes an ioport write, trapping
 	 * into the hypervisor, so the request should be handled immediately.
 	 */
-	while (!virtqueue_get_buf(vp->command_vq, &tmp) &&
-	       !virtqueue_is_broken(vp->command_vq))
-		cpu_relax();
+	wait_for_completion_interruptible(&completion);
+	// In case we've been interrupted, set completion to NULL here on ctx.
+	ctx->completion = NULL;
 
-	memcpy(result, actual_result, result_size);
+	memcpy(result, ctx->result, result_size);
+
+	/* Calling code expects this to be >0 if result_size >0. This doesn't
+	 * reflect if any data was actually written to the result buffer, however.
+	 * The uses of this >0 return value should be reexamined, perhaps it's
+	 * unnecessary.
+	 */
+	err = result_size;
 
 cleanup:
-	kfree(actual_result);
+	virtio_dxgkrnl_cmd_unref(ctx);
+	if (command_queue_locked)
+		spin_unlock(&vp->command_qlock);
+
 	return err;
 }
 
@@ -256,7 +508,8 @@ static int initialize_adapters(struct virtio_dxgkrnl *vp)
 
 	err = virtqueue_add_sgs(vp->setup_vq, sgs, 1, 1, vp, GFP_ATOMIC);
 	if (err) {
-		dev_err(&vp->vdev->dev, "%s: failed to add output\n", __func__);
+		dev_err(&vp->vdev->dev, "%s: failed to add output: %d\n",
+			__func__, err);
 		goto cleanup;
 	}
 
@@ -321,6 +574,20 @@ cleanup:
 	return err;
 }
 
+static void fill_event_queue(struct virtio_dxgkrnl *vp)
+{
+	struct scatterlist sg;
+	int i;
+
+	for (i = 0; i < VIRTIO_DXGKRNL_NUM_EVENT_BUFFERS; i++) {
+		sg_init_one(&sg, &vp->event_buffers[i],
+			    sizeof(struct virtio_dxgkrnl_event_buffer));
+		virtqueue_add_inbuf(vp->event_vq, &sg, 1, &vp->event_buffers[i],
+				    GFP_KERNEL);
+	}
+	virtqueue_kick(vp->event_vq);
+}
+
 static int init_vqs(struct virtio_dxgkrnl *vp)
 {
 	vq_callback_t *callbacks[VIRTIO_DXGKRNL_VQ_MAX];
@@ -331,11 +598,13 @@ static int init_vqs(struct virtio_dxgkrnl *vp)
 	callbacks[VIRTIO_DXGKRNL_VQ_SETUP] = NULL;
 	names[VIRTIO_DXGKRNL_VQ_SETUP] = "dxgkrnl_setup";
 
-	callbacks[VIRTIO_DXGKRNL_VQ_COMMAND] = NULL;
+	callbacks[VIRTIO_DXGKRNL_VQ_COMMAND] = dxgkrnl_command_callback;
 	names[VIRTIO_DXGKRNL_VQ_COMMAND] = "dxgkrnl_command";
+	INIT_WORK(&vp->command_result_work, dxgkrnl_command_result_work);
 
 	callbacks[VIRTIO_DXGKRNL_VQ_EVENT] = dxgkrnl_event_callback;
 	names[VIRTIO_DXGKRNL_VQ_EVENT] = "dxgkrnl_event";
+	INIT_WORK(&vp->event_work, dxgkrnl_event_work);
 
 	err = vp->vdev->config->find_vqs(vp->vdev, VIRTIO_DXGKRNL_VQ_MAX, vqs,
 					 callbacks, names, NULL, NULL);
@@ -394,6 +663,20 @@ static void dxgglobal_destroy(void)
 	}
 }
 
+static struct virtio_dxgkrnl *virtio_dxgkrnl_create(void)
+{
+	struct virtio_dxgkrnl *vp;
+
+	vp = kzalloc(sizeof(*vp), GFP_KERNEL);
+	if (vp) {
+		spin_lock_init(&vp->command_qlock);
+		spin_lock_init(&vp->command_list_mutex);
+		INIT_LIST_HEAD(&vp->command_list_head);
+	}
+
+	return vp;
+}
+
 static int virtdxgkrnl_probe(struct virtio_device *vdev)
 {
 	struct virtio_dxgkrnl *vp;
@@ -404,7 +687,7 @@ static int virtdxgkrnl_probe(struct virtio_device *vdev)
 		return -EINVAL;
 	}
 
-	vp = kzalloc(sizeof(*vp), GFP_KERNEL);
+	vp = virtio_dxgkrnl_create();
 	if (!vp)
 		return -ENOMEM;
 
@@ -430,7 +713,11 @@ static int virtdxgkrnl_probe(struct virtio_device *vdev)
 
 	dxgglobal->vdxgkrnl = vp;
 
+	fill_event_queue(vp);
 	init_ioctls();
+
+	if (virtio_has_feature(vp->vdev, VIRTIO_DXGKRNL_F_ASYNC_COMMANDS))
+		dxgglobal->async_msg_enabled = true;
 
 	return initialize_adapters(vp);
 
@@ -486,7 +773,7 @@ static int virtdxgkrnl_validate(struct virtio_device *vdev)
 	return 0;
 }
 
-static unsigned int features[] = {};
+static unsigned int features[] = { VIRTIO_DXGKRNL_F_ASYNC_COMMANDS };
 
 static struct virtio_driver virtio_dxgkrnl_driver = {
 	.feature_table = features,
