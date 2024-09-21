@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "282066d9_6853c6a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-09-21T03:59:44Z",
+      "side": 1,
+      "message": "As per offline discussion.",
+      "revId": "a3604ba0290cb8b09845193d58495b6a6e2205f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42885d9b_d8dc11b8",
         "filename": "virtio_dxgkrnl/dxgvmbus.c",
         "patchSetId": 1
