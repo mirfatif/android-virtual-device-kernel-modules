@@ -1331,6 +1331,7 @@ kernel_build(
         "drivers/input/mouse/psmouse.ko",
         "drivers/leds/trigger/ledtrig-audio.ko",
         "drivers/md/md-mod.ko",
+        "drivers/virtio/virtio_mem.ko",
         "drivers/virtio/virtio_mmio.ko",
         "drivers/virtio/virtio_pvclock.ko",
         "dummy-cpufreq.ko",
