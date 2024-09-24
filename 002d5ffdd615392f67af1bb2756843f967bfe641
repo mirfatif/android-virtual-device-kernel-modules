@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2e07e3_c920acf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-09-24T06:15:25Z",
+      "side": 1,
+      "message": "At present let\u0027s get to POC and then iterate on optimizations and build warnings, which I see in local build.",
+      "revId": "002d5ffdd615392f67af1bb2756843f967bfe641",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
