@@ -709,13 +709,13 @@ kernel_build(
 kernel_images(
     name = "server_aarch64_images",
     build_initramfs = True,
-    kernel_build = "//common-modules/virtual-device:server_aarch64",
-    kernel_modules_install = "//common-modules/virtual-device:server_aarch64_modules_install",
+    kernel_build = ":server_aarch64",
+    kernel_modules_install = ":server_aarch64_modules_install",
 )
 
 kernel_modules_install(
     name = "server_aarch64_modules_install",
-    kernel_build = "//common-modules/virtual-device:server_aarch64",
+    kernel_build = ":server_aarch64",
 )
 
 pkg_files(
@@ -787,13 +787,13 @@ kernel_build(
 kernel_images(
     name = "server_x86_64_images",
     build_initramfs = True,
-    kernel_build = "//common-modules/virtual-device:server_x86_64",
-    kernel_modules_install = "//common-modules/virtual-device:server_x86_64_modules_install",
+    kernel_build = ":server_x86_64",
+    kernel_modules_install = ":server_x86_64_modules_install",
 )
 
 kernel_modules_install(
     name = "server_x86_64_modules_install",
-    kernel_build = "//common-modules/virtual-device:server_x86_64",
+    kernel_build = ":server_x86_64",
 )
 
 pkg_files(
