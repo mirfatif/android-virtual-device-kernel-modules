@@ -351,7 +351,7 @@ ddk_module(
 kernel_module_group(
     name = "kiwi_x86_64_external_modules",
     srcs = [
-        ":virtio_dxgkrnl",
+        ":virtio-dxgkrnl",
     ],
 )
 
