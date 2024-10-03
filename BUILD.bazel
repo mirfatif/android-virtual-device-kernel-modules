@@ -331,9 +331,9 @@ ddk_module(
 )
 
 ddk_module(
-    name = "virtio_dxgkrnl",
+    name = "virtio-dxgkrnl",
     srcs = [":virtio_dxgkrnl_sources"],
-    out = "virtio_dxgkrnl.ko",
+    out = "virtio-dxgkrnl.ko",
     kernel_build = ":kiwi_x86_64",
     local_defines = ["DRIVER_VERSION=\"android14-6.1\""],
     deps = [":common_headers_x86_64"],
