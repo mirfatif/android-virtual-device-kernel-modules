@@ -1,1 +1,2 @@
-# Anchor file for :rockpi4_dts.
+dtb- += \
+	rk3399-rock-pi-4b.dts
