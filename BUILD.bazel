@@ -749,13 +749,11 @@ kernel_modules_install(
     ],
 )
 
-kernel_images(
-    name = "virtual_device_riscv64_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_riscv64",
+initramfs(
+    name = "virtual_device_riscv64_initramfs",
     kernel_modules_install = ":virtual_device_riscv64_modules_install",
-    modules_blocklist = "modules.blocklist",
-    modules_options = "modules.options",
+    modules_blocklist = ":modules.blocklist",
+    modules_options = ":modules.options",
     ramdisk_compression = "lz4",
 )
 
@@ -763,7 +761,7 @@ pkg_files(
     name = "virtual_device_riscv64_dist_files",
     srcs = [
         ":virtual_device_riscv64",
-        ":virtual_device_riscv64_images",
+        ":virtual_device_riscv64_initramfs",
         ":virtual_device_riscv64_modules_install",
         "//common:kernel_riscv64",
         "//common:kernel_riscv64_images",
