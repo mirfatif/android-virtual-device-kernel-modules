@@ -22,15 +22,16 @@ load(
     "ddk_headers",
     "ddk_module",
     "dependency_graph",
+    "initramfs",
     "initramfs_modules_lists_test",
     "kernel_build",
     "kernel_compile_commands",
     "kernel_dtstree",
-    "kernel_images",
     "kernel_module_group",
     "kernel_module_test",
     "kernel_modules_install",
     "merged_kernel_uapi_headers",
+    "vendor_boot_image",
 )
 load("//common:modules.bzl", "get_gki_modules_list", "get_kunit_modules_list")
 
@@ -256,13 +257,11 @@ merged_kernel_uapi_headers(
     ],
 )
 
-kernel_images(
-    name = "virtual_device_x86_64_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_x86_64",
+initramfs(
+    name = "virtual_device_x86_64_initramfs",
     kernel_modules_install = ":virtual_device_x86_64_modules_install",
-    modules_blocklist = "modules.blocklist",
-    modules_options = "modules.options",
+    modules_blocklist = ":modules.blocklist",
+    modules_options = ":modules.options",
     ramdisk_compression = "lz4",
 )
 
@@ -279,7 +278,7 @@ pkg_files(
     name = "virtual_device_x86_64_dist_files",
     srcs = [
         ":virtual_device_x86_64",
-        ":virtual_device_x86_64_images",
+        ":virtual_device_x86_64_initramfs",
         ":virtual_device_x86_64_merged_kernel_uapi_headers",
         ":virtual_device_x86_64_modules_install",
         "//common:kernel_x86_64",
@@ -353,14 +352,12 @@ write_file(
     ],
 )
 
-kernel_images(
-    name = "fake_virtual_device_x86_64_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_x86_64",
+initramfs(
+    name = "fake_virtual_device_x86_64_initramfs",
     kernel_modules_install = ":virtual_device_x86_64_modules_install",
-    modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
-    modules_list = "modules_list.fake_virtual_device_x86_64",
-    modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
+    modules_charger_list = ":modules_charger_list.fake_virtual_device_x86_64",
+    modules_list = ":modules_list.fake_virtual_device_x86_64",
+    modules_recovery_list = ":modules_recovery_list.fake_virtual_device_x86_64",
     ramdisk_compression = "gzip",
 )
 
@@ -369,7 +366,7 @@ initramfs_modules_lists_test(
     expected_modules_charger_list = "modules_charger_list.fake_virtual_device_x86_64",
     expected_modules_list = "modules_list.fake_virtual_device_x86_64",
     expected_modules_recovery_list = "modules_recovery_list.fake_virtual_device_x86_64",
-    kernel_images = ":fake_virtual_device_x86_64_images",
+    kernel_images = ":fake_virtual_device_x86_64_initramfs",
 )
 
 kernel_build(
@@ -460,13 +457,11 @@ merged_kernel_uapi_headers(
     ],
 )
 
-kernel_images(
-    name = "virtual_device_aarch64_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_aarch64",
+initramfs(
+    name = "virtual_device_aarch64_initramfs",
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
-    modules_blocklist = "modules.blocklist",
-    modules_options = "modules.options",
+    modules_blocklist = ":modules.blocklist",
+    modules_options = ":modules.options",
     ramdisk_compression = "lz4",
 )
 
@@ -494,15 +489,34 @@ write_file(
     ],
 )
 
-kernel_images(
-    name = "fake_virtual_device_aarch64_images",
-    build_initramfs = True,
-    build_vendor_kernel_boot = True,
-    kernel_build = ":virtual_device_aarch64",
+initramfs(
+    name = "fake_virtual_device_aarch64_initramfs",
     kernel_modules_install = ":virtual_device_aarch64_modules_install",
-    modules_charger_list = "modules_charger_list.fake_virtual_device_aarch64",
-    modules_list = "modules_list.fake_virtual_device_aarch64",
-    modules_recovery_list = "modules_recovery_list.fake_virtual_device_aarch64",
+    modules_charger_list = ":modules_charger_list.fake_virtual_device_aarch64",
+    modules_list = ":modules_list.fake_virtual_device_aarch64",
+    modules_recovery_list = ":modules_recovery_list.fake_virtual_device_aarch64",
+    vendor_boot_name = "vendor_kernel_boot",
+)
+
+vendor_boot_image(
+    name = "fake_virtual_device_aarch64_vendor_boot_image",
+    outs = [
+        "dtb.img",
+        "ramdisk.lz4",
+        "vendor_kernel_boot.img",
+    ],
+    initramfs = ":fake_virtual_device_aarch64_initramfs",
+    kernel_build = ":virtual_device_aarch64",
+    unpack_ramdisk = True,
+    vendor_boot_name = "vendor_kernel_boot",
+)
+
+filegroup(
+    name = "fake_virtual_device_aarch64_images",
+    srcs = [
+        ":fake_virtual_device_aarch64_initramfs",
+        ":fake_virtual_device_aarch64_vendor_boot_image",
+    ],
 )
 
 initramfs_modules_lists_test(
@@ -527,7 +541,7 @@ pkg_files(
     name = "virtual_device_aarch64_dist_files",
     srcs = [
         ":virtual_device_aarch64",
-        ":virtual_device_aarch64_images",
+        ":virtual_device_aarch64_initramfs",
         ":virtual_device_aarch64_merged_kernel_uapi_headers",
         ":virtual_device_aarch64_modules_install",
         "//common:kernel_aarch64",
@@ -628,13 +642,11 @@ kernel_modules_install(
     ],
 )
 
-kernel_images(
-    name = "virtual_device_aarch64_16k_images",
-    build_initramfs = True,
-    kernel_build = ":virtual_device_aarch64_16k",
+initramfs(
+    name = "virtual_device_aarch64_16k_initramfs",
     kernel_modules_install = ":virtual_device_aarch64_16k_modules_install",
-    modules_blocklist = "modules.blocklist",
-    modules_options = "modules.options",
+    modules_blocklist = ":modules.blocklist",
+    modules_options = ":modules.options",
     ramdisk_compression = "lz4",
 )
 
@@ -642,7 +654,7 @@ pkg_files(
     name = "virtual_device_aarch64_16k_dist_files",
     srcs = [
         ":virtual_device_aarch64_16k",
-        ":virtual_device_aarch64_16k_images",
+        ":virtual_device_aarch64_16k_initramfs",
         ":virtual_device_aarch64_16k_modules_install",
         "//common:kernel_aarch64_16k",
         "//common:kernel_aarch64_16k_images",
@@ -706,10 +718,8 @@ kernel_build(
     trim_nonlisted_kmi = False,
 )
 
-kernel_images(
-    name = "server_aarch64_images",
-    build_initramfs = True,
-    kernel_build = ":server_aarch64",
+initramfs(
+    name = "server_aarch64_initramfs",
     kernel_modules_install = ":server_aarch64_modules_install",
 )
 
@@ -722,7 +732,7 @@ pkg_files(
     name = "server_aarch64_dist_files",
     srcs = [
         ":server_aarch64",
-        ":server_aarch64_images",
+        ":server_aarch64_initramfs",
         ":server_aarch64_modules_install",
     ],
     strip_prefix = strip_prefix.files_only(),
@@ -784,10 +794,8 @@ kernel_build(
     trim_nonlisted_kmi = False,
 )
 
-kernel_images(
-    name = "server_x86_64_images",
-    build_initramfs = True,
-    kernel_build = ":server_x86_64",
+initramfs(
+    name = "server_x86_64_initramfs",
     kernel_modules_install = ":server_x86_64_modules_install",
 )
 
@@ -800,7 +808,7 @@ pkg_files(
     name = "server_x86_64_dist_files",
     srcs = [
         ":server_x86_64",
-        ":server_x86_64_images",
+        ":server_x86_64_initramfs",
         ":server_x86_64_modules_install",
     ],
     strip_prefix = strip_prefix.files_only(),
