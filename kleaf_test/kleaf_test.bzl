@@ -7,9 +7,10 @@ load(
     "ddk_headers",
     "ddk_module",
     "ddk_submodule",
+    "initramfs",
     "kernel_build",
-    "kernel_images",
     "kernel_modules_install",
+    "vendor_boot_image",
 )
 
 def kleaf_test(
@@ -877,10 +878,11 @@ def _kernel_boot_images_outs_contains_ramdisk_test(name, kernel_build, **private
     """Test the following.
 
     If:
-    - build_initramfs = True
-    - build_boot_images from build_utils.sh is called
+    - There's an initramfs target
+    - build_boot_images from build_utils.sh is called (enforced by vendor_boot_image)
 
     Then build_boot_images can generate $DIST_DIR/ramdisk.{ramdisk_ext} properly.
+    (ramdisk.{ramdisk_ext} is in `outs`).
 
     See b/361733833.
     """
@@ -889,28 +891,50 @@ def _kernel_boot_images_outs_contains_ramdisk_test(name, kernel_build, **private
         kernel_build = kernel_build,
         **private_kwargs
     )
-    kernel_images(
-        name = name + "_images_set_ramdisk_compression",
+
+    vendor_boot_image(
+        name = name + "_images_set_ramdisk_compression_vendor_boot",
         kernel_build = kernel_build,
-        kernel_modules_install = name + "_modules_install",
-        build_initramfs = True,
+        initramfs = name + "_images_set_ramdisk_compression_initramfs",
+        outs = ["dtb.img", "ramdisk.lz4", "vendor_boot.img", "vendor-bootconfig.img"],
+        vendor_boot_name = "vendor_boot",
         ramdisk_compression = "lz4",
-        build_vendor_boot = True,
+        unpack_ramdisk = True,
         **private_kwargs
     )
-    kernel_images(
-        name = name + "_images_unset_ramdisk_compression",
-        kernel_build = kernel_build,
+
+    initramfs(
+        name = name + "_images_set_ramdisk_compression_initramfs",
         kernel_modules_install = name + "_modules_install",
-        build_initramfs = True,
-        build_vendor_boot = True,
+        ramdisk_compression = "lz4",
+        vendor_boot_name = "vendor_boot",
         **private_kwargs
     )
+
+    vendor_boot_image(
+        name = name + "_images_unset_ramdisk_compression_vendor_boot",
+        kernel_build = kernel_build,
+        initramfs = name + "_images_unset_ramdisk_compression_initramfs",
+        outs = ["dtb.img", "ramdisk.lz4", "vendor_boot.img", "vendor-bootconfig.img"],
+        vendor_boot_name = "vendor_boot",
+        unpack_ramdisk = True,
+        **private_kwargs
+    )
+
+    initramfs(
+        name = name + "_images_unset_ramdisk_compression_initramfs",
+        kernel_modules_install = name + "_modules_install",
+        vendor_boot_name = "vendor_boot",
+        **private_kwargs
+    )
+
     build_test(
         name = name,
         targets = [
-            name + "_images_set_ramdisk_compression",
-            name + "_images_unset_ramdisk_compression",
+            name + "_images_set_ramdisk_compression_initramfs",
+            name + "_images_set_ramdisk_compression_vendor_boot",
+            name + "_images_unset_ramdisk_compression_initramfs",
+            name + "_images_unset_ramdisk_compression_vendor_boot",
         ],
         **private_kwargs
     )
