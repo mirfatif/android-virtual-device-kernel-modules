@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c2e66b8_870d98d7",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1961885
+      },
+      "writtenOn": "2024-10-08T17:23:43Z",
+      "side": 1,
+      "message": "Same as the end of dxgkvmb_commandtype below, we can start this at 3000 to avoid collisions with any new microsoft commands in the future (and starting at 3000 avoids colliding with the 2000 from the struct below).\n\n/* Custom commands */\nDXGK_VMBCOMMAND_PRESENTVIRTUAL2\t\t\u003d 3000,",
+      "revId": "25c5af94f015ed79c6df540b6babbbc66714b938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
