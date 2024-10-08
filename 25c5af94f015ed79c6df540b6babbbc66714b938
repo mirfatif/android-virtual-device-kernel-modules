@@ -34,6 +34,24 @@
       "parentUuid": "1c2e66b8_870d98d7",
       "revId": "25c5af94f015ed79c6df540b6babbbc66714b938",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aaba685_909a71a7",
+        "filename": "virtio_dxgkrnl/dxgvmbus.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-08T17:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c2e66b8_870d98d7",
+      "revId": "25c5af94f015ed79c6df540b6babbbc66714b938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
