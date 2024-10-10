@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ce9711_b327ef16",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 1845,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-10T17:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d32600e8_cf75a518",
+      "range": {
+        "startLine": 1845,
+        "startChar": 1,
+        "endLine": 1845,
+        "endChar": 6
+      },
+      "revId": "44cffb7b218b57be67ab2646f0cd1ada2738c234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf61fc64_7d802a6e",
@@ -65,6 +89,30 @@
       "writtenOn": "2024-10-08T20:58:26Z",
       "side": 1,
       "message": "I guess we prefer __s32 here, so that we strictly align with the `d3dkmt_presentvirtual2::layer_memory_fd`?",
+      "range": {
+        "startLine": 5635,
+        "startChar": 28,
+        "endLine": 5635,
+        "endChar": 31
+      },
+      "revId": "44cffb7b218b57be67ab2646f0cd1ada2738c234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fb8300_136a8049",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5635,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-10T17:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf61fc64_7d802a6e",
       "range": {
         "startLine": 5635,
         "startChar": 28,
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "947ac8bd_73e2cff0",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5642,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-10T17:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da4a0e19_c7526a2e",
+      "range": {
+        "startLine": 5642,
+        "startChar": 63,
+        "endLine": 5642,
+        "endChar": 66
+      },
+      "revId": "44cffb7b218b57be67ab2646f0cd1ada2738c234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6bc90ee_5707f53e",
@@ -111,6 +183,30 @@
       "writtenOn": "2024-10-08T20:58:26Z",
       "side": 1,
       "message": "I don\u0027t feel strong, but can we also change this to vzalloc/vfree?\n\nIt improves the consistency. It also doesn\u0027t require continuous physical addresses(this argument is weak tho, the array shouldn\u0027t be long, so should be too bad for fragmentation).",
+      "range": {
+        "startLine": 5651,
+        "startChar": 26,
+        "endLine": 5651,
+        "endChar": 33
+      },
+      "revId": "44cffb7b218b57be67ab2646f0cd1ada2738c234",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c39f8c_f48bae84",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 5651,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-10T17:01:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6bc90ee_5707f53e",
       "range": {
         "startLine": 5651,
         "startChar": 26,
