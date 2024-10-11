@@ -326,7 +326,7 @@ static struct dxgprocess *dxgglobal_get_current_process(void)
 	mutex_lock(&dxgglobal->plistmutex);
 	list_for_each_entry(entry, &dxgglobal->plisthead, plistentry) {
 		/* All threads of a process have the same thread group ID */
-		if (entry->process->tgid == current->tgid) {
+		if (entry->tgid == current->tgid) {
 			if (kref_get_unless_zero(&entry->process_kref)) {
 				process = entry;
 				dev_dbg(dxgglobaldev, "found dxgprocess");
@@ -354,7 +354,7 @@ struct dxgprocess *dxgglobal_get_process_with_tgid(int tgid)
 
 	mutex_lock(&dxgglobal->plistmutex);
 	list_for_each_entry(entry, &dxgglobal->plisthead, plistentry) {
-		if (entry->process->tgid == tgid) {
+		if (entry->tgid == tgid) {
 			if (kref_get_unless_zero(&entry->process_kref)) {
 				process = entry;
 				dev_dbg(dxgglobaldev, "found dxgprocess");
