@@ -1,5 +1,3 @@
-obj-m += virtio_gpu/
-
 obj-m += virtio_snd/
 
 obj-$(CONFIG_VIRT_WIFI) += wlan_simulation/
