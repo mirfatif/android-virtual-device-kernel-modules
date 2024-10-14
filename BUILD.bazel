@@ -242,6 +242,14 @@ ddk_module(
     deps = [":common_headers_x86_64"],
 )
 
+ddk_module(
+    name = "x86_64/virtio_media",
+    srcs = ["//common-modules/virtio-media/driver:virtio_media_sources"],
+    out = "virtio_media/virtio-media.ko",
+    kernel_build = ":virtual_device_x86_64",
+    deps = [":common_headers_x86_64"],
+)
+
 kernel_module_group(
     name = "virtual_device_x86_64_external_modules",
     srcs = [
@@ -249,6 +257,7 @@ kernel_module_group(
         ":x86_64/goldfish_drivers/goldfish_pipe",
         ":x86_64/goldfish_drivers/goldfish_sync",
         ":x86_64/v4l2loopback",
+        ":x86_64/virtio_media",
     ],
 )
 
@@ -430,6 +439,14 @@ ddk_module(
     deps = [":common_headers_aarch64"],
 )
 
+ddk_module(
+    name = "aarch64/virtio_media",
+    srcs = ["//common-modules/virtio-media/driver:virtio_media_sources"],
+    out = "virtio_media/virtio-media.ko",
+    kernel_build = ":virtual_device_aarch64",
+    deps = [":common_headers_aarch64"],
+)
+
 kernel_module_group(
     name = "virtual_device_aarch64_external_modules",
     srcs = [
@@ -437,6 +454,7 @@ kernel_module_group(
         ":aarch64/goldfish_drivers/goldfish_pipe",
         ":aarch64/goldfish_drivers/goldfish_sync",
         ":aarch64/v4l2loopback",
+        ":aarch64/virtio_media",
     ],
 )
 
