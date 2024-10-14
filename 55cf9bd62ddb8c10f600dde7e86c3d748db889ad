@@ -33,6 +33,24 @@
       "message": "nitty nit: You could also use `//common-modules/virtio-media/driver:__subpackages__` or `//common-modules:__subpackages__` to minimize visibility, depending on what you want",
       "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567acd3c_aab93871",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-14T23:00:22Z",
+      "side": 1,
+      "message": "The format is at https://bazel.build/concepts/visibility#target-visibility",
+      "parentUuid": "8efc5607_1547af3b",
+      "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
