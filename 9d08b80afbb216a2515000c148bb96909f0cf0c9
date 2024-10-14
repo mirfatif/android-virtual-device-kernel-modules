@@ -16,6 +16,24 @@
       "message": "The format doesn\u0027t align with the existing format which uses tabs instead of spaces. Try `git clang-format --style\u003dfile:../../common/.clang-format HEAD^` at the `common-modules/virtual-device` path.",
       "revId": "9d08b80afbb216a2515000c148bb96909f0cf0c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8f5380_222b580f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-14T19:32:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df553167_ca0affc2",
+      "revId": "9d08b80afbb216a2515000c148bb96909f0cf0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
