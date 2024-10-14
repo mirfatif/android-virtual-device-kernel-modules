@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf415834_586fce80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-10-14T22:21:21Z",
+      "side": 1,
+      "message": "Not ready, waiting for 3p import of virtio-media",
+      "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
