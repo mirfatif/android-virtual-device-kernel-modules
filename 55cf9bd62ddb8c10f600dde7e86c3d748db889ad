@@ -16,6 +16,23 @@
       "message": "Not ready, waiting for 3p import of virtio-media",
       "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efc5607_1547af3b",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-14T22:59:32Z",
+      "side": 1,
+      "message": "nitty nit: You could also use `//common-modules/virtio-media/driver:__subpackages__` or `//common-modules:__subpackages__` to minimize visibility, depending on what you want",
+      "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
