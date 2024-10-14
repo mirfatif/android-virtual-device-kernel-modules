@@ -34,6 +34,24 @@
       ],
       "revId": "f46e5a170d98a6b01f3b7d0f46c9c33b6162bb4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c5d11f_39afc423",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1849,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-10-14T16:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e115d14_d6e56580",
+      "revId": "f46e5a170d98a6b01f3b7d0f46c9c33b6162bb4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
