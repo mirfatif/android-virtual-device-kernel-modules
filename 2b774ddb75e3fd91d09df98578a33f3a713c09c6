@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c382ffd4_885db1aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-10-14T17:39:32Z",
+      "side": 1,
+      "message": "Changed to many formats that make this CL too large to review. There is a `.clang-format` at [the root of the kernel source](https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/.clang-format)(the `common` repo). Use that. Also use git-clang-format to avoid reformatting code that you don\u0027t touch.",
+      "revId": "2b774ddb75e3fd91d09df98578a33f3a713c09c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
