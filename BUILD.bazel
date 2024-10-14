@@ -111,6 +111,7 @@ ddk_headers(
         ":common_headers",
         "//common:all_headers_aarch64",
     ],
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 ddk_headers(
@@ -121,6 +122,7 @@ ddk_headers(
         ":common_headers",
         "//common:all_headers_x86_64",
     ],
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 _VIRT_COMMON_MODULES = [
@@ -203,6 +205,7 @@ kernel_build(
         "virtio_pmem.ko",
     ],
     strip_modules = True,
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 kernel_compile_commands(
@@ -249,6 +252,7 @@ kernel_module_group(
         ":x86_64/goldfish_drivers/goldfish_pipe",
         ":x86_64/goldfish_drivers/goldfish_sync",
         ":x86_64/v4l2loopback",
+        "//common-modules/virtio-media/driver:x86_64/virtio-media",
     ],
 )
 
@@ -384,6 +388,7 @@ kernel_build(
     ],
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     strip_modules = True,
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 kernel_abi(
@@ -437,6 +442,7 @@ kernel_module_group(
         ":aarch64/goldfish_drivers/goldfish_pipe",
         ":aarch64/goldfish_drivers/goldfish_sync",
         ":aarch64/v4l2loopback",
+        "//common-modules/virtio-media/driver:aarch64/virtio-media",
     ],
 )
 
@@ -555,6 +561,7 @@ kernel_build(
     module_outs = _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
     page_size = "16k",
     strip_modules = True,
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 ddk_module(
@@ -596,6 +603,7 @@ kernel_module_group(
         ":aarch64_16k/goldfish_drivers/goldfish_pipe",
         ":aarch64_16k/goldfish_drivers/goldfish_sync",
         ":aarch64_16k/v4l2loopback",
+        "//common-modules/virtio-media/driver:aarch64_16k/virtio-media",
     ],
 )
 
