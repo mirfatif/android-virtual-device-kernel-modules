@@ -51,6 +51,24 @@
       "parentUuid": "8efc5607_1547af3b",
       "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf61162e_e9383453",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-10-16T18:27:28Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I used the latter option in case we want to add other external modules with their own git projects in the future.",
+      "parentUuid": "567acd3c_aab93871",
+      "revId": "55cf9bd62ddb8c10f600dde7e86c3d748db889ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
