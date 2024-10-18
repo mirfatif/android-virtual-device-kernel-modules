@@ -19,6 +19,8 @@
 #include <linux/mman.h>
 #include <linux/delay.h>
 #include <linux/pagemap.h>
+#include <linux/mm.h>
+#include <linux/sched/mm.h>
 #include "dxgkrnl.h"
 #include "dxgvmbus.h"
 
@@ -318,13 +320,48 @@ cleanup:
 	return ret;
 }
 
+static int get_process_name(struct task_struct *task, char *buffer, int buflen)
+{
+	int res = 0;
+	unsigned int len;
+	struct mm_struct *mm = get_task_mm(task);
+	unsigned long arg_start, arg_end;
+	if (!mm)
+		goto out;
+	if (!mm->arg_end)
+		goto out_mm;
+
+	spin_lock(&mm->arg_lock);
+	arg_start = mm->arg_start;
+	arg_end = mm->arg_end;
+	spin_unlock(&mm->arg_lock);
+
+	len = arg_end - arg_start;
+
+	if (len > buflen)
+		len = buflen;
+
+	res = access_process_vm(task, arg_start, buffer, len, FOLL_FORCE);
+
+	if (res > 0) {
+		if (res >= buflen)
+			res = buflen - 1;
+		buffer[res] = '\0';
+		res += 1;
+	}
+out_mm:
+	mmput(mm);
+out:
+	return res;
+}
+
 int dxgvmb_send_create_process(struct dxgprocess *process)
 {
 	int ret;
 	struct dxgkvmb_command_createprocess *command;
 	struct dxgkvmb_command_createprocess_return result = { 0 };
 	struct dxgvmbusmsg msg;
-	char s[WIN_MAX_PATH];
+	char s[WIN_MAX_PATH] = { 0 };
 	int i;
 
 	ret = init_message(&msg, NULL, process, sizeof(*command));
@@ -338,10 +375,17 @@ int dxgvmb_send_create_process(struct dxgprocess *process)
 
 	command_vm_to_host_init1(&command->hdr, DXGK_VMBCOMMAND_CREATEPROCESS);
 	command->process = process;
-	command->process_id = process->pid;
+	command->process_id = process->tgid;
 	command->linux_process = 1;
+
 	s[0] = 0;
-	__get_task_comm(s, WIN_MAX_PATH, current);
+	ret = get_process_name(current, s, WIN_MAX_PATH);
+
+	if (ret <= 0) {
+		__get_task_comm(s, WIN_MAX_PATH, current);
+	}
+	s[WIN_MAX_PATH - 1] = 0;
+
 	for (i = 0; i < WIN_MAX_PATH; i++) {
 		command->process_name[i] = s[i];
 		if (s[i] == 0)
