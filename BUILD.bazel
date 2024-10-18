@@ -101,6 +101,7 @@ ddk_headers(
     hdrs = glob(["uapi/**/*.h"]),
     includes = ["."],
     linux_includes = ["uapi"],
+    visibility = ["//common-modules:__subpackages__"],
 )
 
 ddk_headers(
@@ -111,7 +112,6 @@ ddk_headers(
         ":common_headers",
         "//common:all_headers_aarch64",
     ],
-    visibility = ["//common-modules:__subpackages__"],
 )
 
 ddk_headers(
@@ -122,7 +122,6 @@ ddk_headers(
         ":common_headers",
         "//common:all_headers_x86_64",
     ],
-    visibility = ["//common-modules:__subpackages__"],
 )
 
 _VIRT_COMMON_MODULES = [
