@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9067648f_49819dff",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-10-18T20:48:37Z",
+      "side": 1,
+      "message": "With change in line 364, this is not really needed, is it?",
+      "revId": "1ea26591f3015cb6512e3a140814a723e1f1a73f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
