@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfd2c0b_8718a6e0",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-10-21T03:37:02Z",
+      "side": 1,
+      "message": "Just for my understanding: we do not want to use, get_cmdline:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android14-kiwi-6.1/mm/util.c#1056\n\nas we are truncating the command line?",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 15
+      },
+      "revId": "9d3c414c7b23ae3c1fc008888658f5b434a90d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
