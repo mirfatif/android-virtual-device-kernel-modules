@@ -16,6 +16,24 @@
       "message": "With change in line 364 it\u0027s not really needed, is it?",
       "revId": "a438e6c0ae0ffd490de774f2f912b60dc53e4bef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c493e8cc_9d208046",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-10-21T14:47:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc45924_1a1928e2",
+      "revId": "a438e6c0ae0ffd490de774f2f912b60dc53e4bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
