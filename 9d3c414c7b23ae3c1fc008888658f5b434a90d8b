@@ -22,6 +22,30 @@
       },
       "revId": "9d3c414c7b23ae3c1fc008888658f5b434a90d8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c187cd_c44dbad7",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-10-21T14:47:10Z",
+      "side": 1,
+      "message": "1. `get_cmdline` can\u0027t be directly used in kernel module because a kernel module can\u0027t correctly link that function, e.g. the declaration of that function is not extern.\n\n2. We don\u0027t need the environment variables, which can be very long. In a way, we even don\u0027t need the full path - the file name should be enough for our use. But for simplicity, we are still using the full path.",
+      "parentUuid": "2cfd2c0b_8718a6e0",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 15
+      },
+      "revId": "9d3c414c7b23ae3c1fc008888658f5b434a90d8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
