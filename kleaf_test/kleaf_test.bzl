@@ -97,6 +97,12 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_autofdo_test(
+        name = name + "_ddk_autofdo_test",
+        kernel_build = kernel_build,
+        **private_kwargs
+    )
+
     _kernel_boot_images_outs_contains_ramdisk_test(
         name = name + "_kernel_boot_images_outs_contains_ramdisk_test",
         kernel_build = kernel_build,
@@ -117,6 +123,7 @@ def kleaf_test(
             name + "_ddk_genfiles_test",
             name + "_ddk_submodule_duplicate_linux_include_test",
             name + "_ddk_submodule_linux_include_in_top_level_test",
+            name + "_ddk_autofdo_test",
             name + "_kernel_boot_images_outs_contains_ramdisk_test",
         ] + extras,
         **kwargs
@@ -870,6 +877,42 @@ def _ddk_submodule_linux_include_in_top_level_test(name, kernel_build, **private
         name = name,
         targets = [
             "{}_module".format(name),
+        ],
+        **private_kwargs
+    )
+
+def _ddk_autofdo_test(name, kernel_build, **private_kwargs):
+    ddk_module(
+        name = name + "_module",
+        out = name + "_module.ko",
+        kernel_build = kernel_build,
+        srcs = [Label("nothing.c")],
+        autofdo_profile = Label("test.proftext"),
+        debug_info_for_profiling = True,
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = name + "_submodule",
+        out = name + "_submodule.ko",
+        srcs = [Label("nothing.c")],
+        autofdo_profile = Label("test.proftext"),
+        debug_info_for_profiling = True,
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module_with_submodule",
+        kernel_build = kernel_build,
+        deps = [name + "_submodule"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+            name + "_module_with_submodule",
         ],
         **private_kwargs
     )
