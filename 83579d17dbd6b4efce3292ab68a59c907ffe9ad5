@@ -22,6 +22,30 @@
       },
       "revId": "83579d17dbd6b4efce3292ab68a59c907ffe9ad5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9cac78_9b8aa84c",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-22T22:28:56Z",
+      "side": 1,
+      "message": "I am pointing to nothing.c in the package of kleaf_test.bzl, not the package where the test is defined; even though in this case they are the same package.\n\n(there are various other source files in this test that needs to be fixed, but I haven\u0027t got to them)",
+      "parentUuid": "c9c86c72_d6aba01a",
+      "range": {
+        "startLine": 889,
+        "startChar": 16,
+        "endLine": 889,
+        "endChar": 17
+      },
+      "revId": "83579d17dbd6b4efce3292ab68a59c907ffe9ad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
