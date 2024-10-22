@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c86c72_d6aba01a",
+        "filename": "kleaf_test/kleaf_test.bzl",
+        "patchSetId": 2
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-10-22T15:40:43Z",
+      "side": 1,
+      "message": "qq: why is this needed here (and below)?",
+      "range": {
+        "startLine": 889,
+        "startChar": 16,
+        "endLine": 889,
+        "endChar": 17
+      },
+      "revId": "83579d17dbd6b4efce3292ab68a59c907ffe9ad5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
