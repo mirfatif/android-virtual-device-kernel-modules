@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a8b815a_0e22604a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3522211
+      },
+      "writtenOn": "2024-10-22T20:01:45Z",
+      "side": 1,
+      "message": "After cherry-picking both this and https://r.android.com/3314745, I\u0027m still seeing ABI build failures on `//common-modules/virtual-device:virtual_device_x86_64_dist`. Is that expected?",
+      "revId": "a07af1d2f64a7dc52f9b0aa74ac8319b088a8f78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
