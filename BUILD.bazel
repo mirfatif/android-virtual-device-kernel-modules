@@ -219,6 +219,8 @@ kernel_build(
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
     build_config = "build.config.virtual_device.x86_64",
+    collect_unstripped_modules = True,
+    kmi_symbol_list = "//common:android/abi_gki_x86_64_virtual_device",
     make_goals = [
         "modules",
     ],
@@ -229,6 +231,12 @@ kernel_build(
         "virtio_pmem.ko",
     ],
     strip_modules = True,
+)
+
+kernel_abi(
+    name = "virtual_device_x86_64_abi",
+    kernel_build = ":virtual_device_x86_64",
+    kernel_modules = [":virtual_device_x86_64_external_modules"],
 )
 
 kernel_compile_commands(
