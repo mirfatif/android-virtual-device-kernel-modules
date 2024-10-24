@@ -1,0 +1,14 @@
+load(
+    "//build/kernel/kleaf:kernel.bzl",
+    "ddk_module",
+)
+
+ddk_module(
+    name = "my_ddk_module",
+    srcs = ["ddk_mod.c"],
+    out = "my_ddk_module.ko",
+    defconfig = "my_ddk_module_defconfig",
+    kconfig = "Kconfig.ext",
+    kernel_build = "//common-modules/virtual-device/kleaf_test:test_kernel",
+    visibility = ["//common-modules/virtual-device/kleaf_test:__subpackages__"],
+)

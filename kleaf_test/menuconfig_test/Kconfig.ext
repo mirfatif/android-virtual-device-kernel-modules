@@ -1,0 +1,9 @@
+menu "Kleaf Testing"
+
+config KLEAF_TEST
+	tristate "Kleaf test"
+	default n
+	help
+	  A test config.
+
+endmenu
