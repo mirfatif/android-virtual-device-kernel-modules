@@ -173,7 +173,8 @@ kernel_build(
     outs = [],
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
-    build_config = "build.config.virtual_device.x86_64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/x86/configs/gki_defconfig",
     make_goals = [
         "modules",
     ],
@@ -378,7 +379,8 @@ kernel_build(
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64",
-    build_config = "build.config.virtual_device.aarch64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/arm64/configs/gki_defconfig",
     make_goals = [
         "modules",
         "arm/fvp-base-revc.dtb",
@@ -580,7 +582,8 @@ kernel_build(
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64_16k",
-    build_config = "build.config.virtual_device.aarch64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/arm64/configs/gki_defconfig",
     make_goals = [
         "modules",
         "arm/fvp-base-revc.dtb",
@@ -688,7 +691,8 @@ kernel_build(
         "vmlinux.symvers",
     ],
     base_kernel = None,
-    build_config = "build.config.server.aarch64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/arm64/configs/gki_defconfig",
     kmi_symbol_list_strict_mode = False,
     makefile = "//common:Makefile",
     module_outs = sets.to_list(sets.make(
@@ -764,7 +768,8 @@ kernel_build(
     ],
     arch = "x86_64",
     base_kernel = None,
-    build_config = "build.config.server.x86_64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/x86/configs/gki_defconfig",
     kmi_symbol_list_strict_mode = False,
     makefile = "//common:Makefile",
     module_outs = sets.to_list(sets.make(
