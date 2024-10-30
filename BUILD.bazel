@@ -173,7 +173,7 @@ kernel_build(
     outs = [],
     arch = "x86_64",
     base_kernel = "//common:kernel_x86_64",
-    build_config = "build.config.virtual_device.x86_64",
+    build_config = "//common:build.config.common",
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "virtual_device.fragment",
@@ -378,7 +378,7 @@ kernel_build(
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64",
-    build_config = "build.config.virtual_device.aarch64",
+    build_config = "//common:build.config.common",
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "virtual_device.fragment",
@@ -580,7 +580,7 @@ kernel_build(
         "arch/arm64/boot/dts/arm/fvp-base-revc.dtb",
     ],
     base_kernel = "//common:kernel_aarch64_16k",
-    build_config = "build.config.virtual_device.aarch64",
+    build_config = "//common:build.config.common",
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "virtual_device.fragment",
@@ -688,7 +688,7 @@ kernel_build(
         "vmlinux.symvers",
     ],
     base_kernel = None,
-    build_config = "build.config.server.aarch64",
+    build_config = "//common:build.config.common",
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "linux_distro.fragment",
@@ -764,7 +764,7 @@ kernel_build(
     ],
     arch = "x86_64",
     base_kernel = None,
-    build_config = "build.config.server.x86_64",
+    build_config = "//common:build.config.common",
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "linux_distro.fragment",
