@@ -171,7 +171,6 @@ _VIRT_COMMON_MODULES = [
 _VIRT_AARCH64_MODULES = [
     # keep sorted
     "ambakmi.ko",
-    "android-v-virt-cpufreq.ko",
     "armmmci.ko",
     "clk-vexpress-osc.ko",
     "drm_dma_helper.ko",
@@ -184,6 +183,7 @@ _VIRT_AARCH64_MODULES = [
     "vexpress-sysreg.ko",
     "virtio_mmio.ko",
     "virtio_pmem.ko",
+    "virtual-cpufreq.ko",
 ]
 
 kernel_build(
