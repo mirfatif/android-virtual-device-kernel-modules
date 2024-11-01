@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0717c8c_05b3a2db",
+        "filename": "virtio_dxgkrnl/ioctl.c",
+        "patchSetId": 25
+      },
+      "lineNbr": 5736,
+      "author": {
+        "id": 1978418
+      },
+      "writtenOn": "2024-11-01T00:00:34Z",
+      "side": 1,
+      "message": "fix: send acquire_target_semaphore_nthandle; copy/paste error",
+      "revId": "0c5906144fcaf24b94849a5958225db3050f015d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
