@@ -699,7 +699,8 @@ kernel_build(
     outs = [],
     arch = "riscv64",
     base_kernel = "//common:kernel_riscv64",
-    build_config = "build.config.virtual_device.riscv64",
+    build_config = "//common:build.config.common",
+    defconfig = "//common:arch/riscv/configs/gki_defconfig",
     defconfig_fragments = [
         "virtual_device_core.fragment",
         "virtual_device.fragment",
