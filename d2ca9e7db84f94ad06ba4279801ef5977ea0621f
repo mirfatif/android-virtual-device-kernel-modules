@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2312b4eb_c79425d0",
+        "filename": "modules_aarch64.blocklist",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-11-04T23:27:37Z",
+      "side": 1,
+      "message": "Nit: Can this be above the comment for the blocklist file?",
+      "revId": "d2ca9e7db84f94ad06ba4279801ef5977ea0621f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
