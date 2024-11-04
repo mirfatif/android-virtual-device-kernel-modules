@@ -16,6 +16,24 @@
       "message": "Nit: Can this be above the comment for the blocklist file?",
       "revId": "d2ca9e7db84f94ad06ba4279801ef5977ea0621f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f209c4aa_e920ca8f",
+        "filename": "modules_aarch64.blocklist",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2024-11-04T23:32:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2312b4eb_c79425d0",
+      "revId": "d2ca9e7db84f94ad06ba4279801ef5977ea0621f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
