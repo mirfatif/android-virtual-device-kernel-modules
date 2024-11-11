@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e15d13_52f2e947",
+        "filename": "virtual_device_core.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-11-11T12:41:13Z",
+      "side": 1,
+      "message": "Do these need to be here now if they\u0027re a part of the gki kernel module build?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "e1183bdafc6c46899dee74a74227940cd9f244bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96811cf3_21ec72c4",
+        "filename": "virtual_device_core.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-11-11T12:41:13Z",
+      "side": 1,
+      "message": "VIRTIO_PCI_LEGACY is default y and only affects the VIRTIO_PCI module which is a park of the GKI module build now. Does this need to be here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "e1183bdafc6c46899dee74a74227940cd9f244bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
