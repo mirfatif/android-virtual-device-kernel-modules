@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea53d85_d465721f",
+        "filename": "virtual_device_core.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-11-11T14:34:05Z",
+      "side": 1,
+      "message": "Removed the ones that are set in gki_defconfig: CONFIG_VIRTIO_BLK, CONFIG_VIRTIO_CONSOLE, CONFIG_VIRTIO_PCI, CONFIG_VIRTIO_VSOCKETS",
+      "parentUuid": "e1e15d13_52f2e947",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "e1183bdafc6c46899dee74a74227940cd9f244bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96811cf3_21ec72c4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-11-11T12:41:13Z",
       "side": 1,
       "message": "VIRTIO_PCI_LEGACY is default y and only affects the VIRTIO_PCI module which is a park of the GKI module build now. Does this need to be here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "e1183bdafc6c46899dee74a74227940cd9f244bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2d6736_88f4e57f",
+        "filename": "virtual_device_core.fragment",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2024-11-11T14:34:05Z",
+      "side": 1,
+      "message": "We disable CONFIG_VIRTIO_PCI_LEGACY in GKI defconfigs, so without this line the virtual_device_x86_64_dist build fails with:\n\n```\nUnable to find virtio_pci_legacy_dev.ko\n```",
+      "parentUuid": "96811cf3_21ec72c4",
       "range": {
         "startLine": 11,
         "startChar": 0,
