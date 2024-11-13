@@ -16,6 +16,24 @@
       "message": "Since this kernel config is generic - please add it to arm64 cf as well. We aim to minimize differences between the two cf targets.",
       "revId": "d411313dff9c5a5221356022c07fea1b2118d39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4909894_b61b282a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2024-11-13T17:57:28Z",
+      "side": 1,
+      "message": "Thanks. I updated this accordingly. Building the aarch64{,_16k} ones requires updating the kernel symbol list to build (aosp/3347209).",
+      "parentUuid": "62c5d200_50d912db",
+      "revId": "d411313dff9c5a5221356022c07fea1b2118d39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
