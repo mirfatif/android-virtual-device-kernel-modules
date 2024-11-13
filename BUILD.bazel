@@ -148,6 +148,7 @@ _VIRT_COMMON_MODULES = [
     "net_failover.ko",
     "pulse8-cec.ko",
     "rtc-test.ko",
+    "snd-aloop.ko",
     "system_heap.ko",
     "usbip-core.ko",
     "vhci-hcd.ko",
