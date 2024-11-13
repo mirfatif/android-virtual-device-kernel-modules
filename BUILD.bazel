@@ -198,6 +198,7 @@ kernel_build(
     module_outs = _VIRT_COMMON_MODULES + [
         # keep sorted
         "nd_virtio.ko",
+        "snd-aloop.ko",
         "test_meminit.ko",
         "virtio_pmem.ko",
     ],
