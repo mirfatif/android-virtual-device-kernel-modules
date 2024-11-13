@@ -13,7 +13,6 @@
 # limitations under the License.
 
 load("@bazel_skylib//lib:paths.bzl", "paths")
-load("@bazel_skylib//lib:sets.bzl", "sets")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load(
@@ -155,17 +154,12 @@ _VIRT_COMMON_MODULES = [
     "virt_wifi.ko",
     "virtio-gpu.ko",
     "virtio-rng.ko",
-    "virtio_balloon.ko",
-    "virtio_blk.ko",
-    "virtio_console.ko",
     "virtio_dma_buf.ko",
     "virtio_input.ko",
     "virtio_net.ko",
-    "virtio_pci.ko",
     "virtio_pci_legacy_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
-    "vmw_vsock_virtio_transport.ko",
 ]
 
 _VIRT_AARCH64_MODULES = [
@@ -318,7 +312,7 @@ test_suite(
     ],
 )
 
-_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = sets.to_list(sets.make([
+_FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = [
     paths.basename(m)
     for m in get_gki_modules_list("x86_64")
 ] + _VIRT_COMMON_MODULES + [
@@ -327,7 +321,7 @@ _FAKE_VIRT_DEVICE_X86_64_MODULES_LIST = sets.to_list(sets.make([
     "test_meminit.ko",
     "v4l2loopback.ko",
     "virtio_pmem.ko",
-]))
+]
 
 write_file(
     name = "fake_virtual_device_x86_64_modules_list",
@@ -469,9 +463,10 @@ kernel_images(
     modules_options = "modules.options",
 )
 
-_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = sets.to_list(sets.make(
-    [paths.basename(m) for m in get_gki_modules_list("arm64")] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES,
-))
+_FAKE_VIRT_DEVICE_AARCH64_MODULES_LIST = [
+    paths.basename(m)
+    for m in get_gki_modules_list("arm64")
+] + _VIRT_COMMON_MODULES + _VIRT_AARCH64_MODULES
 
 write_file(
     name = "fake_virtual_device_aarch64_modules_list",
@@ -649,31 +644,24 @@ kernel_build(
     ],
     base_kernel = None,
     build_config = "build.config.server.aarch64",
-    module_outs = sets.to_list(sets.make(
-        [
-            paths.basename(module)
-            for module in get_gki_modules_list("arm64")
-        ] + [
-            paths.basename(module)
-            for module in get_kunit_modules_list("arm64")
-        ] + [
-            # keep sorted
-            "failover.ko",
-            "net_failover.ko",
-            "virtio-gpu.ko",
-            "virtio-rng.ko",
-            "virtio_blk.ko",
-            "virtio_console.ko",
-            "virtio_dma_buf.ko",
-            "virtio_input.ko",
-            "virtio_net.ko",
-            "virtio_pci.ko",
-            "virtio_pci_legacy_dev.ko",
-            "virtio_pci_modern_dev.ko",
-            "virtio_snd.ko",
-            "vmw_vsock_virtio_transport.ko",
-        ],
-    )),
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("arm64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("arm64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_pci_legacy_dev.ko",
+        "virtio_snd.ko",
+    ],
     strip_modules = False,
 )
 
@@ -714,31 +702,24 @@ kernel_build(
     arch = "x86_64",
     base_kernel = None,
     build_config = "build.config.server.x86_64",
-    module_outs = sets.to_list(sets.make(
-        [
-            paths.basename(module)
-            for module in get_gki_modules_list("x86_64")
-        ] + [
-            paths.basename(module)
-            for module in get_kunit_modules_list("x86_64")
-        ] + [
-            # keep sorted
-            "failover.ko",
-            "net_failover.ko",
-            "virtio-gpu.ko",
-            "virtio-rng.ko",
-            "virtio_blk.ko",
-            "virtio_console.ko",
-            "virtio_dma_buf.ko",
-            "virtio_input.ko",
-            "virtio_net.ko",
-            "virtio_pci.ko",
-            "virtio_pci_legacy_dev.ko",
-            "virtio_pci_modern_dev.ko",
-            "virtio_snd.ko",
-            "vmw_vsock_virtio_transport.ko",
-        ],
-    )),
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("x86_64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("x86_64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_pci_legacy_dev.ko",
+        "virtio_snd.ko",
+    ],
     strip_modules = False,
 )
 
