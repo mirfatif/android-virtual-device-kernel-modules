@@ -14,6 +14,7 @@ PRE_DEFCONFIG_CMDS="mkdir -p \${OUT_DIR}/arch/x86/configs && \
         ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device_core.fragment \
         ${ROOT_DIR}/common-modules/virtual-device/virtual_device.fragment \
+        ${ROOT_DIR}/common-modules/virtual-device/x86_64.fragment && \
         ${ROOT_DIR}/common-modules/virtual-device/kgdb.fragment \
         ${ROOT_DIR}/common-modules/virtual-device/kgdb-x86.fragment && \
      true"
