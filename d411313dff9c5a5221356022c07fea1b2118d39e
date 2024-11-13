@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c5d200_50d912db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-11-13T13:20:08Z",
+      "side": 1,
+      "message": "Since this kernel config is generic - please add it to arm64 cf as well. We aim to minimize differences between the two cf targets.",
+      "revId": "d411313dff9c5a5221356022c07fea1b2118d39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
