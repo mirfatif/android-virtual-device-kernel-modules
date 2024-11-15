@@ -57,8 +57,8 @@ struct winluid {
 struct large_integer {
 	union {
 		struct {
-			unsigned long lowpart;
-			long highpart;
+			__u32 lowpart;
+			__s32 highpart;
 		} u;
 		int64_t quadpart;
 	};
