@@ -80,6 +80,30 @@
       ],
       "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c0ad62_afddd914",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-11-15T22:40:52Z",
+      "side": 1,
+      "message": "I believe it\u0027s the mistake that we have this int64_t below. Kernel\u0027s convention is to use __s64 instead, and this what should be used both in here and in the converting function (in fact, this is the type of the parameter passed to converting function).",
+      "parentUuid": "52d5023a_f60b2ede",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 8
+      },
+      "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
