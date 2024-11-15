@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7c68c530_5343e3f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-11-15T23:03:16Z",
+      "side": 1,
+      "message": "Just a generic reminder - please point any fixes to all the branches of the interest. I do believe that @kritisn@google.com has set up the automergers for downstream branches, so it may be viable only to add that patch to main, potentially?",
+      "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f4d11659_4e038b65",
         "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
         "patchSetId": 1
