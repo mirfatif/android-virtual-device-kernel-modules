@@ -39,6 +39,47 @@
       },
       "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d5023a_f60b2ede",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1952016
+      },
+      "writtenOn": "2024-11-15T22:37:44Z",
+      "side": 1,
+      "message": "Just out of curiosity, is there a reason we don\u0027t use uint32_t and int32_t here (given the int64_t below)?",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c330d135_b4a39025",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tuint32_t lowpart;\n\t\t\tint32_t highpart;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
