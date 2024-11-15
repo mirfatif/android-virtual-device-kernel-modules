@@ -169,6 +169,30 @@
       },
       "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d925706_5826ee1e",
+        "filename": "virtio_dxgkrnl/include/uapi/d3dkmthk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1892436
+      },
+      "writtenOn": "2024-11-15T23:05:44Z",
+      "side": 1,
+      "message": "\"when do driver development\"",
+      "parentUuid": "278b3f70_2a54e23f",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 8
+      },
+      "revId": "516e9960a0d6b17d7cbfecf5f4c2c4144ea6576f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
