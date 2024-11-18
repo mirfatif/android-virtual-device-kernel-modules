@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0569cc_7c30c702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-11-18T19:52:52Z",
+      "side": 1,
+      "message": "Commit message:\n\nhidding / hiding\n\nnow / new ?",
+      "revId": "b1b3050ffa92e07dbb07dffe3488d852a0dc3016",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
