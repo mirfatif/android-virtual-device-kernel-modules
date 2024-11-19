@@ -2005,9 +2005,6 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 		mutex_lock(&resource->resource_mutex);
 	}
 
-	ret = dxgvmb_send_destroy_allocation(process, device, &args,
-					     alloc_handles);
-
 	/*
 	 * Destroy the allocations after the host destroyed it.
 	 * The allocation gpadl teardown will wait until the host unmaps its
@@ -2030,6 +2027,10 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 		mutex_unlock(&resource->resource_mutex);
 		kref_put(&resource->resource_kref, dxgresource_release);
 	}
+
+	ret = dxgvmb_send_destroy_allocation(process, device, &args,
+					     alloc_handles);
+
 
 cleanup:
 
