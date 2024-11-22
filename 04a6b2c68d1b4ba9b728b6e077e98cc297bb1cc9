@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "606b0205_ca67247c",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-11-22T23:59:39Z",
+      "side": 1,
+      "message": "I don\u0027t think we really need a lock here. dxgallocation_stop is being explicitly called before. I don\u0027t think we really need to resolve race for the value here, the important part is that the pointer stays valid? WDYT?",
+      "parentUuid": "6753b3ed_c354a5d3",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fe6310c_e8a66c08",
         "filename": "virtio_dxgkrnl/dxgkrnl.h",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-11-22T21:07:41Z",
       "side": 1,
       "message": "Add a comment that this must be called with the `alloc-\u003elock` being held.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d0d4ad3_5127eb16",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-11-22T23:59:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fe6310c_e8a66c08",
       "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2024-11-22T21:07:41Z",
       "side": 1,
       "message": "Add a comment that this must be called with the `alloc-\u003elock` being held.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2a7490_da61ef91",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-11-22T23:59:39Z",
+      "side": 1,
+      "message": "No more needed.",
+      "parentUuid": "8cccc654_55d684a0",
       "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
