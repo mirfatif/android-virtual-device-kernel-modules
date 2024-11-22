@@ -3013,6 +3013,7 @@ cleanup:
 	return ret;
 }
 
+// Needs to be called under alloc->lock.
 int dxgvmb_send_lock2(struct dxgprocess *process,
 		      struct dxgadapter *adapter,
 		      struct d3dkmt_lock2 *args,
@@ -3046,6 +3047,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args->allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (alloc == NULL) {
 		pr_err("%s invalid alloc", __func__);
 		ret = -EINVAL;
@@ -3084,7 +3086,6 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 			}
 		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 
 cleanup:
 	free_message(&msg, process);
