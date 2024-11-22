@@ -887,6 +887,7 @@ struct dxgallocation *dxgallocation_create(struct dxgprocess *process)
 
 	if (alloc)
 		alloc->process = process;
+		init_rwsem(&alloc->lock);
 	return alloc;
 }
 
@@ -897,7 +898,7 @@ void dxgallocation_stop(struct dxgallocation *alloc)
 		vfree(alloc->pages);
 		alloc->pages = NULL;
 	}
-	dxgprocess_ht_lock_exclusive_down(alloc->process);
+	down_write(&alloc->lock);
 	if (alloc->cpu_address_mapped) {
 		dxg_unmap_iospace(alloc->cpu_address,
 				  alloc->num_pages << PAGE_SHIFT);
@@ -905,7 +906,7 @@ void dxgallocation_stop(struct dxgallocation *alloc)
 		alloc->cpu_address = NULL;
 		alloc->cpu_address_refcount = 0;
 	}
-	dxgprocess_ht_lock_exclusive_up(alloc->process);
+	up_write(&alloc->lock);
 }
 
 void dxgallocation_free_handle(struct dxgallocation *alloc)
