@@ -3982,7 +3982,7 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 		goto cleanup;
 	}
-
+	pr_err("MP: starting lock for allocation %u", args.allocation.v);
 	args.data = NULL;
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
@@ -3994,25 +3994,37 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 	} else {
 		down_write(&alloc->lock);
+		pr_err("MP: lock: alloc lock obtained for allocation %u with cpu_address_mapped %d and refcount %d", args.allocation.v, alloc->cpu_address_mapped, alloc->cpu_address_refcount);
 		if (alloc->cpu_address) {
+			pr_err("MP: lock: found mapping for allocation %u with valid CPU address", args.allocation.v);
 			ret = copy_to_user(&result->data,
 					   &alloc->cpu_address,
 					   sizeof(args.data));
 			if (ret == 0) {
+				pr_err("MP: lock: found mapping for allocation %u with valid CPU address", args.allocation.v);
 				args.data = alloc->cpu_address;
-				if (alloc->cpu_address_mapped)
+				if (alloc->cpu_address_mapped) {
+					pr_err("MP: lock: found mapping for allocation %u with valid CPU address mapped, increasing the refcount", args.allocation.v);
 					alloc->cpu_address_refcount++;
+				} else {
+					pr_err("MP: lock: valid CPU address reported but no cpu_address_mapped, some problem with the data coherency for allocation %u!", args.allocation.v);
+				}
 			} else {
 				pr_err("%s Failed to copy cpu address",
 					__func__);
 				ret = -EINVAL;
 			}
 		}
+		else {
+			pr_err("MP: lock: no valid CPU address found for allocation %u, proceeding with obtaining it from host", args.allocation.v);
+		}
 	}
 	if (ret < 0)
 		goto cleanup;
-	if (args.data)
+	if (args.data) {
+		pr_err("MP: lock: skipping sending to host for allocation %u", args.allocation.v);
 		goto success;
+	}
 
 	/*
 	 * The call acquires reference on the device. It is safe to access the
@@ -4067,6 +4079,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 		goto cleanup;
 	}
+	pr_err("MP: unlock started for allocation %u", args.allocation.v);
 
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
@@ -4077,6 +4090,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 	} else {
 		down_write(&alloc->lock);
+		pr_err("MP: unlock: alloc lock obtained for allcation %u with cpu_address_mapped %d and refcount %d", args.allocation.v, alloc->cpu_address_mapped, alloc->cpu_address_refcount);
 		if (alloc->cpu_address == NULL) {
 			pr_err("Allocation is not locked: %p", alloc);
 			ret = -EINVAL;
@@ -4090,6 +4104,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 						alloc->num_pages << PAGE_SHIFT);
 					alloc->cpu_address_mapped = false;
 					alloc->cpu_address = NULL;
+					pr_err("MP: dxgk_unlock2: set the cpu_addr of allcation %u to NULL", alloc->alloc_handle.v);
 				}
 			} else {
 				pr_err("Invalid cpu access refcount");
@@ -4097,8 +4112,10 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	if (done)
+	if (done) {
+		pr_err("MP: unlock: skipping sending to host for allocation %u", args.allocation.v);
 		goto success;
+	}
 	if (ret < 0)
 		goto cleanup;
 
@@ -4118,6 +4135,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
+	pr_err("MP: unlock: sending to host for allocation %u", args.allocation.v);
 	ret = dxgvmb_send_unlock2(process, adapter, &args);
 
 cleanup:
