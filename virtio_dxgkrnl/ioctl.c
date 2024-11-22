@@ -3976,6 +3976,22 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
+	/*
+	 * The call acquires reference on the device. It is safe to access the
+	 * adapter, because the device holds reference on it.
+	 */
+	device = dxgprocess_device_by_handle(process, args.device);
+	if (device == NULL) {
+		ret = -EINVAL;
+		goto cleanup;
+	}
+	adapter = device->adapter;
+	ret = dxgadapter_acquire_lock_shared(adapter);
+	if (ret < 0) {
+		adapter = NULL;
+		goto cleanup;
+	}
+
 	args.data = NULL;
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
@@ -4004,22 +4020,6 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	if (args.data)
 		goto success;
-
-	/*
-	 * The call acquires reference on the device. It is safe to access the
-	 * adapter, because the device holds reference on it.
-	 */
-	device = dxgprocess_device_by_handle(process, args.device);
-	if (device == NULL) {
-		ret = -EINVAL;
-		goto cleanup;
-	}
-	adapter = device->adapter;
-	ret = dxgadapter_acquire_lock_shared(adapter);
-	if (ret < 0) {
-		adapter = NULL;
-		goto cleanup;
-	}
 
 	ret = dxgvmb_send_lock2(process, adapter, &args, result);
 
