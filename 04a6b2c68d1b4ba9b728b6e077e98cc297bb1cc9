@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6753b3ed_c354a5d3",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-22T21:07:41Z",
+      "side": 1,
+      "message": "Need to hold the write lock for `alloc-\u003elock` before calling `vfree` and access `alloc-\u003ecpu_address_mapped` to avoid use after free of `alloc` and race conditions on the `cpu_address_mapped` field.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe6310c_e8a66c08",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-22T21:07:41Z",
+      "side": 1,
+      "message": "Add a comment that this must be called with the `alloc-\u003elock` being held.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cccc654_55d684a0",
+        "filename": "virtio_dxgkrnl/dxgkrnl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-22T21:07:41Z",
+      "side": 1,
+      "message": "Add a comment that this must be called with the `alloc-\u003elock` being held.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
