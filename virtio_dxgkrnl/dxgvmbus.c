@@ -225,10 +225,13 @@ int dxg_unmap_iospace(void *va, u32 size)
 	 */
 	if (current->mm) {
 		ret = vm_munmap(page_addr, size);
+		pr_err("%d-%d dxg_unmap_iospace: called vm_munmap on virtual address %lx-%lx", current->tgid, current->pid, (unsigned long)va, (((unsigned long)va) + size));
 		if (ret) {
 			pr_err("vm_munmap failed %d", ret);
 			return -ENOTRECOVERABLE;
 		}
+	} else {
+		pr_err("%d-%d dxg_unmap_iospace: skipped virtual address %lx-%lx", current->tgid, current->pid, (unsigned long)va, (((unsigned long)va) + size));
 	}
 	return 0;
 }
@@ -237,7 +240,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 			   unsigned long protection, bool cached)
 {
 	struct vm_area_struct *vma;
-	unsigned long va;
+	unsigned long va, vm_flags;
 	int ret = 0;
 	u8 *res = NULL;
 	bool mm_locked = false;
@@ -285,11 +288,16 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	vma->vm_flags |= VM_DONTCOPY;
 	ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
 				 size, vma->vm_page_prot);
+	vm_flags = vma->vm_flags;
 	if (ret) {
-		pr_err("io_remap_pfn_range failed: %d", ret);
+		pr_err("%d-%d io_remap_pfn_range failed: %d, gpa %llx-%llx, vma->vm_start = %llx, va = %lx", current->tgid, current->pid, ret, iospace_address, iospace_address + size, vma->vm_start, va);
 		res = ERR_PTR(ret);
 		goto cleanup;
 	}
+	if (vma && va != vma->vm_start) {
+		pr_err("!!! va(%lx) doesn't match the vma->vm_start(%lx)", va, vma->vm_start);
+	}
+	pr_err("%d-%d dxg_map_iospace: mapped gpa %llx-%llx(size = %d) to va %lx-%lx, vm_flags = %lx", current->tgid, current->pid, iospace_address, iospace_address + size, (int)size, vma->vm_start, vma->vm_start + size, vm_flags);
 	dev_dbg(dxgglobaldev, "%s end: %lx", __func__, va);
 	res = (u8 *) (va + iospace_address % PAGE_SIZE);
 cleanup:
@@ -461,9 +469,12 @@ int dxgvmb_send_open_sync_object_nt(struct dxgprocess *process,
 
 	args->sync_object = result.sync_object;
 	if (syncobj->monitored_fence) {
-		void *va = dxg_map_iospace(result.guest_cpu_physical_address,
+		void *va;
+		pr_err("%s: %d-%d calling dxg_map_iospace", __func__, current->tgid, current->pid);
+		va = dxg_map_iospace(result.guest_cpu_physical_address,
 					   PAGE_SIZE, PROT_READ | PROT_WRITE,
 					   true);
+		pr_err("%s: %d-%d dxg_map_iospace returned", __func__, current->tgid, current->pid);
 		if (IS_ERR_OR_NULL(va)) {
 			ret = -ENOMEM;
 			goto cleanup;
@@ -1057,9 +1068,11 @@ int dxgvmb_send_create_paging_queue(struct dxgprocess *process,
 
 	args->paging_queue = result.paging_queue;
 	args->sync_object = result.sync_object;
+	pr_err("%s: %d-%d calling dxg_map_iospace", __func__, current->tgid, current->pid);
 	fence_cpu_va =
 	    dxg_map_iospace(result.fence_storage_physical_address, PAGE_SIZE,
 			    PROT_READ | PROT_WRITE, true);
+	pr_err("%s: %d-%d dxg_map_iospace returned", __func__, current->tgid, current->pid);
 	if (IS_ERR_OR_NULL(fence_cpu_va)) {
 		args->fence_cpu_virtual_address = NULL;
 		ret = -ENOMEM;
@@ -1251,6 +1264,7 @@ copy_sysmem_pages_rle_data(struct d3dkmt_createallocation *args,
 			// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
 			// so we don't need to grab the lock.
 			dxgalloc[i]->cpu_address = (void *)input_alloc->sysmem;
+			pr_err("MP: copy_sysmem_pages_rle_data: set cpu_address of allocation %u to %lx", (unsigned int)dxgalloc[i]->alloc_handle.v, (unsigned long)dxgalloc[i]->cpu_address);
 
 			/* Grab the pages from user. */
 			dxgalloc[i]->pages = vzalloc(npages * sizeof(void *));
@@ -1357,6 +1371,7 @@ int create_existing_sysmem(struct dxgdevice *device,
 	// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
 	// so we don't need to grab the lock.
 	dxgalloc->cpu_address = (void *)sysmem;
+	pr_err("MP: create_existing_sysmem: set the cpu_addr of allcation %u to %lx", dxgalloc->alloc_handle.v, (unsigned long)dxgalloc->cpu_address);
 
 	dxgalloc->pages = vzalloc(npages * sizeof(void *));
 	if (dxgalloc->pages == NULL) {
@@ -2786,8 +2801,10 @@ dxgvmb_send_create_sync_object(struct dxgprocess *process,
 		args->info.shared_handle = result.global_sync_object;
 
 	if (syncobj->monitored_fence) {
+		pr_err("%s: %d-%d calling dxg_map_iospace", __func__, current->tgid, current->pid);
 		va = dxg_map_iospace(result.fence_storage_address, PAGE_SIZE,
 				     PROT_READ | PROT_WRITE, true);
+		pr_err("%s: %d-%d dxg_map_iospace returned", __func__, current->tgid, current->pid);
 		if (IS_ERR_OR_NULL(va)) {
 			ret = -ENOMEM;
 			goto cleanup;
@@ -3086,16 +3103,21 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 				alloc->cpu_address_refcount++;
 		} else {
 			u64 offset = (u64)result.cpu_visible_buffer_offset;
-			u8 *va = dxg_map_iospace(offset,
+			u8 *va;
+			pr_err("%s: %d-%d calling dxg_map_iospace", __func__, current->tgid, current->pid);
+			va = dxg_map_iospace(offset,
 					alloc->num_pages << PAGE_SHIFT,
 					PROT_READ | PROT_WRITE, alloc->cached);
+			pr_err("%s: %d-%d dxg_map_iospace returned", __func__, current->tgid, current->pid);
 			if (!IS_ERR_OR_NULL(va)) {
 				args->data = va;
 				alloc->cpu_address_refcount = 1;
 				alloc->cpu_address_mapped = true;
 				alloc->cpu_address = args->data;
+				pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %u to %lx, num_pages = %d", alloc->alloc_handle.v, (unsigned long)alloc->cpu_address, (int)alloc->num_pages);
 			} else {
 				args->data = NULL;
+				pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %u to %lx, num_pages = %d", alloc->alloc_handle.v, (unsigned long)alloc->cpu_address, (int)alloc->num_pages);
 			}
 		}
 		if (args->data == NULL) {
@@ -3112,6 +3134,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 					   alloc->num_pages << PAGE_SHIFT);
 					alloc->cpu_address_mapped = false;
 					alloc->cpu_address = NULL;
+					pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %u to NULL", alloc->alloc_handle.v);
 				}
 			}
 		}
@@ -3658,9 +3681,11 @@ int dxgvmb_send_create_hwqueue(struct dxgprocess *process,
 	hwqueue->handle = command->hwqueue;
 	hwqueue->progress_fence_sync_object = command->hwqueue_progress_fence;
 
+	pr_err("%s: %d-%d calling dxg_map_iospace", __func__, current->tgid, current->pid);
 	progress_fence_va =
 		dxg_map_iospace((u64)command->hwqueue_progress_fence_cpuva,
 				PAGE_SIZE, PROT_READ | PROT_WRITE, true);
+	pr_err("%s: %d-%d dxg_map_iospace returned", __func__, current->tgid, current->pid);
 	if (IS_ERR_OR_NULL(progress_fence_va)) {
 		hwqueue->progress_fence_mapped_address = NULL;
 		ret = -ENOMEM;

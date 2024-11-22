@@ -904,6 +904,7 @@ void dxgallocation_stop(struct dxgallocation *alloc)
 		dxg_unmap_iospace(alloc->cpu_address,
 				  alloc->num_pages << PAGE_SHIFT);
 		alloc->cpu_address_mapped = false;
+		pr_err("MP: dxgallocation_stop: destroy allocation %u", (unsigned int)alloc->alloc_handle.v);
 		alloc->cpu_address = NULL;
 		alloc->cpu_address_refcount = 0;
 	}
