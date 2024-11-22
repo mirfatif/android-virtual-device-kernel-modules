@@ -225,10 +225,13 @@ int dxg_unmap_iospace(void *va, u32 size)
 	 */
 	if (current->mm) {
 		ret = vm_munmap(page_addr, size);
+		pr_err("dxg_unmap_iospace: called vm_munmap on virtual address %lx-%lx", (unsigned long)va, (((unsigned long)va) + size));
 		if (ret) {
 			pr_err("vm_munmap failed %d", ret);
 			return -ENOTRECOVERABLE;
 		}
+	} else {
+		pr_err("dxg_unmap_iospace: skipped virtual address %lx-%lx", (unsigned long)va, (((unsigned long)va) + size));
 	}
 	return 0;
 }
@@ -278,6 +281,8 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	if (ret) {
 		dxg_unmap_iospace((void *)va, size);
 		return NULL;
+	} else {
+		pr_err("dxg_map_iospace: mapped gpa %llx-%llx(size = %d) to va %lx-%lx", iospace_address, iospace_address + size, (int)size, vma->vm_start, vma->vm_start + size);
 	}
 	dev_dbg(dxgglobaldev, "%s end: %lx", __func__, va);
 	return (u8 *) (va + iospace_address % PAGE_SIZE);
@@ -1229,6 +1234,7 @@ copy_sysmem_pages_rle_data(struct d3dkmt_createallocation *args,
 			// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
 			// so we don't need to grab the lock.
 			dxgalloc[i]->cpu_address = (void *)input_alloc->sysmem;
+			pr_err("MP: copy_sysmem_pages_rle_data: set cpu_address of allcation %d to %lx", (int)dxgalloc[i]->alloc_handle.v, (unsigned long)dxgalloc[i]->cpu_address);
 
 			/* Grab the pages from user. */
 			dxgalloc[i]->pages = vzalloc(npages * sizeof(void *));
@@ -1335,6 +1341,7 @@ int create_existing_sysmem(struct dxgdevice *device,
 	// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
 	// so we don't need to grab the lock.
 	dxgalloc->cpu_address = (void *)sysmem;
+	pr_err("MP: create_existing_sysmem: set the cpu_addr of allcation %d to %lx", (int)dxgalloc->alloc_handle.v, (unsigned long)dxgalloc->cpu_address);
 
 	dxgalloc->pages = vzalloc(npages * sizeof(void *));
 	if (dxgalloc->pages == NULL) {
@@ -3072,6 +3079,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 				alloc->cpu_address_refcount = 1;
 				alloc->cpu_address_mapped = true;
 				alloc->cpu_address = args->data;
+				pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %d to %lx, num_pages = %d", (int)alloc->alloc_handle.v, (unsigned long)alloc->cpu_address, (int)alloc->num_pages);
 			}
 		}
 		if (args->data == NULL) {
@@ -3088,6 +3096,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 					   alloc->num_pages << PAGE_SHIFT);
 					alloc->cpu_address_mapped = false;
 					alloc->cpu_address = NULL;
+					pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %d to NULL", (int)alloc->alloc_handle.v);
 				}
 			}
 		}
