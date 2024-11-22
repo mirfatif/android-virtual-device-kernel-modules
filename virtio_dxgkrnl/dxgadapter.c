@@ -887,6 +887,7 @@ struct dxgallocation *dxgallocation_create(struct dxgprocess *process)
 
 	if (alloc)
 		alloc->process = process;
+		init_rwsem(&alloc->lock);
 	return alloc;
 }
 
