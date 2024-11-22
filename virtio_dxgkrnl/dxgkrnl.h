@@ -729,6 +729,8 @@ struct dxgallocation {
 	void				*cpu_address;
 	/* Describes pages for the existing sysmem allocation */
 	struct page			**pages;
+	/* Lock to avoid race condition on cached allocation operations */
+	struct rw_semaphore	lock;
 };
 
 struct dxgallocation *dxgallocation_create(struct dxgprocess *process);
@@ -852,6 +854,7 @@ int dxgvmb_send_wait_sync_object_cpu(struct dxgprocess *process,
 				     *args,
 				     bool user_address,
 				     u64 cpu_event);
+// Needs to be called under alloc->lock.
 int dxgvmb_send_lock2(struct dxgprocess *process,
 		      struct dxgadapter *adapter,
 		      struct d3dkmt_lock2 *args,
