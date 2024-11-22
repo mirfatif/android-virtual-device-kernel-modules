@@ -729,6 +729,8 @@ struct dxgallocation {
 	void				*cpu_address;
 	/* Describes pages for the existing sysmem allocation */
 	struct page			**pages;
+	/* Lock to avoid race condition on cached allocation operations */
+	struct rw_semaphore	lock;
 };
 
 struct dxgallocation *dxgallocation_create(struct dxgprocess *process);

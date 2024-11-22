@@ -3974,35 +3974,49 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 		goto cleanup;
 	}
-
+	pr_err("MP: starging lock for allcation %d", args.allocation);
 	args.data = NULL;
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args.allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
+
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
+		down_write(&alloc->lock);
+		pr_err("MP: lock: alloc lock obtained for allcation %d with cpu_address_mapped %d and refcount %d", args.allocation, alloc->cpu_address_mapped, alloc->cpu_address_refcount);
 		if (alloc->cpu_address) {
+			pr_err("MP: lock: found mapping for allocation %d with valid CPU address", args.allocation);
 			ret = copy_to_user(&result->data,
 					   &alloc->cpu_address,
 					   sizeof(args.data));
 			if (ret == 0) {
+				pr_err("MP: lock: found mapping for allocation %d with valid CPU address", args.allocation);
 				args.data = alloc->cpu_address;
-				if (alloc->cpu_address_mapped)
+				if (alloc->cpu_address_mapped) {
+					pr_err("MP: lock: found mapping for allocation %d with valid CPU address mapped, increasing the refcount", args.allocation);
 					alloc->cpu_address_refcount++;
+				} else {
+					pr_err("MP: lock: valid CPU address reported but no cpu_address_mapped, some problem with the data coherency for allocation %d!", args.allocation);
+				}
 			} else {
 				pr_err("%s Failed to copy cpu address",
 					__func__);
 				ret = -EINVAL;
 			}
 		}
+		else {
+			pr_err("MP: lock: no valid CPU address found for allocation %d, proceeding with obtaining it from host", args.allocation);
+		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (ret < 0)
 		goto cleanup;
-	if (args.data)
+	if (args.data) {
+		pr_err("MP: lock: skipping sending to host for allocation %d", args.allocation);
 		goto success;
+	}
 
 	/*
 	 * The call acquires reference on the device. It is safe to access the
@@ -4020,6 +4034,7 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
+	pr_err("MP: lock: sending to host for allocation %d", args.allocation);
 	ret = dxgvmb_send_lock2(process, adapter, &args, result);
 
 cleanup:
@@ -4031,6 +4046,10 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 success:
+	if (alloc) {
+		pr_err("MP: lock: releasing lock for allocation %d", args.allocation);
+		up_write(&alloc->lock);
+	}
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
 	return ret;
 }
@@ -4051,14 +4070,18 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 		ret = -EINVAL;
 		goto cleanup;
 	}
+	pr_err("MP: unlock started for %d", args.allocation);
 
 	hmgrtable_lock(&process->handle_table, DXGLOCK_EXCL);
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args.allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
+		down_write(&alloc->lock);
+		pr_err("MP: unlock: alloc lock obtained for allcation %d with cpu_address_mapped %d and refcount %d", args.allocation, alloc->cpu_address_mapped, alloc->cpu_address_refcount);
 		if (alloc->cpu_address == NULL) {
 			pr_err("Allocation is not locked: %p", alloc);
 			ret = -EINVAL;
@@ -4079,9 +4102,10 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
-	if (done)
+	if (done) {
+		pr_err("MP: unlock: skipping sending to host for allocation %d", args.allocation);
 		goto success;
+	}
 	if (ret < 0)
 		goto cleanup;
 
@@ -4101,6 +4125,7 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
+	pr_err("MP: unlock: sending to host for allocation %d", args.allocation);
 	ret = dxgvmb_send_unlock2(process, adapter, &args);
 
 cleanup:
@@ -4111,6 +4136,10 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 success:
+	if (alloc) {
+		pr_err("MP: unlock: lock unlocked for allocation %d", args.allocation);
+		up_write(&alloc->lock);
+	}
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
 	return ret;
 }
