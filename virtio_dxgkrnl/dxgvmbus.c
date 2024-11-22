@@ -253,7 +253,11 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		return NULL;
 	}
 
-	mmap_read_lock(current->mm);
+	if (mmap_write_lock_killable(current->mm)) {
+		dxg_unmap_iospace((void *)va, size);
+		pr_err("mmap_write_lock_killable failed %lx %d", va, size);
+		return NULL;
+	}
 	vma = find_vma(current->mm, (unsigned long)va);
 	if (vma) {
 		pgprot_t prot = vma->vm_page_prot;
@@ -271,7 +275,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		pr_err("failed to find vma: %p %lx", vma, va);
 		ret = -ENOMEM;
 	}
-	mmap_read_unlock(current->mm);
+	mmap_write_unlock(current->mm);
 
 	if (ret) {
 		dxg_unmap_iospace((void *)va, size);
