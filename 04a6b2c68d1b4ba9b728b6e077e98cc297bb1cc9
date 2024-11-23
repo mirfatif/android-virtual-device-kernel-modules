@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe9337bc_bec98f30",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-23T00:05:31Z",
+      "side": 1,
+      "message": "Done. Sure. I agree this is problematic.",
+      "parentUuid": "606b0205_ca67247c",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fe6310c_e8a66c08",
@@ -102,6 +120,40 @@
       "side": 1,
       "message": "No more needed.",
       "parentUuid": "8cccc654_55d684a0",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50012ea1_3d121a09",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-23T00:05:31Z",
+      "side": 1,
+      "message": "While I agree that we probably don\u0027t need a lock here, can we add comments here why we don\u0027t need the lock? Thanks.",
+      "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "484067d9_10f02cb4",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-23T00:05:31Z",
+      "side": 1,
+      "message": "While I agree that we probably don\u0027t need a lock here, can we add comments here why we don\u0027t need the lock? Thanks.",
       "revId": "04a6b2c68d1b4ba9b728b6e077e98cc297bb1cc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
