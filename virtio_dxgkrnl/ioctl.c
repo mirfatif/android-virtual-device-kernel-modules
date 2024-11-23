@@ -2005,13 +2005,17 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 		mutex_lock(&resource->resource_mutex);
 	}
 
-	ret = dxgvmb_send_destroy_allocation(process, device, &args,
-					     alloc_handles);
-
 	/*
-	 * Destroy the allocations after the host destroyed it.
-	 * The allocation gpadl teardown will wait until the host unmaps its
-	 * gpadl.
+	 * Destroy the allocations before the host destroyed it. This guarantees
+	 * that we never map a GVA to an unmapped GPA, and we don't map the GPA
+	 * twice unexpectedly.
+	 *
+	 * If the host allocation is destroyed first, the host may reuse the address
+	 * associated to the allocation, and if another guest tries to map this
+	 * reused GPA, the map may fail due to mismatch on the page cache type.
+	 *
+	 * We don't use GPADL so the original comment about GPADL doesn't apply to
+	 * us.
 	 */
 	dxgdevice_acquire_alloc_list_lock(device);
 	if (args.alloc_count) {
@@ -2030,6 +2034,10 @@ dxgk_destroy_allocation(struct dxgprocess *process, void *__user inargs)
 		mutex_unlock(&resource->resource_mutex);
 		kref_put(&resource->resource_kref, dxgresource_release);
 	}
+
+	ret = dxgvmb_send_destroy_allocation(process, device, &args,
+					     alloc_handles);
+
 
 cleanup:
 
