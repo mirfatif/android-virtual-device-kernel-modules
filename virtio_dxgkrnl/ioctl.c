@@ -3988,9 +3988,12 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args.allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
+
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
+		down_write(&alloc->lock);
 		if (alloc->cpu_address) {
 			ret = copy_to_user(&result->data,
 					   &alloc->cpu_address,
@@ -4006,7 +4009,6 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (ret < 0)
 		goto cleanup;
 	if (args.data)
@@ -4028,6 +4030,8 @@ dxgk_lock2(struct dxgprocess *process, void *__user inargs)
 		goto cleanup;
 	}
 
+	// Needs to be called under alloc->lock, as it will change
+	// mapping related fields in the alloc.
 	ret = dxgvmb_send_lock2(process, adapter, &args, result);
 
 cleanup:
@@ -4039,6 +4043,10 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 success:
+	// No more operatons mapping-related fields in alloc, safe to unlock.
+	if (alloc) {
+		up_write(&alloc->lock);
+	}
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
 	return ret;
 }
@@ -4064,9 +4072,11 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args.allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (alloc == NULL) {
 		ret = -EINVAL;
 	} else {
+		down_write(&alloc->lock);
 		if (alloc->cpu_address == NULL) {
 			pr_err("Allocation is not locked: %p", alloc);
 			ret = -EINVAL;
@@ -4087,7 +4097,10 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
+	// No more operatons mapping-related fields in alloc, safe to unlock.
+	if (alloc) {
+		up_write(&alloc->lock);
+	}
 	if (done)
 		goto success;
 	if (ret < 0)
