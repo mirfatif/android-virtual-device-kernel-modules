@@ -1199,6 +1199,8 @@ copy_sysmem_pages_rle_data(struct d3dkmt_createallocation *args,
 		/* Ignore empty sizes. */
 		if (input_alloc->priv_drv_data_size && curr_alloc_size > 0) {
 			npages = curr_alloc_size >> PAGE_SHIFT;
+			// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
+			// so we don't need to grab the lock.
 			dxgalloc[i]->cpu_address = (void *)input_alloc->sysmem;
 
 			/* Grab the pages from user. */
@@ -1303,6 +1305,8 @@ int create_existing_sysmem(struct dxgdevice *device,
 
 	dev_dbg(dxgglobaldev, "   Alloc size: %lld", alloc_size);
 
+	// Allocation created from existing_sys_mem shouldn't be locked/unlocked,
+	// so we don't need to grab the lock.
 	dxgalloc->cpu_address = (void *)sysmem;
 
 	dxgalloc->pages = vzalloc(npages * sizeof(void *));
@@ -2988,6 +2992,7 @@ cleanup:
 	return ret;
 }
 
+// Needs to be called under alloc->lock.
 int dxgvmb_send_lock2(struct dxgprocess *process,
 		      struct dxgadapter *adapter,
 		      struct d3dkmt_lock2 *args,
@@ -3021,6 +3026,7 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 	alloc = hmgrtable_get_object_by_type(&process->handle_table,
 					     HMGRENTRY_TYPE_DXGALLOCATION,
 					     args->allocation, true);
+	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 	if (alloc == NULL) {
 		pr_err("%s invalid alloc", __func__);
 		ret = -EINVAL;
@@ -3059,7 +3065,6 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 			}
 		}
 	}
-	hmgrtable_unlock(&process->handle_table, DXGLOCK_EXCL);
 
 cleanup:
 	free_message(&msg, process);
