@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df4d173_056a8686",
+        "filename": "virtio_dxgkrnl/dxgadapter.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-11-25T18:57:24Z",
+      "side": 1,
+      "message": "We should put this in the `if (alloc)` clause.",
+      "revId": "05c9497cb0e6f6fd9c3b309e185320522809a8a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
