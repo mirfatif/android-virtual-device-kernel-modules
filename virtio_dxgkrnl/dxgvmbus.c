@@ -253,25 +253,27 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		return NULL;
 	}
 
-	mmap_read_lock(current->mm);
+	if (mmap_write_lock_killable(current->mm)) {
+		pr_err("%s: failed to grab the mmap write lock", __func__);
+		dxg_unmap_iospace((void *)va, size);
+		return NULL;
+	}
 	vma = find_vma(current->mm, (unsigned long)va);
 	if (vma) {
-		pgprot_t prot = vma->vm_page_prot;
-
 		if (!cached)
-			prot = pgprot_writecombine(prot);
+			vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
 		dev_dbg(dxgglobaldev, "vma: %lx %lx %lx",
 			    vma->vm_start, vma->vm_end, va);
 		vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
 		ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
-					 size, prot);
+					 size, vma->vm_page_prot);
 		if (ret)
 			pr_err("io_remap_pfn_range failed: %d", ret);
 	} else {
 		pr_err("failed to find vma: %p %lx", vma, va);
 		ret = -ENOMEM;
 	}
-	mmap_read_unlock(current->mm);
+	mmap_write_unlock(current->mm);
 
 	if (ret) {
 		dxg_unmap_iospace((void *)va, size);
