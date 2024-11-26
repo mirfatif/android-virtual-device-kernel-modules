@@ -4112,10 +4112,6 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	// No more operatons mapping-related fields in alloc, safe to unlock.
-	if (alloc) {
-		up_write(&alloc->lock);
-	}
 	if (done) {
 		pr_err("MP: unlock: skipping sending to host for allocation %d", args.allocation);
 		goto success;
@@ -4150,6 +4146,10 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 success:
+	if (alloc) {
+		up_write(&alloc->lock);
+	}
+
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
 	return ret;
 }
