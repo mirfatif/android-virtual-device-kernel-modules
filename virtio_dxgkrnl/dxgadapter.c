@@ -885,9 +885,10 @@ struct dxgallocation *dxgallocation_create(struct dxgprocess *process)
 {
 	struct dxgallocation *alloc = vzalloc(sizeof(struct dxgallocation));
 
-	if (alloc)
+	if (alloc) {
 		alloc->process = process;
 		init_rwsem(&alloc->lock);
+	}
 	return alloc;
 }
 
