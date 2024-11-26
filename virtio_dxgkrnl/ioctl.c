@@ -4097,10 +4097,6 @@ dxgk_unlock2(struct dxgprocess *process, void *__user inargs)
 			}
 		}
 	}
-	// No more operatons mapping-related fields in alloc, safe to unlock.
-	if (alloc) {
-		up_write(&alloc->lock);
-	}
 	if (done)
 		goto success;
 	if (ret < 0)
@@ -4132,6 +4128,14 @@ cleanup:
 		kref_put(&device->device_kref, dxgdevice_release);
 
 success:
+	if (alloc) {
+		// We should not release the lock until the host returns, so that we are
+		// guaranteed that alloc->cpu_address is NULL and the relevant GPA is
+		// unmapped. Therefore, we can avoid accidental lock2 requests sent to
+		// the host before the GPA is unmapped.
+		up_write(&alloc->lock);
+	}
+
 	dev_dbg(dxgglobaldev, "ioctl:%s %s %d", errorstr(ret), __func__, ret);
 	return ret;
 }

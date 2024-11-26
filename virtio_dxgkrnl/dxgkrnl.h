@@ -729,7 +729,11 @@ struct dxgallocation {
 	void				*cpu_address;
 	/* Describes pages for the existing sysmem allocation */
 	struct page			**pages;
-	/* Lock to avoid race condition on cached allocation operations */
+	/*
+	 * Lock to avoid race condition on cached allocation operations and keep the
+	 * order of lock/unlock call sequence the same between the guest and the
+	 * host.
+	 */
 	struct rw_semaphore	lock;
 };
 
@@ -854,11 +858,12 @@ int dxgvmb_send_wait_sync_object_cpu(struct dxgprocess *process,
 				     *args,
 				     bool user_address,
 				     u64 cpu_event);
-// Needs to be called under alloc->lock.
+// Needs to be called under the lock of args->allocation.
 int dxgvmb_send_lock2(struct dxgprocess *process,
 		      struct dxgadapter *adapter,
 		      struct d3dkmt_lock2 *args,
 		      struct d3dkmt_lock2 *__user outargs);
+// Needs to be called under the lock of args->allocation.
 int dxgvmb_send_unlock2(struct dxgprocess *process,
 			struct dxgadapter *adapter,
 			struct d3dkmt_unlock2 *args);
