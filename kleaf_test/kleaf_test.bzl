@@ -8,6 +8,8 @@ load(
     "ddk_module",
     "ddk_submodule",
     "kernel_build",
+    "kernel_images",
+    "kernel_modules_install",
 )
 
 def kleaf_test(
@@ -33,13 +35,15 @@ def kleaf_test(
         defconfig_fragments = [
             "kleaf_test.fragment",
         ],
+        dtstree = Label("//common-modules/virtual-device/kleaf_test/dts"),
         kconfig_ext = "Kconfig.ext",
-        outs = [],
+        outs = ["fake.dtb"],
         base_kernel = "//common:kernel_x86_64",
         build_config = "build.config.kleaf_test",
         module_outs = [],
         make_goals = [
             "modules",
+            "dtbs",
         ],
         **private_kwargs
     )
@@ -92,6 +96,30 @@ def kleaf_test(
         **private_kwargs
     )
 
+    _ddk_submodule_duplicate_linux_include_test(
+        name = name + "_ddk_submodule_duplicate_linux_include_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+    _ddk_submodule_linux_include_in_top_level_test(
+        name = name + "_ddk_submodule_linux_include_in_top_level_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+    _kernel_boot_images_outs_contains_ramdisk_test(
+        name = name + "_kernel_boot_images_outs_contains_ramdisk_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
+    _ddk_genfiles_test(
+        name = name + "_ddk_genfiles_test",
+        kernel_build = name + "_kernel_build",
+        **private_kwargs
+    )
+
     native.test_suite(
         name = name,
         tests = [
@@ -103,6 +131,10 @@ def kleaf_test(
             name + "_ddk_cflags_test",
             name + "_ddk_long_arg_list_test",
             name + "_ddk_submodule_config_conditional_srcs_test",
+            name + "_ddk_submodule_duplicate_linux_include_test",
+            name + "_ddk_submodule_linux_include_in_top_level_test",
+            name + "_kernel_boot_images_outs_contains_ramdisk_test",
+            name + "_ddk_genfiles_test",
         ],
         **kwargs
     )
@@ -215,6 +247,24 @@ def _ddk_module_include_test(name, kernel_build, **private_kwargs):
         **private_kwargs
     )
 
+    ddk_module(
+        name = name + "_textual_hdrs_includes_test_module",
+        out = "mymodule.ko",
+        kernel_build = kernel_build,
+        srcs = [
+            "include_test.c",
+            "include_test_lib.c",
+            "include/include_test_lib.h",
+        ],
+        deps = [
+            "//common:all_headers_x86_64",
+        ],
+        textual_hdrs = [
+            name + "_local_includes_headers",
+        ],
+        **private_kwargs
+    )
+
     build_test(
         name = name,
         targets = [
@@ -222,6 +272,7 @@ def _ddk_module_include_test(name, kernel_build, **private_kwargs):
             name + "_linux_includes_test_module",
             name + "_local_includes_test_module",
             name + "_include_file_test_module",
+            name + "_textual_hdrs_includes_test_module",
         ],
         **private_kwargs
     )
@@ -618,5 +669,239 @@ def _ddk_submodule_config_conditional_srcs_test(name, kernel_build, **private_kw
         name = name,
         targets = [
             name + "_module",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_submodule_duplicate_linux_include_test(name, kernel_build, **private_kwargs):
+    """Tests that linux_inlcudes from deps of individual submodules are not duplicated"""
+
+    # With the fix, this should add 100 tokens to LINUXINCLUDE. Without the fix,
+    # this adds 10000 tokens and will surely trigger "Argument list too long".
+    num_submodules = 100
+    num_includes = 100
+
+    ddk_headers(
+        name = "{}_headers".format(name),
+        hdrs = ["include/include_test_lib.h"],
+        linux_includes = ["include"] + [
+            "include_{}".format(i)
+            for i in range(num_includes)
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = "{}_module".format(name),
+        kernel_build = kernel_build,
+        deps = [
+            "{}_submodule_{}".format(name, i)
+            for i in range(num_submodules)
+        ],
+        **private_kwargs
+    )
+
+    for i in range(num_submodules):
+        write_file(
+            name = "{}_generated_source_{}".format(name, i),
+            out = "{}_generated_source_{}.c".format(name, i),
+            content = [
+                "#include <include_test_lib.h>",
+                "void func_{}(void) {{}}".format(i),
+                "",
+            ],
+            **private_kwargs
+        )
+
+        ddk_submodule(
+            name = "{}_submodule_{}".format(name, i),
+            out = "submodule_{}.ko".format(i),
+            srcs = [
+                Label("nothing.c"),
+                ":{}_generated_source_{}".format(name, i),
+            ],
+            deps = [
+                ":{}_headers".format(name),
+                "//common:all_headers_x86_64",
+            ],
+            **private_kwargs
+        )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_submodule_linux_include_in_top_level_test(name, kernel_build, **private_kwargs):
+    """Tests that linux_inlcudes in top-level ddk_module are applied to individual submodules"""
+    ddk_headers(
+        name = "{}_headers".format(name),
+        hdrs = ["include/include_test_lib.h"],
+        linux_includes = ["include"],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = "{}_module".format(name),
+        kernel_build = kernel_build,
+        deps = [
+            ":{}_submodule".format(name),
+            ":{}_headers".format(name),
+            "//common:all_headers_x86_64",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = "{}_generated_source".format(name),
+        out = "{}_generated_source.c".format(name),
+        content = [
+            "#include <include_test_lib.h>",
+            "void func(void) {}",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = "{}_submodule".format(name),
+        out = "submodule.ko",
+        srcs = [
+            Label("nothing.c"),
+            ":{}_generated_source".format(name),
+        ],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            "{}_module".format(name),
+        ],
+        **private_kwargs
+    )
+
+def _kernel_boot_images_outs_contains_ramdisk_test(name, kernel_build, **private_kwargs):
+    """Test the following.
+
+    If:
+    - build_initramfs = True
+    - build_boot_images from build_utils.sh is called
+
+    Then build_boot_images can generate $DIST_DIR/ramdisk.{ramdisk_ext} properly.
+
+    See b/361733833.
+    """
+    kernel_modules_install(
+        name = name + "_modules_install",
+        kernel_build = kernel_build,
+        **private_kwargs
+    )
+    kernel_images(
+        name = name + "_images_set_ramdisk_compression",
+        kernel_build = kernel_build,
+        kernel_modules_install = name + "_modules_install",
+        build_initramfs = True,
+        ramdisk_compression = "lz4",
+        build_vendor_boot = True,
+        **private_kwargs
+    )
+    kernel_images(
+        name = name + "_images_unset_ramdisk_compression",
+        kernel_build = kernel_build,
+        kernel_modules_install = name + "_modules_install",
+        build_initramfs = True,
+        build_vendor_boot = True,
+        **private_kwargs
+    )
+    build_test(
+        name = name,
+        targets = [
+            name + "_images_set_ramdisk_compression",
+            name + "_images_unset_ramdisk_compression",
+        ],
+        **private_kwargs
+    )
+
+def _ddk_genfiles_test(name, kernel_build, **private_kwargs):
+    write_file(
+        name = name + "_generated_source",
+        out = name + "/generated.c",
+        content = [
+            "void some_generated_func(void) {}",
+            "void some_exported_func(void) {}",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_generated_header",
+        out = name + "/includes/generated.h",
+        content = [
+            "extern void some_generated_func(void);",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    write_file(
+        name = name + "_exported_header",
+        out = name + "/includes/exported.h",
+        content = [
+            "extern void some_exported_func(void);",
+            "",
+        ],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_module",
+        kernel_build = kernel_build,
+        out = "mod.ko",
+        srcs = [
+            "genfiles_test/mod.c",
+            name + "_generated_source",
+            name + "_generated_header",
+        ],
+        hdrs = [
+            name + "_exported_header",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [name],
+        **private_kwargs
+    )
+
+    ddk_submodule(
+        name = name + "_submodule",
+        out = "mod.ko",
+        srcs = [
+            "genfiles_test/mod.c",
+            name + "_generated_source",
+            name + "_generated_header",
+        ],
+        hdrs = [
+            name + "_exported_header",
+        ],
+        deps = ["//common:all_headers_x86_64"],
+        includes = [name],
+        **private_kwargs
+    )
+
+    ddk_module(
+        name = name + "_submodule_module",
+        kernel_build = kernel_build,
+        deps = [name + "_submodule"],
+        **private_kwargs
+    )
+
+    build_test(
+        name = name,
+        targets = [
+            name + "_module",
+            name + "_submodule_module",
         ],
     )
