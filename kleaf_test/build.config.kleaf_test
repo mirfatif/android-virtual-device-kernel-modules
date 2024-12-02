@@ -3,3 +3,8 @@ KERNEL_DIR=common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
+
+# For kernel_boot_images_outs_contains_ramdisk_test
+BOOT_IMAGE_HEADER_VERSION=4
+VENDOR_BOOTCONFIG="fake"
+RAMDISK_COMPRESS="lz4 -c -l -12 --favor-decSpeed"
