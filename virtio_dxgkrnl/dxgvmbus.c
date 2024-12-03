@@ -267,6 +267,11 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		pr_err("failed to find vma: %p %lx", vma, va);
 		goto cleanup;
 	}
+
+	if (vma->vm_start != va || vma->vm_end != va + size) {
+		pr_err("%s: vma merged unexpectedly for size %u", __func__, size);
+		goto cleanup;
+	}
 	prot = vma->vm_page_prot;
 
 	if (!cached)
