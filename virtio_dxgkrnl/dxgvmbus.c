@@ -253,7 +253,12 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		return NULL;
 	}
 
-	mmap_read_lock(current->mm);
+	// TODO: propagate the error to the caller or retry right away.
+	if (mmap_write_lock_killable(current->mm)) {
+		pr_err("%s: mmap_write_lock_killable failed", __func__);
+		dxg_unmap_iospace((void *)va, size);
+		return NULL;
+	}
 	vma = find_vma(current->mm, (unsigned long)va);
 	if (vma) {
 		pgprot_t prot = vma->vm_page_prot;
@@ -263,6 +268,9 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		dev_dbg(dxgglobaldev, "vma: %lx %lx %lx",
 			    vma->vm_start, vma->vm_end, va);
 		vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
+		// We don't allow child processes to inherit the pages, because the
+		// mapping is not correctly refcounted after fork'ed.
+		vma->vm_flags |= VM_DONTCOPY;
 		ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
 					 size, prot);
 		if (ret)
