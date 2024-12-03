@@ -239,6 +239,8 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	struct vm_area_struct *vma;
 	unsigned long va;
 	int ret = 0;
+	u8 *res = NULL;
+	bool mm_locked = false;
 
 	dev_dbg(dxgglobaldev, "%s: %llx %x %lx",
 		    __func__, iospace_address, size, protection);
@@ -256,37 +258,40 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	// TODO: propagate the error to the caller or retry right away.
 	if (mmap_write_lock_killable(current->mm)) {
 		pr_err("%s: mmap_write_lock_killable failed", __func__);
-		dxg_unmap_iospace((void *)va, size);
-		return NULL;
+		goto cleanup;
 	}
+	mm_locked = true;
 	vma = find_vma(current->mm, (unsigned long)va);
-	if (vma) {
-		pgprot_t prot = vma->vm_page_prot;
-
-		if (!cached)
-			prot = pgprot_writecombine(prot);
-		dev_dbg(dxgglobaldev, "vma: %lx %lx %lx",
-			    vma->vm_start, vma->vm_end, va);
-		vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
-		// We don't allow child processes to inherit the pages, because the
-		// mapping is not correctly refcounted after fork'ed.
-		vma->vm_flags |= VM_DONTCOPY;
-		ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
-					 size, prot);
-		if (ret)
-			pr_err("io_remap_pfn_range failed: %d", ret);
-	} else {
+	if (!vma) {
 		pr_err("failed to find vma: %p %lx", vma, va);
-		ret = -ENOMEM;
+		goto cleanup;
 	}
-	mmap_write_unlock(current->mm);
+	pgprot_t prot = vma->vm_page_prot;
 
+	if (!cached)
+		prot = pgprot_writecombine(prot);
+	dev_dbg(dxgglobaldev, "vma: %lx %lx %lx",
+		    vma->vm_start, vma->vm_end, va);
+	vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
+	// We don't allow child processes to inherit the pages, because the
+	// mapping is not correctly refcounted after fork'ed.
+	vma->vm_flags |= VM_DONTCOPY;
+	ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
+				 size, prot);
 	if (ret) {
-		dxg_unmap_iospace((void *)va, size);
-		return NULL;
+		pr_err("io_remap_pfn_range failed: %d", ret);
+		goto cleanup;
 	}
 	dev_dbg(dxgglobaldev, "%s end: %lx", __func__, va);
-	return (u8 *) (va + iospace_address % PAGE_SIZE);
+	res = (u8 *) (va + iospace_address % PAGE_SIZE);
+cleanup:
+	if (mm_locked) {
+		mmap_write_unlock(current->mm);
+	}
+	if (IS_ERR_OR_NULL(res) && ((long)va > 0)) {
+		dxg_unmap_iospace((void *)va, size);
+	}
+	return res;
 }
 
 /*
