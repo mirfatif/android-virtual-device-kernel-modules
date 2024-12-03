@@ -271,10 +271,8 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		pr_err("%s: vma merged expectedly", __func__);
 		goto cleanup;
 	}
-	pgprot_t prot = vma->vm_page_prot;
-
 	if (!cached)
-		prot = pgprot_writecombine(prot);
+		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
 	dev_dbg(dxgglobaldev, "vma: %lx %lx %lx",
 		    vma->vm_start, vma->vm_end, va);
 	vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
@@ -282,7 +280,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	// mapping is not correctly refcounted after fork'ed.
 	vma->vm_flags |= VM_DONTCOPY;
 	ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
-				 size, prot);
+				 size, vma->vm_page_prot);
 	if (ret) {
 		pr_err("io_remap_pfn_range failed: %d", ret);
 		goto cleanup;
