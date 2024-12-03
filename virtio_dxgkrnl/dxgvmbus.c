@@ -246,29 +246,32 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 		    __func__, iospace_address, size, protection);
 	if (check_iospace_address(iospace_address, size) < 0) {
 		pr_err("%s: invalid address", __func__);
-		return NULL;
+		return ERR_PTR(-EINVAL);
 	}
 
 	va = vm_mmap(NULL, 0, size, protection, MAP_SHARED | MAP_ANONYMOUS, 0);
 	if ((long)va <= 0) {
 		pr_err("vm_mmap failed %lx %d", va, size);
-		return NULL;
+		return ERR_PTR((long)va);
 	}
 
 	// TODO: propagate the error to the caller or retry right away.
 	if (mmap_write_lock_killable(current->mm)) {
 		pr_err("%s: mmap_write_lock_killable failed", __func__);
+		res = ERR_PTR(-EINTR);
 		goto cleanup;
 	}
 	mm_locked = true;
 	vma = find_vma(current->mm, (unsigned long)va);
 	if (!vma) {
 		pr_err("failed to find vma: %p %lx", vma, va);
+		res = ERR_PTR(-ENOMEM);
 		goto cleanup;
 	}
 
 	if (vma->vm_start != va || vma->vm_end != va + size) {
 		pr_err("%s: vma merged expectedly", __func__);
+		res = ERR_PTR(-EAGAIN);
 		goto cleanup;
 	}
 	if (!cached)
@@ -283,6 +286,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 				 size, vma->vm_page_prot);
 	if (ret) {
 		pr_err("io_remap_pfn_range failed: %d", ret);
+		res = ERR_PTR(ret);
 		goto cleanup;
 	}
 	dev_dbg(dxgglobaldev, "%s end: %lx", __func__, va);
@@ -459,7 +463,7 @@ int dxgvmb_send_open_sync_object_nt(struct dxgprocess *process,
 		void *va = dxg_map_iospace(result.guest_cpu_physical_address,
 					   PAGE_SIZE, PROT_READ | PROT_WRITE,
 					   true);
-		if (va == NULL) {
+		if (IS_ERR_OR_NULL(va)) {
 			ret = -ENOMEM;
 			goto cleanup;
 		}
@@ -1030,6 +1034,7 @@ int dxgvmb_send_create_paging_queue(struct dxgprocess *process,
 	struct dxgkvmb_command_createpagingqueue *command;
 	int ret;
 	struct dxgvmbusmsg msg = {.hdr = NULL};
+	u8 *fence_cpu_va;
 
 	ret = init_message(&msg, device->adapter, process, sizeof(*command));
 	if (ret)
@@ -1051,13 +1056,15 @@ int dxgvmb_send_create_paging_queue(struct dxgprocess *process,
 
 	args->paging_queue = result.paging_queue;
 	args->sync_object = result.sync_object;
-	args->fence_cpu_virtual_address =
+	fence_cpu_va =
 	    dxg_map_iospace(result.fence_storage_physical_address, PAGE_SIZE,
 			    PROT_READ | PROT_WRITE, true);
-	if (args->fence_cpu_virtual_address == NULL) {
+	if (IS_ERR_OR_NULL(fence_cpu_va)) {
+		args->fence_cpu_virtual_address = NULL;
 		ret = -ENOMEM;
 		goto cleanup;
 	}
+	args->fence_cpu_virtual_address = fence_cpu_va;
 	pqueue->mapped_address = args->fence_cpu_virtual_address;
 	pqueue->handle = args->paging_queue;
 
@@ -2780,7 +2787,7 @@ dxgvmb_send_create_sync_object(struct dxgprocess *process,
 	if (syncobj->monitored_fence) {
 		va = dxg_map_iospace(result.fence_storage_address, PAGE_SIZE,
 				     PROT_READ | PROT_WRITE, true);
-		if (va == NULL) {
+		if (IS_ERR_OR_NULL(va)) {
 			ret = -ENOMEM;
 			goto cleanup;
 		}
@@ -3078,14 +3085,20 @@ int dxgvmb_send_lock2(struct dxgprocess *process,
 				alloc->cpu_address_refcount++;
 		} else {
 			u64 offset = (u64)result.cpu_visible_buffer_offset;
-
-			args->data = dxg_map_iospace(offset,
+			u8 *va = dxg_map_iospace(offset,
 					alloc->num_pages << PAGE_SHIFT,
 					PROT_READ | PROT_WRITE, alloc->cached);
-			if (args->data) {
+			if (!IS_ERR_OR_NULL(va)) {
+				args->data = va;
 				alloc->cpu_address_refcount = 1;
 				alloc->cpu_address_mapped = true;
 				alloc->cpu_address = args->data;
+<<<<<<< HEAD
+=======
+				pr_err("MP: dxgvmb_send_lock2: set the cpu_addr of allcation %u to %lx, num_pages = %d", alloc->alloc_handle.v, (unsigned long)alloc->cpu_address, (int)alloc->num_pages);
+			} else {
+				args->data = NULL;
+>>>>>>> 39b9518 (ANDROID: virtio-dxgkrnl: let dxg_map_iospace propagate the error to the caller)
 			}
 		}
 		if (args->data == NULL) {
@@ -3588,6 +3601,7 @@ int dxgvmb_send_create_hwqueue(struct dxgprocess *process,
 	u32 cmd_size = sizeof(struct dxgkvmb_command_createhwqueue);
 	int ret;
 	struct dxgvmbusmsg msg = {.hdr = NULL};
+	u8 *progress_fence_va;
 
 	if (args->priv_drv_data_size > DXG_MAX_VM_BUS_PACKET_SIZE) {
 		pr_err("invalid private driver data size");
@@ -3647,13 +3661,15 @@ int dxgvmb_send_create_hwqueue(struct dxgprocess *process,
 	hwqueue->handle = command->hwqueue;
 	hwqueue->progress_fence_sync_object = command->hwqueue_progress_fence;
 
-	hwqueue->progress_fence_mapped_address =
+	progress_fence_va =
 		dxg_map_iospace((u64)command->hwqueue_progress_fence_cpuva,
 				PAGE_SIZE, PROT_READ | PROT_WRITE, true);
-	if (hwqueue->progress_fence_mapped_address == NULL) {
+	if (IS_ERR_OR_NULL(progress_fence_va)) {
+		hwqueue->progress_fence_mapped_address = NULL;
 		ret = -ENOMEM;
 		goto cleanup;
 	}
+	hwqueue->progress_fence_mapped_address = progress_fence_va;
 
 	ret = copy_to_user(&inargs->queue, &command->hwqueue,
 			   sizeof(struct d3dkmthandle));
