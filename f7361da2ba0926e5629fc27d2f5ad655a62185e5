@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65548e7_5ff4141e",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-03T19:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a4332f8_6c26ebb4",
+      "revId": "f7361da2ba0926e5629fc27d2f5ad655a62185e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5049e40b_ee18a144",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-12-03T06:39:27Z",
       "side": 1,
       "message": "Add TODO to check if the vma gets merged/resized, and if so, we shouldn\u0027t use it.",
+      "revId": "f7361da2ba0926e5629fc27d2f5ad655a62185e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a738019c_515df1cc",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-03T19:56:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5049e40b_ee18a144",
       "revId": "f7361da2ba0926e5629fc27d2f5ad655a62185e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
