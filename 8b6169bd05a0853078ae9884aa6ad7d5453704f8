@@ -16,6 +16,24 @@
       "message": "The side effect of the current change is that when forked, the child process won\u0027t be able to have the VMA mapped, and can potentially influence the Vulkan calls in the child process. ANGLE registers thread end callback and can trigger such behavior.\n\nAn alternative is to unmap the GPA from all processes, but that will suffer a race condition(the memory may be mapped again in some other processes before we go over all processes, note that this map may be out of control, e.g. the child process calls fork again), and may influence the parent process when forked(e.g. lock2 - fork - unlock2, and the unlock2 in the child process will remove the memory mapping also in the parent process).\n\nPTAL and let me know if I have missed something and we prefer the alternative instead over the current solution.",
       "revId": "8b6169bd05a0853078ae9884aa6ad7d5453704f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fe36bb_987584b0",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-04T23:05:05Z",
+      "side": 1,
+      "message": "Discussed offline.",
+      "parentUuid": "f45d4b2c_34627352",
+      "revId": "8b6169bd05a0853078ae9884aa6ad7d5453704f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
