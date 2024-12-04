@@ -139,7 +139,6 @@ _VIRT_COMMON_MODULES = [
     "virtio_dma_buf.ko",
     "virtio_input.ko",
     "virtio_net.ko",
-    "virtio_pci_legacy_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
 ]
@@ -685,6 +684,7 @@ kernel_build(
         "vmlinux.symvers",
     ],
     base_kernel = None,
+<<<<<<< HEAD   (9f2ed9 ANDROID: virtual_device: Update modules list output)
     build_config = "//common:build.config.common",
     defconfig = "//common:arch/arm64/configs/gki_defconfig",
     kmi_symbol_list_strict_mode = False,
@@ -717,6 +717,44 @@ kernel_build(
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "linux_distro.fragment",
+||||||| BASE
+    build_config = "build.config.server.aarch64",
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("arm64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("arm64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_pci_legacy_dev.ko",
+        "virtio_snd.ko",
+=======
+    build_config = "build.config.server.aarch64",
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("arm64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("arm64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_snd.ko",
+>>>>>>> CHANGE (6a0e1d ANDROID: remove CONFIG_VIRTIO_PCI_LEGACY=y)
     ],
     strip_modules = False,
     trim_nonlisted_kmi = False,
@@ -762,6 +800,7 @@ kernel_build(
     ],
     arch = "x86_64",
     base_kernel = None,
+<<<<<<< HEAD   (9f2ed9 ANDROID: virtual_device: Update modules list output)
     build_config = "//common:build.config.common",
     defconfig = "//common:arch/x86/configs/gki_defconfig",
     kmi_symbol_list_strict_mode = False,
@@ -794,6 +833,44 @@ kernel_build(
     post_defconfig_fragments = [
         "virtual_device_core.fragment",
         "linux_distro.fragment",
+||||||| BASE
+    build_config = "build.config.server.x86_64",
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("x86_64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("x86_64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_pci_legacy_dev.ko",
+        "virtio_snd.ko",
+=======
+    build_config = "build.config.server.x86_64",
+    module_outs = [
+        paths.basename(module)
+        for module in get_gki_modules_list("x86_64")
+    ] + [
+        paths.basename(module)
+        for module in get_kunit_modules_list("x86_64")
+    ] + [
+        # keep sorted
+        "failover.ko",
+        "net_failover.ko",
+        "virtio-gpu.ko",
+        "virtio-rng.ko",
+        "virtio_dma_buf.ko",
+        "virtio_input.ko",
+        "virtio_net.ko",
+        "virtio_snd.ko",
+>>>>>>> CHANGE (6a0e1d ANDROID: remove CONFIG_VIRTIO_PCI_LEGACY=y)
     ],
     strip_modules = False,
     trim_nonlisted_kmi = False,
