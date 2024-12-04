@@ -139,7 +139,6 @@ _VIRT_COMMON_MODULES = [
     "virtio_dma_buf.ko",
     "virtio_input.ko",
     "virtio_net.ko",
-    "virtio_pci_legacy_dev.ko",
     "virtio_snd.ko",
     "vkms.ko",
 ]
@@ -705,7 +704,6 @@ kernel_build(
         "virtio_dma_buf.ko",
         "virtio_input.ko",
         "virtio_net.ko",
-        "virtio_pci_legacy_dev.ko",
         "virtio_snd.ko",
     ],
     strip_modules = False,
@@ -774,7 +772,6 @@ kernel_build(
         "virtio_dma_buf.ko",
         "virtio_input.ko",
         "virtio_net.ko",
-        "virtio_pci_legacy_dev.ko",
         "virtio_snd.ko",
     ],
     strip_modules = False,
