@@ -46,6 +46,30 @@
       },
       "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d960ab_fca8639a",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1883347
+      },
+      "writtenOn": "2024-12-05T19:48:16Z",
+      "side": 1,
+      "message": "I\u0027d leave it to Alistair to weigh in. I was a bit confused looking for the scenario where this part can be false. Not sure about overall kernel policy with this kind of extra checks.",
+      "parentUuid": "d7740b4d_3b677b2d",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 42
+      },
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
