@@ -70,6 +70,30 @@
       },
       "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed28178_062329b2",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-05T19:49:31Z",
+      "side": 1,
+      "message": "Hi @adelva@google.com, can we weigh in some of your opinions there? Thanks.",
+      "parentUuid": "04d960ab_fca8639a",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 42
+      },
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
