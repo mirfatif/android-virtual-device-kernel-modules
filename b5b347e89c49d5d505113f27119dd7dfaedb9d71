@@ -22,6 +22,30 @@
       },
       "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7740b4d_3b677b2d",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-05T19:40:02Z",
+      "side": 1,
+      "message": "No, this is not needed, but I still added here just in case in the future if we add more goto cleanup? WDYT? If you prefer that we should remove this condition, we can do that.",
+      "parentUuid": "7bb4398f_256477aa",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 42
+      },
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
