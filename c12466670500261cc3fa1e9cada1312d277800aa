@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d49678_34079cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2024-12-08T18:57:10Z",
+      "side": 1,
+      "message": "So the fragment files are OK in this branch? Please confirm but otherwise lgtm.",
+      "revId": "c12466670500261cc3fa1e9cada1312d277800aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
