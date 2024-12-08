@@ -16,6 +16,24 @@
       "message": "So the fragment files are OK in this branch? Please confirm but otherwise lgtm.",
       "revId": "c025c668d3c445894c9b43a7fb612498e6d2170e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c31d2a_f49f4656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-12-08T22:14:15Z",
+      "side": 1,
+      "message": "Confimed. They were removed from the fragment files here r.android.com/3342455",
+      "parentUuid": "0d15f86a_66c1f615",
+      "revId": "c025c668d3c445894c9b43a7fb612498e6d2170e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
