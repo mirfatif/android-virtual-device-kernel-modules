@@ -34,6 +34,24 @@
       "parentUuid": "82f19dcd_f58d2838",
       "revId": "ed55016812b801f7dc4d8041974127cc096b799e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ccf570_a14b9e4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-12-09T15:06:28Z",
+      "side": 1,
+      "message": "Yeah, the topic got dropped and I had to manually recreate it since I couldn\u0027t re-add the topic due to a gerrit permission issue. Was easier to recreate than correctly resolve.",
+      "parentUuid": "683fdd2a_19e2f830",
+      "revId": "ed55016812b801f7dc4d8041974127cc096b799e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
