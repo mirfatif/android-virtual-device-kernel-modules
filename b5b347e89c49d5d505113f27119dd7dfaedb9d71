@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d837ace4_98f7ad28",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-12-09T19:55:35Z",
+      "side": 1,
+      "message": "Use IS_ERR/IS_ERR_VALUE to check for errors. Then you don\u0027t need to worry about whether 0 is an error or not, and you don\u0027t need to cast manually.",
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bb4398f_256477aa",
         "filename": "virtio_dxgkrnl/dxgvmbus.c",
         "patchSetId": 5
@@ -86,6 +103,30 @@
       "side": 1,
       "message": "Hi @adelva@google.com, can we weigh in some of your opinions there? Thanks.",
       "parentUuid": "04d960ab_fca8639a",
+      "range": {
+        "startLine": 292,
+        "startChar": 25,
+        "endLine": 292,
+        "endChar": 42
+      },
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30a3eea7_4afaed6a",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2024-12-09T19:55:35Z",
+      "side": 1,
+      "message": "Remove this, but above, please fix the check.",
+      "parentUuid": "1ed28178_062329b2",
       "range": {
         "startLine": 292,
         "startChar": 25,
