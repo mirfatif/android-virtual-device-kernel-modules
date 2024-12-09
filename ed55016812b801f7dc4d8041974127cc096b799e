@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f19dcd_f58d2838",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2024-12-09T13:56:49Z",
+      "side": 1,
+      "message": "Do we also need to cherry pick aosp/3393579?",
+      "revId": "ed55016812b801f7dc4d8041974127cc096b799e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
