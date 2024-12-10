@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fca5c1_9cfabb2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2024-12-10T02:38:31Z",
+      "side": 1,
+      "message": "https://r.android.com/q/topic:%22vcpufreq-v7-android16-6.12%22 - this one hasn\u0027t been landed in android-mainline yet.\n\n@davidai@google.com - guessing I should wait for that occur?",
+      "revId": "91d7f722cb2ad8e50e77266e7fe17b485af0fcba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
