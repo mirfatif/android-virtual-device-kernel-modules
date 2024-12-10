@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb93fa0_cb47337f",
+        "filename": "virtio_dxgkrnl/dxgvmbus.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2024-12-10T19:00:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d837ace4_98f7ad28",
+      "revId": "b5b347e89c49d5d505113f27119dd7dfaedb9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bb4398f_256477aa",
