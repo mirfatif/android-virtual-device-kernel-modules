@@ -243,7 +243,6 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	int ret = 0;
 	u8 *res = NULL;
 	bool mm_locked = false;
-	pgprot_t prot;
 
 	dev_dbg(dxgglobaldev, "%s: %llx %x %lx",
 		    __func__, iospace_address, size, protection);
@@ -253,7 +252,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	}
 
 	va = vm_mmap(NULL, 0, size, protection, MAP_SHARED | MAP_ANONYMOUS, 0);
-	if (IS_ERR(va)) {
+	if (IS_ERR((void*)va)) {
 		pr_err("vm_mmap failed %lx %d", va, size);
 		return ERR_PTR((long)va);
 	}
@@ -284,7 +283,7 @@ static u8 *dxg_map_iospace(u64 iospace_address, u32 size,
 	vma->vm_pgoff = iospace_address >> PAGE_SHIFT;
 	// We don't allow child processes to inherit the pages, because the
 	// mapping is not correctly refcounted after fork'ed.
-	vma->vm_flags |= VM_DONTCOPY;
+	vm_flags_set(vma, VM_DONTCOPY);
 	ret = io_remap_pfn_range(vma, vma->vm_start, vma->vm_pgoff,
 				 size, vma->vm_page_prot);
 	if (ret) {
