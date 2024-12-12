@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506bc220_20d4950c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-12-12T01:40:55Z",
+      "side": 1,
+      "message": "Upstream merge should take care of it, unchecking Code review bit.",
+      "revId": "441963906c4918f02c8b0113e5d539d326b348db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
