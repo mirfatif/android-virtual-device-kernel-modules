@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ab4ae1_92be8c21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-12-14T07:06:46Z",
+      "side": 1,
+      "message": "Gentle reminder about this, the upstream build is currently broken.",
+      "revId": "316f58be3a22d0b4ddeffbe0b12cda8ce364a38f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
