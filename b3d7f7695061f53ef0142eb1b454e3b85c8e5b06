@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48341725_7671d76a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-12-14T07:08:52Z",
+      "side": 1,
+      "message": "Gentle reminder about this, we have added builders for the upstream kernel.\nAt present we are in the process of upgrading the kernel so have both android-12 and android-14 kernels.",
+      "revId": "b3d7f7695061f53ef0142eb1b454e3b85c8e5b06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
