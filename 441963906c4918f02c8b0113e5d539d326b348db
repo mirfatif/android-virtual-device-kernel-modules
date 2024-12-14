@@ -16,6 +16,23 @@
       "message": "Upstream merge should take care of it, unchecking Code review bit.",
       "revId": "441963906c4918f02c8b0113e5d539d326b348db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17fea69b_38cf8b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-12-14T07:14:18Z",
+      "side": 1,
+      "message": "Cherry-picking the fix as the upstream review may take time.",
+      "revId": "441963906c4918f02c8b0113e5d539d326b348db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
