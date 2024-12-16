@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb49c733_9af22727",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060263
+      },
+      "writtenOn": "2024-12-16T04:03:53Z",
+      "side": 1,
+      "message": "The upstream patch review is taking longer, cherry-picking the patch to fix build.",
+      "revId": "1ee2521d37899443b11ad34ecbae5826e404d419",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
