@@ -1,0 +1,7 @@
+menu "Android Emulator Virtual Devices"
+config AVD_VIRTUAL_DEVICE
+    tristate "Android Emulator Virtual Devices"
+    default n
+    help
+      Android Emulator Virtual Devices
+endmenu
